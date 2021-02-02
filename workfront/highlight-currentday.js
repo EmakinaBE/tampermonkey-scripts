@@ -21,7 +21,7 @@
     var x = document.getElementsByClassName("today");
     var i;
     for (i = 0; i < x.length; i++) {
-        x[i].style.backgroundColor = "blue";
+        x[i].style.backgroundColor = "lemonchiffon";
         x[i].style.backgroundImage="none";
     }
 })();
