@@ -1,7 +1,11 @@
 // ==UserScript==
 // @name         Workfront highlight Today
 // @namespace    https://www.emakina.com/
+<<<<<<< HEAD
 // @version      1.0
+=======
+// @version      0.3
+>>>>>>> 4a7707807454230c9e1ae3fb9676ce493ab2677a
 // @description  Highlight current day
 // @author       Jeffrey Vandenbossche
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -21,7 +25,7 @@
     var x = document.getElementsByClassName("today");
     var i;
     for (i = 0; i < x.length; i++) {
-        x[i].style.backgroundColor = "lemonchiffon";
+        x[i].style.backgroundColor = "blue";
         x[i].style.backgroundImage="none";
     }
 })();
