@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workfront highlight Today
 // @namespace    https://www.emakina.com/
-// @version      0.2
+// @version      0.3
 // @description  Highlight current day
 // @author       Jeffrey Vandenbossche
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -16,7 +16,7 @@
     var x = document.getElementsByClassName("today");
     var i;
     for (i = 0; i < x.length; i++) {
-        x[i].style.backgroundColor = "lemonchiffon";
+        x[i].style.backgroundColor = "blue";
         x[i].style.backgroundImage="none";
     }
 })();
