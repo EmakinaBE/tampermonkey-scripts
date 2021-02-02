@@ -1,12 +1,13 @@
 // ==UserScript==
-// @name        Workfront highlight Today
-// @namespace    http://tampermonkey.net/
-// @version      0.1
+// @name         Workfront highlight Today
+// @namespace    https://www.emakina.com/
+// @version      0.2
 // @description  Highlight current day
-// @author       You
+// @author       Jeffrey Vandenbossche
 // @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/*
+// @match        https://emakina.my.workfront.com/timesheets/current*
 // @grant        none
+// @updateURL	 https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/workfront/highlight-currentday.js
 // ==/UserScript==
 
 (function() {
