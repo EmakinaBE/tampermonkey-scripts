@@ -6,8 +6,14 @@
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
+// @icon         https://emakina.my.workfront.com/static/img/favicon.ico
+// @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
+// @homepage     https://gitlab.emakina.net/jev/tampermonkey-scripts
+// @downloadURL  https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/workfront/indicate-missing-comment.js
+// @updateURL    https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/workfront/indicate-missing-comment.js
 // @grant        none
 // ==/UserScript==
+
 
 (function() {
     'use strict';
