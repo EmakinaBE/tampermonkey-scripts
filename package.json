@@ -1,0 +1,19 @@
+{
+  "name": "tampermonkey-scripts",
+  "version": "1.0.0",
+  "description": "Tampermonkey Scripts",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/**/*.js",
+    "format": "eslint src/**/*.js --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.emakina.net/jev/tampermonkey-scripts.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "eslint": "^7.19.0"
+  }
+}
