@@ -19,11 +19,11 @@
     'use strict';
     const inputFieldSelector = '.fc > input';
     const noCommentStyle = 'background: tomato;';
-    const notificationsSelector = '.Notify.success';
     const submitButtonSelector = '.btn.submit.btn-secondary';
-    const saveButtonSelector = '.btn.primary.btn-primary';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
+
+    document.body.addEventListener('WF_RELOAD', init);
 
     init();
 
@@ -55,7 +55,6 @@
     }
 
     function checkAllCommentsAndMarkFields(elements) {
-        const submitButton = getElement(submitButtonSelector);
         let isEmptyCommentPresent = false;
 
         elements.forEach(e => {
@@ -87,24 +86,8 @@
             });
             e.addEventListener('change', () => checkAllCommentsAndMarkFields(elements));
         });
-        getElement(saveButtonSelector).addEventListener('click', () => pollNetworkRequestSuccess(getNrOfNotifications()));
     }
 
-    function pollNetworkRequestSuccess(nrOfPreviousNotifications) {
-        console.log('polling notification');
-        const nrOfNotifications = getNrOfNotifications();
-
-        if (nrOfNotifications === nrOfPreviousNotifications) {
-            setTimeout(pollNetworkRequestSuccess, 500, nrOfNotifications);
-            return;
-        }
-
-        init();
-    }
-
-    function getNrOfNotifications() {
-        return getElements(notificationsSelector).length;
-    }
 
     function getElements(selector) {
         return document.getElements(selector);

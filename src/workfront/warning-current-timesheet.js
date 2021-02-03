@@ -18,11 +18,16 @@
     const message = 'Be aware! You are not on this weeks timesheet.';
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
-    if (!getElement('.today')) {
-        const messageBox = createElementWithText('p', message);
-        messageBox.setAttribute('style', messageStyle);
+    document.body.addEventListener('WF_RELOAD', init);
+    init();
 
-        getElement('#timesheet-header').appendChild(messageBox);
+    function init() {
+        if (!getElement('.today')) {
+            const messageBox = createElementWithText('p', message);
+            messageBox.setAttribute('style', messageStyle);
+
+            getElement('#timesheet-header').appendChild(messageBox);
+        }
     }
 
     function getElement(selector) {

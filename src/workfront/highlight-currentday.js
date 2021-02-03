@@ -18,10 +18,16 @@
 (function() {
     'use strict';
 
-    var x = document.getElementsByClassName('today');
-    var i;
-    for (i = 0; i < x.length; i++) {
-        x[i].style.backgroundColor = 'lemonchiffon';
-        x[i].style.backgroundImage = 'none';
+    document.body.addEventListener('WF_RELOAD', init);
+    init();
+
+    function init() {
+        const x = document.getElementsByClassName('today');
+
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.backgroundColor = 'lemonchiffon';
+            x[i].style.backgroundImage = 'none';
+        }
     }
+
 })();
