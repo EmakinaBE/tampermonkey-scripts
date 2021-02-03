@@ -19,16 +19,26 @@
     'use strict';
     const inputFieldSelector = '.fc > input';
     const noCommentStyle = 'background: tomato;';
+    const notificationsSelector = '.Notify.success';
     const submitButtonSelector = '.btn.submit.btn-secondary';
+    const saveButtonSelector = '.btn.primary.btn-primary';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
 
-    const elements = getElements(inputFieldSelector);
-    const submitButton = getElement(submitButtonSelector);
+    init();
 
-    const warningMessage = createWarningMessage();
-    checkAllComments();
-    initListeners();
+    function init() {
+        const elements = getElements(inputFieldSelector);
+        const submitButton = getElement(submitButtonSelector);
+
+        const warningMessage = createWarningMessage();
+        const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
+
+        submitButton.disabled = emptyFieldFound;
+        emptyFieldFound ? warningMessage.classList.remove('hidden') : warningMessage.classList.add('hidden');
+
+        initListeners(elements);
+    }
 
     function createWarningMessage() {
         const element = document.createElement('p');
@@ -44,8 +54,9 @@
         return element;
     }
 
-    function checkAllComments() {
-        let isSubmitAllowed = true;
+    function checkAllCommentsAndMarkFields(elements) {
+        const submitButton = getElement(submitButtonSelector);
+        let isEmptyCommentPresent = false;
 
         elements.forEach(e => {
             const comment = e.getAttribute('data-description');
@@ -53,22 +64,20 @@
 
             if(value && !comment) {
                 e.setAttribute('style', noCommentStyle);
-                isSubmitAllowed = false;
+                isEmptyCommentPresent = true;
             } else {
                 e.removeAttribute('style');
             }
         });
-
-        submitButton.disabled = !isSubmitAllowed;
-        isSubmitAllowed ? warningMessage.classList.add('hidden') : warningMessage.classList.remove('hidden');
+        return isEmptyCommentPresent;
     }
 
-    function initListeners() {
+    function initListeners(elements) {
         elements.forEach(e => {
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     if (mutation.attributeName === 'data-description') {
-                        checkAllComments();
+                        checkAllCommentsAndMarkFields(elements);
                     }
                 });
             });
@@ -76,8 +85,25 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('change', checkAllComments);
+            e.addEventListener('change', () => checkAllCommentsAndMarkFields(elements));
         });
+        getElement(saveButtonSelector).addEventListener('click', () => pollNetworkRequestSuccess(getNrOfNotifications()));
+    }
+
+    function pollNetworkRequestSuccess(nrOfPreviousNotifications) {
+        console.log('polling notification');
+        const nrOfNotifications = getNrOfNotifications();
+
+        if (nrOfNotifications === nrOfPreviousNotifications) {
+            setTimeout(pollNetworkRequestSuccess, 500, nrOfNotifications);
+            return;
+        }
+
+        init();
+    }
+
+    function getNrOfNotifications() {
+        return getElements(notificationsSelector).length;
     }
 
     function getElements(selector) {
