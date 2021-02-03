@@ -19,7 +19,7 @@
 (function() {
     'use strict';
 
-    document.getElement('.btn.primary.btn-primary').addEventListener('click', () => pollNetworkRequestSuccess(getNrOfNotifications()));
+    addEventlistenerToSaveButton();
 
     function pollNetworkRequestSuccess(nrOfPreviousNotifications) {
         console.log('polling notification', nrOfPreviousNotifications);
@@ -30,9 +30,14 @@
             return;
         }
 
-        const event = new Event('WF_RELOAD');
+        addEventlistenerToSaveButton();
 
+        const event = new Event('WF_RELOAD');
         document.body.dispatchEvent(event);
+    }
+
+    function addEventlistenerToSaveButton() {
+        document.getElement('.btn.primary.btn-primary').addEventListener('click', () => pollNetworkRequestSuccess(getNrOfNotifications()));
     }
 
     function getNrOfNotifications() {
