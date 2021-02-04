@@ -15,7 +15,7 @@
 
 (function() {
     'use strict';
-    const message = 'Be aware! You are not on this weeks timesheet.';
+    const message = 'Be aware! You are not on this week\'s timesheet.';
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
     document.body.addEventListener('WF_RELOAD', init);
