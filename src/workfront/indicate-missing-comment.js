@@ -18,7 +18,7 @@
 (function() {
     'use strict';
     const inputFieldSelector = '.fc > input';
-    const noCommentStyle = 'background: tomato; color: blue';
+    const noCommentStyle = 'background: tomato; color: white';
     const submitButtonSelector = '.btn.submit.btn-secondary';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
