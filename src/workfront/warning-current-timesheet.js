@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
