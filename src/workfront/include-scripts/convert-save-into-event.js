@@ -10,8 +10,8 @@
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @grant        none
-// @downloadURL	 https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/include-scripts/convert-save-into-event.js
-// @updateURL	 https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/include-scripts/convert-save-into-event.js
+// @downloadURL	 https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/include-scripts/convert-save-into-event.js
+// @updateURL	 https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/include-scripts/convert-save-into-event.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 

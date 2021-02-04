@@ -32,12 +32,9 @@
         const submitButton = getElement(submitButtonSelector);
 
         const warningMessage = createWarningMessage();
-        const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
 
-        submitButton.disabled = emptyFieldFound;
-        emptyFieldFound ? warningMessage.classList.remove('hidden') : warningMessage.classList.add('hidden');
-
-        initListeners(elements);
+        checkAll(elements, warningMessage, submitButton);
+        initListeners(elements, warningMessage, submitButton);
     }
 
     function createWarningMessage() {
@@ -52,6 +49,13 @@
         container.insertBefore(element, container.firstChild);
 
         return element;
+    }
+
+    function checkAll(elements, warningMessage, submitButton) {
+        const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
+
+        submitButton.disabled = emptyFieldFound;
+        emptyFieldFound ? warningMessage.classList.remove('hidden') : warningMessage.classList.add('hidden');
     }
 
     function checkAllCommentsAndMarkFields(elements) {
@@ -71,12 +75,12 @@
         return isEmptyCommentPresent;
     }
 
-    function initListeners(elements) {
+    function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     if (mutation.attributeName === 'data-description') {
-                        checkAllCommentsAndMarkFields(elements);
+                        checkAll(elements, warningMessage, submitButton);
                     }
                 });
             });
@@ -84,7 +88,7 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('change', () => checkAllCommentsAndMarkFields(elements));
+            e.addEventListener('change', () => checkAll(elements, warningMessage, submitButton));
         });
     }
 
