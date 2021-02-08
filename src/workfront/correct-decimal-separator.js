@@ -20,7 +20,7 @@
     const inputFieldSelector = '.fc > input';
 
     document.body.addEventListener('WF_RELOAD', init);
-    
+
     init();
 
     function init() {
@@ -40,7 +40,7 @@
         const wrongSeparator = correctSeparator === '.' ? ',' : '.';
         console.log(ev.target.value);
         if (keyPressed === wrongSeparator) {
-            setTimeout(() => { ev.target.value = ev.target.value.slice(0, -1) + correctSeparator }, 0);
+            setTimeout(() => { ev.target.value = ev.target.value.slice(0, -1) + correctSeparator; }, 0);
         }
     }
 
