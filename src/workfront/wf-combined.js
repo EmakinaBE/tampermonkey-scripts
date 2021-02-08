@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.2
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -15,5 +15,6 @@
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/warning-current-timesheet.js
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-missing-comment.js
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/add-companyName-projectHeader.js
+// @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/correct-decimal-separator.js
 // @grant        none
 // ==/UserScript==
