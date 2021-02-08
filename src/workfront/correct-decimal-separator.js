@@ -19,6 +19,8 @@
 
     const inputFieldSelector = '.fc > input';
 
+    document.body.addEventListener('WF_RELOAD', init);
+    
     init();
 
     function init() {
@@ -40,7 +42,6 @@
         if (keyPressed === wrongSeparator) {
             setTimeout(() => { ev.target.value = ev.target.value.slice(0, -1) + correctSeparator }, 0);
         }
-
     }
 
 
