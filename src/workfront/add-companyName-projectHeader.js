@@ -36,7 +36,7 @@
                     }).then(e => {
                         console.log(e.data[0].name);
                         console.log(projectID.querySelector('td.header').value);
-                        projectID.querySelector('td.header').value.add("blablablab");
+                        projectID.querySelector('td.header').value.add('blablablab');
                     });
                 });
         });

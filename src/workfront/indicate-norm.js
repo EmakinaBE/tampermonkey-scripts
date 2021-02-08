@@ -24,29 +24,27 @@
         const timesheetId = getQueryStringValue('ID');
         const data = await fetchProjectData(timesheetId);
 
-        const cols = createTableRows(data);
+        const col = createTableRows(data);
 
-        addListener(cols, parseInt(data.extRefID));
+        addListener(col, parseInt(data.extRefID));
     }
 
     function createTableRows(data){
-        const normCol = insertRow(data.extRefID);
-
         const delta = data.totalHours - parseInt(data.extRefID);
-        const deltaCol = insertRow(getTextForDelta(delta), findColorForDelta(delta));
+        const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
 
-        return { deltaCol, normCol };
+        return col;
     }
 
-    function addListener(cols, norm) {
+    function addListener(col, norm) {
         const tableFooter = document.getElement('#timesheet-data tfoot .total');
 
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
                 const newTotal = parseInt(mutation.target.innerHTML);
                 const delta = newTotal - norm;
-                cols.deltaCol.innerHTML = getTextForDelta(delta);
-                cols.deltaCol.style = `color: ${ findColorForDelta(delta) }`;
+                col.innerHTML = createText(delta, norm);
+                col.style = `color: ${ findColorForDelta(delta) }`;
             });
         });
 
@@ -62,9 +60,15 @@
     function insertRow(text, color) {
         const tableFooter = document.getElement('#timesheet-data > tfoot');
         const tr = tableFooter.insertRow(-1);
-        for (let i = 0; i < 8; i++) {
-            tr.insertCell(0);
+
+        const firstCell = tr.insertCell(0);
+        firstCell.innerHTML = 'Norm(delta):';
+        firstCell.style = 'text-align: right';
+
+        for (let i = 0; i < 7; i++) {
+            tr.insertCell(-1);
         }
+
         const tdSpacer = tr.insertCell(-1);
         tdSpacer.className = 'spacer';
 
@@ -79,11 +83,13 @@
     }
 
     function findColorForDelta(delta) {
-        return delta === 0 ? 'green': 'red';
+        return delta === 0 ? 'green' : 'red';
     }
 
-    function getTextForDelta(delta) {
-        return delta < 0 ? '' + delta : `+${delta}`;
+    function createText(delta, norm) {
+        const deltaText = delta < 0 ? '' + delta : `+${delta}`;
+
+        return `${norm} (${deltaText})`;
     }
 
     function fetchProjectData(timesheetId) {
@@ -93,6 +99,7 @@
     }
 
     function getQueryStringValue (key) {
-        return decodeURIComponent(window.location.search.replace(new RegExp("^(?:.*[&\\?]" + encodeURIComponent(key).replace(/[\.\+\*]/g, "\\$&") + "(?:\\=([^&]*))?)?.*$", "i"), "$1"));
+        // eslint-disable-next-line no-useless-escape
+        return decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'));
     }
 })();
