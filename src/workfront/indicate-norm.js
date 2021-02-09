@@ -27,11 +27,11 @@
 
         const col = createTableRows(data);
 
-        addListener(col, parseInt(data.extRefID));
+        addListener(col, parseToFloat(data.extRefID));
     }
 
     function createTableRows(data){
-        const delta = data.totalHours - parseInt(data.extRefID);
+        const delta = data.totalHours - parseToFloat(data.extRefID);
         const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
 
         return col;
@@ -42,7 +42,7 @@
 
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
-                const newTotal = parseInt(mutation.target.innerHTML);
+                const newTotal = parseToFloat(mutation.target.innerHTML);
                 const delta = newTotal - norm;
                 col.innerHTML = createText(delta, norm);
                 col.style = `color: ${ findColorForDelta(delta) }`;
@@ -81,6 +81,10 @@
         tdVal.innerHTML = text;
 
         return tdVal;
+    }
+
+    function parseToFloat(text) {
+        return parseFloat(text.replace(',', '.'));
     }
 
     function findColorForDelta(delta) {
