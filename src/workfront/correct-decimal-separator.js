@@ -38,7 +38,6 @@
         const keyPressed = ev.key;
         const correctSeparator = getSystemDecimalSeparator();
         const wrongSeparator = correctSeparator === '.' ? ',' : '.';
-        console.log(ev.target.value);
         if (keyPressed === wrongSeparator) {
             setTimeout(() => { ev.target.value = ev.target.value.slice(0, -1) + correctSeparator; }, 0);
         }
