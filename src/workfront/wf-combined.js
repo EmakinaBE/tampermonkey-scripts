@@ -17,5 +17,6 @@
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/add-companyName-projectHeader.js
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/correct-decimal-separator.js
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-norm.js
+// @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/select-next-task-line.js
 // @grant        none
 // ==/UserScript==
