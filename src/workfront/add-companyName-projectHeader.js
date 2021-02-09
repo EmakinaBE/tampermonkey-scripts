@@ -29,16 +29,7 @@
     }
 
     function getProjectFromWorkFront(projectHTMLElement) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=companyID`)
-            .then(response => {
-                return response.json();
-            }).then(fields => {
-                getCompanyFromProject(projectHTMLElement, fields.data[0].companyID);
-            });
-    }
-
-    function getCompanyFromProject(projectHTMLElement, companyID) {
-        fetch(`https://emakina.my.workfront.com/attask/api/v12.0/cmpy/search?ID=${companyID}&fields=name`)
+        return fetch(`https://emakina.my.workfront.com/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=company:name`)
             .then(response => {
                 return response.json();
             }).then(e => {
