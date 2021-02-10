@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -97,7 +97,7 @@
     }
 
     function roundNearQtr(htmlElement) {
-        htmlElement.value = (Math.round(htmlElement.value * 4) / 4).toFixed(2);
+        htmlElement.value = (Math.round(htmlElement.value * 4) / 4);
     }
 
     function getElements(selector) {
