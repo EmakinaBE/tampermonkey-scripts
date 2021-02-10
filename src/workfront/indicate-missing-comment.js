@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @description  Indicate entries without comment and hide submit button when entries without comment are found
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -23,7 +23,7 @@
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
 
-    document.body.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_RELOAD', init);
 
     init();
 
