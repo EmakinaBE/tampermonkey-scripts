@@ -32,7 +32,6 @@
         });
     }
 
-
     function checkDecimal(ev) {
         const keyPressed = ev.key;
         const correctSeparator = getSystemDecimalSeparator();
@@ -41,7 +40,6 @@
             setTimeout(() => { ev.target.value = ev.target.value.slice(0, -1) + correctSeparator; }, 0);
         }
     }
-
 
     function getSystemDecimalSeparator() {
         var n = 1.1;

@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         Convert save into event
+// @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.1
-// @description  Will poll the success notification after save and thrown an event
+// @version      1.2
+// @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
@@ -19,7 +19,9 @@
 (function() {
     'use strict';
 
+    document.head.addEventListener('WF_RELOAD', setUpNewTaskListeners);
     setupListenerAndAttribute();
+    setUpNewTaskListeners();
 
     function pollNetworkRequestSuccess() {
 
@@ -30,12 +32,27 @@
 
         setupListenerAndAttribute();
         const event = new Event('WF_RELOAD');
-        document.head.dispatchEvent(event);
+        dispatchEvent(event);
     }
 
     function setupListenerAndAttribute() {
         document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
-        document.getElement('.btn.primary.btn-primary').addEventListener('click',pollNetworkRequestSuccess);
+        document.getElement('.btn.primary.btn-primary').addEventListener('click', pollNetworkRequestSuccess);
+    }
+
+    function setUpNewTaskListeners() {
+        getNewTaskButtons().forEach(e => e.addEventListener('click', e => {
+            const newTaskEvent = new CustomEvent('WF_NEW-TASK', {'detail': e });
+            dispatchEvent(newTaskEvent);
+        }));
+    }
+
+    function dispatchEvent(event) {
+        document.head.dispatchEvent(event);
+    }
+
+    function getNewTaskButtons() {
+        return document.getElements('.hour-type-and-role-add');
     }
 
 })();

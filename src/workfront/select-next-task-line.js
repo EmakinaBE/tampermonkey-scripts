@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name         Select next task line
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.0
 // @author       Wouter Versyck
+// @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -10,22 +11,16 @@
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @downloadURL  https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/select-next-task-line.js
 // @updateURL    https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/select-next-task-line.js
-// @grant        none
+// @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    document.head.addEventListener('WF_RELOAD', init);
-    init();
-
-    function init() {
-        const buttons = getButtons();
-
-        buttons.forEach(e => addClickHandler(e));
-    }
+    document.head.addEventListener('WF_NEW-TASK', handleEvent);
 
     function handleEvent(e) {
+        e = e.detail;
         const parent = e.target.parentNode.parentNode.parentNode.parentNode;
         const attributeValue = parent.getAttribute('data-workitemobjid');
 
