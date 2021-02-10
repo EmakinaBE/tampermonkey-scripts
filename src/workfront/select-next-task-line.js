@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Select next task line
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @author       Wouter Versyck
 // @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
@@ -17,34 +17,46 @@
 (function() {
     'use strict';
 
+    document.head.addEventListener('WF_RELOAD', init);
     init();
 
     function init() {
-        const elements = getElements();
+        const buttons = getButtons();
 
-        elements.forEach(e => e.addEventListener('DOMNodeInserted', handleEvent, false));
+        buttons.forEach(e => addClickHandler(e));
     }
 
     function handleEvent(e) {
-        if (!isElement(e.target)) {
-            return;
-        }
-        const dropdowns = e.target.parentNode.getElements('.hour-type-drop-down');
-        const newDropDown = dropdowns.pop();
+        const parent = e.target.parentNode.parentNode.parentNode.parentNode;
+        const attributeValue = parent.getAttribute('data-workitemobjid');
 
-        const values = dropdowns.map(e => e.getElement('.dd-hidden-input').value);
-
-        // Put function on event loop to immediately executes after other rendering is done
+        // use setTimeout to execute this after workfront rendered the new dropdown
         setTimeout(() => {
-            newDropDown.click();
-            const option = getFirstUnusedOptions(values);
-            console.log(option);
+            // get all the lines for this task
+            const lines = document.getElements(`[data-workitemobjid=${attributeValue}].TASK`);
+
+            // get the last (latest added) value and add a click handler for it for when other lines are added
+            const newLine = lines.pop();
+            addClickHandler(newLine.getElement('.hour-type-and-role-add'));
+
+            // open dropdown
+            const hoursDropDown = newLine.getElement('.hour-type-drop-down');
+            hoursDropDown.click();
+
+            // get option that is not yet picked and click it
+            const usedValues = lines.getElements('.hour-type-drop-down').map(e => e.getElement('.dd-hidden-input')[0].value);
+            const option = getFirstUnusedOptions(usedValues);
             option.click();
+
         }, 0);
     }
 
-    function getElements() {
-        return document.getElements('.project-hours.hour-collection');
+    function addClickHandler(element) {
+        element.addEventListener('click', handleEvent);
+    }
+
+    function getButtons() {
+        return document.getElements('.hour-type-and-role-add');
     }
 
     function getFirstUnusedOptions(values) {
@@ -52,12 +64,5 @@
         const leftOver = options.filter(e => !values.contains(e.getAttribute('data-value')));
 
         return leftOver.length > 0 ? leftOver[0] : options[0];
-    }
-
-    function isElement(o){
-        return (
-            typeof HTMLElement === 'object' ? o instanceof HTMLElement : //DOM2
-                o && typeof o === 'object' && o !== null && o.nodeType === 1 && typeof o.nodeName === 'string'
-        );
     }
 })();
