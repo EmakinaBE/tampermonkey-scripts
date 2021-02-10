@@ -49,10 +49,6 @@
         element.addEventListener('click', handleEvent);
     }
 
-    function getButtons() {
-        return document.getElements('.hour-type-and-role-add');
-    }
-
     function getFirstUnusedOptions(values) {
         const options = [...document.getElement('.item-list').children];
         const leftOver = options.filter(e => !values.contains(e.getAttribute('data-value')));
