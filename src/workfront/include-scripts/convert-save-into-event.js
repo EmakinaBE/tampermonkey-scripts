@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Convert save into event
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @description  Will poll the success notification after save and thrown an event
 // @author       Wouter Versyck
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -19,28 +19,23 @@
 (function() {
     'use strict';
 
-    addEventlistenerToSaveButton();
+    setupListenerAndAttribute();
 
-    function pollNetworkRequestSuccess(nrOfPreviousNotifications) {
-        console.log('polling notification', nrOfPreviousNotifications);
-        const nrOfNotifications = getNrOfNotifications();
+    function pollNetworkRequestSuccess() {
 
-        if (nrOfNotifications === nrOfPreviousNotifications) {
-            setTimeout(pollNetworkRequestSuccess, 500, nrOfNotifications);
+        if (document.getElement('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
+            setTimeout(pollNetworkRequestSuccess, 500);
             return;
         }
 
-        addEventlistenerToSaveButton();
-
+        setupListenerAndAttribute();
         const event = new Event('WF_RELOAD');
-        document.body.dispatchEvent(event);
+        document.head.dispatchEvent(event);
     }
 
-    function addEventlistenerToSaveButton() {
-        document.getElement('.btn.primary.btn-primary').addEventListener('click', () => pollNetworkRequestSuccess(getNrOfNotifications()));
+    function setupListenerAndAttribute() {
+        document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
+        document.getElement('.btn.primary.btn-primary').addEventListener('click',pollNetworkRequestSuccess);
     }
 
-    function getNrOfNotifications() {
-        return document.getElements('.Notify.success').length;
-    }
 })();

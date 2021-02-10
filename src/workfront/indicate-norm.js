@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.0
-// @description  try to take over the world!
+// @version      1.1
+// @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
@@ -12,13 +12,13 @@
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @downloadURL  https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-norm.js
 // @updateURL    https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-norm.js
-// @grant        GM_xmlhttpRequest
+// @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    document.body.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_RELOAD', init);
     init();
 
     async function init() {

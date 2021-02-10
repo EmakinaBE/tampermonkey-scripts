@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.2
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -18,7 +18,7 @@
     const message = 'Be aware! You are not on this week\'s timesheet.';
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
-    document.body.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_RELOAD', init);
     init();
 
     function init() {

@@ -1,8 +1,9 @@
 // ==UserScript==
-// @name         Indicate entries without comment
+// @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.0
-// @description  Indicate entries without comment and hide submit button when entries without comment are found
+// @version      1.3
+// @description  Indicate entries without comment, hide submit button when entries without comment are found and
+// round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
@@ -23,7 +24,7 @@
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
 
-    document.body.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_RELOAD', init);
 
     init();
 
@@ -88,10 +89,16 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('change', () => checkAll(elements, warningMessage, submitButton));
+            e.addEventListener('change', () => {
+                checkAll(elements, warningMessage, submitButton);
+                roundNearQtr(e);
+            });
         });
     }
 
+    function roundNearQtr(htmlElement) {
+        htmlElement.value = (Math.round(htmlElement.value * 4) / 4);
+    }
 
     function getElements(selector) {
         return document.getElements(selector);

@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workfront highlight Today
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @description  Highlight current day
 // @author       Jeffrey Vandenbossche
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -18,7 +18,7 @@
 (function() {
     'use strict';
 
-    document.body.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_RELOAD', init);
     init();
 
     function init() {

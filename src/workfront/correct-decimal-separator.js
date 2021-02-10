@@ -1,9 +1,8 @@
 // ==UserScript==
 // @name         Correct decimal separator
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @author       Wouter Versyck
-// @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -11,7 +10,7 @@
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @downloadURL  https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/correct-decimal-separator.js
 // @updateURL    https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/correct-decimal-separator.js
-// @grant        GM_xmlhttpRequest
+// @grant        none
 // ==/UserScript==
 
 (function() {
@@ -19,7 +18,7 @@
 
     const inputFieldSelector = '.fc > input';
 
-    document.body.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_RELOAD', init);
 
     init();
 
