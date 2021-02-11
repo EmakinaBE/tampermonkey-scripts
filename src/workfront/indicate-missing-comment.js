@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.3
+// @version      1.4
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -25,6 +25,7 @@
     const warningMessageText = 'Not all entries have a comment';
 
     document.head.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_NEW-TASK', init);
 
     init();
 
