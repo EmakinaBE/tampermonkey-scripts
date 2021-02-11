@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined
 // @namespace    https://www.emakina.com/
-// @version      1.12
+// @version      1.13
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -18,5 +18,6 @@
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/correct-decimal-separator.js
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-norm.js
 // @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/select-next-task-line.js
+// @require      https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/disable-completed-task.js
 // @grant        none
 // ==/UserScript==
