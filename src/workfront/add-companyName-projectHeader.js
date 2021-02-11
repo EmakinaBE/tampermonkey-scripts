@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Add CompanyName to project header
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Add company name in the workfront table header, to see to which company which project is linked
 // @author       Jeffrey Vandenbossche
 // @connect      self
@@ -34,12 +34,12 @@
             .then(response => {
                 return response.json();
             }).then(e => {
-                e.data[0] && addProjectNameToHeader(projectHTMLElement, e.data[0].name);
+                e.data[0] && addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
             });
     }
 
-    function addProjectNameToHeader(projectHTMLElement, projectName) {
-        const textNode = document.createTextNode(` - ${projectName}`);
+    function addCompanyNameToHeader(projectHTMLElement, companyName) {
+        const textNode = document.createTextNode(` - ${companyName}`);
         projectHTMLElement.querySelector('td.header').appendChild(textNode);
     }
 
