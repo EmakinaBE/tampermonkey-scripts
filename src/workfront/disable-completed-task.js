@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable completed tasks
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.2
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -23,7 +23,6 @@
     init();
 
     async function init() {
-        console.log('qsmldfkjqmlsdfjlsdkfj');
         const ids = [...new Set(getAllTasks().map(element => element.getAttribute('data-workitemobjid')))];
 
         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
@@ -32,7 +31,7 @@
         closedTasks.forEach(disableTasks);
     }
 
-    function fetchStatus(id) {
+    async function fetchStatus(id) {
         return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/task/search?ID=${id}&fields=status`)
             .then(response => response.json())
             .then(json => {
@@ -44,13 +43,11 @@
     }
 
     function disableTasks({ id }) {
-        const tasks = document.getElements(`.TASK[data-workitemobjid=${id}]`);
-
-        console.log(tasks);
-
-        tasks.forEach(e => {
-            e.innerHTML = 'heererlsdkjfqmsdfjmqsldfkjqmsldkfjlsmdfkjmlkjf';
-        });
+        document.getElements(`.TASK[data-workitemobjid=${id}] .fc > input`)
+            .forEach(e => {
+                e.setAttribute('disabled', 'disabled');
+                e.style = 'background: #D3D3D3';
+            });
     }
 
     function getAllTasks() {
