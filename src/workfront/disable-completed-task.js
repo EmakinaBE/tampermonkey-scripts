@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disable completed tasks
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -46,7 +46,7 @@
         document.getElements(`.TASK[data-workitemobjid=${id}] .fc > input`)
             .forEach(e => {
                 e.setAttribute('disabled', 'disabled');
-                e.style = 'background: #D3D3D3';
+                e.style = 'background: rgb(211, 211, 211, 0.35)';
             });
     }
 
