@@ -9,9 +9,9 @@
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
-// @homepage     https://gitlab.emakina.net/jev/tampermonkey-scripts
-// @downloadURL  https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-missing-comment.js
-// @updateURL    https://gitlab.emakina.net/jev/tampermonkey-scripts/-/raw/master/src/workfront/indicate-missing-comment.js
+// @homepage     https://github.com/EMAKINA-EGBA/WF-Timesheet-Helpers
+// @downloadURL  https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/indicate-missing-comment.js
+// @updateURL    https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/indicate-missing-comment.js
 // @grant        none
 // ==/UserScript==
 
