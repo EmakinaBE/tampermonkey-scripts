@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.4
+// @version      1.5
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -25,7 +25,7 @@
     const warningMessageText = 'Not all entries have a comment';
 
     document.head.addEventListener('WF_RELOAD', init);
-    document.head.addEventListener('WF_NEW-TASK', init);
+    document.head.addEventListener('WF_NEW-TASK',e => initNewTask(e));
 
     init();
 
@@ -36,6 +36,13 @@
         const warningMessage = createWarningMessage();
 
         checkAll(elements, warningMessage, submitButton);
+        initListeners(elements, warningMessage, submitButton);
+    }
+
+    function initNewTask(e){
+        const elements = e.detail.newLine.getElements(inputFieldSelector);
+        const submitButton = getElement(submitButtonSelector);
+        const warningMessage = getElement('#CommentPanel > menu > p');
         initListeners(elements, warningMessage, submitButton);
     }
 
