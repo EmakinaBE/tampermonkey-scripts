@@ -40,8 +40,4 @@
 
         return leftOver.length > 0 ? leftOver[0] : options[0];
     }
-
-    function addClickHandler(element) {
-        element.addEventListener('click', handleEvent);
-    }
 })();
