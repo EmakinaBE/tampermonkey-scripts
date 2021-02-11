@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -19,8 +19,7 @@
 (function() {
     'use strict';
 
-    setupListenerAndAttribute();
-    setUpNewTaskListeners();
+    setupListeners();
 
     function pollNetworkRequestSuccess() {
         if (document.getElement('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
@@ -28,17 +27,17 @@
             return;
         }
 
-        setupListenerAndAttribute();
+        setupListeners();
         const event = new Event('WF_RELOAD');
         dispatchEvent(event);
     }
 
-    function setupListenerAndAttribute() {
+    function setupListeners() {
+        // setup attribute (to check page refresh) and listeners for on save button
         document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
         document.getElement('.btn.primary.btn-primary').addEventListener('click', pollNetworkRequestSuccess);
-    }
 
-    function setUpNewTaskListeners() {
+        // setup listeners for new task
         getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
