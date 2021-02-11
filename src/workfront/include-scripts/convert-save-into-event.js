@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.1
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://gitlab.emakina.net/jev/tampermonkey-scripts
@@ -19,12 +19,10 @@
 (function() {
     'use strict';
 
-    document.head.addEventListener('WF_RELOAD', setUpNewTaskListeners);
     setupListenerAndAttribute();
     setUpNewTaskListeners();
 
     function pollNetworkRequestSuccess() {
-
         if (document.getElement('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
@@ -41,10 +39,26 @@
     }
 
     function setUpNewTaskListeners() {
-        getNewTaskButtons().forEach(e => e.addEventListener('click', e => {
-            const newTaskEvent = new CustomEvent('WF_NEW-TASK', {'detail': e });
+        getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
+    }
+
+    function newTaskClickHandler(event) {
+        const parent = event.target.parentNode.parentNode.parentNode.parentNode;
+        const workitemobjid = parent.getAttribute('data-workitemobjid');
+
+        // use setTimeout to execute this after workfront rendered the new task line
+        setTimeout(() => {
+            // get all the lines for this task
+            const lines = document.getElements(`[data-workitemobjid=${workitemobjid}].TASK`);
+
+            // get the last (latest added) value and add a click handler for it for when other lines are added
+            const newLine = lines.pop();
+            newLine.getElement('.hour-type-and-role-add').addEventListener('click', newTaskClickHandler);
+
+            // dispatch event containing the original event and the newly added line
+            const newTaskEvent = new CustomEvent('WF_NEW-TASK', {'detail': { event, newLine, workitemobjid } });
             dispatchEvent(newTaskEvent);
-        }));
+        });
     }
 
     function dispatchEvent(event) {
