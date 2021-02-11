@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Correct decimal separator
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.2
 // @author       Wouter Versyck
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
@@ -19,6 +19,8 @@
     const inputFieldSelector = '.fc > input';
 
     document.head.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('WF_NEW-TASK', init);
+
 
     init();
 
