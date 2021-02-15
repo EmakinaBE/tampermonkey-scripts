@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Add CompanyName to project header
 // @namespace    https://www.emakina.com/
-// @version      1.3
+// @version      1.4
 // @description  Add company name in the workfront table header, to see to which company which project is linked
 // @author       Jeffrey Vandenbossche
 // @connect      self
@@ -9,9 +9,9 @@
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
-// @homepage     https://github.com/EMAKINA-EGBA/WF-Timesheet-Helpers
-// @downloadURL  https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/add-companyName-projectHeader.js
-// @updateURL    https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/add-companyName-projectHeader.js
+// @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-companyName-projectHeader.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-companyName-projectHeader.js
 // @grant        none
 // ==/UserScript==
 

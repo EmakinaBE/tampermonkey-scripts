@@ -1,15 +1,15 @@
 // ==UserScript==
 // @name         Correct decimal separator
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @author       Wouter Versyck
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
-// @homepage     https://github.com/EMAKINA-EGBA/WF-Timesheet-Helpers
+// @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
-// @downloadURL  https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/correct-decimal-separator.js
-// @updateURL    https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/correct-decimal-separator.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/correct-decimal-separator.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/correct-decimal-separator.js
 // @grant        none
 // ==/UserScript==
 

@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.2
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
-// @homepage     https://github.com/EMAKINA-EGBA/WF-Timesheet-Helpers
+// @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
-// @downloadURL  https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/indicate-norm.js
-// @updateURL    https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/indicate-norm.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
 // @grant        none
 // ==/UserScript==
 

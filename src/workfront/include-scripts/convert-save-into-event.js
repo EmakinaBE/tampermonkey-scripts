@@ -1,17 +1,17 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.3
+// @version      1.4
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
-// @homepage	 https://github.com/EMAKINA-EGBA/WF-Timesheet-Helpers
+// @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/include-scripts/convert-save-into-event.js
-// @updateURL	 https://raw.githubusercontent.com/EMAKINA-EGBA/WF-Timesheet-Helpers/master/src/workfront/include-scripts/convert-save-into-event.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
