@@ -99,13 +99,30 @@
             });
             e.addEventListener('change', () => {
                 checkAll(elements, warningMessage, submitButton);
+                e.value = roundStringToNearestQtr(e.value);
                 roundNearQtr(e);
             });
         });
     }
 
-    function roundNearQtr(htmlElement) {
-        htmlElement.value = (Math.round(htmlElement.value * 4) / 4);
+    function roundStringToNearestQtr(string) {
+        const roundedNr = roundNearQtr(parseFloat(toDecimalPoint(string)));
+        return toSystemDecimalDelimiter(roundedNr.toString());
+    }
+
+    function toSystemDecimalDelimiter(string) {
+        const correctDel = getSystemDecimalSeparator();
+        const wrongDel = correctDel === '.' ? ',' : '.';
+
+        return string.replace(wrongDel, correctDel);
+    }
+
+    function toDecimalPoint(string) {
+        return string.replace(',', '.');
+    }
+
+    function roundNearQtr(nr) {
+        return Math.round(nr * 4) / 4;
     }
 
     function getElements(selector) {
@@ -114,5 +131,10 @@
 
     function getElement(selector) {
         return document.getElement(selector);
+    }
+
+    function getSystemDecimalSeparator() {
+        var n = 1.1;
+        return n.toLocaleString().substring(1, 2);
     }
 })();
