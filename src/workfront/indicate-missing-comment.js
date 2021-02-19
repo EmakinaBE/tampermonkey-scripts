@@ -1,8 +1,8 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.7
-// @description  Indicate entries without comment, hide submit button when entries without comment are found and
+// @version      1.8
+// @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -99,8 +99,8 @@
             });
             e.addEventListener('change', () => {
                 checkAll(elements, warningMessage, submitButton);
-                e.value = roundStringToNearestQtr(e.value);
-                roundNearQtr(e);
+                const val = e.value;
+                setTimeout(() => e.value = roundStringToNearestQtr(val), 0);
             });
         });
     }
