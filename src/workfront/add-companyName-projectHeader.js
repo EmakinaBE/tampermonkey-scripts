@@ -1,14 +1,16 @@
 // ==UserScript==
 // @name         Add CompanyName to project header
 // @namespace    https://www.emakina.com/
-// @version      1.5
+// @version      1.6
 // @description  Add company name in the workfront table header, to see to which company which project is linked
 // @author       Jeffrey Vandenbossche
 // @connect      self
 // @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
 // @match        https://emakina.preview.workfront.com/timesheet/*
 // @match        https://emakina.sb01.workfront.com/timesheet/*
+// @match        https://emakina.my.workfront.com/timesheets/current*
+// @match        https://emakina.preview.workfront.com/timesheets/current*
+// @match        https://emakina.sb01.workfront.com/timesheets/current*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts

@@ -1,16 +1,18 @@
 // ==UserScript==
 // @name         Disable completed tasks
 // @namespace    https://www.emakina.com/
-// @version      1.4
+// @version      1.5
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
 // @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
 // @match        https://emakina.preview.workfront.com/timesheet/*
 // @match        https://emakina.sb01.workfront.com/timesheet/*
+// @match        https://emakina.my.workfront.com/timesheets/current*
+// @match        https://emakina.preview.workfront.com/timesheets/current*
+// @match        https://emakina.sb01.workfront.com/timesheets/current*
 // @grant        none
 // @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
