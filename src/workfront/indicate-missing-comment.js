@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.8
+// @version      1.9
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -18,7 +18,7 @@
 
 (function() {
     'use strict';
-    const inputFieldSelector = '.fc > input';
+    const inputFieldSelector = '.fc > input:not([readonly=true])';
     const noCommentStyle = 'background: tomato';
     const submitButtonSelector = '.btn.submit.btn-secondary';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
@@ -63,7 +63,11 @@
     function checkAll(elements, warningMessage, submitButton) {
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
 
-        submitButton.disabled = emptyFieldFound;
+        // submit button is not always shown (on already commited ts)
+        if(submitButton) {
+            submitButton.disabled = emptyFieldFound;
+        }
+        
         emptyFieldFound ? warningMessage.classList.remove('hidden') : warningMessage.classList.add('hidden');
     }
 
