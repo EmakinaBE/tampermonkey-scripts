@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workfront highlight Today
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Highlight current day
 // @author       Jeffrey Vandenbossche
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
@@ -9,6 +9,8 @@
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
+// @match        https://emakina.preview.workfront.com/timesheet/*
+// @match        https://emakina.sb01.workfront.com/timesheet/*
 // @grant        none
 // @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/highlight-currentday.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/highlight-currentday.js

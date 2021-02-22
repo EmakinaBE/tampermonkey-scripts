@@ -1,10 +1,13 @@
 // ==UserScript==
 // @name         WF combined
 // @namespace    https://www.emakina.com/
-// @version      1.21
+// @version      1.22
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
+// @match        https://emakina.my.workfront.com/timesheets/current*
+// @match        https://emakina.preview.workfront.com/timesheet/*
+// @match        https://emakina.sb01.workfront.com/timesheet/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts

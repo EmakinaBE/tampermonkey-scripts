@@ -1,12 +1,14 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.9
+// @version      1.10
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
+// @match        https://emakina.preview.workfront.com/timesheet/*
+// @match        https://emakina.sb01.workfront.com/timesheet/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts

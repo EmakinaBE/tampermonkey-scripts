@@ -1,10 +1,13 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.3
+// @version      1.4
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
+// @match        https://emakina.my.workfront.com/timesheets/current*
+// @match        https://emakina.preview.workfront.com/timesheet/*
+// @match        https://emakina.sb01.workfront.com/timesheet/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
