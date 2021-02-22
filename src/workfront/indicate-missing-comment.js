@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.11
+// @version      1.12
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -27,6 +27,8 @@
     const submitButtonSelector = '.btn.submit.btn-secondary';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
+
+    const del = getSystemDecimalSeparator();
 
     document.head.addEventListener('WF_RELOAD', init);
     document.head.addEventListener('WF_NEW-TASK',e => initNewTask(e));
@@ -105,21 +107,27 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('change', () => {
-                checkAll(elements, warningMessage, submitButton);
+            e.addEventListener('keyup', () => {
                 const val = e.value;
-                setTimeout(() => e.value = roundStringToNearestQtr(val), 0);
-            });
+                checkAll(elements, warningMessage, submitButton);
+                if (val) {
+                    e.value = roundStringToNearestQtr(val);
+                }
+            }, false);
         });
     }
 
     function roundStringToNearestQtr(string) {
-        const roundedNr = roundNearQtr(parseFloat(toDecimalPoint(string)));
-        return toSystemDecimalDelimiter(roundedNr.toString());
+        const index = string.indexOf(del);
+        if(index > 0 && index < string.length - 1) {
+            const roundedNr = roundNearQtr(parseFloat(string));
+            return toSystemDecimalDelimiter(roundedNr.toString());
+        }
+        return toSystemDecimalDelimiter(string);
     }
 
     function toSystemDecimalDelimiter(string) {
-        const correctDel = getSystemDecimalSeparator();
+        const correctDel = del;
         const wrongDel = correctDel === '.' ? ',' : '.';
 
         return string.replace(wrongDel, correctDel);
@@ -143,6 +151,11 @@
 
     function getSystemDecimalSeparator() {
         var n = 1.1;
+        const lang = document.documentElement.lang.replace('_', '-');
+
+        if (lang) {
+            return n.toLocaleString(lang).substring(1, 2);
+        }
         return n.toLocaleString().substring(1, 2);
     }
 })();
