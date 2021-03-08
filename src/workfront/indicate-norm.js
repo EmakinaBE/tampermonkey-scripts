@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.4
+// @version      1.5
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self
@@ -92,7 +92,7 @@
     }
 
     function findColorForDelta(delta) {
-        return delta === 0 ? 'green' : 'red';
+        return delta >= 0 ? 'green' : 'red';
     }
 
     function createText(delta, norm) {
