@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.5
+// @version      1.6
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self
@@ -96,6 +96,7 @@
     }
 
     function createText(delta, norm) {
+        delta = Math.round(delta * 100) / 100;
         const deltaText = delta < 0 ? '' + delta : `+${delta}`;
 
         return `${norm} (${deltaText})`;
