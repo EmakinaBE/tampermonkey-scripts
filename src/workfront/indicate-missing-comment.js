@@ -133,10 +133,6 @@
         return string.replace(wrongDel, correctDel);
     }
 
-    function toDecimalPoint(string) {
-        return string.replace(',', '.');
-    }
-
     function roundNearQtr(nr) {
         return Math.round(nr * 4) / 4;
     }
