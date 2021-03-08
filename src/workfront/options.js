@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      0.1
+// @version      1.0
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -27,6 +27,8 @@
             isChecked: false
         },
     };
+
+    window.wfGetOptions = getOptions;
 
     const options = loadOptions();
 
@@ -111,6 +113,15 @@
 
         options[target.name].isChecked = target.checked;
         localStorage.setItem(storageKey, JSON.stringify(options));
+    }
+
+    function getOptions() {
+        const result = {};
+
+        for (const [key, value] of Object.entries(options)) {
+            result[key] = value.isChecked;
+        }
+        return result;
     }
 
     function loadOptions() {
