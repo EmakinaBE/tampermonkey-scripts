@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.5
+// @version      1.6
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -20,14 +20,18 @@
 
 (function() {
     'use strict';
-    const message = 'Be aware! You are not on this week\'s timesheet.';
+
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
     document.head.addEventListener('WF_RELOAD', init);
     init();
 
-    function init() {
-        if (!getElement('.today')) {
+    async function init() {
+        const openTsInPast = await getOldestOpenTsBeforeToday();
+        const isCurrentTs = getElement('.today');
+
+        if (!isCurrentTs || openTsInPast) {
+            const message = await createMessage(isCurrentTs, openTsInPast);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
 
@@ -41,8 +45,35 @@
 
     function createElementWithText(tagName, text) {
         const element = document.createElement(tagName);
-        const textNode = document.createTextNode(text);
-        element.appendChild(textNode);
+        element.innerHTML = text;
         return element;
+    }
+
+    async function createMessage(isCurrentTs, olderTs) {
+        let message = '';
+
+        if (olderTs) {
+            const link = await constructLink(olderTs);
+            message += `Be aware! You are not on the oldest open timesheet follow ${link} to go to the oldest link`;
+        }
+
+        if (!isCurrentTs && olderTs) {
+            message += '<br><br>';
+        }
+
+        if (!isCurrentTs) {
+            message += 'Be aware! You are not on this week\'s timesheet.';
+        }
+        return message;
+    }
+
+    async function constructLink(olderTs){
+        return `<a href="/timesheet/view?ID=${olderTs.ID}">this link</a>`;
+    }
+
+    function getOldestOpenTsBeforeToday() {
+        return fetch('https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYb-1w&OR:1:endDate_Mod=lt&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1')
+            .then(e => e.json())
+            .then(e => e.data[0]);
     }
 })();
