@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.6
+// @version      1.7
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -94,7 +94,7 @@
         const container = document.createElement('div');
         container.style = 'transform: translate(-50%, -50%); position: fixed; left: 50%; top: 50%; padding:20px; background: white; border: 1px solid black; box-shadow: 1px 3px 15px 5px rgba(0,0,0,0.32);';
         container.appendChild(createCloseButton());
-        container.appendChild(createTitle('Options for WorkFront scripts'));
+        container.appendChild(createTitle('WF scripts options'));
 
         for (const [key, value] of Object.entries(options)) {
             const div = document.createElement('div');
@@ -117,8 +117,9 @@
     }
 
     function createTitle(text) {
-        const title = document.createElement('h1');
+        const title = document.createElement('h2');
         title.textContent = text;
+        title.style = 'margin-bottom: 15px;';
         return title;
     }
 
