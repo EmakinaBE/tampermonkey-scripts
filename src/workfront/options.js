@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -166,7 +166,11 @@
         if (oldKeys !== newKeys) {
             const newOptions = { ...defaultOptions };
             for (const [key, value] of Object.entries(oldOptions)) {
-                newOptions[key].isChecked = value.isChecked;
+                // check if key exists on newOptions (clone of default options) - this will not be the case if a previous option is removed
+                if(newOptions[key]) {
+                    newOptions[key].isChecked = value.isChecked;
+                }
+
             }
             localStorage.setItem(storageKey, JSON.stringify(newOptions));
         }
