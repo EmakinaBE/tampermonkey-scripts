@@ -38,8 +38,8 @@
     init();
 
     function init() {
-        createMenuElement();
         popUp = createPopupElement();
+        createMenuElement();
     }
 
     function togglePopUp() {
@@ -52,13 +52,14 @@
     }
 
     function showPopUp() {
-        popUp.style = 'transform: translate(-50%, -50%); position: fixed; left: 50%; top: 50%; padding:20px; background: white; border: 1px solid black; box-shadow: 1px 3px 15px 5px rgba(0,0,0,0.32);';
+        popUp.style = 'position:absolute;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%';
     }
 
     function createMenuElement() {
         const button = document.createElement('button');
         button.textContent = 'test';
         button.onclick = togglePopUp;
+
         const li = document.createElement('li');
         li.appendChild(button);
         li.classList.add('navbar-item');
@@ -66,18 +67,30 @@
     }
 
     function createPopupElement() {
-        const div = document.createElement('div');
-        div.appendChild(createOptionsView());
+        const overlay = createOverlay();
+        overlay.appendChild(createOptionsView());
 
-        document.body.appendChild(div);
+        document.body.appendChild(overlay);
+        return overlay;
+    }
+
+    function createOverlay() {
+        const div = document.createElement('div');
+        div.id = 'WF-overlay';
+        div.style = 'display:none';
+        div.onclick = e => {
+            if (e.target.id === 'WF-overlay') {
+                togglePopUp();
+            }
+        };
         return div;
     }
 
     function createOptionsView() {
         const container = document.createElement('div');
-        const title = document.createElement('h1');
-        title.textContent = 'Options for WorkFront scripts';
-        container.appendChild(title);
+        container.style = 'transform: translate(-50%, -50%); position: fixed; left: 50%; top: 50%; padding:20px; background: white; border: 1px solid black; box-shadow: 1px 3px 15px 5px rgba(0,0,0,0.32);';
+        container.appendChild(createCloseButton());
+        container.appendChild(createTitle('Options for WorkFront scripts'));
 
         for (const [key, value] of Object.entries(options)) {
             const div = document.createElement('div');
@@ -89,6 +102,20 @@
         }
 
         return container;
+    }
+
+    function createCloseButton() {
+        const button = document.createElement('button');
+        button.textContent = 'X';
+        button.onclick = togglePopUp;
+        button.style = 'float:right;border-radius:50%;width:20px;height:20px;line-height:0.1';
+        return button;
+    }
+
+    function createTitle(text) {
+        const title = document.createElement('h1');
+        title.textContent = text;
+        return title;
     }
 
     function createCheckbox(key, value) {
@@ -117,7 +144,6 @@
 
     function getOptions() {
         const result = {};
-
         for (const [key, value] of Object.entries(options)) {
             result[key] = value.isChecked;
         }
