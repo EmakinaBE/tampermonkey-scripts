@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      1.2
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -24,14 +24,18 @@
     const defaultOptions = {
         autoRedirect: {
             label: 'Auto redirect to oldest open ts',
-            isChecked: false
+            isChecked: false,
         },
+        roundToNearestQuarter: {
+            label: 'Round entries to nearest quarter',
+            isChecked: true,
+        }
     };
 
     window.wfGetOptions = getOptions;
 
-    const options = loadOptions();
-
+    checkOptionsUpdate();
+    let options = loadOptions();
     let popUp = null;
     let isPopUpVisible = false;
 
@@ -152,5 +156,19 @@
 
     function loadOptions() {
         return JSON.parse(localStorage.getItem(storageKey)) || defaultOptions;
+    }
+
+    function checkOptionsUpdate() {
+        const oldOptions = loadOptions();
+        const oldKeys = Object.keys(oldOptions).sort();
+        const newKeys = Object.keys(defaultOptions).sort();
+
+        if (oldKeys !== newKeys) {
+            const newOptions = { ...defaultOptions };
+            for (const [key, value] of Object.entries(oldOptions)) {
+                newOptions[key].isChecked = value.isChecked;
+            }
+            localStorage.setItem(storageKey, JSON.stringify(newOptions));
+        }
     }
 })();
