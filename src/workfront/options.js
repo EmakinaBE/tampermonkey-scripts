@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.3
+// @version      1.4
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -56,7 +56,7 @@
     }
 
     function showPopUp() {
-        popUp.style = 'position:absolute;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%';
+        popUp.style = 'position:fixed;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%';
     }
 
     function createMenuElement() {
