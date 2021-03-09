@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.5
+// @version      1.6
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -61,7 +61,7 @@
 
     function createMenuElement() {
         const button = document.createElement('button');
-        button.textContent = 'test';
+        button.style = 'background: url(https://avatars.githubusercontent.com/u/767504?s=400&u=d0a32a535c83ebde083450c51552e0496b0735d2&v=4);background-size:cover;width:30px;height:30px';
         button.onclick = togglePopUp;
 
         const li = document.createElement('li');
