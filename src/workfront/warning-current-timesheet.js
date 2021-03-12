@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.8
+// @version      1.9
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -56,7 +56,7 @@
 
         if (olderTs) {
             const link = constructLink(olderTs);
-            message += `Be aware! You are not on the oldest open timesheet follow ${link} to go to the oldest link`;
+            message += `Be aware! You are not on the oldest open timesheet follow ${link} to go directly to it.`;
         }
 
         if (!isCurrentTs && olderTs) {
