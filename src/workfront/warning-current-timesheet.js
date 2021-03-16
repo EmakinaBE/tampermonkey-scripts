@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.9
+// @version      1.10
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -77,8 +77,11 @@
         return `/timesheet/view?ID=${olderTs.ID}`;
     }
 
-    function redirectIfNeeded(olderTs) {
-        if (!window.wfGetOptions || !olderTs || olderTs.ID === getCurrentTSId()) {
+    async function redirectIfNeeded(olderTs) {
+        const currentTsId = getCurrentTsId();
+        const currentTs = await getCurrentTs(currentTsId);
+
+        if (!window.wfGetOptions || !olderTs || olderTs.ID === currentTsId || currentTs.status === 'C') {
             return;
         }
 
@@ -87,10 +90,17 @@
         }
     }
 
-    function getCurrentTSId() {
+    function getCurrentTsId() {
         let params = (new URL(document.location)).searchParams;
         return params.get('ID');
     }
+
+    function getCurrentTs(currentTsId) {
+        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
+            .then(e => e.json())
+            .then(e => e.data[0]);
+    }
+
 
     function getOldestOpenTsBeforeToday() {
         return fetch('https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYb-1w&OR:1:endDate_Mod=lt&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1')
