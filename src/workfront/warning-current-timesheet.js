@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.10
+// @version      1.11
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -91,8 +91,7 @@
     }
 
     function getCurrentTsId() {
-        let params = (new URL(document.location)).searchParams;
-        return params.get('ID');
+        return document.getElement('[data-timesheetid]').getAttribute('data-timesheetid');
     }
 
     function getCurrentTs(currentTsId) {

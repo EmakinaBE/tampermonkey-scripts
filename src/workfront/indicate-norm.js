@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.6
+// @version      1.7
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self
@@ -26,7 +26,7 @@
     init();
 
     async function init() {
-        const timesheetId = getQueryStringValue('ID');
+        const timesheetId = getCurrentTsId();
         const data = await fetchProjectData(timesheetId);
 
         const col = createTableRows(data);
@@ -108,8 +108,8 @@
             .then(json => json.data[0]);
     }
 
-    function getQueryStringValue (key) {
-        // eslint-disable-next-line no-useless-escape
-        return decodeURIComponent(window.location.search.replace(new RegExp('^(?:.*[&\\?]' + encodeURIComponent(key).replace(/[\.\+\*]/g, '\\$&') + '(?:\\=([^&]*))?)?.*$', 'i'), '$1'));
+    function getCurrentTsId() {
+        return document.getElement('[data-timesheetid]').getAttribute('data-timesheetid');
     }
+
 })();
