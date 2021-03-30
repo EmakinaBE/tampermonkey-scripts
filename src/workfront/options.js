@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.7
+// @version      1.8
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -25,11 +25,11 @@
         autoRedirect: {
             label: 'Auto redirect to oldest open ts',
             isChecked: false,
-        },
+        }/*,
         roundToNearestQuarter: {
             label: 'Round entries to nearest quarter',
             isChecked: true,
-        }
+        }*/
     };
 
     window.wfGetOptions = getOptions;
