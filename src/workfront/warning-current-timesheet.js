@@ -28,12 +28,17 @@
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
+        const currentTsId = getCurrentTsId();
 
-        redirectIfNeeded(openTsInPast);
+        const currentTs = await getCurrentTs(currentTsId);
+        const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
+
+        await redirectIfNeeded(openTsInPast, noOlderTs);
+
         const isCurrentTs = getElement('.today');
 
         if (!isCurrentTs || openTsInPast) {
-            const message = createMessage(isCurrentTs, openTsInPast);
+            const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
 
@@ -51,15 +56,15 @@
         return element;
     }
 
-    function createMessage(isCurrentTs, olderTs) {
+    function createMessage(isCurrentTs, olderTs, noOlderTs) {
         let message = '';
 
-        if (olderTs) {
+        if (!noOlderTs) {
             const link = constructLink(olderTs);
             message += `Be aware! You are not on the oldest open timesheet follow ${link} to go directly to it.`;
         }
 
-        if (!isCurrentTs && olderTs) {
+        if (!isCurrentTs && !noOlderTs) {
             message += '<br><br>';
         }
 
@@ -77,11 +82,9 @@
         return `/timesheet/view?ID=${olderTs.ID}`;
     }
 
-    async function redirectIfNeeded(olderTs) {
-        const currentTsId = getCurrentTsId();
-        const currentTs = await getCurrentTs(currentTsId);
+    async function redirectIfNeeded(olderTs, noOlderTs) {
 
-        if (!window.wfGetOptions || !olderTs || olderTs.ID === currentTsId || currentTs.status === 'C') {
+        if (noOlderTs) {
             return;
         }
 
@@ -106,4 +109,9 @@
             .then(e => e.json())
             .then(e => e.data[0]);
     }
+
+    function noOlderTsExist (olderTs, currentTsId, currentTs) {
+        return (!window.wfGetOptions || !olderTs || olderTs.ID === currentTsId || currentTs.status === 'C');
+    }
+
 })();
