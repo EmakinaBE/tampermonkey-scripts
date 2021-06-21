@@ -20,13 +20,8 @@
 // ==/UserScript==
 
 
-(function(window) {
+(function() {
     'use strict';
-
-    // add to sperate file
-    window.main = () => {}
-    // in ths file
-    main();
 
     setupListeners();
 
@@ -82,4 +77,4 @@
         return document.getElements('.hour-type-and-role-add');
     }
 
-})(Window, document);
+})();
