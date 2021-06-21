@@ -29,6 +29,7 @@
         const iframe = document.querySelector('#main-frame');
         if (iframe) {
             const doc = iframe.contentWindow.document;
+            console.log(doc);
             return resolve(doc);
         }
 
