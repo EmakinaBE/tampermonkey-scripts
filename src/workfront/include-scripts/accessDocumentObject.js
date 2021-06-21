@@ -30,7 +30,6 @@
         if (iframe) {
             const doc = iframe.contentWindow.document;
             doc.addEventListener("DOMContentLoaded", function(event) {
-                console.log(doc);
                 return resolve(doc);
             });
         }
