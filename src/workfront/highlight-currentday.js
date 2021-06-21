@@ -27,7 +27,6 @@
 
     async function init() {
         const doc = await getDocumentObject();
-        console.log(doc);
         const x = doc.body.querySelector('.today')
 
         for (let i = 0; i < x.length; i++) {
