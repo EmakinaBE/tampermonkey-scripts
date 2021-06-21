@@ -29,7 +29,7 @@
         const iframe = document.querySelector('#main-frame');
         if (iframe) {
             const doc = iframe.contentWindow.document;
-            doc.addEventListener("load", function(event) {
+            doc.addEventListener("DOMContentLoaded", function(event) {
                 return resolve(doc);
             });
         }

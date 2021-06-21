@@ -29,14 +29,17 @@
         const doc = await getDocumentObject();
         console.log(doc);
 
-        const x = doc.getElementsByClassName('today');
-        console.log(x);
+        window.addEventListener("load", function(event) {
 
-        for (let i = 0; i < x.length; i++) {
-            x[i].style.backgroundColor = 'lemonchiffon';
-            x[i].style.backgroundImage = 'none';
-        };
+            console.log(doc);
+            const x = doc.getElementsByClassName('today');
+            console.log(x);
 
+            for (let i = 0; i < x.length; i++) {
+                x[i].style.backgroundColor = 'lemonchiffon';
+                x[i].style.backgroundImage = 'none';
+            };
+        })
     }
 
 })();
