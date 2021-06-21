@@ -28,11 +28,10 @@
     const checkElement = (resolve, reject) => {
         const iframe = document.querySelector('#main-frame');
         if (iframe) {
-            iframe.contentWindow.document.addEventListener( "load", function(e) { 
-                const doc = iframe.contentWindow.document;
-                console.log(doc);
+            const doc = iframe.contentWindow.document;
+            doc.addEventListener("DOMContentLoaded", function(event) {
                 return resolve(doc);
-            } );
+            });
         }
 
         setTimeout(() => checkElement(resolve, reject), 100);
