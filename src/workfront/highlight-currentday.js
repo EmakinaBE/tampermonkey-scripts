@@ -29,6 +29,7 @@
         const doc = await getDocumentObject();
         doc.addEventListener("DOMContentLoaded", function(event) {
             const x = doc.getElementsByClassName('today');
+            console.log(x);
             for (let i = 0; i < x.length; i++) {
                 x[i].style.backgroundColor = 'lemonchiffon';
                 x[i].style.backgroundImage = 'none';
