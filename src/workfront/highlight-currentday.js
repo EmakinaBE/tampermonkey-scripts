@@ -27,19 +27,15 @@
 
     async function init() {
         const doc = await getDocumentObject();
-        console.log(doc);
 
-        window.addEventListener("load", function(event) {
+        const x = doc.getElementsByClassName('today');
+        console.log(x);
 
-            console.log(doc);
-            const x = doc.getElementsByClassName('today');
-            console.log(x);
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.backgroundColor = 'lemonchiffon';
+            x[i].style.backgroundImage = 'none';
+        };
 
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.backgroundColor = 'lemonchiffon';
-                x[i].style.backgroundImage = 'none';
-            };
-        })
     }
 
 })();
