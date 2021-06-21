@@ -27,14 +27,13 @@
 
     async function init() {
         const doc = await getDocumentObject();
-        doc.querySelector("iframe").addEventListener( "load", function(e) {
-            const x = doc.body.querySelector('.today')
+        console.log(doc);
+        const x = doc.body.querySelector('.today')
 
-            for (let i = 0; i < x.length; i++) {
-                x[i].style.backgroundColor = 'lemonchiffon';
-                x[i].style.backgroundImage = 'none';
-            }
-        } );
+        for (let i = 0; i < x.length; i++) {
+            x[i].style.backgroundColor = 'lemonchiffon';
+            x[i].style.backgroundImage = 'none';
+        }
     }
 
 })();
