@@ -14,8 +14,8 @@
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @match        https://emakina.preview.workfront.com/timesheets/current*
 // @match        https://emakina.sb01.workfront.com/timesheets/current*
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-norm.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-norm.js
 // @grant        none
 // ==/UserScript==
 

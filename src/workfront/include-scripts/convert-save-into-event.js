@@ -14,14 +14,19 @@
 // @match        https://emakina.preview.workfront.com/timesheets/current*
 // @match        https://emakina.sb01.workfront.com/timesheets/current*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
+
+    // add to sperate file
+    window.main = () => {}
+    // in ths file
+    main();
 
     setupListeners();
 
@@ -77,4 +82,4 @@
         return document.getElements('.hour-type-and-role-add');
     }
 
-})();
+})(Window, document);

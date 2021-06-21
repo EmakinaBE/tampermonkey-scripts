@@ -14,8 +14,8 @@
 // @match        https://emakina.preview.workfront.com/timesheets/current*
 // @match        https://emakina.sb01.workfront.com/timesheets/current*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/highlight-currentday.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/highlight-currentday.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/highlight-currentday.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/highlight-currentday.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
@@ -25,8 +25,9 @@
     document.head.addEventListener('WF_RELOAD', init);
     init();
 
-    function init() {
-        const x = document.getElementsByClassName('today');
+    async function init() {
+        const doc = await getDocumentObject();
+        const x = doc.getElementsByClassName('today');
 
         for (let i = 0; i < x.length; i++) {
             x[i].style.backgroundColor = 'lemonchiffon';
