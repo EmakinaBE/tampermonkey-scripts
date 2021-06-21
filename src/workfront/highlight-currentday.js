@@ -27,16 +27,14 @@
 
     async function init() {
         const doc = await getDocumentObject();
-        const x = doc.getElementsByClassName('today');
-        console.log(doc);
-        console.log(x);
+        doc.addEventListener("DOMContentLoaded", function(event) {
+            const x = doc.getElementsByClassName('today');
+            for (let i = 0; i < x.length; i++) {
+                x[i].style.backgroundColor = 'lemonchiffon';
+                x[i].style.backgroundImage = 'none';
+            }
+        });
 
-        for (let i = 0; i < x.length; i++) {
-            x[i].style.backgroundColor = 'lemonchiffon';
-            x[i].style.backgroundImage = 'none';
-            
-            console.log(x[i]);
-        }
     }
 
 })();
