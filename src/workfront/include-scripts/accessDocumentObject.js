@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.7
+// @version      1.8
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
