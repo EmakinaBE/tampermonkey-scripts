@@ -34,7 +34,7 @@
             if (elements.length) {
                 return resolve(elements);
             }
-            if (!maxTries) return null;
+            if (!maxTries) return resolve(false);
  
             maxTries--;
             await pause(100);
