@@ -27,7 +27,7 @@
     init();
 
     function init() {
-        const elements = getElements(tableHeadersProjects);
+        const elements = await getElementFromDocument(tableHeadersProjects);
         elements.forEach(projectHTMLElement => {
             getProjectFromWorkFront(projectHTMLElement);
         });
