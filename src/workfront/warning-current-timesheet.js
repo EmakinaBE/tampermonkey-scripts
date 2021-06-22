@@ -28,7 +28,8 @@
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
-        const currentTsId = getCurrentTsId();
+        const getTimesheetid = await getElementFromDocument('[data-timesheetid]');
+        const currentTsId =  getTimesheetid[0].getAttribute('data-timesheetid');
 
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
@@ -88,11 +89,6 @@
         if (window.wfGetOptions().autoRedirect) {
             window.location = constructUrl(olderTs);
         }
-    }
-
-    function getCurrentTsId() {
-        const timesheetid = await getElementFromDocument('[data-timesheetid]');
-        return timesheetid[0].getAttribute('data-timesheetid');
     }
 
     function getCurrentTs(currentTsId) {
