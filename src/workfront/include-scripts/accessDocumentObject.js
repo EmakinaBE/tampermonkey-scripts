@@ -39,8 +39,13 @@
         if (!doc) {
             base = document;
             selector = '#main-frame';
-            const iframes = await (new Promise(checkElement));
-            doc = iframes[0].contentWindow.document;
+            let iframeLoaded = false;
+            while(!iframeLoaded){
+                const iframes = await (new Promise(checkElement));
+                doc = iframes[0].contentWindow.document;
+                iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
+                console.log("iframe Loaded: " + iframeLoaded);
+            }
         }
         base = doc;
         selector = finalSelector;
