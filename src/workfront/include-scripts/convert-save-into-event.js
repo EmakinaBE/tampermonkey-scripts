@@ -26,7 +26,7 @@
     setupListeners();
 
     function pollNetworkRequestSuccess() {
-        if (document.getElement('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
+        if (await getElementFromDocument('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
         }
@@ -36,11 +36,11 @@
         dispatchEvent(event);
     }
 
-    function setupListeners() {
+    async function setupListeners() {
         // setup attribute (to check page refresh) and listeners for on save button
-        document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
+        await getElementFromDocument('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
 
-        const saveButton = document.getElement('.btn.primary.btn-primary');
+        const saveButton = await getElementFromDocument('.btn.primary.btn-primary');
 
         if (saveButton) {
              saveButton.addEventListener('click', pollNetworkRequestSuccess);
@@ -57,7 +57,7 @@
         // use setTimeout to execute this after workfront rendered the new task line
         setTimeout(() => {
             // get all the lines for this task
-            const lines = document.getElements(`[data-workitemobjid=${workitemobjid}].TASK`);
+            const lines = await getElementFromDocument(`[data-workitemobjid=${workitemobjid}].TASK`);
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
             const newLine = lines.pop();
@@ -74,7 +74,7 @@
     }
 
     function getNewTaskButtons() {
-        return document.getElements('.hour-type-and-role-add');
+        return await getElementFromDocument('.hour-type-and-role-add');
     }
 
 })();
