@@ -35,7 +35,7 @@
     }
 
     function getProjectFromWorkFront(projectHTMLElement) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=company:name`)
+        return fetch(`https://emakina.sb01.workfront.com/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=company:name`)
             .then(response => {
                 return response.json();
             }).then(e => {
