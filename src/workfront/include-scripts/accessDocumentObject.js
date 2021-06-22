@@ -26,7 +26,7 @@
     let doc;
 
     window.getElementFromDocument = async (finalSelector) => { 
-        let maxTries = 15;
+        let maxTries = 300;
         let base;
         let selector;
         const checkElement = async (resolve, reject) => {
