@@ -48,7 +48,8 @@
         }
 
         // setup listeners for new task
-        getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
+        const taskButtons = getNewTaskButtons();
+        taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
     function newTaskClickHandler(event) {
