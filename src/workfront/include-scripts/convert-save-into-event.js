@@ -48,7 +48,7 @@
         }
 
         // setup listeners for new task
-        const taskButtons = getNewTaskButtons();
+        const taskButtons = await getElementFromDocument('.hour-type-and-role-add');
         taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
@@ -73,10 +73,6 @@
 
     function dispatchEvent(event) {
         document.head.dispatchEvent(event);
-    }
-
-    async function getNewTaskButtons() {
-        return await getElementFromDocument('.hour-type-and-role-add');
     }
 
 })();
