@@ -21,13 +21,14 @@
 
 (function () {
     'use strict';
-    const tableHeadersProjects = '.thead.project-hours';
+
     document.head.addEventListener('WF_RELOAD', init);
 
     init();
 
     function init() {
-        const elements = await getElementFromDocument(tableHeadersProjects);
+        const elements = await getElementFromDocument('.thead.project-hours');
+        console.log(elements);
         elements.forEach(projectHTMLElement => {
             getProjectFromWorkFront(projectHTMLElement);
         });
