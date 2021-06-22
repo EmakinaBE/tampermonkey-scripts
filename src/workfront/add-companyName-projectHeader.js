@@ -47,8 +47,5 @@
         const textNode = document.createTextNode(` - ${companyName}`);
         projectHTMLElement.querySelector('td.header').appendChild(textNode);
     }
-
-    function getElements(selector) {
-        return document.getElements(selector);
-    }
+    
 })();
