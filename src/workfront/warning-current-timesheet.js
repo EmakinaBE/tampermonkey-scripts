@@ -92,14 +92,14 @@
     }
 
     function getCurrentTs(currentTsId) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
+        return fetch(`https://emakina.sb01.workfront.com/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
             .then(e => e.json())
             .then(e => e.data[0]);
     }
 
 
     function getOldestOpenTsBeforeToday() {
-        return fetch('https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1')
+        return fetch('https://emakina.sb01.workfront.com/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1')
             .then(e => e.json())
             .then(e => e.data[0]);
     }
