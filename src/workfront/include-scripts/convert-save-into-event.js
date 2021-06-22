@@ -38,16 +38,16 @@
 
     function setupListeners() {
         // setup attribute (to check page refresh) and listeners for on save button
-        // document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
+        document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
 
-        // const saveButton = document.getElement('.btn.primary.btn-primary');
+        const saveButton = document.getElement('.btn.primary.btn-primary');
 
-        // if (saveButton) {
-        //     saveButton.addEventListener('click', pollNetworkRequestSuccess);
-        // }
+        if (saveButton) {
+             saveButton.addEventListener('click', pollNetworkRequestSuccess);
+        }
 
-        // // setup listeners for new task
-        // getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
+        // setup listeners for new task
+        getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
     function newTaskClickHandler(event) {
