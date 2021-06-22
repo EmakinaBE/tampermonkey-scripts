@@ -4,6 +4,7 @@
 // @version      1.6
 // @description  Add company name in the workfront table header, to see to which company which project is linked
 // @author       Jeffrey Vandenbossche
+// @connect      self
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.preview.workfront.com/timesheet/*
 // @match        https://emakina.sb01.workfront.com/timesheet/*
