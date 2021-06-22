@@ -28,13 +28,14 @@
     window.getElementFromDocument = async (finalSelector) => { 
         let base;
         let selector;
-        const checkElement = (resolve, reject) => {
+        const checkElement = async (resolve, reject) => {
             const elements = base.querySelectorAll(selector);
             if (elements.length) {
                 return resolve(elements);
             }
             
-            setTimeout(() => checkElement(resolve, reject), 100);
+            await pause(100);
+            checkElement(resolve, reject);
         };
         if (!doc) {
             base = document;
@@ -44,8 +45,7 @@
                 const iframes = await (new Promise(checkElement));
                 doc = iframes[0].contentWindow.document;
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
-                console.log("iframe Loaded: " + iframeLoaded, doc);
-                await pause(2000);
+                await pause(1000);
             }
         }
         base = doc;
