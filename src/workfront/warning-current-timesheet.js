@@ -37,6 +37,8 @@
         await redirectIfNeeded(openTsInPast, noOlderTs);
 
         const isCurrentTs = await getElementFromDocument('.today');
+        console.log(isCurrentTs);
+        console.log(openTsInPast);
 
         if (typeof (isCurrentTs) !== 'undefined' || openTsInPast) {
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
