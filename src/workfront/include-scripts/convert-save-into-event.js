@@ -50,12 +50,12 @@
         getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
-    async function newTaskClickHandler(event) {
+    function newTaskClickHandler(event) {
         const parent = event.target.parentNode.parentNode.parentNode.parentNode;
         const workitemobjid = parent.getAttribute('data-workitemobjid');
 
         // use setTimeout to execute this after workfront rendered the new task line
-        setTimeout(() => {
+        setTimeout( async () => {
             // get all the lines for this task
             const lines = await getElementFromDocument(`[data-workitemobjid=${workitemobjid}].TASK`);
 
