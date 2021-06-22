@@ -44,7 +44,7 @@
                 const iframes = await (new Promise(checkElement));
                 doc = iframes[0].contentWindow.document;
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
-                console.log("iframe Loaded: " + iframeLoaded);
+                console.log("iframe Loaded: " + iframeLoaded, doc);
                 await pause(2000);
             }
         }
