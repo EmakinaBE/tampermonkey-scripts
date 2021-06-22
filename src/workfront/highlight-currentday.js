@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Workfront highlight Today
 // @namespace    https://www.emakina.com/
-// @version      1.4
+// @version      1.5
 // @description  Highlight current day
 // @author       Jeffrey Vandenbossche
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
