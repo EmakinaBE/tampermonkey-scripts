@@ -38,7 +38,7 @@
 
         const isCurrentTs = await getElementFromDocument('.today');
 
-        if (!isCurrentTs || openTsInPast) {
+        if (isCurrentTs !== 'undefined' || openTsInPast) {
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
