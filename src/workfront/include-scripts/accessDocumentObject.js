@@ -25,22 +25,27 @@
 
     let doc;
 
-    window.getElementFromDocument = async (selector) => { 
+    window.getElementFromDocument = async (finalSelector) => { 
+        let base;
+        let selector;
+        const checkElement = (resolve, reject) => {
+            const elements = base.querySelectorAll(selector);
+            if (elements.length) {
+                return elements;
+            }
+            
+            setTimeout(() => checkElement(resolve, reject), 100);
+        };
         if (!doc) {
-            const iframes = await checkElement(document, '#main-frame');
+            base = document;
+            selector = '#main-frame';
+            const iframes = await (new Promise(checkElement));
             doc = iframes[0].contentWindow.document;
         }
-        const elements = await checkElement(doc, selector);
+        base = doc;
+        selector = finalSelector;
+        const elements = await (new Promise(checkElement));
         return elements;
     }
-
-    const checkElement = (base, selector) => {
-        const elements = base.querySelectorAll(selector);
-        if (elements.length) {
-            return elements;
-        }
-        
-        setTimeout(() => checkElement(base, selector), 100);
-    };
 
 })(window, document);
