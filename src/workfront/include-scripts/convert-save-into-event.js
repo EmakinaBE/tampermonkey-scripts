@@ -25,7 +25,7 @@
 
     setupListeners();
 
-    function pollNetworkRequestSuccess() {
+    async function pollNetworkRequestSuccess() {
         if (await getElementFromDocument('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
@@ -50,7 +50,7 @@
         getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
-    function newTaskClickHandler(event) {
+    async function newTaskClickHandler(event) {
         const parent = event.target.parentNode.parentNode.parentNode.parentNode;
         const workitemobjid = parent.getAttribute('data-workitemobjid');
 
@@ -73,7 +73,7 @@
         document.head.dispatchEvent(event);
     }
 
-    function getNewTaskButtons() {
+    async function getNewTaskButtons() {
         return await getElementFromDocument('.hour-type-and-role-add');
     }
 
