@@ -23,19 +23,24 @@
 (function(window, document) {
     'use strict';
 
-    window.getDocumentObject = () => new Promise(checkElement);
+    let doc;
 
-    const checkElement = (resolve, reject) => {
-        const iframe = document.querySelector('#main-frame');
-        if (iframe) {
-            const doc = iframe.contentWindow.document;
-            doc.addEventListener("DOMContentLoaded", function(event) {
-                return resolve(doc);
-            });
+    window.getElementFromDocument = async (selector) => { 
+        if (!doc) {
+            const iframes = await checkElement(document, '#main-frame');
+            doc = iframes[0].contentWindow.document;
         }
+        const elements = await checkElement(doc, selector);
+        return elements;
+    }
 
-        setTimeout(() => checkElement(resolve, reject), 100);
+    const checkElement = (base, selector) => {
+        const elements = base.querySelectorAll(selector);
+        if (elements.length) {
+            return elements;
+        }
+        
+        setTimeout(() => checkElement(base, selector), 100);
     };
-
 
 })(window, document);

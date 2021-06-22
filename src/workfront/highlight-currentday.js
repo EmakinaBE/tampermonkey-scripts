@@ -26,9 +26,7 @@
     init();
 
     async function init() {
-        const doc = await getDocumentObject();
-
-        const x = doc.getElementsByClassName('today');
+        const x = await getElementFromDocument('.today');
         console.log(x);
 
         for (let i = 0; i < x.length; i++) {
