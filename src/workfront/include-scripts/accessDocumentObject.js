@@ -51,7 +51,7 @@
                 await pause(1000);
             }
         }
-        maxTries = 5;
+        maxTries = 300;
         base = doc;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
