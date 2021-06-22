@@ -35,19 +35,16 @@
 
         await redirectIfNeeded(openTsInPast, noOlderTs);
 
-        const isCurrentTs = getElement('.today');
+        const isCurrentTs = await getElementFromDocument('.today');
 
         if (!isCurrentTs || openTsInPast) {
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
 
-            getElement('#timesheet-header').appendChild(messageBox);
+            const header = await getElementFromDocument('#timesheet-header');
+            header[0].appendChild(messageBox);
         }
-    }
-
-    function getElement(selector) {
-        return document.querySelector(selector);
     }
 
     function createElementWithText(tagName, text) {
@@ -94,7 +91,8 @@
     }
 
     function getCurrentTsId() {
-        return document.getElement('[data-timesheetid]').getAttribute('data-timesheetid');
+        const timesheetid = await getElementFromDocument('[data-timesheetid]');
+        return timesheetid[0].getAttribute('data-timesheetid');
     }
 
     function getCurrentTs(currentTsId) {
