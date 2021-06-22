@@ -36,11 +36,15 @@
 
         await redirectIfNeeded(openTsInPast, noOlderTs);
 
-        const isCurrentTs = await getElementFromDocument('.today');
+        const isCurrentTs = false;
+
+        if (await getElementFromDocument('.today')){
+            isCurrentTs = true;
+        }
         console.log(isCurrentTs);
         console.log(openTsInPast);
 
-        if ( !isCurrentTs.lenght || typeof (isCurrentTs) === 'undefined' || openTsInPast ) {
+        if ( !isCurrentTs || openTsInPast ) {
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
