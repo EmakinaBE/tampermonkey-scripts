@@ -45,12 +45,17 @@
                 doc = iframes[0].contentWindow.document;
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
                 console.log("iframe Loaded: " + iframeLoaded);
+                await pause(100);
             }
         }
         base = doc;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
         return elements;
+    }
+
+    const pause = (time)  => {
+        return new Promise((resolve) => setTimeout(resolve(), time))
     }
 
 })(window, document);
