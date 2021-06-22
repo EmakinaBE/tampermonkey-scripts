@@ -45,7 +45,7 @@
                 doc = iframes[0].contentWindow.document;
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
                 console.log("iframe Loaded: " + iframeLoaded);
-                await pause(100);
+                await pause(2000);
             }
         }
         base = doc;
