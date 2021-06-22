@@ -44,7 +44,7 @@
         const saveButton = await getElementFromDocument('.btn.primary.btn-primary');
 
         if (saveButton) {
-             saveButton.addEventListener('click', pollNetworkRequestSuccess);
+             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
         }
 
         // setup listeners for new task
