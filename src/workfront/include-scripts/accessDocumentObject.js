@@ -31,7 +31,7 @@
         const checkElement = (resolve, reject) => {
             const elements = base.querySelectorAll(selector);
             if (elements.length) {
-                return elements;
+                return resolve(elements);
             }
             
             setTimeout(() => checkElement(resolve, reject), 100);
