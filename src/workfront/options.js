@@ -59,7 +59,7 @@
         popUp.style = 'position:fixed;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%;z-index:9999';
     }
 
-    function createMenuElement() {
+    async function createMenuElement() {
         const button = document.createElement('button');
         button.style = 'background: url(https://avatars.githubusercontent.com/u/767504?s=400&u=d0a32a535c83ebde083450c51552e0496b0735d2&v=4);background-size:cover;width:30px;height:30px';
         button.onclick = togglePopUp;
@@ -67,7 +67,7 @@
         const li = document.createElement('li');
         li.appendChild(button);
         li.classList.add('navbar-item');
-        document.getElement('.navbar-item-group.right').appendChild(li);
+        await getElementFromDocument('.navbar-item-group.right')[0].appendChild(li);
     }
 
     function createPopupElement() {

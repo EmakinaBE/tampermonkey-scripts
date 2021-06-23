@@ -27,7 +27,8 @@
     init();
 
     async function init() {
-        const ids = [...new Set(getAllTasks().map(element => element.getAttribute('data-workitemobjid')))];
+        const allTasks = await getElementFromDocument('.TASK[data-workitemobjid]')
+        const ids = [...new Set(allTasks.map(element => element.getAttribute('data-workitemobjid')))];
 
         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
         const closedTasks = tasks.filter(e => e.closed);
@@ -36,7 +37,7 @@
     }
 
     async function fetchStatus(id) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/task/search?ID=${id}&fields=status`)
+        return fetch(`https://emakina.sb01.workfront.com/attask/api/v11.0/task/search?ID=${id}&fields=status`)
             .then(response => response.json())
             .then(json => {
                 return {
@@ -52,10 +53,6 @@
                 e.setAttribute('disabled', 'disabled');
                 e.style = 'background: rgb(211, 211, 211, 0.35)';
             });
-    }
-
-    function getAllTasks() {
-        return document.getElements('.TASK[data-workitemobjid]');
     }
 
 })();
