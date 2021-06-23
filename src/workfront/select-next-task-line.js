@@ -39,7 +39,7 @@
     }
 
     function getFirstUnusedOption(lines, itemList) {
-        const usedValues = getDropDown().map(e => e.querySelector('.dd-hidden-input')[0].value);
+        const usedValues = getDropDown(lines).map(e => e.querySelector('.dd-hidden-input')[0].value);
 
         const options = [...itemList[0].children];
         const leftOver = options.filter(e => !usedValues.contains(e.getAttribute('data-value')));
