@@ -35,7 +35,7 @@
         option.click();
     }
 
-    function getFirstUnusedOption(workitemobjid) {
+    async function getFirstUnusedOption(workitemobjid) {
         const lines = await getElementFromDocument(`[data-workitemobjid=${workitemobjid}].TASK`);
         const usedValues = lines.getElements('.hour-type-drop-down').map(e => e.getElement('.dd-hidden-input')[0].value);
 
