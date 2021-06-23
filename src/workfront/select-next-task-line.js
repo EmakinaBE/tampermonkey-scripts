@@ -23,23 +23,24 @@
 
     document.head.addEventListener('WF_NEW-TASK', handleEvent);
 
-    function handleEvent(e) {
+    async function handleEvent(e) {
         const { newLine, workitemobjid } = e.detail;
 
         // Open drop down on lew line
         const hoursDropDown = newLine.getElement('.hour-type-drop-down');
         hoursDropDown.click();
 
+        const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+        const itemList = await getElementFromDocument('.item-list');
+
         // get option that is not yet picked and click it
-        const option = getFirstUnusedOption(workitemobjid);
+        const option = getFirstUnusedOption(lines, itemList);
         option.click();
     }
 
-    async function getFirstUnusedOption(workitemobjid) {
-        const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+    function getFirstUnusedOption(lines, itemList) {
         const usedValues = lines.querySelector('.hour-type-drop-down').map(e => e.querySelector('.dd-hidden-input')[0].value);
 
-        const itemList = await getElementFromDocument('.item-list');
         const options = [...itemList[0].children];
         const leftOver = options.filter(e => !usedValues.contains(e.getAttribute('data-value')));
 
