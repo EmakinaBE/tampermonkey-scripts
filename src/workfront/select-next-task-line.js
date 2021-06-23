@@ -38,7 +38,7 @@
     async function getFirstUnusedOption(workitemobjid) {
         const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
         const dropdown = lines[lines.length-1].querySelector('.hour-type-drop-down');
-        const usedValues = dropdown.map(e => e.getElement('.dd-hidden-input')[0].value);
+        const usedValues = dropdown.map(e => e.querySelector('.dd-hidden-input')[0].value);
 
         const itemList = await getElementFromDocument('.item-list');
         const options = [...itemList[0].children];
