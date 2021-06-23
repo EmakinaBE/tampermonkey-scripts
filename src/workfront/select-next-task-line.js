@@ -48,8 +48,12 @@
         return leftOver.length > 0 ? leftOver[0] : options[0];
     }
 
-    function getElements(array, selector) {
-        return array.querySelector(selector);
+    function getElements(elements, selector) {
+        var array = [];
+        elements.forEach(element => {
+            array.push(element.querySelector(selector));
+        });
+        return array;
     }
 
 
