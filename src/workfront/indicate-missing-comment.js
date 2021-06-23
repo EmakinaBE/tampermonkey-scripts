@@ -25,6 +25,8 @@
     const inputFieldSelector = '.fc > input:not([readonly=true])';
     const noCommentStyle = 'background: tomato';
     const submitButtonSelector = '.btn.submit.btn-secondary';
+    const containerSelector = '#CommentPanel > menu';
+    const warningMessageSelector = '#CommentPanel > menu > p';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
 
@@ -38,7 +40,7 @@
     async function init() {
         const elements =await getElementFromDocument(inputFieldSelector);
         const submitButton = await getElementFromDocument(submitButtonSelector);
-        const container = await getElementFromDocument('#CommentPanel > menu');
+        const container = await getElementFromDocument(containerSelector);
 
         const warningMessage = createWarningMessage(container[0]);
 
@@ -49,7 +51,7 @@
     async function initNewTask(e){
         const elements = e.detail.newLine.getElements(inputFieldSelector);
         const submitButton = await getElementFromDocument(submitButtonSelector);
-        const warningMessage = await getElementFromDocument('#CommentPanel > menu > p');
+        const warningMessage = await getElementFromDocument( warningMessageSelector);
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
