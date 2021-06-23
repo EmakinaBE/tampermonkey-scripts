@@ -41,8 +41,8 @@
         return col;
     }
 
-    function addListener(col, norm) {
-        const tableFooter = document.getElement('#timesheet-data tfoot .total');
+    async function addListener(col, norm) {
+        const tableFooter = await getElementFromDocument('#timesheet-data tfoot .total');
 
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
@@ -53,7 +53,7 @@
             });
         });
 
-        observer.observe(tableFooter, {
+        observer.observe(tableFooter[0], {
             attributes: true,
             childList: true,
             subTree: true,
@@ -62,9 +62,9 @@
         });
     }
 
-    function insertRow(text, color) {
-        const tableFooter = document.getElement('#timesheet-data > tfoot');
-        const tr = tableFooter.insertRow(-1);
+    async function insertRow(text, color) {
+        const tableFooter = await getElementFromDocument('#timesheet-data > tfoot');
+        const tr = tableFooter[0].insertRow(-1);
 
         const firstCell = tr.insertCell(0);
         firstCell.innerHTML = 'Norm(delta):';
@@ -103,13 +103,14 @@
     }
 
     function fetchProjectData(timesheetId) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?ID=${timesheetId}&fields=*`)
+        return fetch(`https://emakina.sb01.workfront.com/attask/api/v11.0/tshet/search?ID=${timesheetId}&fields=*`)
             .then(response => response.json())
             .then(json => json.data[0]);
     }
 
-    function getCurrentTsId() {
-        return document.getElement('[data-timesheetid]').getAttribute('data-timesheetid');
+    async function getCurrentTsId() {
+        const timesheetId = await getElementFromDocument('[data-timesheetid]');
+        return timesheetId[0].getAttribute('data-timesheetid');
     }
 
 })();
