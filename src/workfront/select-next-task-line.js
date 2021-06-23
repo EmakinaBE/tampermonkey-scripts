@@ -36,7 +36,7 @@
     }
 
     async function getFirstUnusedOption(workitemobjid) {
-        const lines = await getElementFromDocument(`[data-workitemobjid=${workitemobjid}].TASK`);
+        const lines = await getElementFromDocument('[data-workitemobjid=${workitemobjid}]');
         const usedValues = lines.getElements('.hour-type-drop-down').map(e => e.getElement('.dd-hidden-input')[0].value);
 
         const itemList = await getElementFromDocument('.item-list');

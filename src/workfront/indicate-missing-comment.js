@@ -38,7 +38,7 @@
     init();
 
     async function init() {
-        const elements =await getElementFromDocument(inputFieldSelector);
+        const elements = await getElementFromDocument(inputFieldSelector);
         const submitButton = await getElementFromDocument(submitButtonSelector);
         const container = await getElementFromDocument(containerSelector);
 
