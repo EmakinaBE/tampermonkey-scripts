@@ -59,7 +59,7 @@
         // use setTimeout to execute this after workfront rendered the new task line
         setTimeout( async () => {
             // get all the lines for this task
-            const lines = await getElementFromDocument(`[data-workitemobjid=${workitemobjid}]`);
+            const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
             const newLine = lines.pop();
