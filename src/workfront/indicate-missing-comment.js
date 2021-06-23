@@ -53,7 +53,7 @@
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
-    async function createWarningMessage(container) {
+    function createWarningMessage(container) {
         const element = document.createElement('p');
         const textNode = document.createTextNode(warningMessageText);
         element.appendChild(textNode);
