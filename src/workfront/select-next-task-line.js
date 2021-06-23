@@ -48,7 +48,7 @@
     }
 
     function getDropDown(lines) {
-        var dropdown = {};
+        var dropdown = [];
         lines.forEach(line => {
             dropdown.push(line.querySelector('.hour-type-drop-down'));
         });
