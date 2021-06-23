@@ -36,10 +36,11 @@
     }
 
     function getFirstUnusedOption(workitemobjid) {
-        const lines = document.getElements(`[data-workitemobjid=${workitemobjid}].TASK`);
+        const lines = await getElementFromDocument(`[data-workitemobjid=${workitemobjid}].TASK`);
         const usedValues = lines.getElements('.hour-type-drop-down').map(e => e.getElement('.dd-hidden-input')[0].value);
 
-        const options = [...document.getElement('.item-list').children];
+        const itemList = await getElementFromDocument('.item-list');
+        const options = [...itemList[0].children];
         const leftOver = options.filter(e => !usedValues.contains(e.getAttribute('data-value')));
 
         return leftOver.length > 0 ? leftOver[0] : options[0];
