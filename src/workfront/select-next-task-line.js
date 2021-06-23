@@ -39,11 +39,20 @@
     }
 
     function getFirstUnusedOption(lines, itemList) {
-        const usedValues = lines.querySelector('.hour-type-drop-down').map(e => e.querySelector('.dd-hidden-input')[0].value);
+        const usedValues = getDropDown().map(e => e.querySelector('.dd-hidden-input')[0].value);
 
         const options = [...itemList[0].children];
         const leftOver = options.filter(e => !usedValues.contains(e.getAttribute('data-value')));
 
         return leftOver.length > 0 ? leftOver[0] : options[0];
     }
+
+    function getDropDown(lines) {
+        var dropdown;
+        lines.forEach(line => {
+            dropdown.push(line.querySelector('.hour-type-drop-down'));
+        });
+        return dropdown;
+    }
+
 })();
