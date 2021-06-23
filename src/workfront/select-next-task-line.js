@@ -39,7 +39,7 @@
     }
 
     function getFirstUnusedOption(lines, itemList) {
-        const usedValues = getDropDown(lines).map(e => e.querySelector('.dd-hidden-input')[0].value);
+        const usedValues =  getUsedValues(lines);
 
         const options = [...itemList[0].children];
         const leftOver = options.filter(e => !usedValues.contains(e.getAttribute('data-value')));
@@ -47,12 +47,13 @@
         return leftOver.length > 0 ? leftOver[0] : options[0];
     }
 
-    function getDropDown(lines) {
+    function getUsedValues(lines) {
         var dropdown = [];
         lines.forEach(line => {
             dropdown.push(line.querySelector('.hour-type-drop-down'));
         });
-        return dropdown;
+        const buttons = dropdown.map(e => e.querySelector('.dd-hidden-input'))
+        return buttons[0].value;
     }
 
 })();
