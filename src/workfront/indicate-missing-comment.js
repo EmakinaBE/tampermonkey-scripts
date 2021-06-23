@@ -38,8 +38,9 @@
     async function init() {
         const elements =await getElementFromDocument(inputFieldSelector);
         const submitButton = await getElementFromDocument(submitButtonSelector);
+        const container = await getElementFromDocument('#CommentPanel > menu');
 
-        const warningMessage = createWarningMessage();
+        const warningMessage = createWarningMessage(container);
 
         checkAll(elements, warningMessage, submitButton[0]);
         initListeners(elements, warningMessage, submitButton[0]);
@@ -52,7 +53,7 @@
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
-    async function createWarningMessage() {
+    async function createWarningMessage(container) {
         const element = document.createElement('p');
         const textNode = document.createTextNode(warningMessageText);
         element.appendChild(textNode);
@@ -60,8 +61,7 @@
         element.setAttribute('style', warningMessageStyle);
         element.classList.add('hidden');
 
-        const container = await getElementFromDocument('#CommentPanel > menu');
-        container[0].insertBefore(element, container[0].firstChild);
+        container.insertBefore(element, container.firstChild);
 
         return element;
     }
