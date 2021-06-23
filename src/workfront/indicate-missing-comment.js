@@ -40,7 +40,7 @@
         const submitButton = await getElementFromDocument(submitButtonSelector);
         const container = await getElementFromDocument('#CommentPanel > menu');
 
-        const warningMessage = createWarningMessage(container);
+        const warningMessage = createWarningMessage(container[0]);
 
         checkAll(elements, warningMessage, submitButton[0]);
         initListeners(elements, warningMessage, submitButton[0]);
