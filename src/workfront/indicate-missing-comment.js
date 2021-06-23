@@ -61,7 +61,7 @@
         element.classList.add('hidden');
 
         const container = await getElementFromDocument('#CommentPanel > menu');
-        container.insertBefore(element, container[0].firstChild);
+        container[0].insertBefore(element, container[0].firstChild);
 
         return element;
     }
