@@ -62,7 +62,7 @@
             const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
-            const newLine = lines.pop();
+            const newLine = lines[length-1];
             newLine.getElement('.hour-type-and-role-add').addEventListener('click', newTaskClickHandler);
 
             // dispatch event containing the original event and the newly added line
