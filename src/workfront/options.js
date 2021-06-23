@@ -67,7 +67,7 @@
         const li = document.createElement('li');
         li.appendChild(button);
         li.classList.add('navbar-item');
-        await getElementFromDocument('.navbar-item-group.right')[0].appendChild(li);
+        await getElementFromDocument('.navbar-item-group.right')[0].push(li);
     }
 
     function createPopupElement() {
