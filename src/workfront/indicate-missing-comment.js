@@ -35,24 +35,24 @@
 
     init();
 
-    function init() {
-        const elements = getElements(inputFieldSelector);
-        const submitButton = getElement(submitButtonSelector);
+    async function init() {
+        const elements =await getElementFromDocument(inputFieldSelector);
+        const submitButton = await getElementFromDocument(submitButtonSelector);
 
         const warningMessage = createWarningMessage();
 
-        checkAll(elements, warningMessage, submitButton);
-        initListeners(elements, warningMessage, submitButton);
+        checkAll(elements, warningMessage, submitButton[0]);
+        initListeners(elements, warningMessage, submitButton[0]);
     }
 
-    function initNewTask(e){
+    async function initNewTask(e){
         const elements = e.detail.newLine.getElements(inputFieldSelector);
-        const submitButton = getElement(submitButtonSelector);
-        const warningMessage = getElement('#CommentPanel > menu > p');
-        initListeners(elements, warningMessage, submitButton);
+        const submitButton = await getElementFromDocument(submitButtonSelector);
+        const warningMessage = await getElementFromDocument('#CommentPanel > menu > p');
+        initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
-    function createWarningMessage() {
+    async function createWarningMessage() {
         const element = document.createElement('p');
         const textNode = document.createTextNode(warningMessageText);
         element.appendChild(textNode);
@@ -60,8 +60,8 @@
         element.setAttribute('style', warningMessageStyle);
         element.classList.add('hidden');
 
-        const container = getElement('#CommentPanel > menu');
-        container.insertBefore(element, container.firstChild);
+        const container = await getElementFromDocument('#CommentPanel > menu');
+        container.insertBefore(element, container[0].firstChild);
 
         return element;
     }
@@ -143,14 +143,6 @@
 
     function roundNearQtr(nr) {
         return Math.round(nr * 4) / 4;
-    }
-
-    function getElements(selector) {
-        return document.getElements(selector);
-    }
-
-    function getElement(selector) {
-        return document.getElement(selector);
     }
 
     function getSystemDecimalSeparator() {
