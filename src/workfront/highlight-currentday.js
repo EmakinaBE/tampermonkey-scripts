@@ -26,11 +26,11 @@
     init();
 
     async function init() {
-        const x = await getElementFromDocument('.today');
+        const today = await getElementFromDocument('.today');
 
-        for (let i = 0; i < x.length; i++) {
-            x[i].style.backgroundColor = 'lemonchiffon';
-            x[i].style.backgroundImage = 'none';
+        for (let i = 0; i < today.length; i++) {
+            today[i].style.backgroundColor = 'lemonchiffon';
+            today[i].style.backgroundImage = 'none';
         };
 
     }

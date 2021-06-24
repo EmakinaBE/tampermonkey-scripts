@@ -34,7 +34,7 @@
         const itemList = await getElementFromDocument('.item-list');
 
         // get option that is not yet picked and click it
-        const option = getFirstUnusedOption(lines, itemList);
+        const option = getFirstUnusedOption(lines, itemList[0]);
         option.click();
     }
 
@@ -42,7 +42,7 @@
         const usedValues  = getElements(lines, '.hour-type-drop-down')
             .map(e => e.querySelector('.dd-hidden-input').value);
 
-        const options = [...itemList[0].children];
+        const options = [...itemList.children];
         const leftOver = options.filter(e => !usedValues.includes(e.getAttribute('data-value')));
 
         return leftOver.length > 0 ? leftOver[0] : options[0];
