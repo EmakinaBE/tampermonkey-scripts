@@ -30,8 +30,8 @@
         const hoursDropDown = newLine.getElement('.hour-type-drop-down');
         hoursDropDown.click();
 
-        const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
-        const itemList = await getElementFromDocument('.item-list');
+        const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+        const itemList = await getElementsFromDocument('.item-list');
 
         // get option that is not yet picked and click it
         const option = getFirstUnusedOption(lines, itemList[0]);

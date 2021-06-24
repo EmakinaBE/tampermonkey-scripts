@@ -27,7 +27,7 @@
     init();
 
     async function init() {
-        const allTasks = Array.prototype.slice.call(await getElementFromDocument('.TASK[data-workitemobjid]'));
+        const allTasks = Array.prototype.slice.call(await getElementsFromDocument('.TASK[data-workitemobjid]'));
         const ids = [...new Set(allTasks.map(element => element.getAttribute('data-workitemobjid')))];
 
         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
@@ -48,7 +48,7 @@
     }
 
     async function disableTasks({ id }) {
-        const tasks = await getElementFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
+        const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
         tasks.forEach(e => {
             e.setAttribute('disabled', 'disabled');
             e.style = 'background: rgb(211, 211, 211, 0.35)';

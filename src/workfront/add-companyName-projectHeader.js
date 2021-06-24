@@ -27,7 +27,7 @@
     init();
 
     async function init() {
-        const elements = await getElementFromDocument('.thead.project-hours');
+        const elements = await getElementsFromDocument('.thead.project-hours');
         elements.forEach(projectHTMLElement => {
             getProjectFromWorkFront(projectHTMLElement);
         });

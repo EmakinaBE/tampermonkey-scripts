@@ -1,9 +1,9 @@
 // ==UserScript==
-// @name         Workfront highlight Today
+// @name         Callback Handler for Events
 // @namespace    https://www.emakina.com/
-// @version      1.5
-// @description  Highlight current day
-// @author       Jeffrey Vandenbossche
+// @version      1.0
+// @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
+// @author       Sarah Roupec
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
@@ -14,25 +14,22 @@
 // @match        https://emakina.preview.workfront.com/timesheets/current*
 // @match        https://emakina.sb01.workfront.com/timesheets/current*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/highlight-currentday.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/highlight-currentday.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/event-handler.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/event-handler.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
-(function() {
+(function(window) {
     'use strict';
 
-    document.head.addEventListener('WF_RELOAD', init);
-    init();
+    var callbacks = [];
 
-    async function init() {
-        const today = await getElementsFromDocument('.today');
-
-        for (let i = 0; i < today.length; i++) {
-            today[i].style.backgroundColor = 'lemonchiffon';
-            today[i].style.backgroundImage = 'none';
-        };
-
+    executeCallback = ()  => {
+        callbacks.forEach(callback => {callback()});
     }
 
-})();
+    window.callback = (callback) => {
+        callbacks.push(callback);
+    }
+
+})(window);

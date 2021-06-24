@@ -67,7 +67,7 @@
         const li = document.createElement('li');
         li.appendChild(button);
         li.classList.add('navbar-item');
-        const navbarItemGroup = await getElementFromDocument('.navbar-item-group.right');
+        const navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right');
         Array.prototype.slice.call(navbarItemGroup).push(li);
     }
 

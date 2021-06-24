@@ -26,13 +26,13 @@
     setupListeners();
 
     async function pollNetworkRequestSuccess() {
-        const view =  await getElementFromDocument('#content-timesheet-view');
+        executeCallback();
+        const view = await getElementsFromDocument('#content-timesheet-view');
         if (view.getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
         }
 
-        // if iframe gets loaded trigger event
         setupListeners();
         const event = new Event('WF_RELOAD');
         dispatchEvent(event);
@@ -40,17 +40,17 @@
 
     async function setupListeners() {
         // setup attribute (to check page refresh) and listeners for on save button
-        const view = await getElementFromDocument('#content-timesheet-view')
+        const view = await getElementsFromDocument('#content-timesheet-view')
         view[0].setAttribute('data-tampermonkey-id', true);
 
-        const saveButton = await getElementFromDocument('.btn.primary.btn-primary');
+        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
         if (saveButton) {
              saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
         }
 
         // setup listeners for new task
-        const taskButtons = await getElementFromDocument('.hour-type-and-role-add');
+        const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
         taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
@@ -61,7 +61,7 @@
         // use setTimeout to execute this after workfront rendered the new task line
         setTimeout( async () => {
             // get all the lines for this task
-            const lines = await getElementFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+            const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
             const newLine = lines[lines.length-1];
