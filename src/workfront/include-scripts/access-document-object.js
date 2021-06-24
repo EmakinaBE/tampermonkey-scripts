@@ -24,6 +24,7 @@
     'use strict';
 
     let doc;
+    let iframeLoaded;
 
     window.getElementsFromDocument = async (finalSelector) => { 
         let doc = null;
@@ -44,7 +45,7 @@
         if (!doc) {
             base = document;
             selector = '#main-frame';
-            let iframeLoaded = false;
+            iframeLoaded = false;
             while(!iframeLoaded){
                 const iframes = await (new Promise(checkElement));
                 doc = iframes[0].contentWindow.document;
@@ -65,6 +66,10 @@
 
     window.resetDocument = () => {
         doc = null;
+    }
+
+    window.getIFrame = () => {
+        return iframeLoaded;
     }
 
 })(window, document);
