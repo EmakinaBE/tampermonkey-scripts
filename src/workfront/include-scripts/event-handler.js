@@ -25,7 +25,7 @@
     var callbacks = [];
 
     window.executeCallback = ()  => {
-        callbacks.forEach(callback => {callback()});
+        callbacks.forEach((callback) => callback());
     }
 
     window.callback = (callback) => {

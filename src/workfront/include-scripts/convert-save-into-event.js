@@ -23,10 +23,10 @@
 (function() {
     'use strict';
 
+    executeCallback();
     setupListeners();
 
     async function pollNetworkRequestSuccess() {
-        executeCallback();
         const view = await getElementsFromDocument('#content-timesheet-view');
         if (view.getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
