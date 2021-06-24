@@ -24,10 +24,10 @@
     'use strict';
 
     init()
-    setupListeners();
 
     function init() {
         executeCallback();
+        setupListeners();
     }
 
     async function pollNetworkRequestSuccess() {
