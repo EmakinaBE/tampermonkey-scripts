@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WF combined
+// @name         WF combined New UI
 // @namespace    https://www.emakina.com/
 // @version      1.44
 // @description  Combines the individual wf scripts into one.
