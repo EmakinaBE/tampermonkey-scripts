@@ -20,11 +20,17 @@
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
 
-    executeCallback();
-    setupListeners();
+    window.addEventListener('popstate', function (event) {
+        init();
+    });
+
+    function init() {
+        executeCallback();
+        setupListeners();
+    }
 
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view');
@@ -33,9 +39,7 @@
             return;
         }
 
-        setupListeners();
-        const event = new Event('WF_RELOAD');
-        dispatchEvent(event);
+        init();
     }
 
     async function setupListeners() {
@@ -77,4 +81,4 @@
         document.head.dispatchEvent(event);
     }
 
-})();
+})(window);
