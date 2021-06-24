@@ -24,7 +24,7 @@
 
     document.head.addEventListener('WF_RELOAD', init);
 
-    init();
+    callback(init());
 
     async function init() {
         const elements = await getElementsFromDocument('.thead.project-hours');
