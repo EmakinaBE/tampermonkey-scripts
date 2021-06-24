@@ -48,11 +48,11 @@
     }
 
     async function disableTasks({ id }) {
-        await getElementFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`)
-            .forEach(e => {
-                e.setAttribute('disabled', 'disabled');
-                e.style = 'background: rgb(211, 211, 211, 0.35)';
-            });
+        const tasks = await getElementFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
+        tasks.forEach(e => {
+            e.setAttribute('disabled', 'disabled');
+            e.style = 'background: rgb(211, 211, 211, 0.35)';
+        });
     }
 
 })();
