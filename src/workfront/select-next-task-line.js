@@ -41,7 +41,6 @@
     function getFirstUnusedOption(lines, itemList) {
         const usedValues  = getElements(lines, '.hour-type-drop-down')
             .map(e => e.querySelector('.dd-hidden-input').value);
-        console.log(usedValues);
 
         const options = [...itemList[0].children];
         const leftOver = options.filter(e => !usedValues.includes(e.getAttribute('data-value')));

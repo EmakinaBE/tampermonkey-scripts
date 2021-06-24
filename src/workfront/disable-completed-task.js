@@ -29,8 +29,9 @@
     async function init() {
         const allTasks = Array.prototype.slice.call(await getElementFromDocument('.TASK[data-workitemobjid]'));
         const ids = [...new Set(allTasks.map(element => element.getAttribute('data-workitemobjid')))];
+        const id;
 
-        const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
+        const tasks = await Promise.all(ids.map((e) => {fetchStatus(e); id = e;}));
         const closedTasks = tasks.filter(e => e.closed);
 
         const disabledTasks = await getElementFromDocument(`.TASK[data-workitemobjid=${id}] .fc > input`);
