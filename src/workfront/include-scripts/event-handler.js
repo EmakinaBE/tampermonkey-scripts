@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Callback Handler for Events
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Sarah Roupec
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
