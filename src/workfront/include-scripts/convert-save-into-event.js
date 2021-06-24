@@ -26,11 +26,13 @@
     setupListeners();
 
     async function pollNetworkRequestSuccess() {
-        if (await getElementFromDocument('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
+        const view =  await getElementFromDocument('#content-timesheet-view');
+        if (view.getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
         }
 
+        // if iframe gets loaded trigger event
         setupListeners();
         const event = new Event('WF_RELOAD');
         dispatchEvent(event);
