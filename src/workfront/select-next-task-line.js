@@ -21,8 +21,6 @@
 (function() {
     'use strict';
 
-    document.head.addEventListener('WF_NEW-TASK', handleEvent);
-
     async function handleEvent(e) {
         const { newLine, workitemobjid } = e.detail;
 

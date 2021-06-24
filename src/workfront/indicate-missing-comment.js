@@ -32,7 +32,6 @@
 
     const del = getSystemDecimalSeparator();
 
-    document.head.addEventListener('WF_RELOAD', init);
     document.head.addEventListener('WF_NEW-TASK',e => initNewTask(e));
 
     callback(init);

@@ -23,7 +23,6 @@
 (function() {
     'use strict';
 
-    document.head.addEventListener('WF_RELOAD', init);
     callback(init);
 
     async function init() {
