@@ -23,7 +23,7 @@
 
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
-    document.head.addEventListener('WF_RELOAD', init);
+    document.head.addEventListener('getElementFromDocument', init);
     init();
 
     async function init() {
