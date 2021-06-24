@@ -35,7 +35,7 @@
     document.head.addEventListener('WF_RELOAD', init);
     document.head.addEventListener('WF_NEW-TASK',e => initNewTask(e));
 
-    init();
+    callback(init);
 
     async function init() {
         const elements = await getElementsFromDocument(inputFieldSelector);

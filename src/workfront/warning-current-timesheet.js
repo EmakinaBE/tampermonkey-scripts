@@ -24,7 +24,7 @@
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
     document.head.addEventListener('WF_RELOAD', init);
-    init();
+    callback(init);
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();

@@ -24,7 +24,7 @@
     'use strict';
 
     document.head.addEventListener('WF_RELOAD', init);
-    init();
+    callback(init);
 
     async function init() {
         const allTasks = Array.prototype.slice.call(await getElementsFromDocument('.TASK[data-workitemobjid]'));

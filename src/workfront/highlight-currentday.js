@@ -23,7 +23,7 @@
     'use strict';
 
     document.head.addEventListener('WF_RELOAD', init);
-    init();
+    callback(init);
 
     async function init() {
         const today = await getElementsFromDocument('.today');
