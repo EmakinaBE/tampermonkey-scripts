@@ -26,6 +26,7 @@
     let doc;
 
     window.getElementsFromDocument = async (finalSelector) => { 
+        let doc = null;
         let maxTries = 30;
         let base;
         let selector;
@@ -60,6 +61,10 @@
 
     const pause = (time)  => {
         return new Promise((resolve) => setTimeout(resolve, time))
+    }
+
+    window.resetDocument = () => {
+        doc = null;
     }
 
 })(window, document);

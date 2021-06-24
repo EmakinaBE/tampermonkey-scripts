@@ -24,6 +24,7 @@
     'use strict';
 
     window.addEventListener('popstate', function (event) {
+        resetDocument();
         init();
     });
 
