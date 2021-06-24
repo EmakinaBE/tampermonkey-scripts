@@ -20,10 +20,10 @@
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
 
-    executeCallback();
+    window.executeCallback();
     setupListeners();
 
     async function pollNetworkRequestSuccess() {
@@ -77,4 +77,4 @@
         document.head.dispatchEvent(event);
     }
 
-})();
+})(window);
