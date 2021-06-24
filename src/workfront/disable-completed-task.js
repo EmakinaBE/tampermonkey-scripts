@@ -34,8 +34,7 @@
         const tasks = await Promise.all(ids.map((e) => {fetchStatus(e); id = e;}));
         const closedTasks = tasks.filter(e => e.closed);
 
-        const disabledTasks = await getElementFromDocument(`.TASK[data-workitemobjid=${id}] .fc > input`);
-        closedTasks.forEach(disableTasks(disabledTasks));
+        closedTasks.forEach(disableTasks);
     }
 
     async function fetchStatus(id) {
@@ -49,11 +48,11 @@
             });
     }
 
-    function disableTasks(tasks) {
-        tasks.forEach(e => {
-            e.setAttribute('disabled', 'disabled');
-            e.style = 'background: rgb(211, 211, 211, 0.35)';
-        });
-    }
+    async function disableTasks({ id }) {
+        await getElementFromDocument(`.TASK[data-workitemobjid=${id}] .fc > input`)
+            .forEach(e => {
+                e.setAttribute('disabled', 'disabled');
+                e.style = 'background: rgb(211, 211, 211, 0.35)';
+            });
 
 })();
