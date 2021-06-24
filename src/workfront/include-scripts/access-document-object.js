@@ -3,7 +3,7 @@
 // @namespace    https://www.emakina.com/
 // @version      1.2
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
-// @author       Sarah Roupec
+// @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
