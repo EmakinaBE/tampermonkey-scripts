@@ -20,11 +20,15 @@
 // ==/UserScript==
 
 
-(function(window) {
+(function() {
     'use strict';
 
-    window.executeCallback();
+    init()
     setupListeners();
+
+    function init() {
+        executeCallback();
+    }
 
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view');
@@ -77,4 +81,4 @@
         document.head.dispatchEvent(event);
     }
 
-})(window);
+})();
