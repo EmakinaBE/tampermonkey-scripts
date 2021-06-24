@@ -23,12 +23,8 @@
 (function() {
     'use strict';
 
-    init()
-
-    async function init() {
-        executeCallback();
-        setupListeners();
-    }
+    executeCallback();
+    setupListeners();
 
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view');
