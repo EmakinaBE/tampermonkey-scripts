@@ -29,7 +29,7 @@
         const openTsInPast = await getOldestOpenTsBeforeToday();
         const getTimesheetId = await getElementsFromDocument('[data-timesheetid]');
         if(!getTimesheetId) return; 
-        const currentTsId =  getTimesheetid[0].getAttribute('data-timesheetid');
+        const currentTsId =  getTimesheetId[0].getAttribute('data-timesheetid');
 
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
