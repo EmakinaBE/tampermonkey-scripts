@@ -34,7 +34,7 @@
             .then(response => {
                 return response.json();
             }).then(e => {
-                e.data[0] && await addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
+                e.data[0] && addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
             });
     }
 
