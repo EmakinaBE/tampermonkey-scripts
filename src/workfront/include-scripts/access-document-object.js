@@ -71,7 +71,7 @@
     window.checkIfElementExists = async (id) => {
         const elementId = id;
         const oldElement = await getElementsFromDocument(`#${elementId}`);
-        return oldElement;
+        return oldElement? true : false;
     } 
 
 })(window, document);
