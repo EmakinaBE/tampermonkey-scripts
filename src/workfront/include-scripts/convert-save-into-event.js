@@ -94,7 +94,7 @@
         document.head.dispatchEvent(event);
     }
 
-    function setAlreadyLoaded() {
+    window.setAlreadyLoaded = () => {
         alreadyLoaded = false;
     }
 
