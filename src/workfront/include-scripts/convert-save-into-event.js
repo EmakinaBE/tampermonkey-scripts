@@ -23,12 +23,14 @@
 (function(window) {
     'use strict';
 
-    window.addEventListener("popstate", loadDoc(), {once: true});
+    window.addEventListener("popstate", loadDoc());
+    var alreadyLoaded = false;
 
     async function loadDoc() {
         resetDocument();
         const getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
-        if(getBody){
+        if(getBody && !alreadyLoaded){
+            alreadyLoaded = true;
             init();
         }
     }
@@ -50,6 +52,7 @@
     }
 
     async function setupListeners() {
+        alreadyLoaded = false;
         // setup attribute (to check page refresh) and listeners for on save button
         const view = await getElementsFromDocument('#content-timesheet-view')
         if(!view) return; 
