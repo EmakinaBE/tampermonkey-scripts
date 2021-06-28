@@ -44,6 +44,7 @@
             messageBox.setAttribute('style', messageStyle);
 
             const header = await getElementsFromDocument('#timesheet-header');
+            if(!header) return;
             header[0].appendChild(messageBox);
         }
     }
