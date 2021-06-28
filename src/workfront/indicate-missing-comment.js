@@ -52,6 +52,7 @@
         const elements = e.detail.newLine.getElements(inputFieldSelector);
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const warningMessage = await getElementsFromDocument( warningMessageSelector);
+        if(!submitButton || !warningMessage) return;
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 

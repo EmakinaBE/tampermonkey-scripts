@@ -44,6 +44,7 @@
 
     async function addListener(col, norm) {
         const tableFooter = await getElementsFromDocument('#timesheet-data tfoot .total');
+        if(!tableFooter) return;
 
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
@@ -65,6 +66,7 @@
 
     async function insertRow(text, color) {
         const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot');
+        if(!tableFooter) return;
         const tr = tableFooter[0].insertRow(-1);
 
         const firstCell = tr.insertCell(0);

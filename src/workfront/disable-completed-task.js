@@ -49,6 +49,7 @@
 
     async function disableTasks({ id }) {
         const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
+        if(!tasks) return;
         tasks.forEach(e => {
             e.setAttribute('disabled', 'disabled');
             e.style = 'background: rgb(211, 211, 211, 0.35)';

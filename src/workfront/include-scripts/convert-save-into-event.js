@@ -40,6 +40,7 @@
 
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view');
+        if(!view) return;
         if (view.getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
@@ -62,6 +63,7 @@
 
         // setup listeners for new task
         const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
+        if(!taskButtons) return;
         taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
 
@@ -73,6 +75,7 @@
         setTimeout( async () => {
             // get all the lines for this task
             const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+            if(!lines) return;
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
             const newLine = lines[lines.length-1];
