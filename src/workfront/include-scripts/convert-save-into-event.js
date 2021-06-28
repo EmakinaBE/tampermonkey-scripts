@@ -23,8 +23,9 @@
 (function(window) {
     'use strict';
 
-    window.addEventListener("popstate", loadDoc());
     var alreadyLoaded = false;
+    
+    window.addEventListener("popstate", () => loadDoc());
 
     async function loadDoc() {
         resetDocument();
