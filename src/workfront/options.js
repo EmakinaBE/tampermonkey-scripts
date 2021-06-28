@@ -68,7 +68,7 @@
         li.appendChild(button);
         li.classList.add('navbar-item');
         //TO-DO:
-        const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar');
+        const navbarItemGroup = document.querySelector('ul.adobe-navbar');
         if(!navbarItemGroup) return;
         //const navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right');
         navbarItemGroup[0].appendChild(li);
