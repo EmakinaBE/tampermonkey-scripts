@@ -68,8 +68,4 @@
         doc = null;
     }
 
-    window.getIFrame = () => {
-        return iframeLoaded;
-    }
-
 })(window, document);
