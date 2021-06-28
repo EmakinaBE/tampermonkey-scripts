@@ -28,7 +28,7 @@
 
     window.getElementsFromDocument = async (finalSelector) => { 
         let doc = null;
-        let maxTries = 30;
+        let maxTries = 50;
         let base;
         let selector;
         const checkElement = async (resolve, reject) => {
@@ -45,7 +45,7 @@
         if (!doc) {
             base = document;
             selector = '#main-frame';
-            iframeLoaded = false;
+            let iframeLoaded = false;
             while(!iframeLoaded){
                 const iframes = await (new Promise(checkElement));
                 doc = iframes[0].contentWindow.document;
@@ -53,7 +53,7 @@
                 await pause(1000);
             }
         }
-        maxTries = 30;
+        maxTries = 50;
         base = doc;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
