@@ -26,6 +26,7 @@
 
     async function init() {
         const timesheetIdData = await getElementsFromDocument('[data-timesheetid]');
+        if(!timesheetIdData) return; 
         const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
         const data = await fetchProjectData(timesheetId);
 

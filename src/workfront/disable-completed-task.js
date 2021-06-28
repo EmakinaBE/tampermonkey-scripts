@@ -26,7 +26,7 @@
     callback(init);
 
     async function init() {
-        const allTasks = Array.prototype.slice.call(await getElementsFromDocument('.TASK[data-workitemobjid]'));
+        const allTasks = [...(await getElementsFromDocument('.TASK[data-workitemobjid]'))];
         const ids = [...new Set(allTasks.map(element => element.getAttribute('data-workitemobjid')))];
 
         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));

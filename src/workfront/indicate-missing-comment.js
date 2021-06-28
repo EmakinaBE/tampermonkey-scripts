@@ -40,6 +40,7 @@
         const elements = await getElementsFromDocument(inputFieldSelector);
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const container = await getElementsFromDocument(containerSelector);
+        if(!elements || !submitButton || !container) return;
 
         const warningMessage = createWarningMessage(container[0]);
 

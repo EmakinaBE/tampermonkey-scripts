@@ -27,7 +27,8 @@
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
-        const getTimesheetid = await getElementsFromDocument('[data-timesheetid]');
+        const getTimesheetId = await getElementsFromDocument('[data-timesheetid]');
+        if(!getTimesheetId) return; 
         const currentTsId =  getTimesheetid[0].getAttribute('data-timesheetid');
 
         const currentTs = await getCurrentTs(currentTsId);

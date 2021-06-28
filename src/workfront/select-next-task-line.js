@@ -32,6 +32,7 @@
 
         const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
         const itemList = await getElementsFromDocument('.item-list');
+        if(!lines || !itemList) return;
 
         // get option that is not yet picked and click it
         const option = getFirstUnusedOption(lines, itemList[0]);
