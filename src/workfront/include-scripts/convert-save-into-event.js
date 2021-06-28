@@ -22,18 +22,13 @@
 
 (function(window) {
     'use strict';
-
-    var alreadyLoaded = false;
     
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
 
     async function loadDoc() {
         resetDocument();
-        if(!alreadyLoaded){
-            alreadyLoaded = true;
-            init();
-        }
+        init();
     }
 
     async function init() {
