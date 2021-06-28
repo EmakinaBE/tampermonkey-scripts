@@ -23,21 +23,7 @@
 (function(window) {
     'use strict';
 
-    var currentPageNo = location.hash || 1;
-
-    function myFunction() {
-
-        const pageNo = location.hash;
-
-        if( pageNo != currentPageNo ){
-
-            loadDoc()
-            currentPageNo = pageNo;
-        }
-
-    };
-
-    window.addEventListener("popstate", () => myFunction());
+    window.addEventListener("popstate", loadDoc(), {once: true});
 
     async function loadDoc() {
         resetDocument();
