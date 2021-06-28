@@ -44,7 +44,7 @@
             if(!header) return;
 
             const messageBoxId = 'messageBoxId13';
-            checkIfElementExists(messageBoxId);
+            if(checkIfElementExists(messageBoxId)) return;
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);

@@ -59,7 +59,7 @@
     function createWarningMessage(container) {
 
         const commentId = 'commentId13';
-        checkIfElementExists(commentId);
+        if(checkIfElementExists(commentId)) return;
 
         const element = document.createElement('p');
         const textNode = document.createTextNode(warningMessageText);
