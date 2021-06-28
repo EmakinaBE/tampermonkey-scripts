@@ -24,9 +24,10 @@
     'use strict';
 
     window.addEventListener('popstate', function (event) {
-        getIFrame();
         resetDocument();
-        init();
+        if(getElementsFromDocument('.react-timesheet-hour-preferences')){
+            init();
+        }
     });
 
     function init() {
