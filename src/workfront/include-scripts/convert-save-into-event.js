@@ -23,13 +23,15 @@
 (function(window) {
     'use strict';
 
-    window.addEventListener('popstate', function (event) {
+    window.addEventListener("popstate", () => loadDoc());
+
+    async function loadDoc() {
         resetDocument();
         var getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
         if(getBody){
             init();
         }
-    });
+    }
 
     async function init() {
         executeCallback();
