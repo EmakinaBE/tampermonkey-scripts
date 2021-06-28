@@ -38,14 +38,13 @@
 
         const isCurrentTs = await getElementsFromDocument('.today');
 
-        if ( (!isCurrentTs || openTsInPast)) {
+        if (!isCurrentTs || openTsInPast) {
 
             const header = await getElementsFromDocument('#timesheet-header');
             if(!header) return;
 
             const messageBoxId = 'messageBoxId13';
-            console.log(checkIfElementExists(messageBoxId));
-            if(checkIfElementExists(messageBoxId)) return;
+            if(await checkIfElementExists(messageBoxId)) return;
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);

@@ -40,7 +40,8 @@
 
     function addCompanyNameToHeader(projectHTMLElement, companyName) {
         const headerId = 'headerId13';
-        if(checkIfElementExists(headerId)) return;
+        if(await checkIfElementExists(headerId)) return;
+
         const textNode = document.createTextNode(` - ${companyName}`);
         const header = projectHTMLElement.querySelector('td.header');
         header.id = headerId;
