@@ -26,7 +26,7 @@
 
     async function init() {
         const elements = (await getElementsFromDocument('.thead.project-hours')) || [];
-        elements.forEach(await getProjectFromWorkFront);
+        elements.forEach(getProjectFromWorkFront);
     }
 
     async function getProjectFromWorkFront(projectHTMLElement) {
@@ -40,7 +40,8 @@
 
     async function addCompanyNameToHeader(projectHTMLElement, companyName) {
         const headerId = 'headerId13';
-        if(await checkIfElementExists(headerId)) return;
+        const oldHeader = await getElementsFromDocument(`#${headerId}`);
+        if(oldHeader) return;
 
         const textNode = document.createTextNode(` - ${companyName}`);
         const header = projectHTMLElement.querySelector('td.header');

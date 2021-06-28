@@ -59,7 +59,8 @@
     async function createWarningMessage(container) {
 
         const commentId = 'commentId13';
-        if(await checkIfElementExists(commentId)) return;
+        const oldComment = await getElementsFromDocument(`#${commentId}`);
+        if(oldComment) return;
 
         const element = document.createElement('p');
         const textNode = document.createTextNode(warningMessageText);

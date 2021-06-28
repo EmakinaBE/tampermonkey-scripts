@@ -68,10 +68,4 @@
         doc = null;
     }
 
-    window.checkIfElementExists = async (id) => {
-        const elementId = id;
-        const oldElement = await getElementsFromDocument(`#${elementId}`);
-        if(oldElement) return true;
-    } 
-
 })(window, document);
