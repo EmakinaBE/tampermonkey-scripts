@@ -30,8 +30,10 @@
     async function loadDoc() {
         resetDocument();
         const getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
+        console.log(alreadyLoaded);
         if(getBody && !alreadyLoaded){
             alreadyLoaded = true;
+            console.log("inside:" + alreadyLoaded);
             init();
         }
     }
