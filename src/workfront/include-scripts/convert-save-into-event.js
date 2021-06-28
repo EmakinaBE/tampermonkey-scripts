@@ -27,7 +27,7 @@
 
     async function loadDoc() {
         resetDocument();
-        var getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
+        const getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
         if(getBody){
             init();
         }
