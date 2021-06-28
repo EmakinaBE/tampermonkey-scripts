@@ -39,8 +39,12 @@
     }
 
     function addCompanyNameToHeader(projectHTMLElement, companyName) {
+        const headerId = 'headerId13';
+        checkIfElementExists(headerId);
         const textNode = document.createTextNode(` - ${companyName}`);
-        projectHTMLElement.querySelector('td.header').appendChild(textNode);
+        const header = projectHTMLElement.querySelector('td.header');
+        header.id = headerId;
+        header.appendChild(textNode);
     }
     
 })();

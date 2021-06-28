@@ -43,9 +43,8 @@
             const header = await getElementsFromDocument('#timesheet-header');
             if(!header) return;
 
-            const messageBoxId = 'messageBoxId123'
-            const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
-            if(oldMessageBox) return;
+            const messageBoxId = 'messageBoxId13';
+            checkIfElementExists(messageBoxId);
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);

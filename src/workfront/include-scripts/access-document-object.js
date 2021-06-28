@@ -26,13 +26,13 @@
     let doc;
     let iframeLoaded;
 
-    window.getElementsFromDocument = async (finalSelector) => { 
+    window.getElementsFromDocument = async (finalSelector, overwrite) => { 
         let doc = null;
         let maxTries = 50;
         let base;
         let selector;
         const checkElement = async (resolve, reject) => {
-            const elements = base.querySelectorAll(selector);
+            const elements = (overwrite || base).querySelectorAll(selector);
             if (elements.length) {
                 return resolve(elements);
             }
@@ -42,7 +42,7 @@
             await pause(100);
             checkElement(resolve, reject);
         };
-        if (!doc) {
+        if (!doc && !overwrite) {
             base = document;
             selector = '#main-frame';
             let iframeLoaded = false;
@@ -67,5 +67,11 @@
     window.resetDocument = () => {
         doc = null;
     }
+
+    window.checkIfElementExists = (id) => {
+        const elementId = id;
+        const oldElement = await getElementsFromDocument(`#${elementId}`);
+        if(oldElement) return;
+    } 
 
 })(window, document);

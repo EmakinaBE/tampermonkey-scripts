@@ -57,8 +57,14 @@
     }
 
     function createWarningMessage(container) {
+
+        const commentId = 'commentId13';
+        checkIfElementExists(commentId);
+
         const element = document.createElement('p');
         const textNode = document.createTextNode(warningMessageText);
+        element.id = commentId;
+
         element.appendChild(textNode);
 
         element.setAttribute('style', warningMessageStyle);
