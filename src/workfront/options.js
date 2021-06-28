@@ -44,7 +44,6 @@
     function init() {
         popUp = createPopupElement();
         createMenuElement();
-        setAlreadyLoaded();
     }
 
     function togglePopUp() {

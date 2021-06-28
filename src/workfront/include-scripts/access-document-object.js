@@ -52,7 +52,6 @@
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
                 await pause(1000);
             }
-            setAlreadyLoaded();
         }
         maxTries = 50;
         base = doc;

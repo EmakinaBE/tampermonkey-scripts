@@ -35,6 +35,7 @@
             alreadyLoaded = true;
             console.log("inside:" + alreadyLoaded);
             init();
+            setTimeout(setAlreadyLoaded(),1000);
         }
     }
 
