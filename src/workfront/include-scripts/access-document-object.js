@@ -53,6 +53,7 @@
                 await pause(1000);
             }
         }
+        setAlreadyLoaded()
         maxTries = 50;
         base = doc;
         selector = finalSelector;

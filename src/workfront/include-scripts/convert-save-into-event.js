@@ -53,7 +53,6 @@
     }
 
     async function setupListeners() {
-        alreadyLoaded = false;
         // setup attribute (to check page refresh) and listeners for on save button
         const view = await getElementsFromDocument('#content-timesheet-view')
         if(!view) return; 
@@ -93,6 +92,10 @@
 
     function dispatchEvent(event) {
         document.head.dispatchEvent(event);
+    }
+
+    function setAlreadyLoaded() {
+        alreadyLoaded = false;
     }
 
 })(window);
