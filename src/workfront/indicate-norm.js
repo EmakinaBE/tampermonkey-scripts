@@ -36,8 +36,14 @@
     }
 
     function createTableRows(data){
+
+        const colId = 'messageBoxId13';
+        const oldCol= await getElementsFromDocument(`#${colId}`);
+        if(oldCol) return;
+
         const delta = data.totalHours - parseToFloat(data.extRefID);
         const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
+        col.id = colId;
 
         return col;
     }
