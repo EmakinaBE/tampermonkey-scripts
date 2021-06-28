@@ -26,8 +26,8 @@
     callback(init);
 
     async function init() {
-        const allTasks = [...(await getElementsFromDocument('.TASK[data-workitemobjid]'))];
-        const ids = [...new Set(allTasks.map(element => element.getAttribute('data-workitemobjid')))];
+        const allTasks = await getElementsFromDocument('.TASK[data-workitemobjid]');
+        const ids = [...new Set([...allTasks].map(element => element.getAttribute('data-workitemobjid')))];
 
         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
         const closedTasks = tasks.filter(e => e.closed);
