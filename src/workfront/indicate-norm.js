@@ -37,13 +37,8 @@
 
     async function createTableRows(data){
 
-        const colId = 'messageBoxId13';
-        const oldCol= await getElementsFromDocument(`#${colId}`);
-        if(oldCol) return;
-
         const delta = data.totalHours - parseToFloat(data.extRefID);
         const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
-        col.id = colId;
 
         return col;
     }
@@ -73,7 +68,13 @@
     async function insertRow(text, color) {
         const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot');
         if(!tableFooter) return;
+
+        const trId = 'trId13';
+        const oldTr= await getElementsFromDocument(`#${trId}`);
+        if(oldTr) return;
+
         const tr = tableFooter[0].insertRow(-1);
+        tr.id = trId;
 
         const firstCell = tr.insertCell(0);
         firstCell.innerHTML = 'Norm(delta):';
