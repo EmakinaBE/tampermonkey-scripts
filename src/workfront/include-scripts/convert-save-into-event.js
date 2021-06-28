@@ -26,16 +26,13 @@
     var alreadyLoaded = false;
     
     window.addEventListener("popstate", () => loadDoc());
+    loadDoc();
 
     async function loadDoc() {
         resetDocument();
-        const getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
-        console.log(alreadyLoaded);
-        if(getBody && !alreadyLoaded){
+        if(!alreadyLoaded){
             alreadyLoaded = true;
-            console.log("inside:" + alreadyLoaded);
             init();
-            //setTimeout(setAlreadyLoaded(), 3000);
         }
     }
 
@@ -95,10 +92,6 @@
 
     function dispatchEvent(event) {
         document.head.dispatchEvent(event);
-    }
-
-    window.setAlreadyLoaded = () => {
-        alreadyLoaded = false;
     }
 
 })(window);

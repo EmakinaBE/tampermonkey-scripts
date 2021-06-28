@@ -38,13 +38,20 @@
 
         const isCurrentTs = await getElementsFromDocument('.today');
 
-        if ( !isCurrentTs || openTsInPast ) {
-            const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
-            const messageBox = createElementWithText('p', message);
-            messageBox.setAttribute('style', messageStyle);
+        if ( (!isCurrentTs || openTsInPast)) {
 
             const header = await getElementsFromDocument('#timesheet-header');
             if(!header) return;
+
+            const messageBoxId = 'messageBoxId123'
+            const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
+            if(oldMessageBox) return;
+
+            const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
+            const messageBox = createElementWithText('p', message);
+            messageBox.setAttribute('style', messageStyle);
+            messageBox.id = messageBoxId;
+
             header[0].appendChild(messageBox);
         }
     }
