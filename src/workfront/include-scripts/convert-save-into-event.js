@@ -23,12 +23,14 @@
 (function(window) {
     'use strict';
 
+    let enteredAlready = false;
     window.addEventListener("popstate", () => loadDoc());
 
     async function loadDoc() {
         resetDocument();
         const getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
-        if(getBody){
+        if(getBody && !enteredAlready){
+            enteredAlready = true;
             init();
         }
     }
