@@ -23,14 +23,26 @@
 (function(window) {
     'use strict';
 
-    let enteredAlready = false;
-    window.addEventListener("popstate", () => loadDoc());
+    var currentPageNo = location.hash || 1;
+
+    function myFunction() {
+
+        const pageNo = location.hash;
+
+        if( pageNo != currentPageNo ){
+
+            loadDoc()
+            currentPageNo = pageNo;
+        }
+
+    };
+
+    window.addEventListener("popstate", () => myFunction());
 
     async function loadDoc() {
         resetDocument();
         const getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
-        if(getBody && !enteredAlready){
-            enteredAlready = true;
+        if(getBody){
             init();
         }
     }
