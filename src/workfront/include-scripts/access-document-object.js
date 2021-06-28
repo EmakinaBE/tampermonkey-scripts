@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         get Elements from Document
 // @namespace    https://www.emakina.com/
-// @version      1.2
+// @version      1.3
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
