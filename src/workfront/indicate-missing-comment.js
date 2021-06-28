@@ -42,7 +42,7 @@
         const container = await getElementsFromDocument(containerSelector);
         if(!elements || !submitButton || !container) return;
 
-        const warningMessage = createWarningMessage(container[0]);
+        const warningMessage = await createWarningMessage(container[0]);
 
         checkAll(elements, warningMessage, submitButton[0]);
         initListeners(elements, warningMessage, submitButton[0]);
@@ -56,7 +56,7 @@
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
-    function createWarningMessage(container) {
+    async function createWarningMessage(container) {
 
         const commentId = 'commentId13';
         if(await checkIfElementExists(commentId)) return;

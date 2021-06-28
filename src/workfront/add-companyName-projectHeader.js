@@ -26,19 +26,19 @@
 
     async function init() {
         const elements = (await getElementsFromDocument('.thead.project-hours')) || [];
-        elements.forEach(getProjectFromWorkFront);
+        elements.forEach(await getProjectFromWorkFront);
     }
 
-    function getProjectFromWorkFront(projectHTMLElement) {
+    async function getProjectFromWorkFront(projectHTMLElement) {
         return fetch(`https://emakina.sb01.workfront.com/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=company:name`)
             .then(response => {
                 return response.json();
             }).then(e => {
-                e.data[0] && addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
+                e.data[0] && await addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
             });
     }
 
-    function addCompanyNameToHeader(projectHTMLElement, companyName) {
+    async function addCompanyNameToHeader(projectHTMLElement, companyName) {
         const headerId = 'headerId13';
         if(await checkIfElementExists(headerId)) return;
 
