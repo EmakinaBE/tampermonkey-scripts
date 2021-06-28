@@ -25,12 +25,13 @@
 
     window.addEventListener('popstate', function (event) {
         resetDocument();
-        if(getElementsFromDocument('.react-timesheet-hour-preferences')){
+        var getBody = await getElementsFromDocument('.react-timesheet-hour-preferences');
+        if(getBody){
             init();
         }
     });
 
-    function init() {
+    async function init() {
         executeCallback();
         setupListeners();
     }
