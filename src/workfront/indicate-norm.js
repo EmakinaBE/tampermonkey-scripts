@@ -30,12 +30,12 @@
         const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
         const data = await fetchProjectData(timesheetId);
 
-        const col = createTableRows(data);
+        const col = await createTableRows(data);
 
         addListener(col, parseToFloat(data.extRefID));
     }
 
-    function createTableRows(data){
+    async function createTableRows(data){
 
         const colId = 'messageBoxId13';
         const oldCol= await getElementsFromDocument(`#${colId}`);
