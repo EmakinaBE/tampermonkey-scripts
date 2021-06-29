@@ -1,14 +1,11 @@
 // ==UserScript==
 // @name         WF combined New UI
 // @namespace    https://www.emakina.com/
-// @version      1.46
+// @version      1.47
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
-// @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/*
-// @match        https://emakina.preview.workfront.com/timesheet/*
 // @match        https://emakina.preview.workfront.com/timesheets/*
-// @match        https://emakina.sb01.workfront.com/timesheet/*
 // @match        https://emakina.sb01.workfront.com/timesheets/*
 // @match        https://emakina.my.workfront.com/timesheets/current*
 // @match        https://emakina.preview.workfront.com/timesheets/current*
