@@ -83,8 +83,9 @@
         if(submitButton) {
             submitButton.disabled = emptyFieldFound;
         }
-        
-        emptyFieldFound ? warningMessage.classList.remove('hidden') : warningMessage.classList.add('hidden');
+
+        const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
+        emptyFieldFound ? (oldWarningMessage || warningMessage).classList.remove('hidden') : (oldWarningMessage || warningMessage).classList.add('hidden');
     }
 
     function checkAllCommentsAndMarkFields(elements) {
