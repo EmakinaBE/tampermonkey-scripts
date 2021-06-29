@@ -23,8 +23,9 @@
 (function(window, document) {
     'use strict';
 
-    window.checkUI = () => { 
+    window.checkUI = async () => { 
         const usedUI = await getUI();
+        const isQuicksilver = usedUI[1];
         console.log(usedUI);
     }
 
