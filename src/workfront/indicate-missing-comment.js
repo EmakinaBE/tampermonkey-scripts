@@ -50,7 +50,7 @@
     }
 
     async function init(e){
-        const elements = e.detail.newLine.getElements(inputFieldSelector);
+        const elements = await e.detail.newLine.getElementsFromDocument(inputFieldSelector, getDoc());
         const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
         const warningMessage = await getElementsFromDocument( warningMessageSelector, getDoc());
         if(!submitButton || !warningMessage) return;
