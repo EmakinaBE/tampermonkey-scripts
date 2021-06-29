@@ -22,6 +22,7 @@
 
 (function() {
     'use strict';
+    const commentId = 'commentId13';
     const inputFieldSelector = '.fc > input:not([readonly=true])';
     const noCommentStyle = 'background: tomato';
     const submitButtonSelector = '.btn.submit.btn-secondary';
@@ -58,7 +59,6 @@
 
     async function createWarningMessage(container) {
 
-        const commentId = 'commentId13';
         const oldComment = await getElementsFromDocument(`#${commentId}`);
         if(oldComment) return;
 
