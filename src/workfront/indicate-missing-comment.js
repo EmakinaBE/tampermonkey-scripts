@@ -49,7 +49,7 @@
         initListeners(elements, warningMessage, submitButton[0]);
     }
 
-    async function initNewTask(e){
+    async function init(e){
         const elements = e.detail.newLine.getElements(inputFieldSelector);
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const warningMessage = await getElementsFromDocument( warningMessageSelector);

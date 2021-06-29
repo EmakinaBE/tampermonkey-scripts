@@ -24,7 +24,6 @@
     'use strict';
 
     let doc;
-    let iframeLoaded;
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
         let doc = null;
