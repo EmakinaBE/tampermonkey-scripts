@@ -25,7 +25,7 @@
 
     window.checkUI = async () => { 
         const usedUI = await getUI();
-        if(usedUI[3]) {
+        if(usedUI) {
             console.log('old UI');
         } else {
             console.log('new UI');
@@ -37,7 +37,8 @@
             .then(response => {
                 return response.json();
             }).then(e => {
-                return e.data[0];     
+                const data =  e.data[0];
+                return data[1];  
             });
     }
 
