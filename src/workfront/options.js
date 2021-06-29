@@ -71,7 +71,7 @@
         const li = document.createElement('li');
         li.appendChild(button);
         //li.classList.add('navbar-item');
-        li.classList.add('flex', 'items-center');
+        li.classList.add('flex', 'mr-4', 'items-center');
         //TO-DO:
         const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
         if(!navbarItemGroup) return;
