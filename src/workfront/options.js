@@ -70,14 +70,15 @@
 
         const li = document.createElement('li');
         li.appendChild(button);
+        var navbarItemGroup;
 
         if(!getUsesQuicksilver()) {
             li.classList.add('navbar-item');
-            const navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right', document);
+            navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right', document);
             if(!navbarItemGroup) return;
         } else {
             li.classList.add('flex', 'mr-4', 'items-center');
-            const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
+            navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
             if(!navbarItemGroup) return;
         }
 
