@@ -72,7 +72,7 @@
         button.id = buttonId;
         li.appendChild(button);
         //li.classList.add('navbar-item');
-        li.classList.add('flex mr-4 ml-6 items-center');
+        li.classList.add('flex', 'ml-6', 'items-center');
         //TO-DO:
         const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
         if(!navbarItemGroup) return;
