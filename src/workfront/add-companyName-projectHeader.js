@@ -25,7 +25,7 @@
     callback(init);
 
     async function init() {
-        const elements = (await getElementsFromDocument('.thead.project-hours'), getDoc()) || [];
+        const elements = (await getElementsFromDocument('.thead.project-hours', getDoc())) || [];
         elements.forEach(getProjectFromWorkFront);
     }
 
