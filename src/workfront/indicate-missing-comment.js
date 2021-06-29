@@ -85,7 +85,7 @@
         }
 
         const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
-        emptyFieldFound ? (oldWarningMessage || warningMessage).classList.remove('hidden') : (oldWarningMessage || warningMessage).classList.add('hidden');
+        emptyFieldFound ? ((oldWarningMessage || warningMessage).classList.remove('hidden')) : ((oldWarningMessage || warningMessage).classList.add('hidden'));
     }
 
     function checkAllCommentsAndMarkFields(elements) {
