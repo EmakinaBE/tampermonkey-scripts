@@ -60,14 +60,19 @@
     }
 
     async function createMenuElement() {
+        const buttonId = 'buttonId13';
+        const oldButton = await getElementsFromDocument(`#${buttonId}`);
+        if(oldButton) return;
+
         const button = document.createElement('button');
         button.style = 'background: url(https://avatars.githubusercontent.com/u/767504?s=400&u=d0a32a535c83ebde083450c51552e0496b0735d2&v=4);background-size:cover;width:30px;height:30px';
         button.onclick = togglePopUp;
 
         const li = document.createElement('li');
+        button.id = buttonId;
         li.appendChild(button);
         //li.classList.add('navbar-item');
-        li.classList.add('item-center');
+        li.classList.add('items-center');
         //TO-DO:
         const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
         if(!navbarItemGroup) return;
