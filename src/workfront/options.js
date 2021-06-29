@@ -70,12 +70,16 @@
 
         const li = document.createElement('li');
         li.appendChild(button);
-        //li.classList.add('navbar-item');
-        li.classList.add('flex', 'mr-4', 'items-center');
-        //TO-DO:
-        const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
-        if(!navbarItemGroup) return;
-        //const navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right');
+        
+        if(!getUsesQuicksilver()) {
+            li.classList.add('navbar-item');
+            const navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right');
+            if(!navbarItemGroup) return;
+        } else {
+            li.classList.add('flex', 'mr-4', 'items-center');
+            const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
+            if(!navbarItemGroup) return;
+        }
 
         li.id = listId;
         navbarItemGroup[0].appendChild(li);

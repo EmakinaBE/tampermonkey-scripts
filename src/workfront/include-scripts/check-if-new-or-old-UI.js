@@ -23,10 +23,11 @@
 (function(window, document) {
     'use strict';
     var doc = null;
+    var usesQuicksilver;
 
     window.checkUI = async () => { 
         // The new UI uses Quicksilver
-        const usesQuicksilver = await getUI();
+        usesQuicksilver = await getUI();
         if(!usesQuicksilver) {
             doc = document;
         }
@@ -43,6 +44,10 @@
 
     window.getDoc = () => {
         return doc;
+    }
+
+    window.getUsesQuicksilver = () => {
+        return usesQuicksilver;
     }
 
 }(window, document));
