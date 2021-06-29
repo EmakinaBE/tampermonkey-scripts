@@ -25,7 +25,7 @@
     callback(init);
 
     async function init() {
-        const elements = (await getElementsFromDocument('.thead.project-hours')) || [];
+        const elements = (await getElementsFromDocument('.thead.project-hours'), getDoc()) || [];
         elements.forEach(getProjectFromWorkFront);
     }
 
@@ -40,7 +40,7 @@
 
     async function addCompanyNameToHeader(projectHTMLElement, companyName) {
         const headerId = 'headerId13';
-        const oldHeader = await getElementsFromDocument(`#${headerId}`);
+        const oldHeader = await getElementsFromDocument(`#${headerId}`, getDoc());
         if(oldHeader) return;
 
         const textNode = document.createTextNode(` - ${companyName}`);

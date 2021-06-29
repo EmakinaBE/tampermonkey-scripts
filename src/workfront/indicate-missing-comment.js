@@ -38,9 +38,9 @@
     callback(init);
 
     async function init() {
-        const elements = await getElementsFromDocument(inputFieldSelector);
-        const submitButton = await getElementsFromDocument(submitButtonSelector);
-        const container = await getElementsFromDocument(containerSelector);
+        const elements = await getElementsFromDocument(inputFieldSelector, getDoc());
+        const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
+        const container = await getElementsFromDocument(containerSelector, getDoc());
         if(!elements || !submitButton || !container) return;
 
         const warningMessage = await createWarningMessage(container[0]);
@@ -51,15 +51,15 @@
 
     async function init(e){
         const elements = e.detail.newLine.getElements(inputFieldSelector);
-        const submitButton = await getElementsFromDocument(submitButtonSelector);
-        const warningMessage = await getElementsFromDocument( warningMessageSelector);
+        const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
+        const warningMessage = await getElementsFromDocument( warningMessageSelector, getDoc());
         if(!submitButton || !warningMessage) return;
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
     async function createWarningMessage(container) {
 
-        const oldComment = await getElementsFromDocument(`#${commentId}`);
+        const oldComment = await getElementsFromDocument(`#${commentId}`, getDoc());
         if(oldComment) return;
 
         const element = document.createElement('p');
@@ -84,7 +84,7 @@
             submitButton.disabled = emptyFieldFound;
         }
 
-        const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
+        const oldWarningMessage = await getElementsFromDocument(`#${commentId}`, getDoc());
         emptyFieldFound ? (oldWarningMessage[0] || warningMessage).classList.remove('hidden') : (oldWarningMessage[0] || warningMessage).classList.add('hidden');
     }
 

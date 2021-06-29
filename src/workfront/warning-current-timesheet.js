@@ -27,7 +27,7 @@
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
-        const getTimesheetId = await getElementsFromDocument('[data-timesheetid]');
+        const getTimesheetId = await getElementsFromDocument('[data-timesheetid]', getDoc());
         if(!getTimesheetId) return; 
         const currentTsId =  getTimesheetId[0].getAttribute('data-timesheetid');
 
@@ -36,15 +36,15 @@
 
         await redirectIfNeeded(openTsInPast, noOlderTs);
 
-        const isCurrentTs = await getElementsFromDocument('.today');
+        const isCurrentTs = await getElementsFromDocument('.today', getDoc());
 
         if (!isCurrentTs || openTsInPast) {
 
-            const header = await getElementsFromDocument('#timesheet-header');
+            const header = await getElementsFromDocument('#timesheet-header', getDoc());
             if(!header) return;
 
             const messageBoxId = 'messageBoxId13';
-            const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
+            const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`, getDoc());
             if(oldMessageBox) return;
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
