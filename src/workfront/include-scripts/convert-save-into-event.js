@@ -38,7 +38,7 @@
     }
 
     async function pollNetworkRequestSuccess() {
-        const view = await getElementsFromDocument('#content-timesheet-view');
+        const view = await getElementsFromDocument('#content-timesheet-view', getDoc());
         if(!view) return;
         if (view.getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
@@ -50,18 +50,18 @@
 
     async function setupListeners() {
         // setup attribute (to check page refresh) and listeners for on save button
-        const view = await getElementsFromDocument('#content-timesheet-view')
+        const view = await getElementsFromDocument('#content-timesheet-view', getDoc())
         if(!view) return; 
         view[0].setAttribute('data-tampermonkey-id', true);
 
-        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
+        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary', getDoc());
 
         if (saveButton) {
              saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
         }
 
         // setup listeners for new task
-        const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
+        const taskButtons = await getElementsFromDocument('.hour-type-and-role-add', getDoc());
         if(!taskButtons) return;
         taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
     }
@@ -73,7 +73,7 @@
         // use setTimeout to execute this after workfront rendered the new task line
         setTimeout( async () => {
             // get all the lines for this task
-            const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+            const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`, getDoc());
             if(!lines) return;
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
