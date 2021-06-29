@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.8
+// @version      1.9
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
@@ -24,6 +24,7 @@
     'use strict';
     
     window.addEventListener("popstate", () => loadDoc());
+    loadDoc();
 
     async function loadDoc() {
         resetDocument();
