@@ -27,6 +27,7 @@
     loadDoc();
 
     async function loadDoc() {
+        checkUI();
         resetDocument();
         init();
     }
