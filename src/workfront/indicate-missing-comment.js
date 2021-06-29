@@ -33,7 +33,7 @@
 
     const del = getSystemDecimalSeparator();
 
-    document.head.addEventListener('WF_NEW-TASK',e => initNewTask(e));
+    document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
     callback(init);
 
@@ -49,7 +49,7 @@
         initListeners(elements, warningMessage, submitButton[0]);
     }
 
-    async function init(e){
+    async function initNewTask(e){
         const elements = await e.detail.newLine.getElementsFromDocument(inputFieldSelector, getDoc());
         const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
         const warningMessage = await getElementsFromDocument( warningMessageSelector, getDoc());
