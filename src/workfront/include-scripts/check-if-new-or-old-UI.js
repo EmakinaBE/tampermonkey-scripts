@@ -1,6 +1,5 @@
 // ==UserScript==
-// @name         Check if new or old 
-UI
+// @name         Check if new or old UI
 // @namespace    https://www.emakina.com/
 // @version      1.0
 // @description  Will check if the old UI (quicksilver) or new UI (phoenix) is used
