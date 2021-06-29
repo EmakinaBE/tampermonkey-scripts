@@ -25,8 +25,11 @@
 
     window.checkUI = async () => { 
         const usedUI = await getUI();
-        const isQuicksilver = usedUI[1];
-        console.log(usedUI);
+        if(usedUI[3]) {
+            console.log('old UI');
+        } else {
+            console.log('new UI');
+        }
     }
 
     async function getUI () {
