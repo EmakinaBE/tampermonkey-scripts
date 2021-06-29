@@ -66,7 +66,8 @@
 
         const li = document.createElement('li');
         li.appendChild(button);
-        li.classList.add('navbar-item');
+        //li.classList.add('navbar-item');
+        li.classList.add('item-center');
         //TO-DO:
         const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
         if(!navbarItemGroup) return;
