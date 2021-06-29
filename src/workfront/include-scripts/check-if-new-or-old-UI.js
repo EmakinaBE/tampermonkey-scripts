@@ -24,7 +24,7 @@
     'use strict';
 
     window.checkUI = () => { 
-        const usedUI = getUI();
+        const usedUI = await getUI();
         console.log(usedUI);
     }
 
@@ -33,7 +33,7 @@
             .then(response => {
                 return response.json();
             }).then(e => {
-                e.data[3];
+                return e.data[0];     
             });
     }
 
