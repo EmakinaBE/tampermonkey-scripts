@@ -61,7 +61,7 @@
 
     async function createMenuElement() {
         const listId = 'listId13';
-        const oldListElement = await getElementsFromDocument(`#${listId}`);
+        const oldListElement = await getElementsFromDocument(`#${listId}`, document);
         if(oldListElement ) return;
 
         const button = document.createElement('button');
