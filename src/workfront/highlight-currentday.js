@@ -25,7 +25,7 @@
     callback(init);
 
     async function init() {
-        const today = await getElementsFromDocument('.today');
+        const today = await getElementsFromDocument('.today', getDoc());
         if(!today) return;
 
         for (let i = 0; i < today.length; i++) {

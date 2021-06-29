@@ -22,13 +22,13 @@
 
 (function(window, document) {
     'use strict';
+    var doc = null;
 
     window.checkUI = async () => { 
+        // The new UI uses Quicksilver
         const usesQuicksilver = await getUI();
-        if(usesQuicksilver) {
-            console.log('old UI');
-        } else {
-            console.log('new UI');
+        if(!usesQuicksilver) {
+            doc = document;
         }
     }
 
@@ -39,6 +39,10 @@
             }).then(e => {
                 return e.data[0].hasQuicksilver;
             });
+    }
+
+    window.getDoc = () => {
+        return doc;
     }
 
 }(window, document));
