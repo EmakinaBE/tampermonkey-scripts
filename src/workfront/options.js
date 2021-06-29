@@ -60,7 +60,7 @@
     }
 
     async function createMenuElement() {
-        const listId = 'buttonId13';
+        const listId = 'listId13';
         const oldListElement = await getElementsFromDocument(`#${listId}`);
         if(oldListElement ) return;
 
@@ -71,7 +71,7 @@
         const li = document.createElement('li');
         li.appendChild(button);
         //li.classList.add('navbar-item');
-        li.classList.add('flex', 'ml-6', 'items-center');
+        li.classList.add('flex', 'items-center');
         //TO-DO:
         const navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
         if(!navbarItemGroup) return;
