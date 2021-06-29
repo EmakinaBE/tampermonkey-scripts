@@ -24,8 +24,8 @@
     'use strict';
 
     window.checkUI = async () => { 
-        const usedUI = await getUI();
-        if(usedUI) {
+        const usesQuicksilver = await getUI();
+        if(usesQuicksilver) {
             console.log('old UI');
         } else {
             console.log('new UI');
@@ -37,8 +37,7 @@
             .then(response => {
                 return response.json();
             }).then(e => {
-                const data =  e.data[0];
-                return data[1];  
+                return e.data[0].hasQuicksilver;
             });
     }
 
