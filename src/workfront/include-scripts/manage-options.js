@@ -43,6 +43,9 @@
     };
 
     window.wfGetOptions = getOptions;
+    
+    checkOptionsUpdate();
+    let options = loadOptions();
 
     window.saveOptions = (e) => {
         const target = e.target;

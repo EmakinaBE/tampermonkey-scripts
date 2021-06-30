@@ -21,8 +21,6 @@
 (function() {
     'use strict';
 
-    checkOptionsUpdate();
-    let options = loadOptions();
     let popUp = null;
     let isPopUpVisible = false;
 
@@ -100,7 +98,7 @@
         container.appendChild(createCloseButton());
         container.appendChild(createTitle('WF scripts options'));
 
-        for (const [key, value] of Object.entries(options)) {
+        for (const [key, value] of Object.entries(loadOptions())) {
             const div = document.createElement('div');
 
             div.appendChild(createCheckbox(key, value));
