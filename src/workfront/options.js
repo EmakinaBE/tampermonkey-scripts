@@ -164,41 +164,4 @@
         label.textContent = text;
         return label;
     }
-
-    function saveOptions(e) {
-        const target = e.target;
-
-        options[target.name].isChecked = target.checked;
-        localStorage.setItem(storageKey, JSON.stringify(options));
-    }
-
-    function getOptions() {
-        const result = {};
-        for (const [key, value] of Object.entries(options)) {
-            result[key] = value.isChecked;
-        }
-        return result;
-    }
-
-    function loadOptions() {
-        return JSON.parse(localStorage.getItem(storageKey)) || defaultOptions;
-    }
-
-    function checkOptionsUpdate() {
-        const oldOptions = loadOptions();
-        const oldKeys = Object.keys(oldOptions).sort();
-        const newKeys = Object.keys(defaultOptions).sort();
-
-        if (oldKeys !== newKeys) {
-            const newOptions = { ...defaultOptions };
-            for (const [key, value] of Object.entries(oldOptions)) {
-                // check if key exists on newOptions (clone of default options) - this will not be the case if a previous option is removed
-                if(newOptions[key]) {
-                    newOptions[key].isChecked = value.isChecked;
-                }
-
-            }
-            localStorage.setItem(storageKey, JSON.stringify(newOptions));
-        }
-    }
 })();
