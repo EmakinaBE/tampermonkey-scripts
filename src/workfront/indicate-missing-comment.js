@@ -51,7 +51,8 @@
     }
 
     async function initNewTask(e){
-        const elements = await e.detail.newLine.getElementsFromDocument(inputFieldSelector, getDoc());
+        const newLine = e.detail.newLine;
+        const elements = await getElementsFromDocument(inputFieldSelector, newLine);
         const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
         const warningMessage = await getElementsFromDocument( warningMessageSelector, getDoc());
         if(!submitButton || !warningMessage) return;
