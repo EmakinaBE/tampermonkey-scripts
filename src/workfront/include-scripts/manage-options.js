@@ -42,8 +42,13 @@
         }*/
     };
     
-    checkOptionsUpdate();
-    let options = loadOptions();
+    init();
+
+    function init(){
+        window.wfGetOptions = getOptions();
+        checkOptionsUpdate();
+        let options = loadOptions();
+    }
 
     window.saveOptions = (e) => {
         const target = e.target;
@@ -82,6 +87,4 @@
         }
     } 
 
-    window.wfGetOptions = getOptions();
-    
 })(window);
