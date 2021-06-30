@@ -22,7 +22,7 @@
 (function(window) {
     'use strict';
 
-    windw.saveOptions = (e) => {
+    window.saveOptions = (e) => {
         const target = e.target;
 
         options[target.name].isChecked = target.checked;
