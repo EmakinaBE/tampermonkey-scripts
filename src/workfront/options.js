@@ -137,7 +137,7 @@
 
     function createLabel(key, text) {
         const label = document.createElement('label');
-        label.classList('ml-4');
+        label.classList.add('ml-4');
         label.setAttribute('for', key);
         label.textContent = text;
         return label;
