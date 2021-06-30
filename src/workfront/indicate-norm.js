@@ -34,12 +34,14 @@
         const col = await createTableRows(data);
         if(!col) return;
  
-        addListener(col, parseToFloat(data.extRefID));
+        if (window.wfGetOptions().correctComma) {
+            addListener(col, parseToFloat(data.extRefID));
+        }
     }
 
     async function createTableRows(data){
-
-        const delta = data.totalHours - parseToFloat(data.extRefID);
+       
+        const delta = data.totalHours - parseFloat(data.extRefID.replace(',', '.'));
         const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
 
         return col;
@@ -100,9 +102,7 @@
     }
 
     function parseToFloat(text) {
-        if (window.wfGetOptions().correctComma) {
-            return parseFloat(text.replace(',', '.'));
-        }
+        return parseFloat(text.replace(',', '.'));
     }
 
     function findColorForDelta(delta) {
