@@ -23,7 +23,15 @@
     let storageKey = 'wf-options';
     const defaultOptions = {
         autoRedirect: {
-            label: 'Auto redirect to oldest open ts',
+            label: 'Auto redirect to oldest open timesheet',
+            isChecked: false,
+        },
+        showCompanyName: {
+            label: 'Show Company-Project Header',
+            isChecked: false,
+        },
+        showWarnings: {
+            label: 'Show Warnings',
             isChecked: false,
         }/*,
         roundToNearestQuarter: {
@@ -71,7 +79,7 @@
 
         const li = document.createElement('li');
         li.appendChild(button);
-        var navbarItemGroup;
+        let navbarItemGroup;
 
         if(!getUsesQuicksilver()) {
             li.classList.add('navbar-item');

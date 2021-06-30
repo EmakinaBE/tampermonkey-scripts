@@ -26,8 +26,10 @@
     init();
 
     async function init() {
-        const elements = (await getElementsFromDocument('.thead.project-hours', getDoc())) || [];
-        elements.forEach(getProjectFromWorkFront);
+        if (window.wfGetOptions().showCompanyName) {          
+            const elements = (await getElementsFromDocument('.thead.project-hours', getDoc())) || [];
+            elements.forEach(getProjectFromWorkFront);
+        }
     }
 
     async function getProjectFromWorkFront(projectHTMLElement) {
