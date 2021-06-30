@@ -32,6 +32,7 @@
         const data = await fetchProjectData(timesheetId);
 
         const col = await createTableRows(data);
+        if(!col) return;
 
         addListener(col, parseToFloat(data.extRefID));
     }
@@ -72,7 +73,7 @@
 
         const trId = 'trId13';
         const oldTr= await getElementsFromDocument(`#${trId}`, getDoc());
-        if(oldTr) return;
+        if(!oldTr) return;
 
         const tr = tableFooter[0].insertRow(-1);
         tr.id = trId;

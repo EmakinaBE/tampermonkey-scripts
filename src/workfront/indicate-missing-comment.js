@@ -159,7 +159,7 @@
     }
 
     function getSystemDecimalSeparator() {
-        var n = 1.1;
+        let n = 1.1;
         const lang = document.documentElement.lang.replace('_', '-');
 
         if (lang) {

@@ -50,7 +50,7 @@
     }
 
     function getElements(elements, selector) {
-        var array = [];
+        let array = [];
         elements.forEach(element => {
             array.push(element.querySelector(selector));
         });

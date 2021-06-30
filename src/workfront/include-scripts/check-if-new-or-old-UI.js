@@ -22,8 +22,8 @@
 
 (function(window, document) {
     'use strict';
-    var doc = null;
-    var usesQuicksilver;
+    let doc = null;
+    let usesQuicksilver;
 
     window.checkUI = async () => { 
         // The new UI uses Quicksilver

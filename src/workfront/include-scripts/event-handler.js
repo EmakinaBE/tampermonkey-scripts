@@ -22,7 +22,7 @@
 (function(window) {
     'use strict';
 
-    var callbacks = [];
+    let callbacks = [];
 
     window.executeCallback = ()  => {
         callbacks.forEach((callback) => callback());
