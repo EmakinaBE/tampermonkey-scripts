@@ -36,6 +36,7 @@
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
     callback(init);
+    init();
 
     async function init() {
         const elements = await getElementsFromDocument(inputFieldSelector, getDoc());

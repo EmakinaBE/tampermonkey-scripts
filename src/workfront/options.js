@@ -40,6 +40,7 @@
     let isPopUpVisible = false;
 
     callback(init);
+    init();
 
     function init() {
         popUp = createPopupElement();

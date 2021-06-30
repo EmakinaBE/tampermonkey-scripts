@@ -24,6 +24,7 @@
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
     callback(init);
+    init();
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();

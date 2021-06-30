@@ -23,6 +23,7 @@
     'use strict';
 
     callback(init);
+    init();
 
     async function init() {
         const today = await getElementsFromDocument('.today', getDoc());

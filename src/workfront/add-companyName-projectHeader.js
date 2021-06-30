@@ -23,6 +23,7 @@
     'use strict';
 
     callback(init);
+    init();
 
     async function init() {
         const elements = (await getElementsFromDocument('.thead.project-hours', getDoc())) || [];
