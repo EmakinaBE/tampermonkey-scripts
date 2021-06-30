@@ -22,6 +22,7 @@
 (function(window) {
     'use strict';
 
+    let options;
     let storageKey = 'wf-options';
     const defaultOptions = {
         autoRedirect: {
@@ -41,14 +42,6 @@
             isChecked: true,
         }*/
     };
-    
-    init();
-
-    function init(){
-        window.wfGetOptions = getOptions();
-        checkOptionsUpdate();
-        let options = loadOptions();
-    }
 
     window.saveOptions = (e) => {
         const target = e.target;
@@ -86,5 +79,13 @@
             localStorage.setItem(storageKey, JSON.stringify(newOptions));
         }
     } 
+
+    init();
+
+    function init(){
+        window.wfGetOptions = getOptions;
+        checkOptionsUpdate();
+        options = loadOptions();
+    }
 
 })(window);
