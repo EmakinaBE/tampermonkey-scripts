@@ -49,7 +49,7 @@
                 const iframes = await (new Promise(checkElement));
                 doc = iframes[0].contentWindow?.document;
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
-                await pause(1000);
+                await pause(100);
             }
         }
         maxTries = 50;
