@@ -80,12 +80,8 @@
         }
     } 
 
-    init();
-
-    function init(){
-        window.wfGetOptions = getOptions;
-        checkOptionsUpdate();
-        options = loadOptions();
-    }
+    window.wfGetOptions = getOptions;
+    checkOptionsUpdate();
+    options = loadOptions();
 
 })(window);
