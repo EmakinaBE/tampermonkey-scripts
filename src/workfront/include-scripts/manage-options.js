@@ -42,7 +42,7 @@
         }*/
     };
 
-    window.wfGetOptions = getOptions;
+    window.wfGetOptions = getOptions();
     
     checkOptionsUpdate();
     let options = loadOptions();
