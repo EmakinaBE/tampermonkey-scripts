@@ -22,6 +22,28 @@
 (function(window) {
     'use strict';
 
+    let storageKey = 'wf-options';
+    const defaultOptions = {
+        autoRedirect: {
+            label: 'Auto redirect to oldest open timesheet',
+            isChecked: false,
+        },
+        showCompanyName: {
+            label: 'Show Company-Project Header',
+            isChecked: false,
+        },
+        showWarnings: {
+            label: 'Show Warnings',
+            isChecked: false,
+        }/*,
+        roundToNearestQuarter: {
+            label: 'Round entries to nearest quarter',
+            isChecked: true,
+        }*/
+    };
+
+    window.wfGetOptions = getOptions;
+
     window.saveOptions = (e) => {
         const target = e.target;
 
