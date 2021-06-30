@@ -41,8 +41,6 @@
             isChecked: true,
         }*/
     };
-
-    window.wfGetOptions = getOptions();
     
     checkOptionsUpdate();
     let options = loadOptions();
@@ -83,4 +81,7 @@
             localStorage.setItem(storageKey, JSON.stringify(newOptions));
         }
     } 
+
+    window.wfGetOptions = getOptions();
+    
 })(window);
