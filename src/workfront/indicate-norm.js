@@ -34,7 +34,9 @@
         const col = await createTableRows(data);
         if(!col) return;
 
-        addListener(col, parseToFloat(data.extRefID));
+        if (window.wfGetOptions().correctComma) { 
+            addListener(col, parseToFloat(data.extRefID));
+        }
     }
 
     async function createTableRows(data){

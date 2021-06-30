@@ -61,9 +61,11 @@
         }
 
         // setup listeners for new task
-        const taskButtons = await getElementsFromDocument('.hour-type-and-role-add', getDoc());
-        if(!taskButtons) return;
-        taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
+        if (window.wfGetOptions().autoSelect) { 
+            const taskButtons = await getElementsFromDocument('.hour-type-and-role-add', getDoc());
+            if(!taskButtons) return;
+            taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
+        }
     }
 
     function newTaskClickHandler(event) {

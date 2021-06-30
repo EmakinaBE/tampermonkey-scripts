@@ -30,12 +30,20 @@
             isChecked: false,
         },
         showCompanyName: {
-            label: 'Show Company-Project Header',
-            isChecked: false,
+            label: 'Show company name next to project',
+            isChecked: true,
         },
-        showWarnings: {
-            label: 'Show Warnings',
-            isChecked: false,
+        autosave: {
+            label: 'Auto-save',
+            isChecked: true,
+        },
+        autoSelect: {
+            label: 'Auto-select next task time line',
+            isChecked: true,
+        },
+        correctComma: {
+            label: 'Correct wrong comma seperator',
+            isChecked: true,
         }/*,
         roundToNearestQuarter: {
             label: 'Round entries to nearest quarter',
