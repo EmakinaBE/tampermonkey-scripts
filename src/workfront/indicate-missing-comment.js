@@ -123,9 +123,11 @@
             e.addEventListener('keyup', () => {
                 const val = e.value;
                 checkAll(elements, warningMessage, submitButton);
-                const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
-                if (val) {
-                    e.value = operation(val);
+                if (window.wfGetOptions().correctComma) { 
+                    const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
+                    if (val) {
+                        e.value = operation(val);
+                    }
                 }
             }, false);
         });
@@ -149,12 +151,9 @@
 
     function toSystemDecimalDelimiter(string) {
         const correctDel = del;
-        if (window.wfGetOptions().correctComma) { 
-            const wrongDel = correctDel === '.' ? ',' : '.';
-            return string.replace(wrongDel, correctDel);
-        } 
-        
-        return correctDel;
+        const wrongDel = correctDel === '.' ? ',' : '.';
+
+        return string.replace(wrongDel, correctDel);
     }
 
     function roundNearQtr(nr) {
