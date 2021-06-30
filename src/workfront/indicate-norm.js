@@ -33,15 +33,13 @@
 
         const col = await createTableRows(data);
         if(!col) return;
- 
-        if (window.wfGetOptions().correctComma) {
-            addListener(col, parseToFloat(data.extRefID));
-        }
+
+        addListener(col, parseToFloat(data.extRefID));
     }
 
     async function createTableRows(data){
        
-        const delta = data.totalHours - parseFloat(data.extRefID.replace(',', '.'));
+        const delta = data.totalHours - parseToFloat(data.extRefID);
         const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
 
         return col;

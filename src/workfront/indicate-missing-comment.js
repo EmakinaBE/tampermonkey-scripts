@@ -149,9 +149,12 @@
 
     function toSystemDecimalDelimiter(string) {
         const correctDel = del;
-        const wrongDel = correctDel === '.' ? ',' : '.';
-
-        return string.replace(wrongDel, correctDel);
+        if (window.wfGetOptions().correctComma) { 
+            const wrongDel = correctDel === '.' ? ',' : '.';
+            return string.replace(wrongDel, correctDel);
+        } 
+        
+        return correctDel;
     }
 
     function roundNearQtr(nr) {
