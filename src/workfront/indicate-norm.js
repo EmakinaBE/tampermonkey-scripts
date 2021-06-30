@@ -33,10 +33,8 @@
 
         const col = await createTableRows(data);
         if(!col) return;
-
-        if (window.wfGetOptions().correctComma) { 
-            addListener(col, parseToFloat(data.extRefID));
-        }
+ 
+        addListener(col, parseToFloat(data.extRefID));
     }
 
     async function createTableRows(data){
@@ -102,7 +100,9 @@
     }
 
     function parseToFloat(text) {
-        return parseFloat(text.replace(',', '.'));
+        if (window.wfGetOptions().correctComma) {
+            return parseFloat(text.replace(',', '.'));
+        }
     }
 
     function findColorForDelta(delta) {
