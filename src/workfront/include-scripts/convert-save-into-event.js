@@ -34,7 +34,7 @@
 
     async function init() {
         executeCallback();
-        setTimeout(setupListeners, 500);
+        setTimeout(setupListeners, 100);
     }
 
     async function pollNetworkRequestSuccess() {
