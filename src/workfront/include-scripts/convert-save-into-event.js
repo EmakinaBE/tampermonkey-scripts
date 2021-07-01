@@ -31,10 +31,10 @@
     async function loadDoc() {
         await checkUI();
         resetDocument();
-        init();
+        exceuteScripts();
     }
 
-    async function init() {
+    window.exceuteScripts = async () => {
         executeCallback();
         setTimeout(setupListeners, 500);
     }
@@ -48,7 +48,7 @@
         }
 
         resetDocument();
-        init();
+        exceuteScripts();
     }
 
     async function setupListeners() {
