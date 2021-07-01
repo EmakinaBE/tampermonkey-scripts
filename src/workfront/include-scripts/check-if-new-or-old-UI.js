@@ -28,7 +28,7 @@
     window.checkUI = async () => { 
         // The new UI uses Quicksilver
         usesQuicksilver = await getUI();
-        if(!usesQuicksilver) {
+        if(usesQuicksilver) {
             doc = document;
         }
     }
