@@ -30,7 +30,7 @@
         setTimeout(testTimeout, 100);
     }
 
-    function testTimeout() {
+    async function testTimeout() {
         usesQuicksilver = await getUI();
         if(!usesQuicksilver) {
             doc = document;
