@@ -27,10 +27,6 @@
 
     window.checkUI = async () => { 
         // The new UI uses Quicksilver
-        setTimeout(testTimeout, 100);
-    }
-
-    async function testTimeout() {
         usesQuicksilver = await getUI();
         if(!usesQuicksilver) {
             doc = document;
