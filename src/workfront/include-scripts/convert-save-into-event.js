@@ -25,6 +25,8 @@
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
+    
+    // if Iframe changes call reset and init()
 
     async function loadDoc() {
         await checkUI();
@@ -45,6 +47,7 @@
             return;
         }
 
+        resetDocument();
         init();
     }
 
