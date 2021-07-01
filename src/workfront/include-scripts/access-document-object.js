@@ -45,15 +45,18 @@
             selector = '#main-frame';
             let iframeLoaded = false;
             const iframes = await (new Promise(checkElement));
-            while(!iframeLoaded){
-                doc = iframes[0].contentWindow?.document;
-                iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
-                await pause(100);
-            }
-            console.log('tries needed to fetch iframe + doc: ' + maxTries);
+            doc = new Promise(async(resolve, reject) => {
+                while(!iframeLoaded){
+                    const iframeContainer  = iframes[0].contentWindow?.document;
+                    iframeLoaded = iframeContainer?.children?.[0]?.children?.[1]?.children?.length;
+                    if(iframeLoaded) return resolve(iframeContainer);
+                    await pause(100);
+                }
+                console.log('tries needed to fetch iframe + doc: ' + maxTries);
+            });
         }
         maxTries = 200;
-        base = doc;
+        base = await doc;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
         console.log('tries needed to fetch element: ' + maxTries);
