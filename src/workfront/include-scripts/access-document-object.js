@@ -26,7 +26,6 @@
     let doc;
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
-        let doc = null;
         let maxTries = 40;
         let base;
         let selector;
