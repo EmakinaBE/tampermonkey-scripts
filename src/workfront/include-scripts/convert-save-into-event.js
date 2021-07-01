@@ -92,17 +92,4 @@
         document.head.dispatchEvent(event);
     }
 
-    window.saveChanges = (type) => {
-        var timeoutId;
-        $(type).keypress(function () {
-            if (timeoutId) clearTimeout(timeoutId);
-                timeoutId = setTimeout(function () {
-    	            $.ajax({
-                    url: '/savecomment',
-                    data: { comment: $(this).val() }
-                });
-            }, 750);
-        });
-    }
-
 })(window);
