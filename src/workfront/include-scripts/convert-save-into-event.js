@@ -47,7 +47,7 @@
             return;
         }
 
-        setTimeout(loadDoc, 50);
+        setTimeout(init, 50);
     }
 
     async function setupListeners() {
