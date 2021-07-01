@@ -26,20 +26,10 @@
     let usesQuicksilver;
 
     window.checkUI = async () => { 
-        // The old UI uses Quicksilver
-        usesQuicksilver = await getUI();
+        usesQuicksilver = window.config;
         if(!usesQuicksilver) {
             doc = document;
         }
-    }
-
-    async function getUI () {
-        return fetch(`https://emakina.sb01.workfront.com/attask/api/unsupported/user/search?ID=$$USER.ID&fields=hasQuicksilver`)
-            .then(response => {
-                return response.json();
-            }).then(e => {
-                return e.data[0].hasQuicksilver;
-            });
     }
 
     window.getDoc = () => {
