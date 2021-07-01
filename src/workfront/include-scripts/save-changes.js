@@ -26,7 +26,7 @@
 
     window.saveChanges = async () => {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary', getDoc());
-        saveButton.click();
+        saveButton[0].click();
     }
     
 })(window);
