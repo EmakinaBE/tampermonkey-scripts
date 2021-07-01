@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         get Elements from Document
+// @name         Get Elements from Document
 // @namespace    https://www.emakina.com/
 // @version      1.3
-// @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
+// @description  Searches for the iframe element if the new Ui ist used and returns an element for the specified selector
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
