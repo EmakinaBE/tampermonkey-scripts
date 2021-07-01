@@ -33,7 +33,7 @@
             label: 'Show company name next to project',
             isChecked: true,
         },
-        autosave: {
+        autoSave: {
             label: 'Auto-save',
             isChecked: true,
         },

@@ -130,7 +130,9 @@
                         e.value = operation(val);
                     }
                 }
-                saveChanges();
+                if(window.wfGetOptions().autoSave) {
+                    saveChanges();
+                }
             }, false);
         });
     }
