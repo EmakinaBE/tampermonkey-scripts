@@ -31,10 +31,6 @@
     async function loadDoc() {
         await checkUI();
         resetDocument();
-        init();
-    }
-
-    async function init () {
         executeCallback();
         setTimeout(setupListeners, 500);
     }

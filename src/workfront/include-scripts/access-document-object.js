@@ -24,6 +24,9 @@
     'use strict';
 
     let doc;
+    let callbacks = [];
+
+    window.addEventListener("popstate", () => callbacks.forEach(callback => callback()), callbacks = []);
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
         const start = performance.now();
@@ -36,7 +39,7 @@
             if (elements.length) {
                 return resolve(elements);
             }
-            if (!maxTries) return resolve(false);
+            if (maxTries <= 0) return resolve(false);
  
             maxTries--;
             await pause(100);
@@ -47,7 +50,7 @@
             selector = '#main-frame';
             let iframeLoaded = false;
             const iframes = await (new Promise(checkElement));
-            doc = new Promise(async(resolve, reject) => {
+            doc = new Promise(async(resolve) => {
                 while(!iframeLoaded){
                     const iframeContainer  = iframes[0].contentWindow?.document;
                     iframeLoaded = iframeContainer?.children?.[0]?.children?.[1]?.children?.length;
@@ -58,8 +61,11 @@
             });
         }
         maxTries = 200;
-        base = await doc;
+        base = doc ? await doc : null;
         selector = finalSelector;
+        callbacks.push(() => {
+            maxTries = 0;
+        });
         const elements = await (new Promise(checkElement));
         console.log('tries needed to fetch element: ' + maxTries);
         const stop = performance.now() - start;
