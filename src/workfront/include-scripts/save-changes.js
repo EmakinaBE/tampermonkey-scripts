@@ -25,7 +25,7 @@
     'use strict';
 
     window.saveChanges = async () => {
-        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary', getDoc());
+        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
         saveButton[0].click();
     }
     

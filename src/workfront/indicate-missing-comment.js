@@ -39,9 +39,9 @@
     init();
 
     async function init() {
-        const elements = await getElementsFromDocument(inputFieldSelector, getDoc());
-        const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
-        const container = await getElementsFromDocument(containerSelector, getDoc());
+        const elements = await getElementsFromDocument(inputFieldSelector);
+        const submitButton = await getElementsFromDocument(submitButtonSelector);
+        const container = await getElementsFromDocument(containerSelector);
         if(!elements || !submitButton || !container) return;
 
         const warningMessage = await createWarningMessage(container[0]);
@@ -53,15 +53,15 @@
     async function initNewTask(e){
         const newLine = e.detail.newLine;
         const elements = await getElementsFromDocument(inputFieldSelector, newLine);
-        const submitButton = await getElementsFromDocument(submitButtonSelector, getDoc());
-        const warningMessage = await getElementsFromDocument( warningMessageSelector, getDoc());
+        const submitButton = await getElementsFromDocument(submitButtonSelector);
+        const warningMessage = await getElementsFromDocument( warningMessageSelector);
         if(!submitButton || !warningMessage) return;
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
 
     async function createWarningMessage(container) {
 
-        const oldComment = await getElementsFromDocument(`#${commentId}`, getDoc());
+        const oldComment = await getElementsFromDocument(`#${commentId}`);
         if(oldComment) return;
 
         const element = document.createElement('p');
@@ -86,7 +86,7 @@
             submitButton.disabled = emptyFieldFound;
         }
 
-        const oldWarningMessage = await getElementsFromDocument(`#${commentId}`, getDoc());
+        const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
         emptyFieldFound ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden') : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
     }
 

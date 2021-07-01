@@ -26,7 +26,7 @@
     init();
 
     async function init() {
-        const timesheetIdData = await getElementsFromDocument('[data-timesheetid]',getDoc());
+        const timesheetIdData = await getElementsFromDocument('[data-timesheetid]');
         if(!timesheetIdData) return; 
         const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
         const data = await fetchProjectData(timesheetId);
@@ -46,7 +46,7 @@
     }
 
     async function addListener(col, norm) {
-        const tableFooter = await getElementsFromDocument('#timesheet-data tfoot .total', getDoc());
+        const tableFooter = await getElementsFromDocument('#timesheet-data tfoot .total');
         if(!tableFooter) return;
 
         const observer = new MutationObserver(mutations => {
@@ -68,11 +68,11 @@
     }
 
     async function insertRow(text, color) {
-        const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot', getDoc());
+        const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot');
         if(!tableFooter) return;
 
         const trId = 'trId13';
-        const oldTr= await getElementsFromDocument(`#${trId}`, getDoc());
+        const oldTr= await getElementsFromDocument(`#${trId}`);
         if(oldTr) return;
 
         const tr = tableFooter[0].insertRow(-1);

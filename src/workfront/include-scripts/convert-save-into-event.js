@@ -40,7 +40,7 @@
     }
 
     async function pollNetworkRequestSuccess() {
-        const view = await getElementsFromDocument('#content-timesheet-view', getDoc());
+        const view = await getElementsFromDocument('#content-timesheet-view');
         if(!view) return;
         if (view[0].getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
@@ -52,11 +52,11 @@
 
     async function setupListeners() {
         // setup attribute (to check page refresh) and listeners for on save button
-        const view = await getElementsFromDocument('#content-timesheet-view', getDoc())
+        const view = await getElementsFromDocument('#content-timesheet-view')
         if(!view) return; 
         view[0].setAttribute('data-tampermonkey-id', true);
 
-        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary', getDoc());
+        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
         if (saveButton) {
              saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
@@ -64,7 +64,7 @@
 
         // setup listeners for new task
         if (window.wfGetOptions().autoSelect) { 
-            const taskButtons = await getElementsFromDocument('.hour-type-and-role-add', getDoc());
+            const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
         }
@@ -77,7 +77,7 @@
         // use setTimeout to execute this after workfront rendered the new task line
         setTimeout( async () => {
             // get all the lines for this task
-            const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`, getDoc());
+            const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
             if(!lines) return;
 
             // get the last (latest added) value and add a click handler for it for when other lines are added

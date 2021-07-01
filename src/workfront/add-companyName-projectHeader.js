@@ -27,7 +27,7 @@
 
     async function init() {
         if (window.wfGetOptions().showCompanyName) {          
-            const elements = (await getElementsFromDocument('.thead.project-hours', getDoc())) || [];
+            const elements = (await getElementsFromDocument('.thead.project-hours')) || [];
             elements.forEach(getProjectFromWorkFront);
         }
     }
@@ -43,7 +43,7 @@
 
     async function addCompanyNameToHeader(projectHTMLElement, companyName) {
         const headerId = 'headerId13';
-        const oldHeader = await getElementsFromDocument(`#${headerId}`, getDoc());
+        const oldHeader = await getElementsFromDocument(`#${headerId}`);
         if(oldHeader) return;
 
         const textNode = document.createTextNode(` - ${companyName}`);

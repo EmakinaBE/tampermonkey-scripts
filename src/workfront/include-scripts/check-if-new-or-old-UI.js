@@ -22,18 +22,10 @@
 
 (function(window, document) {
     'use strict';
-    let doc = null;
     let usesQuicksilver;
 
     window.checkUI = async () => { 
         usesQuicksilver = window.config;
-        if(!usesQuicksilver) {
-            doc = document;
-        }
-    }
-
-    window.getDoc = () => {
-        return doc;
     }
 
     window.getUsesQuicksilver = () => {

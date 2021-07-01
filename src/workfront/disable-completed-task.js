@@ -27,7 +27,7 @@
     init();
 
     async function init() {
-        const allTasks = await getElementsFromDocument('.TASK[data-workitemobjid]', getDoc());
+        const allTasks = await getElementsFromDocument('.TASK[data-workitemobjid]');
         if(!allTasks) return;
         const ids = [...new Set([...allTasks].map(element => element.getAttribute('data-workitemobjid')))];
 
@@ -49,7 +49,7 @@
     }
 
     async function disableTasks({ id }) {
-        const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`, getDoc());
+        const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
         if(!tasks) return;
         tasks.forEach(e => {
             e.setAttribute('disabled', 'disabled');

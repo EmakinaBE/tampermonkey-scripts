@@ -26,6 +26,8 @@
     let doc;
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
+        const start = performance.now();
+        overwrite = getUsesQuicksilver() ? overwrite : document;
         let maxTries = 200;
         let base;
         let selector;
@@ -60,6 +62,7 @@
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
         console.log('tries needed to fetch element: ' + maxTries);
+        console.log('performance:' + performance.now() - start);
         return elements;
     }
 
