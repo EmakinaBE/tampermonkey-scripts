@@ -130,6 +130,7 @@
                         e.value = operation(val);
                     }
                 }
+                saveChanges();
             }, false);
         });
     }
