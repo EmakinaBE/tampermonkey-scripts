@@ -62,8 +62,8 @@
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
         console.log('tries needed to fetch element: ' + maxTries);
-        const stop = performance.now() ;
-        console.log('performance:' + stop - start);
+        const stop = performance.now() - start;
+        console.log('performance:' + stop);
         return elements;
     }
 
