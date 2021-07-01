@@ -44,17 +44,19 @@
             base = document;
             selector = '#main-frame';
             let iframeLoaded = false;
+            const iframes = await (new Promise(checkElement));
             while(!iframeLoaded){
-                const iframes = await (new Promise(checkElement));
                 doc = iframes[0].contentWindow?.document;
                 iframeLoaded = doc?.children?.[0]?.children?.[1]?.children?.length;
                 await pause(100);
             }
+            console.log('tries needed to fetch iframe + doc: ' + maxTries);
         }
         maxTries = 200;
         base = doc;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
+        console.log('tries needed to fetch element: ' + maxTries);
         return elements;
     }
 
