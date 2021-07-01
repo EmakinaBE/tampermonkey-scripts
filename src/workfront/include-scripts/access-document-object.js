@@ -26,7 +26,7 @@
     let doc;
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
-        let maxTries = 40;
+        let maxTries = 200;
         let base;
         let selector;
         const checkElement = async (resolve, reject) => {
@@ -51,7 +51,7 @@
                 await pause(100);
             }
         }
-        maxTries = 40;
+        maxTries = 200;
         base = doc;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
