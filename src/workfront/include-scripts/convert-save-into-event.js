@@ -22,7 +22,7 @@
 
 (function(window) {
     'use strict';
-    
+
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
 
@@ -40,7 +40,7 @@
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view', getDoc());
         if(!view) return;
-        if (view.getAttribute('data-tampermonkey-id') ) {
+        if (view[0].getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
         }
@@ -90,6 +90,10 @@
 
     function dispatchEvent(event) {
         document.head.dispatchEvent(event);
+    }
+
+    window.saveChanges = () => {
+        
     }
 
 })(window);
