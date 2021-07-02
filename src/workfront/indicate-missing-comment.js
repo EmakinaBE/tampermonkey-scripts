@@ -39,7 +39,6 @@
     init();
 
     async function init() {
-        console.log('indicate missing comment');
         const elements = await getElementsFromDocument(inputFieldSelector);
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const container = await getElementsFromDocument(containerSelector);

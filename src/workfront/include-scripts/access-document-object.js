@@ -32,7 +32,6 @@
     });
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
-        const start = performance.now();
         overwrite = getUsesQuicksilver() ? overwrite : document;
         let maxTries = 200;
         let base;
@@ -64,7 +63,6 @@
                         if(iframeLoaded) return resolve(iframeContainer);
                         await pause(100);
                     }
-                    console.log('tries needed to fetch iframe + doc: ' + maxTries);
                 });
             }
         }
@@ -75,9 +73,6 @@
         base = doc ? await doc : null;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
-        console.log('tries needed to fetch element: ' + maxTries);
-        const stop = performance.now() - start;
-        console.log('performance:' + stop, selector);
         return elements;
     }
 
