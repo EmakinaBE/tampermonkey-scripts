@@ -22,6 +22,7 @@
 
 (function(window) {
     'use strict';
+    let buttonHasEventlistener;
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
@@ -57,7 +58,8 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        if (saveButton) {
+        if (saveButton && !buttonHasEventlistener) {
+            buttonHasEventlistener = true;
             console.log('setting up clickhandler');
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
         }
