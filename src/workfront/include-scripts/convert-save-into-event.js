@@ -35,7 +35,7 @@
         resetDoc();
         executeCallback();
         setTimeout(setupListeners, 1000);
-        setTimeout(() => addedEventListener = false, 100);
+        setTimeout(() => addedEventListener = false, 1100);
     }
 
     async function pollNetworkRequestSuccess() {
