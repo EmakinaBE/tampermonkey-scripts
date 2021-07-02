@@ -29,7 +29,7 @@
     // if Iframe changes call reset and init()
 
     async function loadDoc() {
-        await checkUI();
+        checkUI();
         executeCallback();
         setTimeout(setupListeners, 500);
     }

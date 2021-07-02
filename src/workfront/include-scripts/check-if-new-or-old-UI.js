@@ -24,7 +24,7 @@
     'use strict';
     let usesQuicksilver;
 
-    window.checkUI = async () => { 
+    window.checkUI = () => { 
         usesQuicksilver = window.config;
     }
 
