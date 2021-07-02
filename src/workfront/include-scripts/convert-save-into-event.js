@@ -31,11 +31,11 @@
     // if Iframe changes call reset and init()
 
     async function loadDoc() {
-        console.log('load doc');
         checkUI();
         resetDoc();
         executeCallback();
         setTimeout(setupListeners, 1000);
+        setTimeout(() => addedEventListener = false, 100);
     }
 
     async function pollNetworkRequestSuccess() {
