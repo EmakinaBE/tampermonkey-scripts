@@ -49,7 +49,6 @@
 
     async function setupListeners() {
         // setup attribute (to check page refresh) and listeners for on save button
-        console.log('settinguplistner');
         const view = await getElementsFromDocument('#content-timesheet-view')
         if(!view) return; 
         view[0].setAttribute('data-tampermonkey-id', true);
