@@ -33,7 +33,7 @@
         checkUI();
         resetDoc();
         executeCallback();
-        setTimeout(setupListeners, 500);
+        setTimeout(setupListeners, 1000);
     }
 
     async function pollNetworkRequestSuccess() {
