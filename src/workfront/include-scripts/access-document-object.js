@@ -78,7 +78,7 @@
     }
 
     const pause = (time)  => {
-        return new Promise((resolve) => setTimeout(resolve, time))
+        return new Promise((resolve) => requestIdleCallback(resolve, {timeout : time}))
     }
 
 })(window, document);
