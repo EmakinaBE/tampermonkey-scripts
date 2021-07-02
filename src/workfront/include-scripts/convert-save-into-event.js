@@ -34,7 +34,7 @@
         checkUI();
         resetDoc();
         executeCallback();
-        setTimeout(setupListeners, 2000);
+        setTimeout(setupListeners, 3000);
     }
 
     async function pollNetworkRequestSuccess() {
@@ -61,7 +61,7 @@
             addedEventListener = true;
             console.log('setting up clickhandler');
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
-            setTimeout(() => addedEventListener = false, 2000);
+            setTimeout(() => addedEventListener = false, 1000);
         }
 
         // setup listeners for new task
