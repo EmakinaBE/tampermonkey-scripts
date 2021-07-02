@@ -38,6 +38,7 @@
         await redirectIfNeeded(openTsInPast, noOlderTs);
 
         const isCurrentTs = await getElementsFromDocument('.today');
+        console.log(isCurrentTs, openTsInPast);
 
         if (!isCurrentTs || openTsInPast) {
 
