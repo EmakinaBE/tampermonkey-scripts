@@ -27,7 +27,6 @@
     let callbacks = [];
 
     window.addEventListener("popstate", () => {
-        doc = null;
         callbacks.forEach(callback => callback());
         callbacks = [];
     });

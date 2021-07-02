@@ -30,6 +30,7 @@
 
     async function loadDoc() {
         checkUI();
+        resetDoc();
         executeCallback();
         setTimeout(setupListeners, 500);
     }
@@ -43,7 +44,6 @@
             return;
         }
 
-        resetDoc();
         setTimeout(loadDoc, 500);
     }
 
