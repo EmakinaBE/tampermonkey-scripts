@@ -84,4 +84,8 @@
         return new Promise((resolve) => requestIdleCallback(resolve, {timeout : time}))
     }
 
+    window.resetDoc = () => {
+        doc = null;
+    }
+
 })(window, document);

@@ -42,6 +42,7 @@
             return;
         }
 
+        resetDoc();
         setTimeout(loadDoc, 100);
     }
 
