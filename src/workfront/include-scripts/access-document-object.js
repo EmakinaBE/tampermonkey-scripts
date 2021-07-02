@@ -26,7 +26,11 @@
     let doc;
     let callbacks = [];
 
-    window.addEventListener("popstate", () => callbacks.forEach(callback => callback()), callbacks = []);
+    window.addEventListener("popstate", () => {
+        doc = null;
+        callbacks.forEach(callback => callback());
+        callbacks = [];
+    });
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
         const start = performance.now();
@@ -75,10 +79,6 @@
 
     const pause = (time)  => {
         return new Promise((resolve) => setTimeout(resolve, time))
-    }
-
-    window.resetDocument = () => {
-        doc = null;
     }
 
 })(window, document);

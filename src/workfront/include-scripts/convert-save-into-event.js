@@ -30,7 +30,6 @@
 
     async function loadDoc() {
         await checkUI();
-        resetDocument();
         executeCallback();
         setTimeout(setupListeners, 500);
     }
