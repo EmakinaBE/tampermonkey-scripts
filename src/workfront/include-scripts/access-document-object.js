@@ -65,11 +65,11 @@
             });
         }
         maxTries = 200;
-        base = doc ? await doc : null;
-        selector = finalSelector;
         callbacks.push(() => {
             maxTries = 0;
         });
+        base = doc ? await doc : null;
+        selector = finalSelector;
         const elements = await (new Promise(checkElement));
         console.log('tries needed to fetch element: ' + maxTries);
         const stop = performance.now() - start;
