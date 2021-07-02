@@ -35,7 +35,7 @@
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
 
-        await redirectIfNeeded(openTsInPast, noOlderTs);
+        redirectIfNeeded(openTsInPast, noOlderTs);
 
         const isCurrentTs = await getElementsFromDocument('.today');
         console.log(isCurrentTs, openTsInPast);
@@ -90,7 +90,7 @@
         return `/timesheet/view?ID=${olderTs.ID}`;
     }
 
-    async function redirectIfNeeded(olderTs, noOlderTs) {
+    function redirectIfNeeded(olderTs, noOlderTs) {
 
         if (noOlderTs) {
             return;

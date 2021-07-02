@@ -35,8 +35,9 @@
     }
 
     async function pollNetworkRequestSuccess() {
+        console.log('pollNet');
         const view = await getElementsFromDocument('#content-timesheet-view');
-        if(!view) return;
+        if(!view) return console.log('no-view');
         if (view[0].getAttribute('data-tampermonkey-id') ) {
             setTimeout(pollNetworkRequestSuccess, 500);
             return;
@@ -55,7 +56,8 @@
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
         if (saveButton) {
-             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
+            console.log('setting up clickhandler');
+            saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
         }
 
         // setup listeners for new task
