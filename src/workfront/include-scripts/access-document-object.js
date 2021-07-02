@@ -50,6 +50,9 @@
             checkElement(resolve, reject);
         };
         if (!doc && !overwrite) {
+            callbacks.push(() => {
+                maxTries = 0;
+            });
             base = document;
             selector = '#main-frame';
             let iframeLoaded = false;
