@@ -59,7 +59,7 @@
             const iframes = await (new Promise(checkElement));
             doc = new Promise(async(resolve) => {
                 while(!iframeLoaded){
-                    const iframeContainer  = iframes[0].contentWindow?.document;
+                    const iframeContainer  = iframes?.[0]?.contentWindow?.document;
                     iframeLoaded = iframeContainer?.children?.[0]?.children?.[1]?.children?.length;
                     if(iframeLoaded) return resolve(iframeContainer);
                     await pause(100);
