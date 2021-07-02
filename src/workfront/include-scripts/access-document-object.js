@@ -39,7 +39,7 @@
         let selector;
         const checkElement = async (resolve, reject) => {
             const elements = (overwrite || base)?.querySelectorAll(selector);
-            if (elements.length) {
+            if (elements?.length) {
                 return resolve(elements);
             }
             if (maxTries <= 0) return resolve(false);
