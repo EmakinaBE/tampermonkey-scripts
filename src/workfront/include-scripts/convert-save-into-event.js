@@ -23,8 +23,6 @@
 (function(window) {
     'use strict';
 
-    let addedEventListener;
-
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
     
@@ -35,7 +33,6 @@
         resetDoc();
         executeCallback();
         setTimeout(setupListeners, 2000);
-        setTimeout(() => addedEventListener = false, 2100);
     }
 
     async function pollNetworkRequestSuccess() {
@@ -59,8 +56,7 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        if (saveButton && !addedEventListener) {
-            addedEventListener = true;
+        if (saveButton) {
             console.log('setting up clickhandler');
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
         }
