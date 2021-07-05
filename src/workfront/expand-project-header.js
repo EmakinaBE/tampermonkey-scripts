@@ -49,6 +49,7 @@
         })
         
         localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
+        console.log(localStorage.getItem(storageKey));
 
         return headers;
     }
