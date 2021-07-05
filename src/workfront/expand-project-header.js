@@ -25,20 +25,20 @@
 
     let storageKey = 'expanded-header';
     
-    callback(init);
-    init();
+    async function init(){
+        const returnHeaders = await getExpandedHeader();
+    }
 
     window.getExpandedHeader = async () => {
         const headers = await getElementsFromDocument('.thead.project-hours');
         return headers;
     }
-
-    async function init(){
-        const returnHeaders = await getExpandedHeader();
-    }
     
     window.setExpandedHeader = () => {}
 
     window.storeExpandedHeader = () => {}
+
+    callback(init);
+    init();
     
 })(window);
