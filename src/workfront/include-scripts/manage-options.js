@@ -44,11 +44,11 @@
         correctComma: {
             label: 'Correct wrong comma seperator',
             isChecked: true,
-        }/*,
+        },
         roundToNearestQuarter: {
             label: 'Round entries to nearest quarter',
             isChecked: true,
-        }*/
+        }
     };
 
     window.saveOptions = (e) => {
