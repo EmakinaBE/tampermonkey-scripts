@@ -28,13 +28,13 @@
     callback(init);
     init();
 
-    async function init(){
-        const returnHeaders = await getExpandedHeader();
-    }
-
     window.getExpandedHeader = async () => {
         const headers = await getElementsFromDocument('.thead.project-hours');
         return headers;
+    }
+
+    async function init(){
+        const returnHeaders = await getExpandedHeader();
     }
     
     window.setExpandedHeader = () => {}
