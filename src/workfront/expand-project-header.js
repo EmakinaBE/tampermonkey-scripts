@@ -41,7 +41,9 @@
         headers.forEach( header => {
             header.addEventListener('click', function() {
                 if(!header.classList.contains('closed')) {
+                    console.log("Id: " + header.getAttribute('data-projectid'));
                     closedHeaders.push(header.getAttribute('data-projectid'));
+                    console.log("ClosedHeaders: " + closedHeaders.join(', '));
                 }
             });	
         })
