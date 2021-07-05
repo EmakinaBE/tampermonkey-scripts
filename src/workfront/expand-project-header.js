@@ -38,7 +38,7 @@
         // const allheaders = Array.from(headers);
         // const allheaders = Array.prototype.slice.call(headers);
         
-        headers.foreach( header => {
+        headers.forEach( header => {
             header.addEventListener('click', function() {
                 if(header.classList.contains('closed')) {
                     closedHeaders.push(header.getAttribute('data-projectid'));
