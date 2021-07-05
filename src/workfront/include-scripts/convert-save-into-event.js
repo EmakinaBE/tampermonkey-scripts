@@ -24,6 +24,7 @@
     'use strict';
 
     let addedEventListener;
+    let addedSelectNewTaskLineEventListener;
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
@@ -65,10 +66,12 @@
         }
 
         // setup listeners for new task
-        if (window.wfGetOptions().autoSelect && !addedEventListener) { 
+        if (window.wfGetOptions().autoSelect && !addedEventListener) {
+            addedSelectNewTaskLineEventListener = true; 
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
+            setTimeout(() => addedSelectNewTaskLineEventListener = false, 1000);
         } 
     }
 
