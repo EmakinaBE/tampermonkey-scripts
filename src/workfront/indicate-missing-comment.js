@@ -125,7 +125,7 @@
                 checkAll(elements, warningMessage, submitButton);
                 // TO-DO Add check if roundStringToQuarter is being used
                 if (window.wfGetOptions().correctComma) { 
-                    const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
+                    const operation = shouldRoundToNearestQuarter() && e.key == 'enter' ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
                         e.value = operation(val);
                     }
