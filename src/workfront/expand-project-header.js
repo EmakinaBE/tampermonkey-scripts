@@ -24,9 +24,18 @@
     'use strict';
 
     let storageKey = 'expanded-header';
+    const closedHeaders = [];
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
+        for (header of headers) {
+            header.addEventListener('click', function() {
+                if(header.classList.contains('closed')) {
+                    closedHeaders.push(header.getAttribute('data-projectid'));
+                }
+            });		
+        }
+        localStorage.setItem(storageKey, JSON.parse(closedHeaders));
         console.log("returnHeaders" + returnHeaders);
     }
 
