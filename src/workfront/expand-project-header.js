@@ -35,9 +35,9 @@
         const headers = await getElementsFromDocument('.thead.project-hours');
         if(!headers) return;
         
-        // const allheaders = Array.from(headers);
+        const allheaders = Array.from(headers);
         // const allheaders = Array.prototype.slice.call(headers);
-        headers.forEach( header => {
+        for (header in allheaders){
             header.addEventListener('click', function() {
                 if(!header.classList.contains('closed')) {
                     console.log("Id: " + header.getAttribute('data-projectid'));
@@ -45,7 +45,7 @@
                     console.log("ClosedHeaders: " + closedHeaders.join(', '));
                 }
             });	
-        })
+        }
         
         localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
         console.log(localStorage.getItem(storageKey));
