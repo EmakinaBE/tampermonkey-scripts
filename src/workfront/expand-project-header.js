@@ -27,10 +27,12 @@
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
+        console.log("returnHeaders" + returnHeaders);
     }
 
     window.getExpandedHeader = async () => {
         const headers = await getElementsFromDocument('.thead.project-hours');
+        if(!headers) return;
         return headers;
     }
     
