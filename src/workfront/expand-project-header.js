@@ -35,7 +35,7 @@
                 }
             });		
         }
-        localStorage.setItem(storageKey, JSON.parse(closedHeaders));
+        localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
         console.log("returnHeaders" + returnHeaders);
     }
 
