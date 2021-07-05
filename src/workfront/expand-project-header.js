@@ -28,7 +28,7 @@
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
-        for (header of headers) {
+        for (header of returnHeaders) {
             header.addEventListener('click', function() {
                 if(header.classList.contains('closed')) {
                     closedHeaders.push(header.getAttribute('data-projectid'));
