@@ -120,8 +120,8 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('keyup', () => {
-                if(e.key == "Backspace")
+            e.addEventListener('keyup', (keyValue) => {
+                if(keyValue.key == "Backspace")
                 {
                     const val = e.value;
                     checkAll(elements, warningMessage, submitButton);
