@@ -37,7 +37,7 @@
         
         // const allheaders = Array.from(headers);
         // const allheaders = Array.prototype.slice.call(headers);
-        
+        console.log(headers.join('   |   '));
         headers.forEach( header => {
             header.addEventListener('click', function() {
                 if(!header.classList.contains('closed')) {
