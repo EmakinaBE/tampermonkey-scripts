@@ -121,7 +121,7 @@
                 attributes: true
             });
             e.addEventListener('keyup', (keyValue) => {
-                if(keyValue.keyCode == 8)
+                if(keyValue.keyCode != 8)
                 {
                     const val = e.value;
                     checkAll(elements, warningMessage, submitButton);
