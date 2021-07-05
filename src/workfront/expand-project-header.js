@@ -28,7 +28,14 @@
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
-        for (header of returnHeaders) {
+        console.log("returnHeaders" + returnHeaders);
+    }
+
+    window.getExpandedHeader = async () => {
+        const headers = await getElementsFromDocument('.thead.project-hours');
+        if(!headers) return;
+
+        for (header of headers) {
             header.addEventListener('click', function() {
                 if(header.classList.contains('closed')) {
                     closedHeaders.push(header.getAttribute('data-projectid'));
@@ -36,12 +43,7 @@
             });		
         }
         localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
-        console.log("returnHeaders" + returnHeaders);
-    }
 
-    window.getExpandedHeader = async () => {
-        const headers = await getElementsFromDocument('.thead.project-hours');
-        if(!headers) return;
         return headers;
     }
     
