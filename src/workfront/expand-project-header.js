@@ -34,14 +34,18 @@
     window.getExpandedHeader = async () => {
         const headers = await getElementsFromDocument('.thead.project-hours');
         if(!headers) return;
-
-        for (header of headers) {
+        
+        // const allheaders = Array.from(headers);
+        // const allheaders = Array.prototype.slice.call(headers);
+        
+        headers.foreach( header => {
             header.addEventListener('click', function() {
                 if(header.classList.contains('closed')) {
                     closedHeaders.push(header.getAttribute('data-projectid'));
                 }
-            });		
-        }
+            });	
+        })
+        
         localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
 
         return headers;
