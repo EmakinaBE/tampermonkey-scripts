@@ -40,7 +40,7 @@
         
         headers.forEach( header => {
             header.addEventListener('click', function() {
-                if(header.classList.contains('closed')) {
+                if(!header.classList.contains('closed')) {
                     closedHeaders.push(header.getAttribute('data-projectid'));
                 }
             });	
