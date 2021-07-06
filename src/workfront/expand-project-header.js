@@ -24,7 +24,7 @@
     'use strict';
 
     let storageKey = 'expanded-header';
-    const closedHeaders = [];
+    let closedHeaders = [];
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
@@ -35,7 +35,6 @@
         if(!headers) return;
         
         const allHeaders = [...headers];
-        // const allheaders = Array.prototype.slice.call(headers);
         
         allHeaders.forEach(header => {
             header.addEventListener('click', function() {
