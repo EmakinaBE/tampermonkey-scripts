@@ -60,9 +60,10 @@
 
         let closedHeaders = JSON.parse(localStorage.getItem(storageKey)) || [];
         allHeaders.forEach( header => {
-            if(closedHeaders.includes(header.getAttribute('data-projectid')))
+            if(closedHeaders.includes(header.getAttribute('data-projectid'))) {
                 header.classList.add('closed');
                 header.nextElementSibling.classList.add('closed');
+            }
         });
 
     }
