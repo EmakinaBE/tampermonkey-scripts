@@ -47,9 +47,11 @@
         if(oldHeader) return;
 
         const textNode = document.createTextNode(` - ${companyName}`);
-        const header = projectHTMLElement.querySelector('td.header');
-        header.id = headerId;
-        header.appendChild(textNode);
+        const headers = projectHTMLElement.querySelectorAll('td.header');
+        headers.forEach(header => {
+            header.id = headerId;
+            header.appendChild(textNode);
+        });
     }
     
 })();
