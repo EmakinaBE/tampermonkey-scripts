@@ -44,7 +44,7 @@
     async function addCompanyNameToHeader(projectHTMLElement, companyName) {
 
         const textNode = document.createTextNode(` - ${companyName}`);
-        const header = projectHTMLElement.querySelectorAll('td.header');
+        const header = projectHTMLElement.querySelector('td.header');
 
         header.appendChild(textNode);
     }
