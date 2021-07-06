@@ -45,7 +45,7 @@
                     console.log("ClosedHeaders: " + closedHeaders.join(', '));    
                 } else
                 {
-                    closedHeaders.removeItem(headerId);
+                    closedHeaders.splice(closedHeaders.indexOf(headerId), 1);
                     console.log("Closed header after removed: " + closedHeaders);
                 }
                 localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
