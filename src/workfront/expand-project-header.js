@@ -24,12 +24,16 @@
     'use strict';
 
     let storageKey = 'expanded-header';
+
+    callback(init);
+    init();
     
     async function init(){
-        const returnHeaders = await getExpandedHeader();
+        await setExpandedHeader();
+        await getExpandedHeader();
     }
 
-    window.getExpandedHeader = async () => {
+    async function getExpandedHeader()  {
         const headers = await getElementsFromDocument('.thead.project-hours');
         if(!headers) return;
         
@@ -39,24 +43,27 @@
             header.addEventListener('click', function() {
                 const headerId = header.getAttribute('data-projectid');
                 let closedHeaders = JSON.parse(localStorage.getItem(storageKey)) || [];
-                if(!header.classList.contains('closed')) {
-                    console.log("Id: " + headerId);
-                    closedHeaders.push(headerId);
-                    console.log("ClosedHeaders: " + closedHeaders.join(', '));    
-                } else
-                {
+                if(!header.classList.contains('closed'))
+                    closedHeaders.push(headerId);   
+                else
                     closedHeaders.splice(closedHeaders.indexOf(headerId), 1);
-                    console.log("Closed header after removed: " + closedHeaders);
-                }
                 localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
             });	
         });
-        return headers;
     }
     
-    window.setExpandedHeader = () => {}
+    async function setExpandedHeader() {
+        const headers = await getElementsFromDocument('.thead.project-hours');
+        if(!headers) return;
 
-    callback(init);
-    init();
+        const allHeaders = [...headers];
+
+        let closedHeaders = JSON.parse(localStorage.getItem(storageKey)) || [];
+        allHeaders.forEach( header => {
+            if(closedHeaders.contains(header.getAttribute('data-projectid')))
+                header.classList.add('closed');
+        });
+
+    }
     
-})(window);
+})();
