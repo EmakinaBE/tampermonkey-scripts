@@ -24,7 +24,6 @@
     'use strict';
 
     let storageKey = 'expanded-header';
-    let closedHeaders = [];
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
@@ -34,12 +33,12 @@
         const headers = await getElementsFromDocument('.thead.project-hours');
         if(!headers) return;
         
-        const allHeaders = [...headers];
+        const allHeaders = [...headers];      
         
         allHeaders.forEach(header => {
             header.addEventListener('click', function() {
                 const headerId = header.getAttribute('data-projectid');
-                closedHeaders = JSON.parse(localStorage.getItem(storageKey));
+                let closedHeaders = JSON.parse(localStorage.getItem(storageKey)) || [];
                 if(!header.classList.contains('closed')) {
                     console.log("Id: " + headerId);
                     closedHeaders.push(headerId);
