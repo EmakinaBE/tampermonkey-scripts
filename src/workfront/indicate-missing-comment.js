@@ -43,7 +43,7 @@
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const container = await getElementsFromDocument(containerSelector);
         if(!elements || !submitButton || !container) return;
-
+        console.log("Elements: " + elements.length);
         const warningMessage = await createWarningMessage(container[0]);
 
         checkAll(elements, warningMessage, submitButton[0]);
@@ -93,10 +93,11 @@
     function checkAllCommentsAndMarkFields(elements) {
         let isEmptyCommentPresent = false;
 
+        console.log("CheckAllCommentsAndMarkFields: " + elements.length);
         elements.forEach(e => {
             const comment = e.getAttribute('data-description');
             const value = e.value;
-
+            
             if(value && !comment) {
                 e.setAttribute('style', noCommentStyle);
                 isEmptyCommentPresent = true;
