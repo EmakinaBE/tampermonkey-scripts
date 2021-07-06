@@ -34,10 +34,10 @@
         const headers = await getElementsFromDocument('.thead.project-hours');
         if(!headers) return;
         
-        const allheaders = Array.from(headers);
+        const allHeaders = [...headers];
         // const allheaders = Array.prototype.slice.call(headers);
         
-        for (header in allheaders){
+        allHeaders.forEach(header => {
             header.addEventListener('click', function() {
                 const headerId = header.getAttribute('data-projectid');
                 closedHeaders = JSON.parse(localStorage.getItem(storageKey));
@@ -52,7 +52,7 @@
                 }
                 localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
             });	
-        }
+        });
         return headers;
     }
     
