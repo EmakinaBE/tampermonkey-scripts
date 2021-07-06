@@ -63,7 +63,7 @@
         if (saveButton && !addedEventListener) {
             addedEventListener = true;
             console.log('setting up saveButton clickhandler');
-            saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
+            saveButton[0].addEventListener('click', pollNetworkRequestSuccess, true);
             setTimeout(() => addedEventListener = false, 1000);
         }
 
@@ -73,7 +73,7 @@
             console.log('setting up newTask click handler'); 
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
-            taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
+            taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler, true));
             setTimeout(() => addedSelectNewTaskLineEventListener = false, 1000);
         } 
     }
