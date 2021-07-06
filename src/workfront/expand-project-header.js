@@ -28,7 +28,6 @@
     
     async function init(){
         const returnHeaders = await getExpandedHeader();
-        console.log("returnHeaders" + returnHeaders);
     }
 
     window.getExpandedHeader = async () => {
@@ -37,25 +36,27 @@
         
         const allheaders = Array.from(headers);
         // const allheaders = Array.prototype.slice.call(headers);
+        
         for (header in allheaders){
             header.addEventListener('click', function() {
+                const headerId = header.getAttribute('data-projectid');
+                closedHeaders = JSON.parse(localStorage.getItem(storageKey));
                 if(!header.classList.contains('closed')) {
-                    console.log("Id: " + header.getAttribute('data-projectid'));
-                    closedHeaders.push(header.getAttribute('data-projectid'));
-                    console.log("ClosedHeaders: " + closedHeaders.join(', '));
+                    console.log("Id: " + headerId);
+                    closedHeaders.push(headerId);
+                    console.log("ClosedHeaders: " + closedHeaders.join(', '));    
+                } else
+                {
+                    closedHeaders.removeItem(headerId);
+                    console.log("Closed header after removed: " + closedHeaders);
                 }
+                localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
             });	
         }
-        
-        localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
-        console.log(localStorage.getItem(storageKey));
-
         return headers;
     }
     
     window.setExpandedHeader = () => {}
-
-    window.storeExpandedHeader = () => {}
 
     callback(init);
     init();
