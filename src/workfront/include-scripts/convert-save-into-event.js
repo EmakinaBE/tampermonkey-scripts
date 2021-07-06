@@ -35,16 +35,18 @@
         checkUI();
         resetDoc();
         executeCallback();
-        setTimeout(setupListeners, 5000);
+        setTimeout(setupListeners, 3000);
     }
 
     async function pollNetworkRequestSuccess() {
         console.log('pollNet');
         const view = await getElementsFromDocument('#content-timesheet-view');
         if(!view) return;
-        if (view[0].getAttribute('data-tampermonkey-id') ) {
-            setTimeout(pollNetworkRequestSuccess, 500);
-            return;
+        if(!getUsesQuicksilver()){
+            if (view[0].getAttribute('data-tampermonkey-id') ) {
+                setTimeout(pollNetworkRequestSuccess, 500);
+                return;
+            }
         }
 
         setTimeout(loadDoc, 1000);
