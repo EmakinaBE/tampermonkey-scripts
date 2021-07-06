@@ -62,6 +62,7 @@
         allHeaders.forEach( header => {
             if(closedHeaders.includes(header.getAttribute('data-projectid')))
                 header.classList.add('closed');
+                header.nextElementSibling.classList.add('closed');
         });
 
     }
