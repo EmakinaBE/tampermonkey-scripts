@@ -35,7 +35,8 @@
         checkUI();
         resetDoc();
         executeCallback();
-        setTimeout(setupListeners, 3000);
+        await pause(3000);
+        setupListeners();
     }
 
     async function pollNetworkRequestSuccess() {
@@ -44,12 +45,14 @@
         if(!view) return;
         if(!getUsesQuicksilver()){
             if (view[0].getAttribute('data-tampermonkey-id') ) {
-                setTimeout(pollNetworkRequestSuccess, 500);
+                await pause(500);
+                pollNetworkRequestSuccess;
                 return;
             }
         }
 
-        setTimeout(loadDoc, 1000);
+        await pause(1000);
+        loadDoc();
     }
 
     async function setupListeners() {
@@ -63,8 +66,9 @@
         if (saveButton && !addedEventListener) {
             addedEventListener = true;
             console.log('setting up saveButton clickhandler');
-            saveButton[0].addEventListener('click', pollNetworkRequestSuccess, true);
-            setTimeout(() => addedEventListener = false, 1000);
+            saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
+            await pause(1000);
+            addedEventListener = false;
         }
 
         // setup listeners for new task
@@ -73,8 +77,9 @@
             console.log('setting up newTask click handler'); 
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
-            taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler, true));
-            setTimeout(() => addedSelectNewTaskLineEventListener = false, 1000);
+            taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
+            await pause(1000);
+            addedSelectNewTaskLineEventListener = false;
         } 
     }
 

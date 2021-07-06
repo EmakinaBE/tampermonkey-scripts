@@ -76,7 +76,7 @@
         return elements;
     }
 
-    const pause = (time)  => {
+    window.pause = (time)  => {
         return new Promise((resolve) => requestIdleCallback(resolve, {timeout : time}))
     }
 
