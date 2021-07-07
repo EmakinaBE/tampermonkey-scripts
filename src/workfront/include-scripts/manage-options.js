@@ -53,7 +53,6 @@
 
     window.saveOptions = (e) => {
         const target = e.target;
-
         options[target.name].isChecked = target.checked;
         localStorage.setItem(storageKey, JSON.stringify(options));
     }
@@ -78,7 +77,8 @@
         if (oldKeys !== newKeys) {
             const newOptions = { ...defaultOptions };
             for (const [key, value] of Object.entries(oldOptions)) {
-                // check if key exists on newOptions (clone of default options) - this will not be the case if a previous option is removed
+                // check if key exists on newOptions (clone of default options) 
+                //- this will not be the case if a previous option is removed
                 if(newOptions[key]) {
                     newOptions[key].isChecked = value.isChecked;
                 }

@@ -3,7 +3,7 @@
 // @namespace    https://www.emakina.com/
 // @version      1.9
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
-// @author       Wouter Versyck
+// @author       Wouter Versyck, Antonia Langer, Sarah Roupec
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
@@ -23,13 +23,11 @@
 (function(window) {
     'use strict';
 
-    let addedEventListener;
+    let addedSaveButtonEventListener;
     let addedSelectNewTaskLineEventListener;
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
-    
-    // if Iframe changes call reset and init()
 
     async function loadDoc() {
         checkUI();
@@ -40,7 +38,6 @@
     }
 
     async function pollNetworkRequestSuccess() {
-        console.log('pollNet');
         const view = await getElementsFromDocument('#content-timesheet-view');
         if(!view) return;
         if(!getUsesQuicksilver()){
@@ -63,18 +60,18 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        if (saveButton && !addedEventListener) {
-            addedEventListener = true;
-            console.log('setting up saveButton clickhandler');
+        // if saveButton exists and eventListener isn't attatched yet
+        if (saveButton && !addedSaveButtonEventListener) {
+            addedSaveButtonEventListener = true;
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
             await pause(1000);
-            addedEventListener = false;
+            addedSaveButtonEventListener = false;
         }
 
         // setup listeners for new task
+        // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
         if (window.wfGetOptions().autoSelect && !addedSelectNewTaskLineEventListener) {
             addedSelectNewTaskLineEventListener = true;
-            console.log('setting up newTask click handler'); 
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));

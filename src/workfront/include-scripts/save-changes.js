@@ -3,8 +3,8 @@
 // @name         Save Changes
 // @namespace    https://www.emakina.com/
 // @version      1.0
-// @description  Trigger the save button
-// @author       Wouter Versyck
+// @description  Triggers the save button
+// @author       Antonia Langer, Sarah Roupec
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
@@ -27,6 +27,5 @@
     window.saveChanges = async () => {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
         saveButton[0].click();
-    }
-    
+    }   
 })(window);

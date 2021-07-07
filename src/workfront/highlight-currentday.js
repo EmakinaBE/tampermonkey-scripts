@@ -33,7 +33,5 @@
             today[i].style.backgroundColor = 'lemonchiffon';
             today[i].style.backgroundImage = 'none';
         };
-
     }
-
 })();

@@ -44,14 +44,15 @@
             const header = await getElementsFromDocument('#timesheet-header');
             if(!header) return;
 
-            /*const messageBoxId = 'messageBoxId13';
+            // check if warning message was created already
+            const messageBoxId = 'messageBoxId13';
             const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
-            if(oldMessageBox) return;*/
+            if(oldMessageBox) return;
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
-            //messageBox.id = messageBoxId;
+            messageBox.id = messageBoxId;
 
             header[0].appendChild(messageBox);
         }

@@ -2,7 +2,7 @@
 // @name         Get Elements from Document
 // @namespace    https://www.emakina.com/
 // @version      1.3
-// @description  Searches for the iframe element if the new Ui ist used and returns an element for the specified selector
+// @description  Searches for the iframe element if the new UI ist used and returns an element for the specified selector
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
@@ -26,6 +26,7 @@
     let doc;
     let callbacks = [];
 
+    // ensures that the popstate event only gets called once when history changes
     window.addEventListener("popstate", () => {
         callbacks.forEach(callback => callback());
         callbacks = [];
@@ -36,6 +37,8 @@
         let maxTries = 200;
         let base;
         let selector;
+
+        // get element(s) with specific selector
         const checkElement = async (resolve, reject) => {
             const elements = (overwrite || base)?.querySelectorAll(selector);
             if (elements?.length) {
@@ -47,14 +50,19 @@
             await pause(100);
             checkElement(resolve, reject);
         };
+
+        // if the document was not found yet and its the new UI search for the iframe
         if (!doc && !overwrite) {
             callbacks.push(() => {
                 maxTries = 0;
             });
+
             base = document;
             selector = '#main-frame';
             let iframeLoaded = false;
             const iframes = await (new Promise(checkElement));
+
+            // ensures that the iframe element is fully loaded
             if(iframes) {
                 doc = new Promise(async(resolve) => {
                     while(!iframeLoaded){
@@ -70,9 +78,11 @@
         callbacks.push(() => {
             maxTries = 0;
         });
+
         base = doc ? await doc : null;
         selector = finalSelector;
         const elements = await (new Promise(checkElement));
+
         return elements;
     }
 
@@ -80,6 +90,7 @@
         return new Promise((resolve) => requestIdleCallback(resolve, {timeout : time}))
     }
 
+    // if a popstate event gets triggered the iframe element needs to be reset
     window.resetDoc = () => {
         doc = null;
     }

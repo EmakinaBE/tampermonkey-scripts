@@ -20,7 +20,7 @@
 // ==/UserScript==
 
 
-(function(window, document) {
+(function(window) {
     'use strict';
     let usesQuicksilver;
 
@@ -32,4 +32,4 @@
         return usesQuicksilver;
     }
 
-}(window, document));
+}(window));

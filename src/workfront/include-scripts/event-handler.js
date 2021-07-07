@@ -2,7 +2,7 @@
 // @name         Callback Handler for Events
 // @namespace    https://www.emakina.com/
 // @version      1.1
-// @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
+// @description  Adds all callbacks to an array and executes them
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico

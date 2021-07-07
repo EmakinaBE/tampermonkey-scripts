@@ -61,6 +61,7 @@
 
     async function createWarningMessage(container) {
 
+        // check if comment was created already
         const oldComment = await getElementsFromDocument(`#${commentId}`);
         if(oldComment) return;
 
@@ -121,17 +122,18 @@
                 attributes: true
             });
             e.addEventListener('keyup', (keyValue) => {
+                // should only be executed, when key is not backspace
                 if(keyValue.keyCode != 8)
                 {
                     const val = e.value;
                     checkAll(elements, warningMessage, submitButton);
-                    // TO-DO Add check if roundStringToQuarter is being used
                     if (window.wfGetOptions().correctComma) { 
                         const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                         if (val) {
                             e.value = operation(val);
                         }
                     }
+                    // TO-DO: change functionality to call when user has been idle for a while
                     if(window.wfGetOptions().autoSave) {
                         saveChanges();
                     }

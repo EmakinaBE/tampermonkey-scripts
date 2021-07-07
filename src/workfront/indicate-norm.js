@@ -71,6 +71,7 @@
         const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot');
         if(!tableFooter) return;
 
+        // check if table row was created already
         const trId = 'trId13';
         const oldTr= await getElementsFromDocument(`#${trId}`);
         if(oldTr) return;
