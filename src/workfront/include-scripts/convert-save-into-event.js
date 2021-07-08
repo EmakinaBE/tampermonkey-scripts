@@ -33,8 +33,7 @@
         checkUI();
         resetDoc();
         executeCallback();
-        await pause(3000);
-        setupListeners();
+        setTimeout(setupListeners, 3000);
     }
 
     async function pollNetworkRequestSuccess() {
@@ -48,8 +47,7 @@
             }
         }
 
-        await pause(1000);
-        loadDoc();
+        setTimeout(loadDoc, 1000);
     }
 
     async function setupListeners() {
