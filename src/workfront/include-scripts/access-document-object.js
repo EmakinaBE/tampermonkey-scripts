@@ -33,7 +33,7 @@
     });
 
     window.getElementsFromDocument = async (finalSelector, overwrite) => { 
-        overwrite = getUsesQuicksilver() ? overwrite : document;
+        overwrite = isNewUI() ? overwrite : document;
         let maxTries = 200;
         let base;
         let selector;

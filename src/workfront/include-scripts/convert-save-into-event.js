@@ -30,7 +30,6 @@
     loadDoc();
 
     async function loadDoc() {
-        checkUI();
         resetDoc();
         executeCallback();
         setTimeout(setupListeners, 3000);
@@ -39,7 +38,7 @@
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view');
         if(!view) return;
-        if(!getUsesQuicksilver()){
+        if(!isNewUI()){
             if (view[0].getAttribute('data-tampermonkey-id') ) {
                 await pause(500);
                 pollNetworkRequestSuccess;

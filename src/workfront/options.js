@@ -58,7 +58,7 @@
         li.appendChild(button);
         let navbarItemGroup;
 
-        if(!getUsesQuicksilver()) {
+        if(!isNewUI()) {
             li.classList.add('navbar-item');
             navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right', document);
             if(!navbarItemGroup) return;

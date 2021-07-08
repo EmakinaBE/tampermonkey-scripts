@@ -22,14 +22,9 @@
 
 (function(window) {
     'use strict';
-    let usesQuicksilver;
 
-    window.checkUI = () => { 
-        usesQuicksilver = window.config;
-    }
-
-    window.getUsesQuicksilver = () => {
-        return usesQuicksilver;
+    window.isNewUI = () => { 
+        return window.config;
     }
 
 }(window));
