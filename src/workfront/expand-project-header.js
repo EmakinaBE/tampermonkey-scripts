@@ -26,7 +26,6 @@
         entries = [];
 
         constructor() {
-            console.log(localStorage.getItem(storageKey));
             this.entries = localStorage.getItem(storageKey) || [];
         }
 
@@ -35,8 +34,6 @@
         }
         
         set value (id) {
-            console.log(this.entries);
-            console.log(entries);
             this.entries.push(id);
             localStorage.setItem(storageKey, this.entries);
         }
