@@ -98,8 +98,8 @@
         doc = null;
 
         if (localStorage.getItem('reload')){
-            let reload = false;
-            localStorage.setItem('reload', reload);
+            localStorage.setItem('reload', false);
+            window.location.reload();
         }
         //if (getVariable from local storage)
         //do reload, set then to false in local storage
