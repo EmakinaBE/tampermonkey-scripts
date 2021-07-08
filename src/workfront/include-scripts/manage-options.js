@@ -23,7 +23,7 @@
     'use strict';
 
     let options;
-    let storageKey = 'wf-options';
+    const store = new Store('wf-options');
     const defaultOptions = {
         autoRedirect: {
             label: 'Auto redirect to oldest open timesheet',
@@ -54,7 +54,7 @@
     window.saveOptions = (e) => {
         const target = e.target;
         options[target.name].isChecked = target.checked;
-        localStorage.setItem(storageKey, JSON.stringify(options));
+        store.value = JSON.stringify(options);
     }
 
     window.getOptions = () => {
@@ -66,7 +66,8 @@
     }
 
     window.loadOptions = () => {
-        return JSON.parse(localStorage.getItem(storageKey)) || defaultOptions;
+        return store.value || defaultOptions;
+        // return JSON.parse(localStorage.getItem(storageKey)) || defaultOptions;
     }
 
     window.checkOptionsUpdate = () => {
@@ -84,7 +85,8 @@
                 }
 
             }
-            localStorage.setItem(storageKey, JSON.stringify(newOptions));
+            store.replace(newOptions);
+            // localStorage.setItem(storageKey, JSON.stringify(newOptions));
         }
     } 
 

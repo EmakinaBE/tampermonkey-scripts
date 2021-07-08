@@ -22,31 +22,10 @@
 
 (function() {
     'use strict'
-    class Store {
-
-        constructor() {
-            this.entries = JSON.parse(localStorage.getItem(storageKey)) || [];
-        }
-
-        get value () {
-            return this.entries;
-        }
-        
-        set value (id) {
-            this.entries.push(id);
-            localStorage.setItem(storageKey, JSON.stringify(this.entries));
-        }
-        
-        remove(id) {
-            this.entries.splice(this.entries.indexOf(id), 1);
-            localStorage.setItem(storageKey, JSON.stringify(this.entries));
-        }
-    }    
-
-    let storageKey = 'expanded-header';
+    
     let headers;
     let allHeaders;
-    const store = new Store();
+    const store = new Store('expanded-header');
 
     callback(init);
     init();
