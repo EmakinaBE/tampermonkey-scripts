@@ -39,8 +39,7 @@
         }
         
         remove(id) {
-            this.entries = this.entries.filter(item => item !== id);
-            
+            this.entries.splice(this.entries.indexOf(id), 1);
             localStorage.setItem(storageKey, this.entries);
         }
     }    
