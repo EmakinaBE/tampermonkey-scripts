@@ -46,6 +46,7 @@
     let storageKey = 'expanded-header';
     let headers;
     let allHeaders;
+    const store = new Store();
 
     callback(init);
     init();
