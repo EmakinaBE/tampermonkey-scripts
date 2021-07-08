@@ -94,8 +94,8 @@
     window.resetDoc = () => {
         doc = null;
 
-        if (localStorage.getItem('reload')){
-            let reload = false;
+        if (localStorage.getItem('reload') === 'true'){
+            let reload = 'false';
             localStorage.setItem('reload', reload);
             window.location.reload();
         }

@@ -27,7 +27,7 @@
     let addedSelectNewTaskLineEventListener;
 
     window.addEventListener("load", function(event) {
-        let reload = true;
+        let reload = 'true';
         localStorage.setItem('reload', reload);
     });
 
