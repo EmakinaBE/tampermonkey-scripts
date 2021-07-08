@@ -24,7 +24,7 @@
     'use strict'
     class Store {
         constructor() {
-            entries = localStorage.getItem(storageKey) || [];
+            this.entries = localStorage.getItem(storageKey) || [];
         }
 
         get value () {
