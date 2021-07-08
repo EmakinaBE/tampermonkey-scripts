@@ -25,53 +25,69 @@
     'use strict';
 
     let storageKey = 'expanded-header';
+    let headers;
+    let allHeaders;
+    const store = new Store();
 
     callback(init);
     init();
     
     async function init(){
-        await setExpandedHeader();
+        await getHeaderElements();
+        setExpandedHeader();
         getExpandedHeader();
     }
 
+    async function getHeaderElements() {
+        headers = await getElementsFromDocument('.thead.project-hours');
+
+        allHeaders = [...headers] || [];  
+    }
+
     // create a listener for all headers and save it to the local storage if it gets closed
-    async function getExpandedHeader()  {
-        const headers = await getElementsFromDocument('.thead.project-hours');
-        if(!headers) return;
-        
-        const allHeaders = [...headers];      
-        
+    function getExpandedHeader()  {
         allHeaders.forEach(header => {
-            header.addEventListener('click', function() {
+            header.addEventListener('click', () => {
                 const headerId = header.getAttribute('data-projectid');
-                let closedHeaders = JSON.parse(localStorage.getItem(storageKey)) || [];
                 
                 if(!header.classList.contains('closed'))
-                    closedHeaders.push(headerId);   
+                    store.entries = headerId;   
                 else
-                    closedHeaders.splice(closedHeaders.indexOf(headerId), 1);
-                    
-                localStorage.setItem(storageKey, JSON.stringify(closedHeaders));
+                    store.remove(headerId);
             });	
         });
     }
     
     // set all headers + body that are in the local storage to closed
-    async function setExpandedHeader() {
-        const headers = await getElementsFromDocument('.thead.project-hours');
-        if(!headers) return;
-
-        const allHeaders = [...headers];
-
-        let closedHeaders = JSON.parse(localStorage.getItem(storageKey)) || [];
+    function setExpandedHeader() {
+        let closedHeaders = store.entries || [];
         
-        allHeaders.forEach( header => {
+        allHeaders.forEach(header => {
             if(closedHeaders.includes(header.getAttribute('data-projectid'))) {
                 header.classList.add('closed');
                 header.nextElementSibling.classList.add('closed');
             }
         });
-
     }
+
+    class Store {
+        constructor() {
+            this.object = localStorage.getItem(storageKey) || [];
+        }
+        
+        get entries () {
+            return this.object;
+        }
+        
+        set entries (id) {
+            this.object.push(id);
+            localStorage.setItem(storageKey, this.object);
+        }
+        
+        remove(id) {
+            this.object = this.object.filter(item => item !== id);
+            localStorage.setItem(storageKey, this.object);
+        }
+    }       
     
 })();
