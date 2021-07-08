@@ -37,7 +37,7 @@
         }
         
         remove(id) {
-            this.object = Object.values(this.object).filter(item => item !== id);
+            this.object = Object.entries(this.object).filter(item => item !== id);
             
             localStorage.setItem(storageKey, this.object);
         }
