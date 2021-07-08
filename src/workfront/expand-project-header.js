@@ -23,10 +23,9 @@
 (function() {
     'use strict'
     class Store {
-        entries = [];
 
         constructor() {
-            this.entries = localStorage.getItem(storageKey) || [];
+            this.entries = JSON.parse(localStorage.getItem(storageKey)) || [];
         }
 
         get value () {
@@ -35,12 +34,12 @@
         
         set value (id) {
             this.entries.push(id);
-            localStorage.setItem(storageKey, this.entries);
+            localStorage.setItem(storageKey, JSON.stringify(this.entries));
         }
         
         remove(id) {
             this.entries.splice(this.entries.indexOf(id), 1);
-            localStorage.setItem(storageKey, this.entries);
+            localStorage.setItem(storageKey, JSON.stringify(this.entries));
         }
     }    
 
