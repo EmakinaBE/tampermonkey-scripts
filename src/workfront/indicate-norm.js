@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.8
+// @version      2.0
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self

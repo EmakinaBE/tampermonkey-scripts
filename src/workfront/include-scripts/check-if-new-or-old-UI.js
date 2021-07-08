@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Check if new or old UI
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      2.0
 // @description  Will check if the old UI (quicksilver) or new UI (phoenix) is used
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts

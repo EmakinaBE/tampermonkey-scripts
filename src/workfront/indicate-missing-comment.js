@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      1.14
+// @version      2.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck

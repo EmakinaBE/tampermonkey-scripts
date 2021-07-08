@@ -2,7 +2,7 @@
 // ==UserScript==
 // @name         Save Changes
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      2.0
 // @description  Triggers the save button
 // @author       Antonia Langer, Sarah Roupec
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts

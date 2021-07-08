@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      1.8
+// @version      2.0
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*

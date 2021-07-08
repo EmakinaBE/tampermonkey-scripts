@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Add CompanyName to project header
 // @namespace    https://www.emakina.com/
-// @version      1.6
+// @version      2.0
 // @description  Add company name in the workfront table header, to see to which company which project is linked
 // @author       Jeffrey Vandenbossche
 // @connect      self

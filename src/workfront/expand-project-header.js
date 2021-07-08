@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Store and Load expanded project header
 // @namespace    https://www.emakina.com/
-// @version      1.1
+// @version      2.0
 // @description  If headers where closed or expanded in the past, they will be stored in a local storage. When the user enters the
 //               timesheet again they will automatically set as closed or expanded.
 // @author       Antonia Langer, Florian Schmidt, Sarah Roupec

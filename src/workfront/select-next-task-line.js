@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Select next task line
 // @namespace    https://www.emakina.com/
-// @version      1.5
+// @version      2.0
 // @author       Wouter Versyck
 // @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico

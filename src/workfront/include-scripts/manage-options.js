@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Option Management
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      2.0
 // @description  Handles all option operations
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
