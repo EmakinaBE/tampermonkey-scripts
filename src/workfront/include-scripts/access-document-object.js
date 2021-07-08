@@ -72,9 +72,6 @@
                         await pause(100);
                     }
                 });
-            
-                let reload = true;
-                localStorage.setItem('reload', reload);
             }
         }
         maxTries = 200;
@@ -100,7 +97,7 @@
         if (localStorage.getItem('reload')){
             let reload = false;
             localStorage.setItem('reload', reload);
-            //window.location.reload();
+            window.location.reload();
         }
 
     }

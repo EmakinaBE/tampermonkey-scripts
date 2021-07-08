@@ -26,6 +26,11 @@
     let addedSaveButtonEventListener;
     let addedSelectNewTaskLineEventListener;
 
+    document.addEventListener("load", function(event) {
+        let reload = true;
+        localStorage.setItem('reload', reload);
+    });
+
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
 
