@@ -72,6 +72,9 @@
                         await pause(100);
                     }
                 });
+            
+                let reload = true;
+                localStorage.setItem('reload', reload);
             }
         }
         maxTries = 200;
@@ -93,6 +96,14 @@
     // if a popstate event gets triggered the iframe element needs to be reset
     window.resetDoc = () => {
         doc = null;
+
+        if (localStorage.getItem('reload')){
+            let reload = false;
+            localStorage.setItem('reload', reload);
+        }
+        //if (getVariable from local storage)
+        //do reload, set then to false in local storage
+
     }
 
 })(window, document);
