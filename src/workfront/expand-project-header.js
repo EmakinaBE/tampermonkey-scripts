@@ -24,23 +24,23 @@
     'use strict'
     class Store {
         constructor() {
-            this.object = localStorage.getItem(storageKey) || [];
+            this.entries = [...this.localStorage.getItem(storageKey)] || [];
         }
         
         get entries () {
-            return this.object;
+            return this.entries;
         }
         
         set entries (id) {
-            this.object.push(id);
-            localStorage.setItem(storageKey, this.object);
+            this.entries.push(id);
+            localStorage.setItem(storageKey, this.entries);
         }
         
         remove(id) {
-            console.log(Array.isArray(this.object));
-            this.object = this.object.filter(item => item !== id);
             
-            localStorage.setItem(storageKey, this.object);
+            this.entries = this.entries.filter(item => item !== id);
+            
+            localStorage.setItem(storageKey, this.entries);
         }
     }    
 
