@@ -88,7 +88,9 @@
         }
 
         const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
-        emptyFieldFound ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden') : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
+        emptyFieldFound
+                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
+                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
     }
 
     function checkAllCommentsAndMarkFields(elements) {
@@ -170,7 +172,7 @@
     }
 
     function getSystemDecimalSeparator() {
-        let n = 1.1;
+        const n = 1.1;
         const lang = document.documentElement.lang.replace('_', '-');
 
         if (lang) {
