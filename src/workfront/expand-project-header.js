@@ -24,7 +24,7 @@
     'use strict'
     class Store {
         constructor() {
-            this.entries = [...localStorage.getItem(storageKey)] || [];
+            this.entries = localStorage.getItem(storageKey) || [];
         }
         
         get entries () {
@@ -37,8 +37,7 @@
         }
         
         remove(id) {
-            
-            this.entries = this.entries.filter(item => item !== id);
+            this.entries = Object.keys(this.entries).filter(item => item !== id);
             
             localStorage.setItem(storageKey, this.entries);
         }
