@@ -46,7 +46,8 @@
             }
         }
 
-        setTimeout(loadDoc, 1000);
+        window.location.reload();
+        //setTimeout(loadDoc, 1000);
     }
 
     async function setupListeners() {
