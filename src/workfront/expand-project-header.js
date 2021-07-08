@@ -71,7 +71,7 @@
                 const headerId = header.getAttribute('data-projectid');
                 
                 if(!header.classList.contains('closed'))
-                    store.entries = headerId;   
+                    store.value = headerId;   
                 else
                     store.remove(headerId);
             });	
@@ -80,7 +80,7 @@
     
     // set all headers + body that are in the local storage to closed
     function setExpandedHeader() {
-        let closedHeaders = store.entries || [];
+        let closedHeaders = store.value || [];
         
         allHeaders.forEach(header => {
             if(closedHeaders.includes(header.getAttribute('data-projectid'))) {
