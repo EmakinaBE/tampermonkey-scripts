@@ -54,7 +54,7 @@
     window.saveOptions = (e) => {
         const target = e.target;
         options[target.name].isChecked = target.checked;
-        store.value = JSON.stringify(options);
+        store.value = options;
     }
 
     window.getOptions = () => {

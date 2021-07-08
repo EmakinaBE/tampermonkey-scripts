@@ -34,13 +34,4 @@ class Store {
         this.entries = value;
         localStorage.setItem(this.storageKey, JSON.stringify(this.entries));
     }
-
-    replace(newvalue) {
-        localStorage.setItem(this.storageKey, JSON.stringify(newvalue));
-    }
-    
-    remove(id) {
-        this.entries.splice(this.entries.indexOf(id), 1);
-        localStorage.setItem(this.storageKey, JSON.stringify(this.entries));
-    }
 }    
