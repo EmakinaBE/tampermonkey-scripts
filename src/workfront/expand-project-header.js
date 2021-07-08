@@ -24,7 +24,7 @@
     'use strict'
     
     let headers;
-    let allHeaders;
+    let allHeaders = [];
     const store = new Store('expanded-header');
     store.value = store.value || [];
 
@@ -41,7 +41,7 @@
         headers = await getElementsFromDocument('.thead.project-hours');
         if(!headers) return;
         
-        allHeaders = [...headers] || [];  
+        allHeaders = [...headers];  
     }
 
     // create a listener for all headers and save it to the local storage if it gets closed
