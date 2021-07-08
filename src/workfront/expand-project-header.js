@@ -69,7 +69,6 @@
         allHeaders.forEach(header => {
             header.addEventListener('click', () => {
                 const headerId = header.getAttribute('data-projectid');
-                const store = new Store();
                 if(!header.classList.contains('closed'))
                     store.value = headerId;   
                 else
@@ -80,7 +79,6 @@
     
     // set all headers + body that are in the local storage to closed
     function setExpandedHeader() {
-        const store = new Store();
         let closedHeaders = store.value || [];
         
         allHeaders.forEach(header => {
