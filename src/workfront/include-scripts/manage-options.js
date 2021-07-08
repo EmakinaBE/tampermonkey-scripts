@@ -67,27 +67,10 @@
 
     window.loadOptions = () => {
         return store.value || defaultOptions;
-        // return JSON.parse(localStorage.getItem(storageKey)) || defaultOptions;
     }
 
     window.checkOptionsUpdate = () => {
-        const oldOptions = loadOptions();
-        const oldKeys = Object.keys(oldOptions).sort();
-        const newKeys = Object.keys(defaultOptions).sort();
-
-        if (oldKeys !== newKeys) {
-            const newOptions = { ...defaultOptions };
-            for (const [key, value] of Object.entries(oldOptions)) {
-                // check if key exists on newOptions (clone of default options) 
-                //- this will not be the case if a previous option is removed
-                if(newOptions[key]) {
-                    newOptions[key].isChecked = value.isChecked;
-                }
-
-            }
-            store.replace(newOptions);
-            // localStorage.setItem(storageKey, JSON.stringify(newOptions));
-        }
+        store.value = Object.assign(defaultOptions, store.value);
     } 
 
     window.wfGetOptions = getOptions;

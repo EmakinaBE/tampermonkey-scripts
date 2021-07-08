@@ -26,6 +26,7 @@
     let headers;
     let allHeaders;
     const store = new Store('expanded-header');
+    store.value = store.value || [];
 
     callback(init);
     init();
@@ -49,9 +50,9 @@
             header.addEventListener('click', () => {
                 const headerId = header.getAttribute('data-projectid');
                 if(!header.classList.contains('closed'))
-                    store.value = headerId;   
+                    store.value = [...store.value, headerId];   
                 else
-                    store.remove(headerId);
+                    store.value = store.value.filter(item => item !== headerId);
             });	
         });
     }

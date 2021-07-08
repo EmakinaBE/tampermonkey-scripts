@@ -23,15 +23,15 @@ class Store {
 
     constructor(storageKey) {
         this.storageKey = storageKey;
-        this.entries = JSON.parse(localStorage.getItem(this.storageKey)) || [];
+        this.entries = JSON.parse(localStorage.getItem(this.storageKey));
     }
 
     get value () {
         return this.entries;
     }
     
-    set value (id) {
-        this.entries.push(id);
+    set value (value) {
+        this.entries = value;
         localStorage.setItem(this.storageKey, JSON.stringify(this.entries));
     }
 
