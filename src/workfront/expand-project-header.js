@@ -21,7 +21,7 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
+    'use strict'
     class Store {
         constructor() {
             this.object = localStorage.getItem(storageKey) || [];
@@ -58,7 +58,8 @@
 
     async function getHeaderElements() {
         headers = await getElementsFromDocument('.thead.project-hours');
-
+        if(!headers) return;
+        
         allHeaders = [...headers] || [];  
     }
 
