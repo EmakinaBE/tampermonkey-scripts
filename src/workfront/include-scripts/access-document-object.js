@@ -100,7 +100,7 @@
         if (localStorage.getItem('reload')){
             let reload = false;
             localStorage.setItem('reload', reload);
-            window.location.reload();
+            //window.location.reload();
         }
 
     }
