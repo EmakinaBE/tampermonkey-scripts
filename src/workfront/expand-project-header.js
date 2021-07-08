@@ -20,9 +20,27 @@
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
-
 (function() {
     'use strict';
+    class Store {
+        constructor() {
+            this.object = localStorage.getItem(storageKey) || [];
+        }
+        
+        get entries () {
+            return this.object;
+        }
+        
+        set entries (id) {
+            this.object.push(id);
+            localStorage.setItem(storageKey, this.object);
+        }
+        
+        remove(id) {
+            this.object = this.object.filter(item => item !== id);
+            localStorage.setItem(storageKey, this.object);
+        }
+    }    
 
     let storageKey = 'expanded-header';
     let headers;
@@ -68,26 +86,6 @@
                 header.nextElementSibling.classList.add('closed');
             }
         });
-    }
-
-    class Store {
-        constructor() {
-            this.object = localStorage.getItem(storageKey) || [];
-        }
-        
-        get entries () {
-            return this.object;
-        }
-        
-        set entries (id) {
-            this.object.push(id);
-            localStorage.setItem(storageKey, this.object);
-        }
-        
-        remove(id) {
-            this.object = this.object.filter(item => item !== id);
-            localStorage.setItem(storageKey, this.object);
-        }
-    }       
+    }   
     
 })();
