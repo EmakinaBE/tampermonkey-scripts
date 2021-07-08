@@ -93,7 +93,6 @@
     // if a popstate event gets triggered the iframe element needs to be reset
     window.resetDoc = () => {
         doc = null;
-        window.location.reload();
     }
 
 })(window, document);
