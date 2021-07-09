@@ -58,6 +58,16 @@
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
         let storage = localStorage.getItem(storageKey) || {};
+        if(storage == {})
+        {
+            storage = {
+                'addedSaveButtonEventListener': false,
+                'addedSelectNewTaskLineEventListener': false,
+                'addedSaveCommentSaveButtonEventListener': false
+            };
+            
+            localStorage.setItem(storageKey, storage);
+        }
 
         // if saveButton exists and eventListener isn't attatched yet
         if (saveButton && !(Object.values(storage)[0])) {
