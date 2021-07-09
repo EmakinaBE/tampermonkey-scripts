@@ -33,7 +33,7 @@
     async function loadDoc() {
         resetDoc();
         executeCallback();
-        setTimeout(setupListeners, 3000);
+        setTimeout(setupHandlers, 3000);
     }
 
     async function pollNetworkRequestSuccess() {
@@ -50,7 +50,7 @@
         setTimeout(loadDoc, 1000);
     }
 
-    async function setupListeners() {
+    async function setupHandlers() {
         // setup attribute (to check page refresh) and listeners for on save button
         const view = await getElementsFromDocument('#content-timesheet-view')
         if(!view) return; 
@@ -90,7 +90,7 @@
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
-            inputFields.forEach(button => button.onclick = () => {
+            inputFields.forEach(field => field.nextElementSibling.onclick = () => {
                 autoSaveChanges();
             })
         }
