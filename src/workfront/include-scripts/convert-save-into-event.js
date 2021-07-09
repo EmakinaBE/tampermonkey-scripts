@@ -19,10 +19,7 @@
 
 (function(window) {
     'use strict';
-
-    let addedSaveButtonEventListener;
-    let addedSelectNewTaskLineEventListener;
-    let addedSaveCommentSaveButtonEventListener;
+    let storageKey = 'eventListenerCheck'; 
 
     /*window.addEventListener("load", function(event) {
         let reload = 'true';
@@ -60,31 +57,48 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
+        //Object 
+        //storage = {
+        //  addedSaveButtonEventListener:bool, 
+        //  addedSelectNewTaskLineEventListener:bool, 
+        //  addedSaveCommentSaveButtonEventListener:bool
+        //}
+        let storage = localStorage.getItem(storageKey);
+
         // if saveButton exists and eventListener isn't attatched yet
-        if (saveButton && !addedSaveButtonEventListener) {
-            addedSaveButtonEventListener = true;
+        if (saveButton && !(Object.values(storage)[0])) {
+            storage.addedSaveButtonEventListener = true;
+            localStorage.setItem(storageKey, storage);
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
             await pause(1000);
-            addedSaveButtonEventListener = false;
+            storage.addedSaveButtonEventListener = false;
+            localStorage.setItem(storageKey, storage);
         }
 
+        storage = localStorage.getItem(storageKey);
         // setup listeners for new task
         // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
-        if (window.wfGetOptions().autoSelect && !addedSelectNewTaskLineEventListener) {
-            addedSelectNewTaskLineEventListener = true;
+        if (window.wfGetOptions().autoSelect && !(Object.values(storage)[1])) {
+            storage.addedSelectNewTaskLineEventListener = true;
+            localStorage.setItem(storageKey, storage);
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
             await pause(1000);
-            addedSelectNewTaskLineEventListener = false;
+            storage.addedSelectNewTaskLineEventListener = false;
+            localStorage.setItem(storageKey, storage);
         }
-        
-        if (window.wfGetOptions().autoSave && !addedSaveCommentSaveButtonEventListener){
-            addedSaveCommentSaveButtonEventListener = true;
+
+        storage = localStorage.getItem(storageKey); 
+        if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
+            storage.addedSaveCommentSaveButtonEventListener = true;
+            localStorage.setItem(storageKey, storage);
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
-            setTimeout(() => {addedSaveCommentSaveButtonEventListener = false}, 1000);
+            await pause(1000);
+            storage.addedSaveCommentSaveButtonEventListener = false;
+            localStorage.setItem(storageKey, storage);
         }
     }
 
