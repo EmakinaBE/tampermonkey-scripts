@@ -22,11 +22,6 @@
     let storageKey = 'eventListenerCheck'; 
     let storage;
 
-    /*window.addEventListener("load", function(event) {
-        let reload = 'true';
-        localStorage.setItem('reload', reload);
-    });*/
-
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
 

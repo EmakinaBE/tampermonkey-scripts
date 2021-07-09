@@ -90,13 +90,6 @@
     // if a popstate event gets triggered the iframe element needs to be reset
     window.resetDoc = () => {
         doc = null;
-
-        /*if (localStorage.getItem('reload') === 'true'){
-            let reload = 'false';
-            localStorage.setItem('reload', reload);
-            window.location.reload();
-        }*/
-
     }
 
 })(window, document);

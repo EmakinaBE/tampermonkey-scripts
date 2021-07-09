@@ -22,6 +22,7 @@
     'use strict';
 
     async function triggerSaveButton() {
+        await pause(100);
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
         saveButton[0].click();
     } 
