@@ -68,7 +68,10 @@
         if (saveButton && !(Object.values(storage)[0])) {
             storage.addedSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
-            saveButton[0].addEventListener('click', pollNetworkRequestSuccess, { once: true });
+            saveButton[0].onclick = () => {
+                pollNetworkRequestSuccess();
+            }
+            //saveButton[0].addEventListener('click', pollNetworkRequestSuccess, { once: true });
         }
 
         // setup listeners for new task
