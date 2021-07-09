@@ -68,7 +68,7 @@
         if (saveButton && !(Object.values(storage)[0])) {
             storage.addedSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
-            saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
+            saveButton[0].addEventListener('click', pollNetworkRequestSuccess, { once: true });
         }
 
         // setup listeners for new task
@@ -89,7 +89,7 @@
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
         }
 
-        setTimeout(resetStorageObj, 10000);
+        setTimeout(resetStorageObj, 2000);
     }
 
     function resetStorageObj() {
