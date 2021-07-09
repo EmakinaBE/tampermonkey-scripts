@@ -113,7 +113,7 @@
     }
 
     function fetchProjectData(timesheetId) {
-        return fetch(`https://emakina.sb01.workfront.com/attask/api/v11.0/tshet/search?ID=${timesheetId}&fields=*`)
+        return fetch(`${location.origin}/attask/api/v11.0/tshet/search?ID=${timesheetId}&fields=*`)
             .then(response => response.json())
             .then(json => json.data[0]);
     }

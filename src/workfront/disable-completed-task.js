@@ -35,7 +35,7 @@
     }
 
     async function fetchStatus(id) {
-        return fetch(`https://emakina.sb01.workfront.com/attask/api/v11.0/task/search?ID=${id}&fields=status`)
+        return fetch(`${location.origin}/attask/api/v11.0/task/search?ID=${id}&fields=status`)
             .then(response => response.json())
             .then(json => {
                 return {
