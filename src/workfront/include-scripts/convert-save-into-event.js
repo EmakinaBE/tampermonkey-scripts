@@ -20,6 +20,7 @@
 (function(window) {
     'use strict';
     let storageKey = 'eventListenerCheck'; 
+    let storage;
 
     /*window.addEventListener("load", function(event) {
         let reload = 'true';
@@ -57,10 +58,10 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        let storage = JSON.parse(localStorage.getItem(storageKey));
+        storage = JSON.parse(localStorage.getItem(storageKey));
         if(!storage)
         {
-            resetStorageObj(storage)
+            resetStorageObj()
         }
 
         // if saveButton exists and eventListener isn't attatched yet
@@ -88,10 +89,10 @@
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
         }
 
-        setTimeout(resetStorageObj(storage) ,1000);
+        setTimeout(resetStorageObj() ,1000);
     }
 
-    function resetStorageObj(storage) {
+    function resetStorageObj() {
         storage = {
             'addedSaveButtonEventListener': false,
             'addedSelectNewTaskLineEventListener': false,
