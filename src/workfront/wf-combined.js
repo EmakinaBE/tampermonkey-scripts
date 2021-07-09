@@ -4,6 +4,7 @@
 // @version      2.0
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
+// @run-at document-start
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.my.workfront.com/timesheets/*
 // @match        https://emakina.preview.workfront.com/timesheet/*
