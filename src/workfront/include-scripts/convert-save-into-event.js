@@ -76,7 +76,13 @@
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
             await pause(1000);
             addedSelectNewTaskLineEventListener = false;
-        } 
+        }
+        
+        if (window.wfGetOptions().autoSave){
+            const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
+            if (!inputFields) return;
+            inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
+        }
     }
 
     function newTaskClickHandler(event) {

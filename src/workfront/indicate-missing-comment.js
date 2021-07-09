@@ -132,10 +132,6 @@
                             e.value = operation(val);
                         }
                     }
-                    // TO-DO: change functionality to call when user has been idle for a while
-                    if(window.wfGetOptions().autoSave) {
-                        saveChanges();
-                    }
                 }
             }, false);
         });
