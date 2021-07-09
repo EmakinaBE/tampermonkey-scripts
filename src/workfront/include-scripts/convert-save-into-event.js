@@ -89,7 +89,7 @@
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
         }
 
-        setTimeout(resetStorageObj(), 10000);
+        setTimeout(resetStorageObj, 10000);
     }
 
     function resetStorageObj() {
