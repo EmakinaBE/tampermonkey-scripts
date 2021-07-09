@@ -7,12 +7,9 @@
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
-// @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.preview.workfront.com/timesheet/*
-// @match        https://emakina.sb01.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
-// @match        https://emakina.preview.workfront.com/timesheets/current*
-// @match        https://emakina.sb01.workfront.com/timesheets/current*
+// @match        https://emakina.my.workfront.com/*
+// @match        https://emakina.preview.workfront.com/*
+// @match        https://emakina.sb01.workfront.com/*
 // @grant        none
 // @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
@@ -26,10 +23,10 @@
     let addedSaveButtonEventListener;
     let addedSelectNewTaskLineEventListener;
 
-    window.addEventListener("load", function(event) {
+    /*window.addEventListener("load", function(event) {
         let reload = 'true';
         localStorage.setItem('reload', reload);
-    });
+    });*/
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
