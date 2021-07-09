@@ -90,10 +90,9 @@
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
-            saveButton[0].onclick = () => {
-                pollNetworkRequestSuccess();
-            }
-            inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
+            inputFields.forEach(button => button.onclick = () => {
+                newTaskClickHandler();
+            })
         }
 
         setTimeout(resetStorageObj, 2000);
