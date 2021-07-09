@@ -80,8 +80,8 @@
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
-            taskButtons.forEach(button => button.onclick = () => {
-                newTaskClickHandler();
+            taskButtons.forEach(button => button.onclick = (event) => {
+                newTaskClickHandler(event);
             })
         }
          
@@ -91,7 +91,7 @@
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(button => button.onclick = () => {
-                newTaskClickHandler();
+                autoSaveChanges();
             })
         }
 
