@@ -1,21 +1,18 @@
 // ==UserScript==
 // @name         Disable completed tasks
 // @namespace    https://www.emakina.com/
-// @version      1.5
+// @version      2.0
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
 // @author       Wouter Versyck
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
-// @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.preview.workfront.com/timesheet/*
-// @match        https://emakina.sb01.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
-// @match        https://emakina.preview.workfront.com/timesheets/current*
-// @match        https://emakina.sb01.workfront.com/timesheets/current*
+// @match        https://emakina.my.workfront.com/*
+// @match        https://emakina.preview.workfront.com/*
+// @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/disable-completed-task.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/disable-completed-task.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
@@ -23,11 +20,13 @@
 (function() {
     'use strict';
 
-    document.head.addEventListener('WF_RELOAD', init);
+    callback(init);
     init();
 
     async function init() {
-        const ids = [...new Set(getAllTasks().map(element => element.getAttribute('data-workitemobjid')))];
+        const allTasks = await getElementsFromDocument('.TASK[data-workitemobjid]');
+        if(!allTasks) return;
+        const ids = [...new Set([...allTasks].map(element => element.getAttribute('data-workitemobjid')))];
 
         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
         const closedTasks = tasks.filter(e => e.closed);
@@ -36,7 +35,7 @@
     }
 
     async function fetchStatus(id) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/task/search?ID=${id}&fields=status`)
+        return fetch(`${location.origin}/attask/api/v11.0/task/search?ID=${id}&fields=status`)
             .then(response => response.json())
             .then(json => {
                 return {
@@ -46,16 +45,12 @@
             });
     }
 
-    function disableTasks({ id }) {
-        document.getElements(`.TASK[data-workitemobjid=${id}] .fc > input`)
-            .forEach(e => {
-                e.setAttribute('disabled', 'disabled');
-                e.style = 'background: rgb(211, 211, 211, 0.35)';
-            });
+    async function disableTasks({ id }) {
+        const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
+        if(!tasks) return;
+        tasks.forEach(e => {
+            e.setAttribute('disabled', 'disabled');
+            e.style = 'background: rgb(211, 211, 211, 0.35)';
+        });
     }
-
-    function getAllTasks() {
-        return document.getElements('.TASK[data-workitemobjid]');
-    }
-
 })();
