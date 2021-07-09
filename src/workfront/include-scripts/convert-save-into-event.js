@@ -57,13 +57,7 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        //Object 
-        //storage = {
-        //  addedSaveButtonEventListener:bool, 
-        //  addedSelectNewTaskLineEventListener:bool, 
-        //  addedSaveCommentSaveButtonEventListener:bool
-        //}
-        let storage = localStorage.getItem(storageKey);
+        let storage = localStorage.getItem(storageKey) || {};
 
         // if saveButton exists and eventListener isn't attatched yet
         if (saveButton && !(Object.values(storage)[0])) {
@@ -76,6 +70,7 @@
         }
 
         storage = localStorage.getItem(storageKey);
+
         // setup listeners for new task
         // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
         if (window.wfGetOptions().autoSelect && !(Object.values(storage)[1])) {
@@ -89,7 +84,8 @@
             localStorage.setItem(storageKey, storage);
         }
 
-        storage = localStorage.getItem(storageKey); 
+        storage = localStorage.getItem(storageKey);
+         
         if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
             storage.addedSaveCommentSaveButtonEventListener = true;
             localStorage.setItem(storageKey, storage);
