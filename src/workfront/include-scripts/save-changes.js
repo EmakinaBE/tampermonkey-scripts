@@ -29,6 +29,6 @@
     window.autoSaveChanges = async () => {
         const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
         if(!commentSaveButton) return;
-        commentSaveButton.addEventListener('click', triggerSaveButton);
+        commentSaveButton[0].addEventListener('click', triggerSaveButton);
     }
 })(window);
