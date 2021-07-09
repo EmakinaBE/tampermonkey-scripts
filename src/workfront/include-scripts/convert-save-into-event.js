@@ -60,13 +60,7 @@
         let storage = JSON.parse(localStorage.getItem(storageKey));
         if(!storage)
         {
-            storage = {
-                'addedSaveButtonEventListener': false,
-                'addedSelectNewTaskLineEventListener': false,
-                'addedSaveCommentSaveButtonEventListener': false
-            };
-            
-            localStorage.setItem(storageKey, JSON.stringify(storage));
+            resetStorageObj(storage)
         }
 
         // if saveButton exists and eventListener isn't attatched yet
@@ -74,12 +68,7 @@
             storage.addedSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
-            await pause(1000);
-            storage.addedSaveButtonEventListener = false;
-            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
-
-        storage = JSON.parse(localStorage.getItem(storageKey));
 
         // setup listeners for new task
         // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
@@ -89,12 +78,7 @@
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
-            await pause(1000);
-            storage.addedSelectNewTaskLineEventListener = false;
-            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
-
-        storage = JSON.parse(localStorage.getItem(storageKey));
          
         if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
             storage.addedSaveCommentSaveButtonEventListener = true;
@@ -102,10 +86,19 @@
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
-            await pause(1000);
-            storage.addedSaveCommentSaveButtonEventListener = false;
-            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
+
+        setTimeout(resetStorageObj(storage) ,1000);
+    }
+
+    function resetStorageObj(storage) {
+        storage = {
+            'addedSaveButtonEventListener': false,
+            'addedSelectNewTaskLineEventListener': false,
+            'addedSaveCommentSaveButtonEventListener': false
+        };
+        
+        localStorage.setItem(storageKey, JSON.stringify(storage));
     }
 
     function newTaskClickHandler(event) {
