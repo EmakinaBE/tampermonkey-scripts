@@ -21,8 +21,14 @@
 (function(window) {
     'use strict';
 
-    window.saveChanges = async () => {
+    async function triggerSaveButton() {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
         saveButton[0].click();
-    }   
+    } 
+    
+    window.autoSaveChanges = async () => {
+        const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
+        if(commentSaveButton) return;
+        commentSaveButton.addEventListener('click', triggerSaveButton);
+    }
 })(window);
