@@ -71,7 +71,6 @@
             saveButton[0].onclick = () => {
                 pollNetworkRequestSuccess();
             }
-            //saveButton[0].addEventListener('click', pollNetworkRequestSuccess, { once: true });
         }
 
         // setup listeners for new task
@@ -81,7 +80,9 @@
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
-            taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
+            taskButtons.forEach(button => button.onclick = () => {
+                newTaskClickHandler();
+            })
         }
          
         if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
@@ -89,6 +90,9 @@
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
+            saveButton[0].onclick = () => {
+                pollNetworkRequestSuccess();
+            }
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
         }
 
