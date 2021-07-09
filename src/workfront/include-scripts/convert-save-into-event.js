@@ -57,8 +57,8 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        let storage = localStorage.getItem(storageKey) || {};
-        if(storage == {})
+        let storage = localStorage.getItem(storageKey);
+        if(!storage)
         {
             storage = {
                 'addedSaveButtonEventListener': false,
