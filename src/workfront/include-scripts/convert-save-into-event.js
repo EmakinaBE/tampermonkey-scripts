@@ -57,7 +57,7 @@
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
-        let storage = localStorage.getItem(storageKey);
+        let storage = JSON.parse(localStorage.getItem(storageKey));
         if(!storage)
         {
             storage = {
@@ -66,45 +66,45 @@
                 'addedSaveCommentSaveButtonEventListener': false
             };
             
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
 
         // if saveButton exists and eventListener isn't attatched yet
         if (saveButton && !(Object.values(storage)[0])) {
             storage.addedSaveButtonEventListener = true;
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
             saveButton[0].addEventListener('click', pollNetworkRequestSuccess);
             await pause(1000);
             storage.addedSaveButtonEventListener = false;
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
 
-        storage = localStorage.getItem(storageKey);
+        storage = JSON.parse(localStorage.getItem(storageKey));
 
         // setup listeners for new task
         // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
         if (window.wfGetOptions().autoSelect && !(Object.values(storage)[1])) {
             storage.addedSelectNewTaskLineEventListener = true;
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.addEventListener('click', newTaskClickHandler));
             await pause(1000);
             storage.addedSelectNewTaskLineEventListener = false;
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
 
-        storage = localStorage.getItem(storageKey);
+        storage = JSON.parse(localStorage.getItem(storageKey));
          
         if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
             storage.addedSaveCommentSaveButtonEventListener = true;
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
             await pause(1000);
             storage.addedSaveCommentSaveButtonEventListener = false;
-            localStorage.setItem(storageKey, storage);
+            localStorage.setItem(storageKey, JSON.stringify(storage));
         }
     }
 
