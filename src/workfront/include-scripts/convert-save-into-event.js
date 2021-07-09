@@ -22,6 +22,7 @@
 
     let addedSaveButtonEventListener;
     let addedSelectNewTaskLineEventListener;
+    let addedSaveCommentSaveButtonEventListener;
 
     /*window.addEventListener("load", function(event) {
         let reload = 'true';
@@ -78,10 +79,13 @@
             addedSelectNewTaskLineEventListener = false;
         }
         
-        if (window.wfGetOptions().autoSave){
+        if (window.wfGetOptions().autoSave && !addedSaveCommentSaveButtonEventListener){
+            addedSaveCommentSaveButtonEventListener = true;
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
+            await pause(1000);
+            addedSaveCommentSaveButtonEventListener = false;
         }
     }
 
