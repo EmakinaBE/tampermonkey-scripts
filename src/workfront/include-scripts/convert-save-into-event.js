@@ -84,8 +84,7 @@
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.nextElementSibling.addEventListener('click', autoSaveChanges));
-            await pause(1000);
-            addedSaveCommentSaveButtonEventListener = false;
+            setTimeout(() => {addedSaveCommentSaveButtonEventListener = false}, 1000);
         }
     }
 
