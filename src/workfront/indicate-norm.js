@@ -52,7 +52,6 @@
                 const delta = newTotal - norm;
                 col.innerText = createText(delta, norm);
                 col.style = `color: ${ findColorForDelta(delta) }`;
-                tableFooter
             });
         });
 
