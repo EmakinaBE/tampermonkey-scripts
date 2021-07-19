@@ -74,11 +74,10 @@
         executeCallback();
         
         setTimeout(window.setupHandlers, 3000);
+        autoSaveAfterBeingIdle();
     }
 
     async function pollNetworkRequestSuccess() {
-        const view = await getElementsFromDocument('#content-timesheet-view');
-        if(!view) return;
         
         setTimeout(loadDoc, 1000);
     }

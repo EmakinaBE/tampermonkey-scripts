@@ -21,6 +21,8 @@
 (function(window) {
     'use strict';
 
+    var idleTime = 0;
+
     async function triggerSaveButton() {
         await pause(100);
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
@@ -32,4 +34,22 @@
         if(!commentSaveButton) return;
         commentSaveButton[0].addEventListener('click', triggerSaveButton);
     }
+
+    window.autoSaveAfterBeingIdle = () => {
+        setInterval(timerIncrement, 60000);
+        document.body.keypress(function (e) {
+            idleTime = 0;
+        });
+        document.body.mousedown(function (e) {
+            idleTime = 0;
+        });
+    }
+
+    function timerIncrement() {
+        idleTime++;
+        if (idleTime > 2) {
+            autoSaveChanges();
+        }
+    }
+
 })(window);
