@@ -50,8 +50,9 @@
             mutations.forEach(mutation => {
                 const newTotal = parseToFloat(mutation.target.innerHTML);
                 const delta = newTotal - norm;
-                col.innerHTML = createText(delta, norm);
+                col.innerText = createText(delta, norm);
                 col.style = `color: ${ findColorForDelta(delta) }`;
+                tableFooter
             });
         });
 
