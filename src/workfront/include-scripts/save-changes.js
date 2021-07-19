@@ -37,10 +37,10 @@
 
     window.autoSaveAfterBeingIdle = () => {
         setInterval(timerIncrement, 60000);
-        document.body.keypress(function (e) {
+        document.body.addEventListener('keypress', () => {
             idleTime = 0;
         });
-        document.body.mousedown(function (e) {
+        document.body.addEventListener('mousedown', () => {
             idleTime = 0;
         });
     }
