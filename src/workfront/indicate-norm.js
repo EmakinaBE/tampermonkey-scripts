@@ -33,7 +33,7 @@
         const col = await getElementsFromDocument('#trId13 .total');
         if(!col) return;
 
-        addListener(col, parseToFloat(data.extRefID));
+        addListener(col[0], parseToFloat(data.extRefID));
     }
 
     function createTableRows(data){
