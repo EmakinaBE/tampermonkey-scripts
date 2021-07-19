@@ -47,7 +47,7 @@
 
     function timerIncrement() {
         idleTime++;
-        if (idleTime > 2) {
+        if (idleTime > 1) {
             autoSaveChanges();
         }
     }
