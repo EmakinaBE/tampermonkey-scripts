@@ -24,20 +24,7 @@
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
-
-    async function loadDoc() {
-        resetDoc();
-        executeCallback();
-        setTimeout(setupHandlers, 3000);
-    }
-
-    async function pollNetworkRequestSuccess() {
-        const view = await getElementsFromDocument('#content-timesheet-view');
-        if(!view) return;
-        
-        setTimeout(loadDoc, 1000);
-    }
-
+    
     window.setupHandlers = async () => {
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
@@ -80,6 +67,20 @@
         }
 
         setTimeout(resetStorageObj, 2000);
+    }
+
+    async function loadDoc() {
+        resetDoc();
+        executeCallback();
+        
+        setTimeout(setupHandlers, 3000);
+    }
+
+    async function pollNetworkRequestSuccess() {
+        const view = await getElementsFromDocument('#content-timesheet-view');
+        if(!view) return;
+        
+        setTimeout(loadDoc, 1000);
     }
 
     function resetStorageObj() {
