@@ -73,7 +73,7 @@
         resetDoc();
         executeCallback();
         
-        setTimeout(setupHandlers, 3000);
+        setTimeout(window.setupHandlers, 3000);
     }
 
     async function pollNetworkRequestSuccess() {
