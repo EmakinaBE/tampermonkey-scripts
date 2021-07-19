@@ -30,8 +30,9 @@
 
         const col = createTableRows(data);
         if(!col) return;
+        const coll = await getElementsFromDocument('#trId13');
 
-        addListener(col, parseToFloat(data.extRefID));
+        addListener(coll, parseToFloat(data.extRefID));
     }
 
     function createTableRows(data){
@@ -51,10 +52,7 @@
                 const newTotal = parseToFloat(mutation.target.innerHTML);
                 const delta = newTotal - norm;
                 col.innerHTML = createText(delta, norm);
-                const coll = await getElementsFromDocument('#trId13');
-                coll.innerHTML = createText(delta, norm);
-                console.log(coll.innerHTML);
-                coll.style = `color: ${ findColorForDelta(delta) }`;
+                col.style = `color: ${ findColorForDelta(delta) }`;
             });
         });
 
