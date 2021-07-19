@@ -38,7 +38,7 @@
         setTimeout(loadDoc, 1000);
     }
 
-    async function setupHandlers() {
+    window.setupHandlers = async () => {
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
@@ -76,7 +76,6 @@
             if(!taskButtons) return;
             taskButtons.forEach(button => button.onclick = (event) => {
                 newTaskClickHandler(event);
-                
             })
         }
 
