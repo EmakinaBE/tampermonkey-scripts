@@ -74,7 +74,9 @@
         executeCallback();
         
         setTimeout(window.setupHandlers, 3000);
-        autoSaveAfterBeingIdle();
+        if(window.wfGetOptions().autoSave){
+            autoSaveAfterBeingIdle();
+        }
     }
 
     async function pollNetworkRequestSuccess() {

@@ -36,7 +36,6 @@
     }
 
     window.autoSaveAfterBeingIdle = () => {
-        idleTime = 0;
         setInterval(timerIncrement, 60000);
 
         document.body.addEventListener('keypress', () => {
@@ -49,7 +48,7 @@
 
     function timerIncrement() {
         idleTime++;
-        if (idleTime > 1) {
+        if (idleTime > 2) {
             triggerSaveButton();
         }
     }
