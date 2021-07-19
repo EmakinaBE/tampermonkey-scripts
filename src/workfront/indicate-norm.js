@@ -32,7 +32,7 @@
         if(!col) return;
         const coll = await getElementsFromDocument('#trId13');
 
-        addListener(coll, parseToFloat(data.extRefID));
+        addListener(coll[0], parseToFloat(data.extRefID));
     }
 
     function createTableRows(data){
