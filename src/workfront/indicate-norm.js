@@ -51,9 +51,10 @@
                 const newTotal = parseToFloat(mutation.target.innerHTML);
                 const delta = newTotal - norm;
                 col.innerHTML = createText(delta, norm);
-                col.innerHTML = 'hallo';
-                console.log(col.innerHTML);
-                col.style = `color: ${ findColorForDelta(delta) }`;
+                const coll = await getElementsFromDocument('#trId13');
+                coll.innerHTML = createText(delta, norm);
+                console.log(coll.innerHTML);
+                coll.style = `color: ${ findColorForDelta(delta) }`;
             });
         });
 
