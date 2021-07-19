@@ -47,7 +47,7 @@
         const tableFooter = await getElementsFromDocument('#timesheet-data tfoot .total');
         if(!tableFooter) return;
 
-        const observer = new MutationObserver(mutations = async() => {
+        const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
                 const newTotal = parseToFloat(mutation.target.innerHTML);
                 const delta = newTotal - norm;
