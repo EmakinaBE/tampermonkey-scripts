@@ -47,8 +47,8 @@
 
     function timerIncrement() {
         idleTime++;
-        if (idleTime > 1) {
-            autoSaveChanges();
+        if (idleTime > 2) {
+            triggerSaveButton();
         }
     }
 
