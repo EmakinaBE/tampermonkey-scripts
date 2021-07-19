@@ -31,6 +31,7 @@
         const col = createTableRows(data);
         if(!col) return;
         const coll = await getElementsFromDocument('#trId13');
+        if(!coll) return;
 
         addListener(coll[0], parseToFloat(data.extRefID));
     }
