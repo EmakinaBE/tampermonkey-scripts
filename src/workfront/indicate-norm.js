@@ -28,7 +28,9 @@
         const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
         const data = await fetchProjectData(timesheetId);
 
-        const col = createTableRows(data);
+        createTableRows(data);
+
+        const col = await getElementsFromDocument('#trId13 .total');
         if(!col) return;
 
         addListener(col, parseToFloat(data.extRefID));
