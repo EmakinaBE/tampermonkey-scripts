@@ -34,7 +34,7 @@
         const col = createTableRows(data);
         if(!col) return;
 
-        addListener(coll[0], parseToFloat(data.extRefID));
+        addListener(col, parseToFloat(data.extRefID));
     }
 
     function createTableRows(data){
