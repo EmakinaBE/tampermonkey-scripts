@@ -21,7 +21,8 @@
 (function(window) {
     'use strict';
 
-    var idleTime = 0;
+    let idleTime = 0;
+    let idleTimer;
 
     async function triggerSaveButton() {
         await pause(100);
@@ -36,7 +37,10 @@
     }
 
     window.autoSaveAfterBeingIdle = () => {
-        setInterval(timerIncrement, 60000);
+        if(idleTimer){
+            clearInterval(idleTimer);
+        }
+        idleTimer = setInterval(timerIncrement, 60000);
 
         document.body.addEventListener('keypress', () => {
             idleTime = 0;
