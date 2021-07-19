@@ -39,9 +39,7 @@
     function createTableRows(data){
        
         const delta = data.totalHours - parseToFloat(data.extRefID);
-        const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
-
-        return col;
+        insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
     }
 
     async function addListener(col, norm) {
@@ -95,8 +93,6 @@
             tdVal.style = `color: ${color}`;
         }
         tdVal.innerHTML = text;
-
-        return tdVal;
     }
 
     function parseToFloat(text) {

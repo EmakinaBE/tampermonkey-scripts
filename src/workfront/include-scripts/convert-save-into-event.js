@@ -56,6 +56,16 @@
                 pollNetworkRequestSuccess();
             }
         }
+         
+        if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
+            storage.addedSaveCommentSaveButtonEventListener = true;
+            localStorage.setItem(storageKey, JSON.stringify(storage));
+            const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
+            if (!inputFields) return;
+            inputFields.forEach(field => field.nextElementSibling.onclick = () => {
+                autoSaveChanges();
+            })
+        }
 
         // setup listeners for new task
         // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
@@ -66,16 +76,7 @@
             if(!taskButtons) return;
             taskButtons.forEach(button => button.onclick = (event) => {
                 newTaskClickHandler(event);
-            })
-        }
-         
-        if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
-            storage.addedSaveCommentSaveButtonEventListener = true;
-            localStorage.setItem(storageKey, JSON.stringify(storage));
-            const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
-            if (!inputFields) return;
-            inputFields.forEach(field => field.nextElementSibling.onclick = () => {
-                autoSaveChanges();
+                
             })
         }
 
