@@ -34,22 +34,11 @@
     async function pollNetworkRequestSuccess() {
         const view = await getElementsFromDocument('#content-timesheet-view');
         if(!view) return;
-        if(!isNewUI()){
-            if (view[0].getAttribute('data-tampermonkey-id') ) {
-                await pause(500);
-                pollNetworkRequestSuccess;
-                return;
-            }
-        }
         
         setTimeout(loadDoc, 1000);
     }
 
     async function setupHandlers() {
-        // setup attribute (to check page refresh) and listeners for on save button
-        const view = await getElementsFromDocument('#content-timesheet-view')
-        if(!view) return; 
-        view[0].setAttribute('data-tampermonkey-id', true);
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
