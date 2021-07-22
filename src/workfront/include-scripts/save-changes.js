@@ -30,20 +30,20 @@
     } 
     
     window.autoSaveChanges = async () => {
-        const textArea = await getElementsFromDocument('#comment-container textarea');
-        if(!textArea) return;
-        textArea.addEventListener('keyup', (keyValue) => {
-            if(keyValue.keyCode == 13)
-            {
-                setTimeout(triggerSaveButton, 100);
-            }
-        }, false);
 
         const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
         if(!commentSaveButton) return;
         commentSaveButton[0].onclick = () => {
             setTimeout(triggerSaveButton, 100);
         }
+
+        const textArea = commentSaveButton.closest('textarea');
+        textArea.addEventListener('keyup', (keyValue) => {
+            if(keyValue.keyCode == 13)
+            {
+                setTimeout(triggerSaveButton, 100);
+            }
+        }, false);
     }
 
     window.autoSaveAfterBeingIdle = () => {
