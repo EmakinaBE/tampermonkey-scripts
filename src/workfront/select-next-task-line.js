@@ -34,8 +34,6 @@
         // get option that is not yet picked and click it
         const option = getFirstUnusedOption(lines, itemList[0]);
         option.click();
-
-        setupHandlers();
     }
 
     function getFirstUnusedOption(lines, itemList) {

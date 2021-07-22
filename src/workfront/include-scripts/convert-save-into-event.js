@@ -23,8 +23,9 @@
     let storage;
 
     window.addEventListener("popstate", () => loadDoc());
+    //loadDoc();
     
-    window.setupHandlers = async () => {
+    async function setupHandlers() {
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
@@ -72,7 +73,7 @@
         resetDoc();
         executeCallback();
         
-        setTimeout(window.setupHandlers, 3000);
+        setTimeout(setupHandlers, 3000);
         if(window.wfGetOptions().autoSave){
             autoSaveAfterBeingIdle();
         }
