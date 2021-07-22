@@ -26,6 +26,7 @@
     loadDoc();
 
     async function loadDoc() {
+        resetStorageObj();
         resetDoc();
         executeCallback();
         
@@ -90,8 +91,6 @@
                 newTaskClickHandler(event);
             })
         }
-
-        setTimeout(resetStorageObj, 2000);
     }
 
     function newTaskClickHandler(event) {
