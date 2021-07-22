@@ -106,7 +106,9 @@
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
             const newLine = lines[lines.length-1];
-            newLine.getElement('.hour-type-and-role-add').addEventListener('click', newTaskClickHandler);
+            newLine.getElement('.hour-type-and-role-add').onclick = (event) => {
+                newTaskClickHandler(event);
+            }
 
             // dispatch event containing the original event and the newly added line
             const newTaskEvent = new CustomEvent('WF_NEW-TASK', {'detail': { event, newLine, workitemobjid } });
