@@ -25,7 +25,6 @@
     let idleTimer;
 
     async function triggerSaveButton() {
-        await pause(100);
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
         saveButton[0].click();
     } 
@@ -34,7 +33,7 @@
         const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
         if(!commentSaveButton) return;
         commentSaveButton[0].onclick = () => {
-            triggerSaveButton();
+            setTimeout(triggerSaveButton, 100);
         }
     }
 
