@@ -37,7 +37,8 @@
             setTimeout(triggerSaveButton, 100);
         }
 
-        const textArea = commentSaveButton[0].closest('textarea');
+        const container = await getElementsFromDocument('#comment-container').children;
+        const textArea = container;
         textArea.addEventListener('keyup', (keyValue) => {
             if(keyValue.keyCode == 13)
             {
