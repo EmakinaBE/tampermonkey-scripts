@@ -23,7 +23,6 @@
     let storage;
 
     window.addEventListener("popstate", () => loadDoc());
-    //loadDoc();
     
     window.setupHandlers = async () => {
 
