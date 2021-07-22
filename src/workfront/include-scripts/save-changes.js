@@ -37,14 +37,14 @@
             setTimeout(triggerSaveButton, 100);
         }
 
-        /*const textArea = await getElementsFromDocument('#comment-container textarea');
+        const textArea = await getElementsFromDocument('#comment-container textarea');
         if(!textArea) return;
         textArea[0].addEventListener('keydown', (keyValue) => {
             if(keyValue.key === 'Enter')
             {
                 setTimeout(triggerSaveButton, 100);
             }
-        })*/
+        })
     }
 
     window.autoSaveAfterBeingIdle = () => {

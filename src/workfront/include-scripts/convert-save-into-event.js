@@ -75,7 +75,7 @@
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
-            inputFields.forEach(field => field.nextElementSibling.onclick = () => {
+            inputFields.forEach(field => field.onclick = () => {
                 autoSaveChanges();
             })
         }
