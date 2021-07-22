@@ -34,6 +34,12 @@
         // get option that is not yet picked and click it
         const option = getFirstUnusedOption(lines, itemList[0]);
         option.click();
+
+        const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
+        if(!taskButtons) return;
+        taskButtons.forEach(button => button.onclick = (event) => {
+                newTaskClickHandler(event);
+        })
     }
 
     function getFirstUnusedOption(lines, itemList) {
