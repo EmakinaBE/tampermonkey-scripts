@@ -61,7 +61,7 @@
         }
 
         // if saveButton exists and eventListener isn't attatched yet
-        if (saveButton && !(Object.values(storage)[0])) {
+        if (saveButton && !storage.addedSaveButtonEventListener) {
             storage.addedSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
             saveButton[0].onclick = () => {
@@ -69,7 +69,7 @@
             }
         }
          
-        if (window.wfGetOptions().autoSave && !(Object.values(storage)[2])){
+        if (window.wfGetOptions().autoSave && !storage.addedSaveCommentSaveButtonEventListener){
             storage.addedSaveCommentSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
@@ -81,7 +81,7 @@
 
         // setup listeners for new task
         // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
-        if (window.wfGetOptions().autoSelect && !(Object.values(storage)[1])) {
+        if (window.wfGetOptions().autoSelect && !storage.addedSelectNewTaskLineEventListener) {
             storage.addedSelectNewTaskLineEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
