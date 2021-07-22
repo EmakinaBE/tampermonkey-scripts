@@ -40,7 +40,7 @@
             storage.addedSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
             saveButton[0].onclick = () => {
-                pollNetworkRequestSuccess();
+                setTimeout(pollNetworkRequestSuccess, 1000);
             }
         }
          
