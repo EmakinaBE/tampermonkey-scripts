@@ -35,10 +35,10 @@
         const option = getFirstUnusedOption(lines, itemList[0]);
         option.click();
 
-        const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
-        if(!taskButtons) return;
-        taskButtons.forEach(button => button.onclick = (event) => {
-                newTaskClickHandler(event);
+        const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
+        if (!inputFields) return;
+        inputFields.forEach(field => field.nextElementSibling.onclick = () => {
+            autoSaveChanges();
         })
     }
 
