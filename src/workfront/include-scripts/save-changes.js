@@ -44,7 +44,7 @@
             {
                 setTimeout(triggerSaveButton, 100);
             }
-        }, false);
+        })
     }
 
     window.autoSaveAfterBeingIdle = () => {
