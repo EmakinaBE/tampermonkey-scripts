@@ -23,9 +23,34 @@
     let storage;
 
     window.addEventListener("popstate", () => loadDoc());
-    //loadDoc();
-    
-    window.setupHandlers = async () => {
+    loadDoc();
+
+    async function loadDoc() {
+        resetDoc();
+        executeCallback();
+        
+        setTimeout(setupHandlers, 3000);
+        if(window.wfGetOptions().autoSave){
+            autoSaveAfterBeingIdle();
+        }
+    }
+
+    async function pollNetworkRequestSuccess() {
+        
+        setTimeout(loadDoc, 1000);
+    }
+
+    function resetStorageObj() {
+        storage = {
+            'addedSaveButtonEventListener': false,
+            'addedSelectNewTaskLineEventListener': false,
+            'addedSaveCommentSaveButtonEventListener': false
+        };
+        
+        localStorage.setItem(storageKey, JSON.stringify(storage));
+    }
+
+    async function setupHandlers() {
 
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
 
@@ -67,31 +92,6 @@
         }
 
         setTimeout(resetStorageObj, 2000);
-    }
-
-    async function loadDoc() {
-        resetDoc();
-        executeCallback();
-        
-        setTimeout(window.setupHandlers, 3000);
-        if(window.wfGetOptions().autoSave){
-            autoSaveAfterBeingIdle();
-        }
-    }
-
-    async function pollNetworkRequestSuccess() {
-        
-        setTimeout(loadDoc, 1000);
-    }
-
-    function resetStorageObj() {
-        storage = {
-            'addedSaveButtonEventListener': false,
-            'addedSelectNewTaskLineEventListener': false,
-            'addedSaveCommentSaveButtonEventListener': false
-        };
-        
-        localStorage.setItem(storageKey, JSON.stringify(storage));
     }
 
     function newTaskClickHandler(event) {
