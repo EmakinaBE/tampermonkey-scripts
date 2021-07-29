@@ -27,7 +27,7 @@
     async function triggerSaveButton() {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
         
-        if(!saveButton[0].getAttribute('data-action') === "O"){
+        if(!(saveButton[0].getAttribute('data-action') === "O")){
             saveButton[0].click();
         }
     } 
