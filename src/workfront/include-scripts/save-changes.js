@@ -26,7 +26,10 @@
 
     async function triggerSaveButton() {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
-        saveButton[0].click();
+        
+        if(!saveButton.getAttribute('data-action') === "O"){
+            saveButton[0].click();
+        }
     } 
     
     window.autoSaveChanges = async () => {
