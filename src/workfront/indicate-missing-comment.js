@@ -36,12 +36,14 @@
     init();
 
     async function init() {
+        console.log(submitButtonSelector);
         const elements = await getElementsFromDocument(inputFieldSelector);
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const container = await getElementsFromDocument(containerSelector);
         
         if(!elements || !submitButton || !container) return;
         const warningMessage = await createWarningMessage(container[0]);
+        console.log('sub', submitButton);
 
         checkAll(elements, warningMessage, submitButton[0]);
         initListeners(elements, warningMessage, submitButton[0]);
