@@ -95,8 +95,10 @@
     }
 
     function checkAllCommentsAndMarkFields(elements) {
+        console.log('check all', elements);
         let isEmptyCommentPresent = false;
         
+        // elements.some ??
         elements.forEach(e => {
             const comment = e.getAttribute('data-description');
             const value = e.value;
