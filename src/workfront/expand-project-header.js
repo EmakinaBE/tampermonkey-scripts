@@ -36,6 +36,7 @@
 
     async function getHeaderElements() {
         headers = await getElementsFromDocument('.thead.project-hours');
+        console.log('headers', headers);
         if(!headers) return;
         
         allHeaders = [...headers];  
