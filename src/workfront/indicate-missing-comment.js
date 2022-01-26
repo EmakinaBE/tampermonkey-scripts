@@ -78,6 +78,8 @@
 
     async function checkAll(elements, warningMessage, submitButton) {
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
+        console.log('empty Field', emptyFieldFound);
+        console.log('submit', submitButton);
 
         // submit button is not always shown (on already commited ts)
         if(submitButton) {
