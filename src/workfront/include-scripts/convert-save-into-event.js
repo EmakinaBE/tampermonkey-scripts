@@ -1,53 +1,96 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      1.7
+// @version      2.0
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
-// @author       Wouter Versyck
+// @author       Wouter Versyck, Antonia Langer, Sarah Roupec
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
-// @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.preview.workfront.com/timesheet/*
-// @match        https://emakina.sb01.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
-// @match        https://emakina.preview.workfront.com/timesheets/current*
-// @match        https://emakina.sb01.workfront.com/timesheets/current*
+// @match        https://emakina.my.workfront.com/*
+// @match        https://emakina.preview.workfront.com/*
+// @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
 // @supportURL	 https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
+    let storageKey = 'eventListenerCheck'; 
+    let storage;
 
-    setupListeners();
+    window.addEventListener("popstate", () => loadDoc());
+    loadDoc();
 
-    function pollNetworkRequestSuccess() {
-        if (document.getElement('#content-timesheet-view').getAttribute('data-tampermonkey-id') ) {
-            setTimeout(pollNetworkRequestSuccess, 500);
-            return;
+    async function loadDoc() {
+        resetStorageObj();
+        resetDoc();
+        executeCallback();
+        
+        setTimeout(setupHandlers, 3000);
+        if(window.wfGetOptions().autoSave){
+            autoSaveAfterBeingIdle();
         }
-
-        setupListeners();
-        const event = new Event('WF_RELOAD');
-        dispatchEvent(event);
     }
 
-    function setupListeners() {
-        // setup attribute (to check page refresh) and listeners for on save button
-        document.getElement('#content-timesheet-view').setAttribute('data-tampermonkey-id', true);
+    async function pollNetworkRequestSuccess() {
+        
+        setTimeout(loadDoc, 1000);
+    }
 
-        const saveButton = document.getElement('.btn.primary.btn-primary');
+    function resetStorageObj() {
+        storage = {
+            'addedSaveButtonEventListener': false,
+            'addedSelectNewTaskLineEventListener': false,
+            'addedSaveCommentSaveButtonEventListener': false
+        };
+        
+        localStorage.setItem(storageKey, JSON.stringify(storage));
+    }
 
-        if (saveButton) {
-            saveButton.addEventListener('click', pollNetworkRequestSuccess);
+    async function setupHandlers() {
+
+        const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
+
+        storage = JSON.parse(localStorage.getItem(storageKey));
+        if(!storage)
+        {
+            resetStorageObj()
+        }
+
+        // if saveButton exists and eventListener isn't attatched yet
+        if (saveButton && !storage.addedSaveButtonEventListener) {
+            storage.addedSaveButtonEventListener = true;
+            localStorage.setItem(storageKey, JSON.stringify(storage));
+            saveButton[0].onclick = () => {
+                setTimeout(pollNetworkRequestSuccess, 1000);
+            }
+        }
+         
+        if (window.wfGetOptions().autoSave && !storage.addedSaveCommentSaveButtonEventListener){
+            storage.addedSaveCommentSaveButtonEventListener = true;
+            localStorage.setItem(storageKey, JSON.stringify(storage));
+            const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
+            if (!inputFields) return;
+            inputFields.forEach(field => field.onclick = () => {
+                autoSaveChanges();
+            })
         }
 
         // setup listeners for new task
-        getNewTaskButtons().forEach(button => button.addEventListener('click', newTaskClickHandler));
+        // if autoSelectNewTaskLine option is active and eventListener isn't attached yet
+        if (window.wfGetOptions().autoSelect && !storage.addedSelectNewTaskLineEventListener) {
+            storage.addedSelectNewTaskLineEventListener = true;
+            localStorage.setItem(storageKey, JSON.stringify(storage));
+            const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
+            if(!taskButtons) return;
+            taskButtons.forEach(button => button.onclick = (event) => {
+                newTaskClickHandler(event);
+            })
+        }
     }
 
     function newTaskClickHandler(event) {
@@ -55,13 +98,16 @@
         const workitemobjid = parent.getAttribute('data-workitemobjid');
 
         // use setTimeout to execute this after workfront rendered the new task line
-        setTimeout(() => {
+        setTimeout( async () => {
             // get all the lines for this task
-            const lines = document.getElements(`[data-workitemobjid=${workitemobjid}].TASK`);
+            const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+            if(!lines) return;
 
             // get the last (latest added) value and add a click handler for it for when other lines are added
-            const newLine = lines.pop();
-            newLine.getElement('.hour-type-and-role-add').addEventListener('click', newTaskClickHandler);
+            const newLine = lines[lines.length-1];
+            newLine.getElement('.hour-type-and-role-add').onclick = (event) => {
+                newTaskClickHandler(event);
+            }
 
             // dispatch event containing the original event and the newly added line
             const newTaskEvent = new CustomEvent('WF_NEW-TASK', {'detail': { event, newLine, workitemobjid } });
@@ -73,8 +119,4 @@
         document.head.dispatchEvent(event);
     }
 
-    function getNewTaskButtons() {
-        return document.getElements('.hour-type-and-role-add');
-    }
-
-})();
+})(window);

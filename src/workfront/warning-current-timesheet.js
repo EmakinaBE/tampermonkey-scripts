@@ -1,20 +1,17 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      1.13
+// @version      2.0
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
-// @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.preview.workfront.com/timesheet/*
-// @match        https://emakina.sb01.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
-// @match        https://emakina.preview.workfront.com/timesheets/current*
-// @match        https://emakina.sb01.workfront.com/timesheets/current*
+// @match        https://emakina.my.workfront.com/*
+// @match        https://emakina.preview.workfront.com/*
+// @match        https://emakina.sb01.workfront.com/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/warning-current-timesheet.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/warning-current-timesheet.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/warning-current-timesheet.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/warning-current-timesheet.js
 // @grant        none
 // ==/UserScript==
 
@@ -23,31 +20,39 @@
 
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 
-    document.head.addEventListener('WF_RELOAD', init);
+    callback(init);
     init();
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
-        const currentTsId = getCurrentTsId();
+        const getTimesheetId = await getElementsFromDocument('[data-timesheetid]');
+        if(!getTimesheetId) return; 
+        const currentTsId =  getTimesheetId[0].getAttribute('data-timesheetid');
 
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
 
-        await redirectIfNeeded(openTsInPast, noOlderTs);
+        redirectIfNeeded(openTsInPast, noOlderTs);
 
-        const isCurrentTs = getElement('.today');
+        const isCurrentTs = await getElementsFromDocument('.today');
 
         if (!isCurrentTs || openTsInPast) {
+
+            const header = await getElementsFromDocument('#timesheet-header');
+            if(!header) return;
+
+            // check if warning message was created already
+            const messageBoxId = 'messageBoxId13';
+            const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
+            if(oldMessageBox) return;
+
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
             messageBox.setAttribute('style', messageStyle);
+            messageBox.id = messageBoxId;
 
-            getElement('#timesheet-header').appendChild(messageBox);
+            header[0].appendChild(messageBox);
         }
-    }
-
-    function getElement(selector) {
-        return document.querySelector(selector);
     }
 
     function createElementWithText(tagName, text) {
@@ -82,7 +87,7 @@
         return `/timesheet/view?ID=${olderTs.ID}`;
     }
 
-    async function redirectIfNeeded(olderTs, noOlderTs) {
+    function redirectIfNeeded(olderTs, noOlderTs) {
 
         if (noOlderTs) {
             return;
@@ -93,19 +98,15 @@
         }
     }
 
-    function getCurrentTsId() {
-        return document.getElement('[data-timesheetid]').getAttribute('data-timesheetid');
-    }
-
     function getCurrentTs(currentTsId) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
+        return fetch(`${location.origin}/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
             .then(e => e.json())
             .then(e => e.data[0]);
     }
 
 
     function getOldestOpenTsBeforeToday() {
-        return fetch('https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1')
+        return fetch(`${location.origin}/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1`)
             .then(e => e.json())
             .then(e => e.data[0]);
     }

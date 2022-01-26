@@ -1,48 +1,50 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      1.7
+// @version      2.0
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Wouter Versyck
 // @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @match        https://emakina.my.workfront.com/timesheet/*
-// @match        https://emakina.preview.workfront.com/timesheet/*
-// @match        https://emakina.sb01.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
-// @match        https://emakina.preview.workfront.com/timesheets/current*
-// @match        https://emakina.sb01.workfront.com/timesheets/current*
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
+// @match        https://emakina.my.workfront.com/*
+// @match        https://emakina.preview.workfront.com/*
+// @match        https://emakina.sb01.workfront.com/*
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-norm.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-norm.js
 // @grant        none
 // ==/UserScript==
 
 (function() {
     'use strict';
 
-    document.head.addEventListener('WF_RELOAD', init);
+    callback(init);
     init();
 
     async function init() {
-        const timesheetId = getCurrentTsId();
+        const timesheetIdData = await getElementsFromDocument('[data-timesheetid]');
+        if(!timesheetIdData) return; 
+        const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
         const data = await fetchProjectData(timesheetId);
 
-        const col = createTableRows(data);
+        createTableRows(data);
 
-        addListener(col, parseToFloat(data.extRefID));
+        const col = await getElementsFromDocument('#trId13 .total');
+        if(!col) return;
+
+        addListener(col[0], parseToFloat(data.extRefID));
     }
 
     function createTableRows(data){
+       
         const delta = data.totalHours - parseToFloat(data.extRefID);
-        const col = insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
-
-        return col;
+        insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
     }
 
-    function addListener(col, norm) {
-        const tableFooter = document.getElement('#timesheet-data tfoot .total');
+    async function addListener(col, norm) {
+        const tableFooter = await getElementsFromDocument('#timesheet-data tfoot .total');
+        if(!tableFooter) return;
 
         const observer = new MutationObserver(mutations => {
             mutations.forEach(mutation => {
@@ -53,7 +55,7 @@
             });
         });
 
-        observer.observe(tableFooter, {
+        observer.observe(tableFooter[0], {
             attributes: true,
             childList: true,
             subTree: true,
@@ -62,9 +64,17 @@
         });
     }
 
-    function insertRow(text, color) {
-        const tableFooter = document.getElement('#timesheet-data > tfoot');
-        const tr = tableFooter.insertRow(-1);
+    async function insertRow(text, color) {
+        const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot');
+        if(!tableFooter) return;
+
+        // check if table row was created already
+        const trId = 'trId13';
+        const oldTr= await getElementsFromDocument(`#${trId}`);
+        if(oldTr) return;
+
+        const tr = tableFooter[0].insertRow(-1);
+        tr.id = trId;
 
         const firstCell = tr.insertCell(0);
         firstCell.innerHTML = 'Norm(delta):';
@@ -83,8 +93,6 @@
             tdVal.style = `color: ${color}`;
         }
         tdVal.innerHTML = text;
-
-        return tdVal;
     }
 
     function parseToFloat(text) {
@@ -103,13 +111,9 @@
     }
 
     function fetchProjectData(timesheetId) {
-        return fetch(`https://emakina.my.workfront.com/attask/api/v11.0/tshet/search?ID=${timesheetId}&fields=*`)
+        return fetch(`${location.origin}/attask/api/v11.0/tshet/search?ID=${timesheetId}&fields=*`)
             .then(response => response.json())
             .then(json => json.data[0]);
-    }
-
-    function getCurrentTsId() {
-        return document.getElement('[data-timesheetid]').getAttribute('data-timesheetid');
     }
 
 })();
