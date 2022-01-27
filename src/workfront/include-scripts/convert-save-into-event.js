@@ -18,7 +18,6 @@
 
 
 (function(window) {
-    'use strict';
     let storageKey = 'eventListenerCheck'; 
     let storage;
 

@@ -17,7 +17,6 @@
 // ==/UserScript==
 
 (function(window) {
-    'use strict';
 
     let options;
     const store = new Store('wf-options');

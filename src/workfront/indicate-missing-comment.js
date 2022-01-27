@@ -18,7 +18,6 @@
 
 
 (function() {
-    'use strict';
     const commentId = 'commentId13';
     const inputFieldSelector = '.fc > input:not([readonly=true])';
     const noCommentStyle = 'background: tomato';

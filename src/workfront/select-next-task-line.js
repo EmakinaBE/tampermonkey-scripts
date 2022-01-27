@@ -16,7 +16,6 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
 
     document.head.addEventListener('WF_NEW-TASK', handleEvent);
 

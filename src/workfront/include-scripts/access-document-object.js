@@ -18,7 +18,6 @@
 
 
 (function(window, document) {
-    'use strict';
 
     let doc;
     let callbacks = [];

@@ -19,7 +19,6 @@
 
 
 (function(window) {
-    'use strict';
 
     let idleTime = 0;
     let idleTimer;

@@ -17,7 +17,6 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
 
     callback(init);
     init();

@@ -16,7 +16,6 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
 
     let popUp = null;
     let isPopUpVisible = false;

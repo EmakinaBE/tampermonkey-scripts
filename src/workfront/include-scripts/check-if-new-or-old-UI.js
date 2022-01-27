@@ -18,7 +18,6 @@
 
 
 (function(window) {
-    'use strict';
 
     window.isNewUI = () => { 
         return window.config;

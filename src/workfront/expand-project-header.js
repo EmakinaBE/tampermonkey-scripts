@@ -18,7 +18,6 @@
 // ==/UserScript==
 
 (function() {
-    'use strict'
     
     let headers;
     let allHeaders = [];

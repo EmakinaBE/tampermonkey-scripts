@@ -16,7 +16,6 @@
 // ==/UserScript==
 
 (function() {
-    'use strict';
 
     const messageStyle = 'padding: 15px; background: tomato; color: white;';
 

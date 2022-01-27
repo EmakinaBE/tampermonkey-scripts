@@ -17,7 +17,6 @@
 // ==/UserScript==
 
 (function(window) {
-    'use strict';
 
     let callbacks = [];
 
