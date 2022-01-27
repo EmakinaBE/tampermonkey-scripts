@@ -37,6 +37,7 @@
 
 (function() {
     'use strict';
-    const my_css = GM_getResourceText("customCSS);
+    const my_css = GM_getResourceText("customCSS");
     GM_addStyle(my_css);
+})
 // test
