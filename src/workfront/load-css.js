@@ -12,21 +12,14 @@
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-css.js
 // @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-css.js
+// @grant        GM_getResourceText
 // @grant        GM_addStyle
+// @resource     EMAKINA_CSS https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css
 /// ==/UserScript==
 
 (function() {
-    'use strict';
     console.log('Hello CSS');
-    GM_addStyle(`
-        body {
-            backgropund: #000;
-        }
-        button.btn.submit.btn-secondary:disabled {
-            background-color: #b3d6f3;
-            border-color: #b3d6f3;
-            color: #fff;
-        }
-    `);
+    const my_css = GM_getResourceText("EMAKINA_CSS");
+    GM_addStyle(my_css);
     alert('Gib mir css du sack');
 })();
