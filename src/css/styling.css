@@ -1,3 +1,8 @@
 #main-content {
     background: #000;
 }
+
+.btn.submit.btn-secondary:disabled {
+    color: red;
+    background-color: #000;
+}
