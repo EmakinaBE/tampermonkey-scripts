@@ -32,5 +32,14 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/disable-completed-task.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/options.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-styling.js
-// @grant        none
+// @resource     customCSS https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/styling.css
+// @grant        GM_getResourceText
+// @grant        GM_addStyle
 // ==/UserScript==
+
+(function() {
+    'use strict';
+    const my_css = GM_getResourceText("customCSS");
+    GM_addStyle(my_css);
+    alert('hi');
+})();
