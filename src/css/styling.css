@@ -5,6 +5,7 @@ body {
 
 #main-content {
     background: #000;
+    color: violet;
 }
 
 body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled {
