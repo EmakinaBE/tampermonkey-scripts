@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined Test New UI
 // @namespace    https://www.emakina.com/
-// @version      2.0.5
+// @version      2.0.6
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -41,5 +41,3 @@
     const my_css = GM_getResourceText("customCSS");
     console.log('my', my_css);
     GM_addStyle(my_css);
-})
-// test
