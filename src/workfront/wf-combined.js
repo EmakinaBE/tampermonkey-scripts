@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined New UI ttt
 // @namespace    https://www.emakina.com/
-// @version      2.0.1
+// @version      2.0.2
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -31,13 +31,13 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/select-next-task-line.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/disable-completed-task.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/options.js
-// @resource     emakinaCSS https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/csss/style.css
+// @resource     emakinaCSS https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css
 // @grant        GM_getResourceText
 // @grant        GM_addStyle
 // ==/UserScript==
 
 (function() {
     'use strict';
-    const my_css = GM_getResourceText("emakinaCSS");
+    const my_css = await GM_getResourceText("emakinaCSS");
     GM_addStyle(my_css);
 })();
