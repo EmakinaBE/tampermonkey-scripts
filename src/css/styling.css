@@ -7,7 +7,7 @@ body {
     background: #000;
 }
 
-.timesheet-saving-panel>div>button.btn-secondary:disabled {
+body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled {
     color: red;
     background-color: #000;
 }
