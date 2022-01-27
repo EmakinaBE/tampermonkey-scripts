@@ -34,6 +34,10 @@
 // @resource     customCSS https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/styling.css
 // @grant        none
 // ==/UserScript==
-var newCSS = GM_getResourceText ("customCSS");
-GM_addStyle (newCSS);
+
+(function() {
+    'use strict';
+    const my_css = GM_getResourceText("customCSS);
+    GM_addStyle(my_css);
+})
 // test
