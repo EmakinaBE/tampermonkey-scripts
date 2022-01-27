@@ -2,7 +2,7 @@
     background: #000;
 }
 
-.btn.submit.btn-secondary:disabled {
+.timesheet-saving-panel>div>button.btn-secondary:disabled {
     color: red;
     background-color: #000;
 }
