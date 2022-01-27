@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined Test New UI
 // @namespace    https://www.emakina.com/
-// @version      2.0.2
+// @version      2.0.3
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
