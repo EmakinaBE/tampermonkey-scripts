@@ -36,14 +36,12 @@
     init();
 
     async function init() {
-        console.log(submitButtonSelector);
         const elements = await getElementsFromDocument(inputFieldSelector);
         const submitButton = await getElementsFromDocument(submitButtonSelector);
         const container = await getElementsFromDocument(containerSelector);
         
         if(!elements || !submitButton || !container) return;
         const warningMessage = await createWarningMessage(container[0]);
-        console.log('sub', submitButton);
 
         checkAll(elements, warningMessage, submitButton[0]);
         initListeners(elements, warningMessage, submitButton[0]);
@@ -80,8 +78,6 @@
 
     async function checkAll(elements, warningMessage, submitButton) {
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
-        console.log('empty Field', emptyFieldFound);
-        console.log('submit', submitButton);
 
         // submit button is not always shown (on already commited ts)
         if(submitButton) {
@@ -95,7 +91,6 @@
     }
 
     function checkAllCommentsAndMarkFields(elements) {
-        console.log('check all', elements);
         let isEmptyCommentPresent = false;
         
         // elements.some ??
