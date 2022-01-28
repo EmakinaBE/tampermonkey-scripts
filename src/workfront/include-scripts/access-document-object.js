@@ -29,9 +29,8 @@
         callbacks = [];
     });
 
-    window.getElementsFromDocument = async (finalSelector, overwrite) => { 
+    window.getElementsFromDocument = async (finalSelector, overwrite, maxTries = 200) => { 
         overwrite = isNewUI() ? overwrite : document;
-        let maxTries = 200;
         let base;
         let selector;
 
