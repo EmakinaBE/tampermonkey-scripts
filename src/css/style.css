@@ -4,10 +4,11 @@ Version: 1.0.0
 */
 
 .wkday.today.w1 {
-    background-color: lemonchiffon;
+    background-color: red;
 }
 
-body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled {
+body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled,
+body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary[disabled] {
     background-color: #b3d6f3;
     border-color: #b3d6f3;
     color: #fff;
