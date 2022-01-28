@@ -15,7 +15,7 @@
 // @grant        none
 /// ==/UserScript==
 
-(function (document) {
+(async function (document) {
     'use strict';
     let container;
     function styleTagToHead(options) {
@@ -41,6 +41,5 @@
 
     container = await getElementsFromDocument(`#tp-icon-container`, document);
     
-
     styleTagToHead({src: 'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css'})
 })(document);
