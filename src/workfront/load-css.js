@@ -17,6 +17,7 @@
 
 (function (document) {
     'use strict';
+    let container;
     function styleTagToHead(options) {
         generateTag(
             'link',
@@ -35,9 +36,11 @@
             .forEach(([key, value]) => {
                 tag[key] = value;
             });
-
-        const lastTag = document.querySelector(`head ${type}:last-of-type`);
-        lastTag.parentNode.insertBefore(tag, lastTag.nextSibling);
+        container.appendChild(tag)
     }
+
+    container = await getElementsFromDocument(`#tp-icon-container`, document);
+    
+
     styleTagToHead({src: 'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css'})
 })(document);
