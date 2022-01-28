@@ -52,7 +52,7 @@
         button.onclick = togglePopUp;
 
         const li = document.createElement('li');
-        li.id('tp-icon-container')
+        li.id = 'tp-icon-container';
         li.appendChild(button);
         let navbarItemGroup;
 
