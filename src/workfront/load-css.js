@@ -12,14 +12,32 @@
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-css.js
 // @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-css.js
-// @resource     EMAKINA_CSS https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css
-// @grant        GM_getResourceText
-// @grant        GM_addStyle
+// @grant        none
 /// ==/UserScript==
 
-(function() {
+(function (document) {
     'use strict';
-    console.log('Hello');
-    const my_css = GM_getResourceText("EMAKINA_CSS");
-    GM_addStyle(my_css);
-})();
+    function styleTagToHead(options) {
+        generateTag(
+            'link',
+            {
+                type: 'text/css',
+            },
+            options,
+        );
+    }
+
+    function generateTag(type, standardOptions, options) {
+        const tag = document.createElement(type);
+
+        Object.assign(standardOptions, options);
+        Object.entries(standardOptions)
+            .forEach(([key, value]) => {
+                tag[key] = value;
+            });
+
+        const lastTag = document.querySelector(`head ${type}:last-of-type`);
+        lastTag.parentNode.insertBefore(tag, lastTag.nextSibling);
+    }
+    styleTagToHead({src: 'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css'})
+})(document);
