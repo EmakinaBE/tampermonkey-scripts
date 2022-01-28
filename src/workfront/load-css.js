@@ -38,7 +38,7 @@
             });
         container.appendChild(tag)
     }
-    setTimeout(() => {
+    setTimeout(async() => {
         container = await getElementsFromDocument(`#tp-icon-container`, document, 4000);
         if (!container) return;
         styleTagToHead({src: 'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css'})
