@@ -29,8 +29,9 @@
         callbacks = [];
     });
 
-    window.getElementsFromDocument = async (finalSelector, overwrite, maxTries = 200) => { 
+    window.getElementsFromDocument = async (finalSelector, overwrite, maxTriesInput = 200) => { 
         overwrite = isNewUI() ? overwrite : document;
+        let maxTries = maxTriesInput;
         let base;
         let selector;
 
@@ -70,7 +71,7 @@
                 });
             }
         }
-        maxTries = 200;
+        maxTries = maxTriesInput;
         callbacks.push(() => {
             maxTries = 0;
         });
