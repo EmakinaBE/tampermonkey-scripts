@@ -8,7 +8,9 @@ Version: 1.0.0
 }
 
 body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled,
-body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary[disabled] {
+body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary[disabled],
+button.btn.submit.btn-secondary:disabled,
+button.btn.submit.btn-secondary[disabled] {
     background-color: #b3d6f3;
     border-color: #b3d6f3;
     color: #fff;
