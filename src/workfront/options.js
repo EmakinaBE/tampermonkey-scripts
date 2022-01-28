@@ -43,7 +43,7 @@
     }
 
     async function createMenuElement() {
-        const listId = 'listId13';
+        const listId = 'tp-icon-container';
         const oldListElement = await getElementsFromDocument(`#${listId}`, document);
         if(oldListElement ) return;
 
@@ -52,7 +52,6 @@
         button.onclick = togglePopUp;
 
         const li = document.createElement('li');
-        li.id = 'tp-icon-container';
         li.appendChild(button);
         let navbarItemGroup;
 
