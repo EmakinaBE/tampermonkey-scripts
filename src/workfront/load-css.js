@@ -25,12 +25,11 @@
         const css = await res.text();
         tag.type="text/css";
         tag.innerHTML = css
-        console.log(container);
         container[0].contentDocument.head.appendChild(tag)
     }
     setTimeout(async() => {
-        container = await getElementsFromDocument(`#main-frame`, document, 4000);
+        container = await getElementsFromDocument(`#main-frame`, document, 1000);
         if (!container) return;
         generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css')
-    }, 10000);
+    }, 7000);
 })(document);
