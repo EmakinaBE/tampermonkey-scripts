@@ -2,18 +2,18 @@
 Autor: Jan-Dennis Drenkhahn
 Version: 1.0.0
 */
-#main-frame body {
+body {
     background-color: orange;
 }
 
-#main-frame .wkday.today.w1 {
+.wkday.today.w1 {
     background-color: red;
 }
 
-#main-frame body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled,
-#main-frame body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary[disabled],
-#main-frame button.btn.submit.btn-secondary:disabled,
-#main-frame button.btn.submit.btn-secondary[disabled] {
+body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled,
+body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary[disabled],
+button.btn.submit.btn-secondary:disabled,
+button.btn.submit.btn-secondary[disabled] {
     background-color: #b3d6f3;
     border-color: #b3d6f3;
     color: #fff;
