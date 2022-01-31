@@ -18,29 +18,19 @@
 (async function (document) {
     'use strict';
     let container;
-    function styleTagToHead(options) {
-        generateTag(
-            'link',
-            {
-                type: 'text/css',
-            },
-            options,
-        );
-    }
 
-    function generateTag(type, standardOptions, options) {
-        const tag = document.createElement(type);
-
-        Object.assign(standardOptions, options);
-        Object.entries(standardOptions)
-            .forEach(([key, value]) => {
-                tag[key] = value;
-            });
-        container.appendChild(tag)
+    async function generateTag(url) {
+        const tag = document.createElement('style');
+        const res = await fetch(url);
+        const css = await res.text();
+        tag.type="text/css";
+        tag.innerHTML = css
+        console.log(container);
+        container[0].contentDocument.head.appendChild(tag)
     }
     setTimeout(async() => {
-        container = await getElementsFromDocument(`#tp-icon-container`, document, 4000);
+        container = await getElementsFromDocument(`#main-frame`, document, 4000);
         if (!container) return;
-        styleTagToHead({src: 'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css'})
+        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css')
     }, 10000);
 })(document);
