@@ -10,8 +10,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-css.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/workfront/load-css.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/load-css.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/load-css.js
 // @grant        none
 /// ==/UserScript==
 
@@ -30,6 +30,6 @@
     setTimeout(async() => {
         container = await getElementsFromDocument(`#main-frame`, document, 1000);
         if (!container) return;
-        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2986-tm-mark-save-and-close-b/src/css/style.css')
+        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/css/style.css')
     }, 7000);
 })(document);
