@@ -15,6 +15,8 @@
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
 // @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/test3/src/workfront/options.js
+
 
 // ==/UserScript==
 
