@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined New
 // @namespace    https://www.emakina.com/
-// @version      2.1.0.0
+// @version      2.1.0.1
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*

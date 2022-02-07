@@ -82,7 +82,6 @@
         // submit button is not always shown (on already commited ts)
         if(submitButton) {
             submitButton.disabled = emptyFieldFound;
-            submitButton.style.backgroundColor = #b3d6f3;
         }
 
         const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
