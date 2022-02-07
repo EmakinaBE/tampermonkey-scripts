@@ -31,7 +31,9 @@
         executeCallback();
         
         setTimeout(setupHandlers, 3000);
+        console.log('give me save options', window.wfGetOptions().autoSave);
         if(window.wfGetOptions().autoSave){
+            console.log('hello autoSave');
             autoSaveAfterBeingIdle();
         }
     }
@@ -71,11 +73,13 @@
         }
          
         if (window.wfGetOptions().autoSave && !storage.addedSaveCommentSaveButtonEventListener){
+            console.log('is not or doch');
             storage.addedSaveCommentSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.onclick = () => {
+                console.log('is onclick autosave');
                 autoSaveChanges();
             })
         }
