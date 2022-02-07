@@ -98,6 +98,7 @@
             const value = e.value;
             
             if(value && !comment) {
+                console.log('value', value);
                 e.setAttribute('style', noCommentStyle);
                 isEmptyCommentPresent = true;
             } else {
@@ -147,6 +148,7 @@
     function roundStringToNearestQtr(string) {
         const index = string.indexOf(del);
         if(index > 0 && index < string.length - 1) {
+            string = string.replace(",", ".");
             const roundedNr = roundNearQtr(parseFloat(string));
             return toSystemDecimalDelimiter(roundedNr.toString());
         }
@@ -154,10 +156,13 @@
     }
 
     function toSystemDecimalDelimiter(string) {
-        const correctDel = del;
-        const wrongDel = correctDel === '.' ? ',' : '.';
+        const commaLangs = ['de-AT', 'de-DE', 'de'];
+        const dotLangs = ['en', 'en-US'];
+        const lang = navigator.language[0];
+        if (commaLangs.includes(lang)) return string.replace('.', ',');
+        if (dotLangs.includes(lang)) return string.replace(',', '.');
 
-        return string.replace(wrongDel, correctDel);
+        return string;
     }
 
     function roundNearQtr(nr) {
