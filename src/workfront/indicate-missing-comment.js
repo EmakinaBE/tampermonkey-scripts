@@ -28,7 +28,11 @@
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
 
-    const del = getSystemDecimalSeparator();
+    // spell check
+    const commaLangs = ['de-AT', 'de-DE', 'de'];
+    const dotLangs = ['en', 'en-US'];
+    const lang = navigator.language;
+
 
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
@@ -110,6 +114,17 @@
 
     function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
+            e.addEventListener('keyup', (keyValue) => {
+                // should only be executed, when key is not backspace
+                if(keyValue.keyCode != 8)
+                {
+                    const val = e.value;
+                    if (val) {
+                        e.value = toSystemDecimalDelimiter(val);
+                    }
+                }
+            }, false);
+            
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     if (mutation.attributeName === 'data-description') {
@@ -121,17 +136,13 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('keyup', (keyValue) => {
-                // should only be executed, when key is not backspace
-                if(keyValue.keyCode != 8)
-                {
-                    const val = e.value;
-                    checkAll(elements, warningMessage, submitButton);
-                    if (window.wfGetOptions().correctComma) { 
-                        const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
-                        if (val) {
-                            e.value = operation(val);
-                        }
+            e.addEventListener('blur', (keyValue) => {
+                const val = e.value;
+                checkAll(elements, warningMessage, submitButton);
+                if (window.wfGetOptions().correctComma) { 
+                    const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
+                    if (val) {
+                        e.value = operation(val);
                     }
                 }
             }, false);
@@ -144,21 +155,14 @@
         }
         return window.wfGetOptions().roundToNearestQuarter;
     }
-
+    
     function roundStringToNearestQtr(string) {
-        const index = string.indexOf(del);
-        if(index > 0 && index < string.length - 1) {
-            string = string.replace(",", ".");
-            const roundedNr = roundNearQtr(parseFloat(string));
-            return toSystemDecimalDelimiter(roundedNr.toString());
-        }
-        return toSystemDecimalDelimiter(string);
+        string = string.replace(",", ".");
+        const roundedNr = roundNearQtr(parseFloat(string));
+        return toSystemDecimalDelimiter(roundedNr.toString());
     }
 
     function toSystemDecimalDelimiter(string) {
-        const commaLangs = ['de-AT', 'de-DE', 'de'];
-        const dotLangs = ['en', 'en-US'];
-        const lang = navigator.language[0];
         if (commaLangs.includes(lang)) return string.replace('.', ',');
         if (dotLangs.includes(lang)) return string.replace(',', '.');
 
@@ -167,15 +171,5 @@
 
     function roundNearQtr(nr) {
         return Math.round(nr * 4) / 4;
-    }
-
-    function getSystemDecimalSeparator() {
-        const n = 1.1;
-        const lang = document.documentElement.lang.replace('_', '-');
-
-        if (lang) {
-            return n.toLocaleString(lang).substring(1, 2);
-        }
-        return n.toLocaleString().substring(1, 2);
     }
 })();
