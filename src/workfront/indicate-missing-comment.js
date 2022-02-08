@@ -102,7 +102,6 @@
             const value = e.value;
             
             if(value && !comment) {
-                console.log('value', value);
                 e.setAttribute('style', noCommentStyle);
                 isEmptyCommentPresent = true;
             } else {
@@ -124,7 +123,7 @@
                     }
                 }
             }, false);
-            
+
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     if (mutation.attributeName === 'data-description') {
