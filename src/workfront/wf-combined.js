@@ -1,37 +1,37 @@
 // ==UserScript==
-// @name         WF combined
+// @name         WF combined New
 // @namespace    https://www.emakina.com/
-// @version      1.44
+// @version      2.2.0.3
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
 // @match        https://emakina.preview.workfront.com/timesheet/*
 // @match        https://emakina.sb01.workfront.com/timesheet/*
-// @match        https://emakina.my.workfront.com/timesheets/current*
-// @match        https://emakina.preview.workfront.com/timesheets/current*
-// @match        https://emakina.sb01.workfront.com/timesheets/current*
+// @match        https://emakina.my.workfront.com/timesheets/*
+// @match        https://emakina.preview.workfront.com/timesheets/*
+// @match        https://emakina.sb01.workfront.com/timesheets/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
-// @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
+// @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
 // @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/save-changes.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/storage.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/manage-options.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/check-if-new-or-old-UI.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/event-handler.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/access-document-object.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/expand-project-header.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/highlight-currentday.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/warning-current-timesheet.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-company-name-project-header.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-missing-comment.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-companyName-projectHeader.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/select-next-task-line.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/options.js
-
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/load-css.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
+// @grant        none
 // ==/UserScript==
-
-setTimeout(async() => {
-    var newDiv = document.createElement("div");
-    newDiv.innerHTML = "Your Tampermonkey script is out-dated, please update it. (Details <a href='https://share.emakina.net/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
-    newDiv.style = 'display:flex; justify-content: center; align-items: center;background:red; color: #ffffff; height: 50px'
-
-    var currentDiv = document.getElementById("root");
-    document.body.insertBefore(newDiv, currentDiv);
-}, 5000);
