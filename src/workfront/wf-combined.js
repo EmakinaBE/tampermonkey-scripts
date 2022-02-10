@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined New
 // @namespace    https://www.emakina.com/
-// @version      2.2.0.0
+// @version      2.2.0.1
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -11,7 +11,7 @@
 // @match        https://emakina.preview.workfront.com/timesheets/*
 // @match        https://emakina.sb01.workfront.com/timesheets/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
-// @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
+// @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
 // @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/wf-combined.js
 // @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/wf-combined.js
