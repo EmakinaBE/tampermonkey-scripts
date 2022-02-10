@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined New
 // @namespace    https://www.emakina.com/
-// @version      2.2.0.2
+// @version      2.2.0.3
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -13,25 +13,25 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/wf-combined.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/wf-combined.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/save-changes.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/storage.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/manage-options.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/check-if-new-or-old-UI.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/event-handler.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/access-document-object.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/include-scripts/convert-save-into-event.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/expand-project-header.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/highlight-currentday.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/warning-current-timesheet.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/add-company-name-project-header.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-missing-comment.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-norm.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/select-next-task-line.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/disable-completed-task.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/options.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/load-css.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/version-warning.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/save-changes.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/storage.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/manage-options.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/check-if-new-or-old-UI.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/event-handler.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/access-document-object.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/expand-project-header.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/highlight-currentday.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/warning-current-timesheet.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-company-name-project-header.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-missing-comment.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-norm.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/select-next-task-line.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/options.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/load-css.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
 // @grant        none
 // ==/UserScript==

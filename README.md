@@ -7,7 +7,7 @@ To-Do for the future:
       - @supportURL
       
       FOR EXAMPLE: 
-      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/disable-completed-task.js
+      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
       
       SHOULD BE CHANGED TO:
       https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
