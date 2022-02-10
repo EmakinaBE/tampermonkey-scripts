@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WF combined New Auto Save
+// @name         WF combined New
 // @namespace    https://www.emakina.com/
 // @version      2.2.0.0
 // @description  Combines the individual wf scripts into one.
