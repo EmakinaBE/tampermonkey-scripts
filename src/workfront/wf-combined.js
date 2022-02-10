@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined New
 // @namespace    https://www.emakina.com/
-// @version      2.2.0.1
+// @version      2.2.0.2
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -32,5 +32,6 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/disable-completed-task.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/options.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/load-css.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/version-warning.js
 // @grant        none
 // ==/UserScript==
