@@ -21,7 +21,7 @@
 
 setTimeout(async() => {
     var newDiv = document.createElement("div");
-    newDiv.innerHTML = "Your Tampermonkey script is out-dated, please update it. (Details <a href='https://share.emakina.net/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
+    newDiv.innerHTML = "Your Tampermonkey script is on monday 14/02/22 out-dated, please update it at Monday 14/02/22. (Details <a href='https://share.emakina.net/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
     newDiv.style = 'display:flex; justify-content: center; align-items: center;background:red; color: #ffffff; height: 50px'
 
     var currentDiv = document.getElementById("root");
