@@ -1,8 +1,8 @@
 // ==UserScript==
-// @name         File to Load Emakina CSS
+// @name         File to Load a Version Warning
 // @namespace    https://www.emakina.com/
 // @version      1.0
-// @description  This File Load the Emakina CSS to change desing
+// @description  This File Load the Emakina version Warning
 // @author       Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
