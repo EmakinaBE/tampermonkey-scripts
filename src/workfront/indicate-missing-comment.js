@@ -27,6 +27,7 @@
     const warningMessageSelector = '#CommentPanel > menu > p';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
+    const numberFormater = new Intl.NumberFormat(navigator.language);
 
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
@@ -159,7 +160,7 @@
     }
 
     function toSystemDecimalDelimiter(number) {
-        return new Intl.NumberFormat().format(number);
+        return numberFormater.format(number);
     }
 
     function roundNearQtr(nr) {

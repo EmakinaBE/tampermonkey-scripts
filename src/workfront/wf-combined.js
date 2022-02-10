@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined New Auto Save
 // @namespace    https://www.emakina.com/
-// @version      2.1.1.5
+// @version      2.1.1.6
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
