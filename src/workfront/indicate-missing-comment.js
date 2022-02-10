@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.1.0.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -11,8 +11,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3024-TM-AutoSave/src/workfront/indicate-missing-comment.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3024-TM-AutoSave/src/workfront/indicate-missing-comment.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-missing-comment.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-missing-comment.js
 // @grant        none
 // ==/UserScript==
 
