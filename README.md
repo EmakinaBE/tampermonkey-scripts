@@ -1,4 +1,5 @@
 #Tampermonkey Scripts
+
 ![GitHub Downloads All Releases](https://img.shields.io/github/downloads/EmakinaBE/tampermonkey-scripts/total?label=Downloads+(Total))
 
 To-Do for the future:
