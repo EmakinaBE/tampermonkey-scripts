@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.1.0.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck
@@ -9,10 +9,10 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
-// @supportURL   https://bugtracking.emakina.net/projects/ENWORKFNAV/summary
+// @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-missing-comment.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/New-UI/src/workfront/indicate-missing-comment.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-missing-comment.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-missing-comment.js
 // @grant        none
 // ==/UserScript==
 
@@ -27,8 +27,7 @@
     const warningMessageSelector = '#CommentPanel > menu > p';
     const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
-
-    const del = getSystemDecimalSeparator();
+    const numberFormater = new Intl.NumberFormat(navigator.language);
 
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
@@ -107,8 +106,24 @@
         return isEmptyCommentPresent;
     }
 
+    function cleanParseFloat(string) {
+        string = string.replace(",", ".");
+        return parseFloat(string);
+    }
+
     function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
+            e.addEventListener('keyup', (keyValue) => {
+                // should only be executed, when key is not backspace
+                if(keyValue.keyCode != 8)
+                {
+                    const val = e.value;
+                    if (val && val.match(/\d+[,.]\d+/g)) {
+                        e.value = toSystemDecimalDelimiter(cleanParseFloat(val));
+                    }
+                }
+            }, false);
+
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
                     if (mutation.attributeName === 'data-description') {
@@ -120,17 +135,13 @@
             observer.observe(e, {
                 attributes: true
             });
-            e.addEventListener('keyup', (keyValue) => {
-                // should only be executed, when key is not backspace
-                if(keyValue.keyCode != 8)
-                {
-                    const val = e.value;
-                    checkAll(elements, warningMessage, submitButton);
-                    if (window.wfGetOptions().correctComma) { 
-                        const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
-                        if (val) {
-                            e.value = operation(val);
-                        }
+            e.addEventListener('blur', (keyValue) => {
+                const val = e.value;
+                checkAll(elements, warningMessage, submitButton);
+                if (window.wfGetOptions().correctComma) { 
+                    const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
+                    if (val) {
+                        e.value = operation(cleanParseFloat(val));
                     }
                 }
             }, false);
@@ -143,34 +154,16 @@
         }
         return window.wfGetOptions().roundToNearestQuarter;
     }
-
-    function roundStringToNearestQtr(string) {
-        const index = string.indexOf(del);
-        if(index > 0 && index < string.length - 1) {
-            const roundedNr = roundNearQtr(parseFloat(string));
-            return toSystemDecimalDelimiter(roundedNr.toString());
-        }
-        return toSystemDecimalDelimiter(string);
+    
+    function roundStringToNearestQtr(number) {
+        return toSystemDecimalDelimiter(roundNearQtr(number));
     }
 
-    function toSystemDecimalDelimiter(string) {
-        const correctDel = del;
-        const wrongDel = correctDel === '.' ? ',' : '.';
-
-        return string.replace(wrongDel, correctDel);
+    function toSystemDecimalDelimiter(number) {
+        return numberFormater.format(number);
     }
 
     function roundNearQtr(nr) {
         return Math.round(nr * 4) / 4;
-    }
-
-    function getSystemDecimalSeparator() {
-        const n = 1.1;
-        const lang = document.documentElement.lang.replace('_', '-');
-
-        if (lang) {
-            return n.toLocaleString(lang).substring(1, 2);
-        }
-        return n.toLocaleString().substring(1, 2);
     }
 })();
