@@ -34,7 +34,7 @@
     }
 
 
-    if(isToday(new Date()) === isToday(new Date('02-14-2022'))) {
+    if(isToday(new Date()) === isToday(new Date('02-18-2022'))) {
         console.log('play time;');
         setTimeout(async() => {
             var newDiv = document.createElement("div");
