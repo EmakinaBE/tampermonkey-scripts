@@ -70,6 +70,8 @@
             }
         }
          
+        console.log('autosave',window.wfGetOptions().autoSave );
+
         if (window.wfGetOptions().autoSave && !storage.addedSaveCommentSaveButtonEventListener){
             storage.addedSaveCommentSaveButtonEventListener = true;
             localStorage.setItem(storageKey, JSON.stringify(storage));
