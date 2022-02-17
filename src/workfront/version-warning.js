@@ -33,9 +33,9 @@
         return dateParameter.getDate() === today.getDate() && dateParameter.getMonth() === today.getMonth() && dateParameter.getFullYear() === today.getFullYear();
     }
 
+    var currentVersionCheck = GM_info.script.version;
 
-    if(isToday(new Date()) === isToday(new Date('02-18-2022'))) {
-        console.log('play time;');
+    if(isToday(new Date()) === isToday(new Date('02-18-2022')) && currentVersionCheck !== "2.2.0.43") {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
             newDiv.innerHTML = "Your Tampermonkey script is out-dated, please update it. (Details <a href='https://confluence.emakina.at/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
@@ -44,8 +44,5 @@
             var currentDiv = document.getElementById("root");
             document.body.insertBefore(newDiv, currentDiv);
         }, 5000);
-    } else {
-        console.log('not Today');
-    }; 
-    
+    };
 })();
