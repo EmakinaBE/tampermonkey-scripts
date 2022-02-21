@@ -38,7 +38,7 @@
         const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
         if (!inputFields) return;
         inputFields.forEach(field => field.nextElementSibling.onclick = () => {
-            autoSaveChanges();
+            if (window.wfGetOptions().autoSave) autoSaveChanges();
         })
     }
 
