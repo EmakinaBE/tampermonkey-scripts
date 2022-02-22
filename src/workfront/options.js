@@ -39,7 +39,7 @@
     }
 
     function showPopUp() {
-        popUp.style = 'position:fixed;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%;z-index:9999';
+        popUp.style = 'display: block';
     }
 
     async function createMenuElement() {
@@ -79,6 +79,7 @@
 
     function createOverlay() {
         const div = document.createElement('div');
+        div.classList.add("wf-overlay");
         div.id = 'WF-overlay';
         div.style = 'display:none';
         div.onclick = e => {
@@ -91,7 +92,7 @@
 
     function createOptionsView() {
         const container = document.createElement('div');
-        container.style = 'transform: translate(-50%, -50%); position: fixed; left: 50%; top: 50%; padding:20px; background: white; border: 1px solid black; box-shadow: 1px 3px 15px 5px rgba(0,0,0,0.32);';
+        container.classList.add("wf-popup");
         container.appendChild(createCloseButton());
         container.appendChild(createTitle('WF scripts options'));
 
@@ -109,9 +110,9 @@
 
     function createCloseButton() {
         const button = document.createElement('button');
+        button.classList.add("wf-popup-closs");
         button.textContent = 'X';
         button.onclick = togglePopUp;
-        button.style = 'float:right;border-radius:50%;width:20px;height:20px;line-height:0.1';
         return button;
     }
 

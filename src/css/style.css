@@ -10,3 +10,32 @@ button.btn.submit.btn-secondary[disabled] {
     border-color: #b3d6f3;
     color: #fff;
 }
+
+.wf-overlay {
+    position:fixed;
+    background:rgba(0,0,0,50%);
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    z-index:9999;
+}
+
+.wf-popup {
+    transform: translate(-50%, -50%); 
+    position: fixed; 
+    left: 50%; 
+    top: 50%; 
+    padding:20px; 
+    background: white; 
+    border: 1px solid black; 
+    box-shadow: 1px 3px 15px 5px rgba(0,0,0,0.32);
+}
+
+.wf-popup-closs {
+    float:right;
+    border-radius:50%;
+    width:20px;
+    height:20px;
+    line-height:0.1;
+}
