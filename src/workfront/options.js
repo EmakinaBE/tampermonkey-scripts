@@ -39,7 +39,7 @@
     }
 
     function showPopUp() {
-        popUp.style = 'display: block';
+        popUp.style = 'position:fixed;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%;z-index:9999';
     }
 
     async function createMenuElement() {
@@ -79,7 +79,6 @@
 
     function createOverlay() {
         const div = document.createElement('div');
-        div.classList.add("wf-overlay");
         div.id = 'WF-overlay';
         div.style = 'display:none';
         div.onclick = e => {

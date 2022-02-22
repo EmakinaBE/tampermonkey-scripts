@@ -32,4 +32,10 @@
         if (!container) return;
         generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/css/style.css')
     }, 7000);
+    
+    setTimeout(async() => {
+        container = await getElementsFromDocument(`body`, document, 1000);
+        if (!container) return;
+        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/css/main-style.css')
+    }, 7000);
 })(document);
