@@ -30,6 +30,6 @@
     setTimeout(async() => {
         container = await getElementsFromDocument(`#main-frame`, document, 1000);
         if (!container) return;
-        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/css/style.css')
+        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/css/style.css')
     }, 7000);
 })(document);
