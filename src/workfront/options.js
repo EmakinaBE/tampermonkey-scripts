@@ -19,13 +19,14 @@
     'use strict';
 
     let popUp = null;
+    let popupCreate;
     let isPopUpVisible = false;
 
     callback(init);
     init();
 
     function init() {
-        popUp = createPopupElement();
+        if (!popupCreate) popUp = createPopupElement();
         createMenuElement();
     }
 
@@ -39,7 +40,7 @@
     }
 
     function showPopUp() {
-        popUp.style = 'position:fixed;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%;z-index:9999';
+        popUp.style = 'display: block';
     }
 
     async function createMenuElement() {
@@ -48,7 +49,7 @@
         if(oldListElement ) return;
 
         const button = document.createElement('button');
-        button.style = 'background: url(https://avatars.githubusercontent.com/u/767504?s=400&u=d0a32a535c83ebde083450c51552e0496b0735d2&v=4);background-size:cover;width:30px;height:30px';
+        button.classList.add('wf-button');
         button.onclick = togglePopUp;
 
         const li = document.createElement('li');
@@ -70,6 +71,7 @@
     }
 
     function createPopupElement() {
+        popupCreate = true;
         const overlay = createOverlay();
         overlay.appendChild(createOptionsView());
 
@@ -79,6 +81,7 @@
 
     function createOverlay() {
         const div = document.createElement('div');
+        div.classList.add('wf-overlay');
         div.id = 'WF-overlay';
         div.style = 'display:none';
         div.onclick = e => {
@@ -91,7 +94,7 @@
 
     function createOptionsView() {
         const container = document.createElement('div');
-        container.classList.add("wf-popup");
+        container.classList.add('wf-popup');
         container.appendChild(createCloseButton());
         container.appendChild(createTitle('WF scripts options'));
 
@@ -109,7 +112,7 @@
 
     function createCloseButton() {
         const button = document.createElement('button');
-        button.classList.add("wf-popup-closs");
+        button.classList.add('wf-popup-closs');
         button.textContent = 'X';
         button.onclick = togglePopUp;
         return button;

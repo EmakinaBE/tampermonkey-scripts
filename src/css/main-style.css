@@ -30,3 +30,10 @@ Version: 1.0.0
     height:20px;
     line-height:0.1;
 }
+
+.wf-button {
+    background: url(https://avatars.githubusercontent.com/u/767504?s=400&u=d0a32a535c83ebde083450c51552e0496b0735d2&v=4);
+    background-size:cover;
+    width:30px;
+    height:30px;
+}
