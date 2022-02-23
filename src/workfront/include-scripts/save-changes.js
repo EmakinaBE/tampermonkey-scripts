@@ -30,7 +30,9 @@
         if(!(saveButton[0].getAttribute('data-action') === "O")){
             saveButton[0].click();
         }
-    } 
+    }
+
+
     
     window.autoSaveChanges = async () => {
         const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
@@ -68,6 +70,12 @@
         if (idleTime > 1) {
             triggerSaveButton();
         }
+    }
+
+    window.checkSaveButton = async () => {
+        console.log('check check');
+        const buttonToSave = await getElementsFromDocument('#save-btn.btn.primary.btn-primary');
+        console.log('to save button',buttonToSave)
     }
 
 })(window);

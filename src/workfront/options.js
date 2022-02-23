@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.0.1.0
 // @description  Show/edit options
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/*
@@ -106,7 +106,7 @@
 
             container.appendChild(div);
         }
-
+        createButtonArea();
         return container;
     }
 
@@ -141,5 +141,28 @@
         label.setAttribute('for', key);
         label.textContent = text;
         return label;
+    }
+
+    function createButtonArea() {
+        const btnContainer = document.createElement('div');
+        btnContainer.classList.add('wf-popup-btn-ctn');
+        btnContainer.appendChild(createButtonArea());
+        btnContainer.appendChild(createCancleButton());
+    }
+
+    function createSaveButton() {
+        const button = document.createElement('button');
+        button.classList.add('wf-popup-save-btn');
+        button.textContent= 'Save';
+        button.onClick = location.reload();
+        return button;
+    }
+
+    function createCancleButton() {
+        const button = document.createElement('button');
+        button.classList.add('wf-popup-cancle.btn');
+        button.textContent = 'Close';
+        button.onClick = togglePopUp;
+        return button;
     }
 })();

@@ -27,12 +27,9 @@
         tag.type="text/css";
         tag.innerHTML = css
         if (container === iframe_container) {
-            console.log('generateTage',container );
             container[0].contentDocument.head.appendChild(tag);
-            console.log('end container', container[0].contentDocument.head.appendChild(tag));
         }
         if (container === main_container) {
-            console.log('check find head', main_container[0]);
             main_container[0].appendChild(tag);
         }
     }
