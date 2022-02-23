@@ -91,6 +91,13 @@
                 newTaskClickHandler(event);
             })
         }
+
+        // window.addEventListener('beforeunload', (e) => {
+        //     const confirmationMessage = '\o/';
+
+        //     (e || window.event).returnValue = confirmationMessage;
+        //     return confirmationMessage;
+        // });
     }
 
     function newTaskClickHandler(event) {
