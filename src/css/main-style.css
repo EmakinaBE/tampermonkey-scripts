@@ -40,6 +40,10 @@ Version: 1.0.0
     height:30px;
 }
 
+.wf-popup-btn-ctn {
+    margin: 5px 0 0 0;
+}
+
 .wf-popup-btn-ctn-inner {
     margin: 5px 0 0 0;
     display: flex;
@@ -79,7 +83,6 @@ Version: 1.0.0
 }
 
 .wf-info-text {
-    margin-top: 5px;
     font-size: 12px;
 }
 
