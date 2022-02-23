@@ -2,6 +2,8 @@
 Autor: Jan-Dennis Drenkhahn
 Version: 1.0.0
 */
+
+/* popup styling */
 .wf-overlay {
     position:fixed;
     background:rgba(0,0,0,50%);
@@ -36,4 +38,32 @@ Version: 1.0.0
     background-size:cover;
     width:30px;
     height:30px;
+}
+
+.wf-popup-btn-ctn-inner {
+    margin: 5px 0 0 0;
+    display: flex;
+    justify-content: space-around;
+}
+
+.wf-popup-save-btn {
+    width: 50px;
+    padding: 4px;
+    border-radius: 5px;
+    background: #0D66D0;
+    color: #fff;
+    border: 2px solid transparent;
+}
+
+.wf-popup-cancle-btn {
+    width: 50px;
+    padding: 4px;
+    border-radius: 5px;
+    background: #fff;
+    border: 1px solid #0D66D0;
+    color: #0D66D0;
+}
+
+.wf-info-text {
+    content: "\2139"; 
 }

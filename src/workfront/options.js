@@ -43,6 +43,10 @@
         popUp.style = 'display: block';
     }
 
+    function reloadPage() {
+      if (isPopUpVisible) location.reload();
+    }
+
     async function createMenuElement() {
         const listId = 'tp-icon-container';
         const oldListElement = await getElementsFromDocument(`#${listId}`, document);
@@ -106,7 +110,8 @@
 
             container.appendChild(div);
         }
-        createButtonArea();
+        container.appendChild(createButtonArea());
+
         return container;
     }
 
@@ -146,23 +151,39 @@
     function createButtonArea() {
         const btnContainer = document.createElement('div');
         btnContainer.classList.add('wf-popup-btn-ctn');
-        btnContainer.appendChild(createButtonArea());
-        btnContainer.appendChild(createCancleButton());
+        btnContainer.appendChild(createInfoText('If you save, the page must be reloaded'))
+        btnContainer.appendChild(createButtonInner());
+        return btnContainer;
+    }
+
+    function createInfoText(text) {
+        const infoText = document.createElement('span');
+        infoText.classList.add('wf-info-text');
+        infoText.textContent = text;
+        return infoText;
+    }
+
+    function createButtonInner() {
+        const innercontainer = document.createElement('div');
+        innercontainer.classList.add('wf-popup-btn-ctn-inner');
+        innercontainer.appendChild(createSaveButton());
+        innercontainer.appendChild(createCancleButton());
+        return innercontainer;
     }
 
     function createSaveButton() {
         const button = document.createElement('button');
         button.classList.add('wf-popup-save-btn');
         button.textContent= 'Save';
-        button.onClick = location.reload();
+        button.onclick = reloadPage;
         return button;
     }
 
     function createCancleButton() {
         const button = document.createElement('button');
-        button.classList.add('wf-popup-cancle.btn');
+        button.classList.add('wf-popup-cancle-btn');
         button.textContent = 'Close';
-        button.onClick = togglePopUp;
+        button.onclick = togglePopUp;
         return button;
     }
 })();
