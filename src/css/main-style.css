@@ -53,6 +53,13 @@ Version: 1.0.0
     background: #0D66D0;
     color: #fff;
     border: 2px solid transparent;
+    transition: 0.3s ease-in;
+}
+
+.wf-popup-save-btn:hover {
+    background: #fff;
+    color: #0D66D0;
+    border-color:#0D66D0;
 }
 
 .wf-popup-cancle-btn {
@@ -62,8 +69,23 @@ Version: 1.0.0
     background: #fff;
     border: 1px solid #0D66D0;
     color: #0D66D0;
+    transition: 0.3s ease-in;
+}
+
+.wf-popup-cancle-btn:hover {
+    background: #0D66D0;
+    color: #fff;
+    border-color: transparent;
 }
 
 .wf-info-text {
+    font-size: 12px;
+}
+
+.wf-info-text::before {
     content: "\2139"; 
+    border: 1px solid #000;
+    padding: 2px 8px;
+    border-radius: 50%;
+    margin-right: 5px;
 }

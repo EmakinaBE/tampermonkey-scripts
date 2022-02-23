@@ -35,11 +35,11 @@
 
     
     window.autoSaveChanges = async () => {
-        const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
-        if(!commentSaveButton) return;
-        commentSaveButton[0].onclick = () => {
-            setTimeout(triggerSaveButton, 100);
-        }
+        // const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
+        // if(!commentSaveButton) return;
+        // commentSaveButton[0].onclick = () => {
+        //     setTimeout(triggerSaveButton, 100);
+        // }
 
         const textArea = await getElementsFromDocument('#comment-container textarea');
         if(!textArea) return;
