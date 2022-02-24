@@ -36,7 +36,9 @@
 
 
     function init() {
-        if (!popupCreate) popUp = createPopupElement();
+        setTimeout(async() => {
+            if (!popupCreate) popUp = createPopupElement();
+        },1000);
         createMenuElement();
     }
 
