@@ -3,7 +3,7 @@
 // @namespace    https://www.emakina.com/
 // @version      2.0.1.0
 // @description  Show/edit options
-// @author       Wouter Versyck
+// @author       Wouter Versyck, Jan Drenkhahn, Domenik Reitzner
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
@@ -25,6 +25,16 @@
     callback(init);
     init();
 
+    const optionsLabel = {
+        autoRedirect: 'Auto redirect to oldest open timesheet',
+        showCompanyName: 'Show company name next to project',
+        autoSave: 'Auto-save',
+        autoSelect: 'Auto-select next task time line',
+        correctComma: 'Correct wrong comma seperator',
+        roundToNearestQuarter: 'Round entries to nearest quarter', 
+    };
+
+
     function init() {
         if (!popupCreate) popUp = createPopupElement();
         createMenuElement();
@@ -43,8 +53,20 @@
         popUp.style = 'display: block';
     }
 
-    function reloadPage() {
-      if (isPopUpVisible) location.reload();
+    function reloadOptions() {
+      if (isPopUpVisible) {
+        const newOptions = [...document.querySelectorAll('.wf-popup [type="checkbox"]')]
+            .map((newOption) => {
+                return [
+                    newOption.id, 
+                    newOption.checked
+                ];
+            });
+        
+        saveOptions(Object.fromEntries(newOptions));
+        excecuteReInit();
+        hidePopup();
+      } 
     }
 
     async function createMenuElement() {
@@ -102,11 +124,11 @@
         container.appendChild(createCloseButton());
         container.appendChild(createTitle('WF scripts options'));
 
-        for (const [key, value] of Object.entries(loadOptions())) {
+        for (const [key, value] of Object.entries(wfGetOptions())) {
             const div = document.createElement('div');
 
             div.appendChild(createCheckbox(key, value));
-            div.appendChild(createLabel(key, value.label));
+            div.appendChild(createLabel(key, optionsLabel[key]));
 
             container.appendChild(div);
         }
@@ -135,7 +157,7 @@
         checkBox.setAttribute('type', 'checkbox');
         checkBox.id = key;
         checkBox.name = key;
-        checkBox.checked = value.isChecked;
+        checkBox.checked = value;
         checkBox.onchange = saveOptions;
         return checkBox;
     }
@@ -151,7 +173,7 @@
     function createButtonArea() {
         const btnContainer = document.createElement('div');
         btnContainer.classList.add('wf-popup-btn-ctn');
-        btnContainer.appendChild(createInfoText('If you save, the page must be reloaded'))
+        btnContainer.appendChild(createInfoText('If you save, we reload the Options'))
         btnContainer.appendChild(createButtonInner());
         return btnContainer;
     }
@@ -175,7 +197,7 @@
         const button = document.createElement('button');
         button.classList.add('wf-popup-save-btn');
         button.textContent= 'Save';
-        button.onclick = reloadPage;
+        button.onclick = reloadOptions;
         return button;
     }
 

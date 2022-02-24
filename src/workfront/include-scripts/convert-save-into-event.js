@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Create events
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.0.1.0
 // @description  Will poll the success notification after save and thrown an event. Will throw event when a new line is added
-// @author       Wouter Versyck, Antonia Langer, Sarah Roupec
+// @author       Wouter Versyck, Antonia Langer, Sarah Roupec, Jan Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
@@ -11,8 +11,8 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/convert-save-into-event.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/workfront/include-scripts/convert-save-into-event.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/workfront/include-scripts/convert-save-into-event.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
@@ -24,6 +24,14 @@
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
+    addReInit(setAutoSave);
+    addReInit(setupHandlers);
+
+    function setAutoSave() {
+        if(window.wfGetOptions().autoSave){
+            autoSaveAfterBeingIdle();
+        }
+    }
 
     async function loadDoc() {
         resetStorageObj();
@@ -31,9 +39,7 @@
         executeCallback();
         
         setTimeout(setupHandlers, 3000);
-        if(window.wfGetOptions().autoSave){
-            autoSaveAfterBeingIdle();
-        }
+        setAutoSave();
     }
 
     async function pollNetworkRequestSuccess() {
@@ -76,7 +82,7 @@
             const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
             if (!inputFields) return;
             inputFields.forEach(field => field.onclick = () => {
-                autoSaveChanges();
+                if (window.wfGetOptions().autoSave) autoSaveChanges();
             })
         }
 
@@ -88,7 +94,7 @@
             const taskButtons = await getElementsFromDocument('.hour-type-and-role-add');
             if(!taskButtons) return;
             taskButtons.forEach(button => button.onclick = (event) => {
-                newTaskClickHandler(event);
+                if (window.wfGetOptions().autoSave) newTaskClickHandler(event);
             })
         }
 

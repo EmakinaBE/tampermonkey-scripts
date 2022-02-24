@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Add CompanyName to project header
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.0.1.0
 // @description  Add company name in the workfront table header, to see to which company which project is linked
-// @author       Jeffrey Vandenbossche
+// @author       Jeffrey Vandenbossche, Jan Drenkhahn
 // @connect      self
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
@@ -11,8 +11,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-company-name-project-header.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/add-company-name-project-header.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/workfront/add-company-name-project-header.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/workfront/add-company-name-project-header.js
 // @grant        none
 // ==/UserScript==
 
@@ -20,6 +20,7 @@
     'use strict';
 
     callback(init);
+    addReInit(init)
     init();
 
     async function init() {
