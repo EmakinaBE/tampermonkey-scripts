@@ -23,17 +23,18 @@
 
     let idleTime = 0;
     let idleTimer;
+    var countDownDate = new Date().getTime()+ (6000 * 60);
 
     async function triggerSaveButton() {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
-        
+
         if(!(saveButton[0].getAttribute('data-action') === "O")){
             saveButton[0].click();
         }
     }
 
 
-    
+
     window.autoSaveChanges = async () => {
         // const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
         // if(!commentSaveButton) return;
@@ -55,14 +56,49 @@
         if(idleTimer){
             clearInterval(idleTimer);
         }
-        idleTimer = setInterval(timerIncrement, 60000);
+        idleTimer = setInterval(function() {
 
-        document.body.addEventListener('keypress', () => {
-            idleTime = 0;
-        });
-        document.body.addEventListener('mousedown', () => {
-            idleTime = 0;
-        });
+        // Get today's date and time
+            var now = new Date().getTime();
+
+            // Find the distance between now and the count down date
+            var distance = countDownDate - now;
+
+            // Time calculations for days, hours, minutes and seconds
+
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+           
+            // Output the result in an element with id="demo"
+            addTimer(minutes, seconds);
+
+            if (distance < (3000 * 60)) {
+                console.log('timer over')
+            };
+
+            // If the count down is over, write some text
+            if (distance < 0) {
+                clearInterval(idleTimer);
+                document.getElementsByClassName("timer-area").innerHTML = "EXPIRED";
+            }
+        }, 1000);
+
+
+        // document.body.addEventListener('keypress', () => {
+        //     idleTime = countDownDate;
+        // });
+        // document.body.addEventListener('mousedown', () => {
+        //     idleTime = countDownDate;
+        // });
+    }
+
+    async function addTimer(minutes, seconds) {
+        setTimeout(async() => {
+            const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            if (!timerElement) return;
+            timerElement.innerHTML = minutes + "m " + seconds + "s ";
+        }, 100)
     }
 
     function timerIncrement() {

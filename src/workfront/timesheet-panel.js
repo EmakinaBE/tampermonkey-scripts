@@ -24,9 +24,22 @@
         selectTimePanel();
     }
 
-    function selectTimePanel() {
-        const panel = document.getElementsByClassName('timesheet-saving-panel');
-        console.log('panel', panel);
+    async function selectTimePanel() {
+        setTimeout(async() => {
+            const panel = (await getElementsFromDocument(`#main-frame`, document))?.[0];
+            if (!panel) return selectTimePanel();
+            const panelinner = (await getElementsFromDocument(`#timesheet-saving-panel div`, panel.contentWindow.document))?.[0];
+            if (!panelinner) return selectTimePanel();
+            if (panelinner && !panelinner.classList.contains('timer-panel-btn')) {
+                panelinner.classList.add('timer-panel-btn');
+                panelinner.appendChild(autoSaveTiming());
+            }
+        }, 3000);
     }
 
-});
+    function autoSaveTiming() {
+        const timerElement = document.createElement('div');
+        timerElement.classList.add('timer-area');
+        return timerElement;
+    }
+})();
