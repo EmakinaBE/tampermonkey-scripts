@@ -22,7 +22,7 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
     color: #000;
 }
 
-body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn.blink {
+body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .timer-area.blink {
     color: #000000;
     animation-name: blinker;
       animation-duration: 1s;
