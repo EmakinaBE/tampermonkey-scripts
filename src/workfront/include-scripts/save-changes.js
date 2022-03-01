@@ -74,13 +74,17 @@
             addTimer(minutes, seconds);
 
             if (distance < (3000 * 60)) {
-                console.log('timer over')
+                console.log('half time')
             };
+
+            if (distance < (1000 * 60)) {
+                addElement();
+            }
 
             // If the count down is over, write some text
             if (distance < 0) {
                 clearInterval(idleTimer);
-                document.getElementsByClassName("timer-area").innerHTML = "EXPIRED";
+                addMessage()
             }
         }, 1000);
 
@@ -97,7 +101,24 @@
         setTimeout(async() => {
             const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
             if (!timerElement) return;
-            timerElement.innerHTML = minutes + "m " + seconds + "s ";
+            timerElement.innerHTML = "Auto Save in: " + minutes + "m " + seconds + "s ";
+        }, 100)
+    }
+
+    async function addMessage() {
+      setTimeout(async() => {
+            const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            if (!timerElement) return;
+            timerElement.innerHTML = "Auto Save";
+        }, 100)
+    }
+
+    async function addElement() {
+        setTimeout(async() => {
+            const elementToAdd = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            if (!elementToAdd) return;
+            elementToAdd.classList.add('blink');
+            return elementToAdd;
         }, 100)
     }
 
