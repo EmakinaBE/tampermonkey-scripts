@@ -23,7 +23,13 @@
 
     let idleTime = 0;
     let idleTimer;
-    var countDownDate = new Date().getTime()+ (6000 * 60);
+    let countDownDate;
+    let iframe_container;
+    let currentTime;
+
+    function setCountDownDate() {
+        countDownDate = new Date().getTime()+ (2000 * 60);
+    }
 
     async function triggerSaveButton() {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
@@ -53,48 +59,47 @@
     }
 
     window.autoSaveAfterBeingIdle = () => {
+        setCountDownDate();
         if(idleTimer){
             clearInterval(idleTimer);
         }
         idleTimer = setInterval(function() {
-
-        // Get today's date and time
             var now = new Date().getTime();
-
-            // Find the distance between now and the count down date
             var distance = countDownDate - now;
-
-            // Time calculations for days, hours, minutes and seconds
-
+            currentTime = distance;
+            console.log('currentTime', currentTime)
+        
             var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-           
-            // Output the result in an element with id="demo"
-            addTimer(minutes, seconds);
-
+ 
             if (distance < (3000 * 60)) {
-                console.log('half time')
+                addTimer(minutes, seconds);
             };
 
             if (distance < (1000 * 60)) {
-                addElement();
+                addClass();
             }
 
             // If the count down is over, write some text
             if (distance < 0) {
-                clearInterval(idleTimer);
                 addMessage()
+                currentTime;
+                triggerSaveButton();
             }
         }, 1000);
 
 
-        // document.body.addEventListener('keypress', () => {
-        //     idleTime = countDownDate;
-        // });
-        // document.body.addEventListener('mousedown', () => {
-        //     idleTime = countDownDate;
-        // });
+
+        document.addEventListener('keypress', () => {
+            timerCheck()
+            setCountDownDate();
+        });
+        document.addEventListener('mousedown', () => {
+            timerCheck()
+            setCountDownDate();
+        });
+
+        eventListnerIframe();
     }
 
     async function addTimer(minutes, seconds) {
@@ -113,7 +118,15 @@
         }, 100)
     }
 
-    async function addElement() {
+    async function removeTimer() {
+        setTimeout(async() => {
+            const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            if (!timerElement) return;
+            timerElement.innerHTML = "";
+        }, 100)
+    }
+
+    async function addClass() {
         setTimeout(async() => {
             const elementToAdd = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
             if (!elementToAdd) return;
@@ -122,10 +135,39 @@
         }, 100)
     }
 
-    function timerIncrement() {
-        idleTime++;
-        if (idleTime > 1) {
-            triggerSaveButton();
+    async function removeClass() {
+        setTimeout(async() => {
+            const elementToRemove = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            if (!elementToRemove) return;
+            elementToRemove.classList.remove('blink');
+            return elementToRemove;
+        }, 100)
+    }
+
+    async function eventListnerIframe() {
+        setTimeout(async() => {
+            iframe_container = (await getElementsFromDocument(`#main-frame`, document, 1000))?.[0];
+            if (!iframe_container) return;
+            iframe_container.contentDocument.body.addEventListener('mousedown', () => {
+                timerCheck();
+                setCountDownDate();
+            })
+
+            iframe_container.contentDocument.body.addEventListener('keypress', () => {
+                timerCheck();
+                setCountDownDate();
+            })
+        }, 7000);
+    }
+
+    function timerCheck() {
+        if (currentTime < (3000 * 60)) {
+            removeTimer();
+        };
+
+        if (currentTime < (1000 * 60)) {
+            removeTimer()
+            removeClass();
         }
     }
 
