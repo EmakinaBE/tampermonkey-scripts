@@ -21,33 +21,29 @@
 (function(window) {
     'use strict';
 
-    let idleTime = 0;
     let idleTimer;
-    let countDownDate;
     let iframe_container;
     let currentTime;
 
     function setCountDownDate() {
-        countDownDate = new Date().getTime()+ (2000 * 60);
+        currentTime = (2 * 60 * 1000);
     }
 
     async function triggerSaveButton() {
         const saveButton = await getElementsFromDocument('.btn.primary.btn-primary');
-
-        if(!(saveButton[0].getAttribute('data-action') === "O")){
+        if(!(saveButton[0].getAttribute('data-action') === "O") && currentTime === -1 && !saveButton[0].disabled){
+            currentTime = null;
+            isIframeReload();
             saveButton[0].click();
+        } else {
+            timerCheck();
+            setCountDownDate();
         }
     }
 
 
 
     window.autoSaveChanges = async () => {
-        // const commentSaveButton = await getElementsFromDocument('#comment-container .primary.btn.btn-primary');
-        // if(!commentSaveButton) return;
-        // commentSaveButton[0].onclick = () => {
-        //     setTimeout(triggerSaveButton, 100);
-        // }
-
         const textArea = await getElementsFromDocument('#comment-container textarea');
         if(!textArea) return;
         textArea[0].addEventListener('keydown', (keyValue) => {
@@ -61,41 +57,35 @@
     window.autoSaveAfterBeingIdle = () => {
         setCountDownDate();
         if(idleTimer){
-            clearInterval(idleTimer);
+            return;
         }
         idleTimer = setInterval(function() {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
-            currentTime = distance;
-            console.log('currentTime', currentTime)
+            currentTime -= 1000;
         
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            var minutes = Math.floor((currentTime % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((currentTime % (1000 * 60)) / 1000);
  
-            if (distance < (3000 * 60)) {
+            if (currentTime < (3000 * 60)) {
                 addTimer(minutes, seconds);
             };
 
-            if (distance < (1000 * 60)) {
+            if (currentTime < (1000 * 60)) {
                 addClass();
             }
 
-            // If the count down is over, write some text
-            if (distance < 0) {
+            if (currentTime === 0) {
                 addMessage()
-                currentTime;
+                currentTime = -1;
                 triggerSaveButton();
             }
         }, 1000);
 
-
-
         document.addEventListener('keypress', () => {
-            timerCheck()
+            timerCheck();
             setCountDownDate();
         });
         document.addEventListener('mousedown', () => {
-            timerCheck()
+            timerCheck();
             setCountDownDate();
         });
 
@@ -163,10 +153,10 @@
     function timerCheck() {
         if (currentTime < (3000 * 60)) {
             removeTimer();
-        };
+        }
 
         if (currentTime < (1000 * 60)) {
-            removeTimer()
+            removeTimer();
             removeClass();
         }
     }
@@ -175,6 +165,18 @@
         console.log('check check');
         const buttonToSave = await getElementsFromDocument('#save-btn.btn.primary.btn-primary');
         console.log('to save button',buttonToSave)
+    }
+
+    async function isIframeReload() {
+        setTimeout(async() => {
+            const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            if (timerElement) {
+                isIframeReload();
+            } else {
+                executeCallback();
+                console.log('class is remove');
+            }
+        }, 100)
     }
 
 })(window);

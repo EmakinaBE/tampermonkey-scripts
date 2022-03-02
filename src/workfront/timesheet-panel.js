@@ -17,7 +17,8 @@
 
 (function() {
     'use strict';
-
+    
+    callback(init);
     init();
 
     function init() {
