@@ -2,9 +2,9 @@
 // ==UserScript==
 // @name         Save Changes
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.5.0.0
 // @description  Triggers the save button
-// @author       Antonia Langer, Sarah Roupec
+// @author       Antonia Langer, Sarah Roupec, Jan Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
@@ -26,7 +26,7 @@
     let currentTime;
 
     function setCountDownDate() {
-        currentTime = (2 * 60 * 1000);
+        currentTime = (6 * 60 * 1000);
     }
 
     async function triggerSaveButton() {
@@ -65,7 +65,7 @@
             var minutes = Math.floor((currentTime % (1000 * 60 * 60)) / (1000 * 60));
             var seconds = Math.floor((currentTime % (1000 * 60)) / 1000);
  
-            if (currentTime < (3000 * 60)) {
+            if (currentTime < (3000 * 60) && currentTime !== -1) {
                 addTimer(minutes, seconds);
             };
 
@@ -74,8 +74,8 @@
             }
 
             if (currentTime === 0) {
-                addMessage()
                 currentTime = -1;
+                addMessage()
                 triggerSaveButton();
             }
         }, 1000);
@@ -161,12 +161,6 @@
         }
     }
 
-    window.checkSaveButton = async () => {
-        console.log('check check');
-        const buttonToSave = await getElementsFromDocument('#save-btn.btn.primary.btn-primary');
-        console.log('to save button',buttonToSave)
-    }
-
     async function isIframeReload() {
         setTimeout(async() => {
             const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
@@ -174,7 +168,8 @@
                 isIframeReload();
             } else {
                 executeCallback();
-                console.log('class is remove');
+                timerCheck();
+                setCountDownDate();
             }
         }, 100)
     }
