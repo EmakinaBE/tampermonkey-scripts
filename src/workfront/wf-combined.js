@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         WF combined
+// @name         WF combined api and design
 // @namespace    https://www.emakina.com/
-// @version      2.2.0.43
+// @version      2.2.1.0
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*
@@ -33,5 +33,7 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/options.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/load-css.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/timesheet-panel.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/save-spinner.js
 // @grant        none
 // ==/UserScript==

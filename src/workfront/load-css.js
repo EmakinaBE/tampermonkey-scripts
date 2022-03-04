@@ -17,19 +17,31 @@
 
 (async function (document) {
     'use strict';
-    let container;
+    let iframe_container;
+    let main_container;
 
-    async function generateTag(url) {
+    async function generateTag(container ,url) {
         const tag = document.createElement('style');
         const res = await fetch(url);
         const css = await res.text();
         tag.type="text/css";
         tag.innerHTML = css
-        container[0].contentDocument.head.appendChild(tag)
+        if (container === iframe_container) {
+            container[0].contentDocument.head.appendChild(tag);
+        }
+        if (container === main_container) {
+            main_container[0].appendChild(tag);
+        }
     }
     setTimeout(async() => {
-        container = await getElementsFromDocument(`#main-frame`, document, 1000);
-        if (!container) return;
-        generateTag('https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/css/style.css')
+        iframe_container = await getElementsFromDocument(`#main-frame`, document, 1000);
+        if (!iframe_container) return;
+        generateTag(iframe_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/css/style.css')
+    }, 7000);
+
+    setTimeout(async() => {
+        main_container = await getElementsFromDocument('head', document, 1000);
+        if (!main_container) return;
+        generateTag(main_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/css/main-style.css')
     }, 7000);
 })(document);
