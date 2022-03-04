@@ -171,7 +171,9 @@
                 executeCallback();
                 timerCheck();
                 setCountDownDate();
-                findLoadingElement();
+                setTimeout(() => {
+                    findLoadingElement();
+                }, 3000);
             }
         }, 100)
     }

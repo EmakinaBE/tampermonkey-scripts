@@ -3,7 +3,7 @@
 // @name         Save Spinner
 // @namespace    https://www.emakina.com/
 // @version      1.0.0.0
-// @description  Triggers the save button
+// @description  Include Save Spinner
 // @author       Jan Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
@@ -12,8 +12,8 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/workfront/save-spinner.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-2398/src/workfront/save-spinner.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/save-spinner.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/save-spinner.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
@@ -52,7 +52,6 @@
     window.findLoadingElement = async() => {
         setTimeout(async() => {
             const spinnerOverlay = await getElementsFromDocument('.wf-save-overlay', document);
-            console.log(spinnerOverlay);
             spinnerOverlay[0].classList.toggle('hidden');
         }, 100);
     }
