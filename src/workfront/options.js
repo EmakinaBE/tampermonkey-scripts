@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Options
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.0.1.0
 // @description  Show/edit options
-// @author       Wouter Versyck
+// @author       Wouter Versyck, Jan Drenkhahn, Domenik Reitzner
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
@@ -19,13 +19,26 @@
     'use strict';
 
     let popUp = null;
+    let popupCreate;
     let isPopUpVisible = false;
 
     callback(init);
     init();
 
+    const optionsLabel = {
+        autoRedirect: 'Auto redirect to oldest open timesheet',
+        showCompanyName: 'Show company name next to project',
+        autoSave: 'Auto-save',
+        autoSelect: 'Auto-select next task time line',
+        correctComma: 'Correct wrong comma seperator',
+        roundToNearestQuarter: 'Round entries to nearest quarter', 
+    };
+
+
     function init() {
-        popUp = createPopupElement();
+        setTimeout(async() => {
+            if (!popupCreate) popUp = createPopupElement();
+        },1000);
         createMenuElement();
     }
 
@@ -39,7 +52,23 @@
     }
 
     function showPopUp() {
-        popUp.style = 'position:fixed;background:rgba(0,0,0,50%);left:0;top:0;width:100%;height:100%;z-index:9999';
+        popUp.style = 'display: block';
+    }
+
+    function reloadOptions() {
+      if (isPopUpVisible) {
+        const newOptions = [...document.querySelectorAll('.wf-popup [type="checkbox"]')]
+            .map((newOption) => {
+                return [
+                    newOption.id, 
+                    newOption.checked
+                ];
+            });
+        
+        saveOptions(Object.fromEntries(newOptions));
+        excecuteReInit();
+        hidePopup();
+      } 
     }
 
     async function createMenuElement() {
@@ -48,7 +77,7 @@
         if(oldListElement ) return;
 
         const button = document.createElement('button');
-        button.style = 'background: url(https://avatars.githubusercontent.com/u/767504?s=400&u=d0a32a535c83ebde083450c51552e0496b0735d2&v=4);background-size:cover;width:30px;height:30px';
+        button.classList.add('wf-button');
         button.onclick = togglePopUp;
 
         const li = document.createElement('li');
@@ -70,6 +99,7 @@
     }
 
     function createPopupElement() {
+        popupCreate = true;
         const overlay = createOverlay();
         overlay.appendChild(createOptionsView());
 
@@ -79,6 +109,7 @@
 
     function createOverlay() {
         const div = document.createElement('div');
+        div.classList.add('wf-overlay');
         div.id = 'WF-overlay';
         div.style = 'display:none';
         div.onclick = e => {
@@ -91,27 +122,28 @@
 
     function createOptionsView() {
         const container = document.createElement('div');
-        container.style = 'transform: translate(-50%, -50%); position: fixed; left: 50%; top: 50%; padding:20px; background: white; border: 1px solid black; box-shadow: 1px 3px 15px 5px rgba(0,0,0,0.32);';
+        container.classList.add('wf-popup');
         container.appendChild(createCloseButton());
         container.appendChild(createTitle('WF scripts options'));
 
-        for (const [key, value] of Object.entries(loadOptions())) {
+        for (const [key, value] of Object.entries(wfGetOptions())) {
             const div = document.createElement('div');
 
             div.appendChild(createCheckbox(key, value));
-            div.appendChild(createLabel(key, value.label));
+            div.appendChild(createLabel(key, optionsLabel[key]));
 
             container.appendChild(div);
         }
+        container.appendChild(createButtonArea());
 
         return container;
     }
 
     function createCloseButton() {
         const button = document.createElement('button');
+        button.classList.add('wf-popup-closs');
         button.textContent = 'X';
         button.onclick = togglePopUp;
-        button.style = 'float:right;border-radius:50%;width:20px;height:20px;line-height:0.1';
         return button;
     }
 
@@ -127,7 +159,7 @@
         checkBox.setAttribute('type', 'checkbox');
         checkBox.id = key;
         checkBox.name = key;
-        checkBox.checked = value.isChecked;
+        checkBox.checked = value;
         checkBox.onchange = saveOptions;
         return checkBox;
     }
@@ -138,5 +170,44 @@
         label.setAttribute('for', key);
         label.textContent = text;
         return label;
+    }
+
+    function createButtonArea() {
+        const btnContainer = document.createElement('div');
+        btnContainer.classList.add('wf-popup-btn-ctn');
+        btnContainer.appendChild(createInfoText('If you save, we reload the Options'))
+        btnContainer.appendChild(createButtonInner());
+        return btnContainer;
+    }
+
+    function createInfoText(text) {
+        const infoText = document.createElement('span');
+        infoText.classList.add('wf-info-text');
+        infoText.textContent = text;
+        return infoText;
+    }
+
+    function createButtonInner() {
+        const innercontainer = document.createElement('div');
+        innercontainer.classList.add('wf-popup-btn-ctn-inner');
+        innercontainer.appendChild(createSaveButton());
+        innercontainer.appendChild(createCancleButton());
+        return innercontainer;
+    }
+
+    function createSaveButton() {
+        const button = document.createElement('button');
+        button.classList.add('wf-popup-save-btn');
+        button.textContent= 'Save';
+        button.onclick = reloadOptions;
+        return button;
+    }
+
+    function createCancleButton() {
+        const button = document.createElement('button');
+        button.classList.add('wf-popup-cancle-btn');
+        button.textContent = 'Close';
+        button.onclick = togglePopUp;
+        return button;
     }
 })();
