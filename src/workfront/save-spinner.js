@@ -18,22 +18,28 @@
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
+
+    let loadSpinner;
 
     callback(init);
     init();
 
     function init() {
-        document.body.appendChild(createSaveOverlay)
+        setTimeout(async() => {
+            if (!loadSpinner) document.body.appendChild(createSaveOverlay());
+
+        }, 1000)
     }
 
     function createSaveOverlay() {
+        loadSpinner = true;
         const div = document.createElement('div');
         div.classList.add('wf-save-overlay');
-        div.appendChild(createSaveSpinner);
+        div.appendChild(createSaveSpinner());
         div.id = 'WF-Save-overlay';
-        // div.style = 'display:none';
+        div.style = 'display:none';
         return div;
     }
 
@@ -42,4 +48,9 @@
         spinner.classList.add('wf-save-spinner');
         return spinner;
     }
-});
+
+    window.findLoadingElement = async() => {
+        const spinnerWf = (await getElementsFromDocument('.wf-save-overlay'))?.[0];
+        spinnerWf.toggle('hidden');
+    }
+})(window);

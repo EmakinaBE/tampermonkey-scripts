@@ -34,6 +34,7 @@
         if(!(saveButton[0].getAttribute('data-action') === "O") && currentTime === -1 && !saveButton[0].disabled){
             currentTime = null;
             isIframeReload();
+            findLoadingElement();
             saveButton[0].click();
         } else {
             timerCheck();
@@ -173,5 +174,4 @@
             }
         }, 100)
     }
-
 })(window);
