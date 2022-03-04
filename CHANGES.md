@@ -4,9 +4,12 @@ all changes from the project are listed here. The changes are sorted by version
 
 ## 2.2.1.0
 
-- change Auto-Save function and optimise code
-- include Eventlistener on iframe
-- include Saving Spinner
-- include reload action after Saving
-- include Visible Timer for Auto-Saving
-- 
+- changed Auto-Save function and optimise code
+- included Eventlistener on iframe
+- included Save Spinner
+- included reloading scripts after Saving
+- included Visible Timer for Auto-Saving
+- Fix Options
+- After a change of Options, reload options after saving
+- include css styling
+- remove not use code
