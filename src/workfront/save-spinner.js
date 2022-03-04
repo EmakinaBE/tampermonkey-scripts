@@ -37,9 +37,9 @@
         loadSpinner = true;
         const div = document.createElement('div');
         div.classList.add('wf-save-overlay');
+        div.classList.add('hidden');
         div.appendChild(createSaveSpinner());
         div.id = 'WF-Save-overlay';
-        div.style = 'display:none';
         return div;
     }
 
@@ -50,7 +50,10 @@
     }
 
     window.findLoadingElement = async() => {
-        const spinnerWf = (await getElementsFromDocument('.wf-save-overlay'))?.[0];
-        spinnerWf.toggle('hidden');
+        setTimeout(async() => {
+            const spinnerOverlay = await getElementsFromDocument('.wf-save-overlay', document);
+            console.log(spinnerOverlay);
+            spinnerOverlay[0].classList.toggle('hidden');
+        }, 100);
     }
 })(window);

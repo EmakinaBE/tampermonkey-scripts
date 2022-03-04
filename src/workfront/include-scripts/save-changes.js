@@ -171,6 +171,7 @@
                 executeCallback();
                 timerCheck();
                 setCountDownDate();
+                findLoadingElement();
             }
         }, 100)
     }
