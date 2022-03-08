@@ -2,6 +2,10 @@
 
 all changes from the project are listed here. The changes are sorted by version
 
+## 2.2.1.1
+- HOTFIX for Loading Spinner
+- Change Colors from Loading Spinner
+
 ## 2.2.1.0
 
 - changed Auto-Save function and optimise code
