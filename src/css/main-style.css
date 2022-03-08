@@ -110,10 +110,14 @@ Version: 1.0.0
     left: 50%;
     top: 50%;
     border: 16px solid #f3f3f3; /* Light grey */
-    border-top: 16px solid blue;
+    /* border-top: 16px solid blue;
     border-right: 16px solid green;
     border-bottom: 16px solid red;
-    border-left: 16px solid pink;
+    border-left: 16px solid pink; */
+    border-top: 16px solid #0057B8;
+    border-right: 16px solid #0057B8;
+    border-bottom: 16px solid #FFD700;
+    border-left: 16px solid #FFD700;
     border-radius: 50%;
     width: 120px;
     height: 120px;
