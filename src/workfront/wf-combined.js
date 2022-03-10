@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         WF combined api and design
+// @name         WF combined
 // @namespace    https://www.emakina.com/
-// @version      2.2.1.0
+// @version      2.2.1.1
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/timesheet/*

@@ -164,7 +164,7 @@
 
     async function isIframeReload() {
         setTimeout(async() => {
-            const timerElement = (await getElementsFromDocument('.timer-panel-btn .timer-area'))?.[0];
+            const timerElement = (await getElementsFromDocument('.css-1m1vchs .css-1m1vchs-notice'))?.[0];
             if (timerElement) {
                 isIframeReload();
             } else {
