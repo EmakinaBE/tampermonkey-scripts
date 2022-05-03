@@ -10,8 +10,8 @@
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/select-next-task-line.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/select-next-task-line.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/select-next-task-line.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/select-next-task-line.js
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 

@@ -10,8 +10,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/version-warning.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/version-warning.js
 // @grant        none
 /// ==/UserScript==
 
@@ -38,7 +38,7 @@
     if(isToday(new Date()) === isToday(new Date('03-08-2022')) && currentVersionCheck === "2.2.0.44") {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
-            newDiv.innerHTML = "You must Manuelly update your Tampermonkey Script. Please use this URL https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js to intall the new version";
+            newDiv.innerHTML = "You must Manuelly update your Tampermonkey Script. Please use this URL https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/wf-combined.js to intall the new version";
             newDiv.style = 'display:flex; justify-content: center; align-items: center;background:red; color: #ffffff; height: 50px'
         
             var currentDiv = document.getElementById("root");
