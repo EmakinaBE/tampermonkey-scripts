@@ -8,9 +8,9 @@
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @icon64       https://emakina.my.workfront.com/static/img/favicon.ico
-// @match        https://emakina.my.workfront.com/*
-// @match        https://emakina.preview.workfront.com/*
-// @match        https://emakina.sb01.workfront.com/*
+// @match        https://emakina.my.workfront.com/timesheet/*
+// @match        https://emakina.preview.workfront.com/timesheet/*
+// @match        https://emakina.sb01.workfront.com/timesheet/*
 // @grant        none
 // @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/include-scripts/save-changes.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3125/src/workfront/include-scripts/save-changes.js
