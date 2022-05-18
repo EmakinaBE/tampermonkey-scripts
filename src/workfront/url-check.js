@@ -19,9 +19,19 @@
 (function(window) {
     'use strict';
 
-    console.log('load');
-    window.addEventListener('popstate', function (event) {
-        console.log(location.href);
-    });
- 
-})();
+    let urlCheck; 
+
+    if (!urlCheck) {
+        console.log('load');
+        window.addEventListener('popstate', function (event) {
+           console.log('%c url', 'background: orange; color:#fff', location.href);
+           let string = location.href;
+           if (string.includes('timesheet')) {
+             console.log('%c is in', 'background: red; color: #fff');
+           };
+        });
+        urlCheck = true;
+        console.log('%c Variable', 'color: red', urlCheck);
+    }
+
+})(window);
