@@ -19,7 +19,8 @@
 (function(window) {
     'use strict';
 
-    let urlCheck; 
+    let urlCheck;
+    let urlFind;
 
     if (!urlCheck) {
         console.log('load');
@@ -28,10 +29,15 @@
            let string = location.href;
            if (string.includes('timesheet')) {
              console.log('%c is in', 'background: red; color: #fff');
-           };
+             urlFind = true;
+             console.log('%c there', 'color: #fff; background: #000', urlFind);
+            };
+            urlCheck = true;
+            window.isTimesheet = () => {
+             return urlFind
+           }
+           console.log('%c Variable', 'color: red', urlCheck);
         });
-        urlCheck = true;
-        console.log('%c Variable', 'color: red', urlCheck);
     }
 
 })(window);

@@ -17,6 +17,11 @@
 
 (function() {
     'use strict';
+
+    if(window.isTimesheet) {
+        console.log('%c This is the Timesheet info', 'color: #000, background: orange');
+    }
+
     if(!isNewUI()) {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
