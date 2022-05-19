@@ -19,25 +19,30 @@
 (function(window) {
     'use strict';
 
-    let urlCheck;
-    let urlFind;
+    // let urlCheck;
+    // let urlFind;
 
-    if (!urlCheck) {
-        console.log('load');
-        window.addEventListener('popstate', function (event) {
-           console.log('%c url', 'background: orange; color:#fff', location.href);
-           let string = location.href;
-           if (string.includes('timesheet')) {
-             console.log('%c is in', 'background: red; color: #fff');
-             urlFind = true;
-             console.log('%c there', 'color: #fff; background: #000', urlFind);
-            };
-            urlCheck = true;
-            window.isTimesheet = () => {
-             return urlFind
-           }
-           console.log('%c Variable', 'color: red', urlCheck);
-        });
+    // if (!urlCheck) {
+    //   console.log('load');
+    //   window.addEventListener('popstate', function (event) {
+    //     console.log('%c url', 'background: orange; color:#fff', location.href);
+    //     let string = location.href;
+    //     if (string.includes('timesheet')) {
+    //       console.log('%c is in', 'background: red; color: #fff');
+    //       urlFind = true;
+    //       console.log('%c there', 'color: #fff; background: #000', urlFind);
+    //       urlCheck = true;
+    //     };
+    //     console.log('%c Variable', 'color: red', urlCheck);
+    //   });
+    // }
+        
+    window.isTimesheet = () => {
+      let string = location.href;
+      return string.includes('timesheet');
     }
 
+    // popstate function, wenn url gefunden
+    //  timesheet init für files erstellen, dass diese erst ausgeführt werden, wenn url gefunden. 
+    //  window.callback anschauen, vielleicht wieder verwenden
 })(window);
