@@ -34,9 +34,7 @@
     }
 
     async function loadDoc() {
-        console.log('about what??')
-        if (!isTimesheet) return;
-        console.log('is timesheet')
+        if (!isTimesheet()) return;
         resetStorageObj();
         resetDoc();
         executeCallback();

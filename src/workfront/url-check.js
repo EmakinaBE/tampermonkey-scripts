@@ -19,27 +19,13 @@
 (function(window) {
     'use strict';
 
-    // let urlCheck;
-    // let urlFind;
+    let hasBeenTimesheet;
 
-    // if (!urlCheck) {
-    //   console.log('load');
-    //   window.addEventListener('popstate', function (event) {
-    //     console.log('%c url', 'background: orange; color:#fff', location.href);
-    //     let string = location.href;
-    //     if (string.includes('timesheet')) {
-    //       console.log('%c is in', 'background: red; color: #fff');
-    //       urlFind = true;
-    //       console.log('%c there', 'color: #fff; background: #000', urlFind);
-    //       urlCheck = true;
-    //     };
-    //     console.log('%c Variable', 'color: red', urlCheck);
-    //   });
-    // }
-        
     window.isTimesheet = () => {
       let string = location.href;
-      return string.includes('timesheet');
+      const oldBeenTimesheet = hasBeenTimesheet;
+      if (!hasBeenTimesheet) hasBeenTimesheet = string.includes('timesheet/');
+      return !oldBeenTimesheet && hasBeenTimesheet;
     }
 
     // popstate function, wenn url gefunden
