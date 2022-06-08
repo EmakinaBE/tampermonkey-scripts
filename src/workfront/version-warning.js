@@ -17,6 +17,7 @@
 
 (function() {
     'use strict';
+
     if(!isNewUI()) {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
