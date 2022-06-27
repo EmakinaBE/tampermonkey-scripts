@@ -35,10 +35,10 @@
 
     var currentVersionCheck = GM_info.script.version;
 
-    if(isToday(new Date()) === isToday(new Date('03-08-2022')) && currentVersionCheck <= "2.2.1.1") {
+    if(isToday(new Date()) >= isToday(new Date('03-08-2022')) && currentVersionCheck <= "2.2.1.1") {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
-            newDiv.innerHTML = "You must Manuelly update your Tampermonkey Script. Please use this URL https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js to intall the new version";
+            newDiv.innerHTML = "Your Tampermonkey script is out-dated, please update it. (Details <a href='https://share.emakina.net/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
             newDiv.style = 'display:flex; justify-content: center; align-items: center;background:red; color: #ffffff; height: 50px'
         
             var currentDiv = document.getElementById("root");
