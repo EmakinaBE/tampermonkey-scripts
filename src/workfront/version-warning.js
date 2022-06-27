@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         File to Load a Version Warning
 // @namespace    https://www.emakina.com/
-// @version      1.0
+// @version      1.1.0
 // @description  This File Load the Emakina version Warning
 // @author       Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
@@ -17,7 +17,6 @@
 
 (function() {
     'use strict';
-
     if(!isNewUI()) {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
@@ -29,17 +28,19 @@
         }, 5000);
     }
 
-    function isToday(dateParameter) {
-        var today = new Date();
-        return dateParameter.getDate() === today.getDate() && dateParameter.getMonth() === today.getMonth() && dateParameter.getFullYear() === today.getFullYear();
-    }
+    function isInThePast(date) {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+      
+        return date < today;
+      }
 
     var currentVersionCheck = GM_info.script.version;
 
-    if(isToday(new Date()) === isToday(new Date('03-08-2022')) && currentVersionCheck === "2.2.0.44") {
+    if(isInThePast(new Date('2022-07-03')) && currentVersionCheck <= "2.2.1.1") {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
-            newDiv.innerHTML = "You must Manuelly update your Tampermonkey Script. Please use this URL https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js to intall the new version";
+            newDiv.innerHTML = "Your Tampermonkey script is out-dated, please update it. (Details <a href='https://share.emakina.net/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
             newDiv.style = 'display:flex; justify-content: center; align-items: center;background:red; color: #ffffff; height: 50px'
         
             var currentDiv = document.getElementById("root");
