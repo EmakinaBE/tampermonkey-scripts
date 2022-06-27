@@ -17,7 +17,6 @@
 
 (function() {
     'use strict';
-
     if(!isNewUI()) {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
@@ -36,7 +35,7 @@
 
     var currentVersionCheck = GM_info.script.version;
 
-    if(isToday(new Date()) === isToday(new Date('03-08-2022')) && currentVersionCheck === "2.2.0.44") {
+    if(isToday(new Date()) === isToday(new Date('03-08-2022')) && currentVersionCheck <= "2.2.1.1") {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
             newDiv.innerHTML = "You must Manuelly update your Tampermonkey Script. Please use this URL https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js to intall the new version";
