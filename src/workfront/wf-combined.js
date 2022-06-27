@@ -1,7 +1,7 @@
 // ==UserScript==
-// @name         WF combined
+// @name         WF combined version warning
 // @namespace    https://www.emakina.com/
-// @version      2.2.1.2
+// @version      2.2.1.1
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/*
@@ -13,8 +13,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/wf-combined.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/includeManuelUpdateMessage/src/workfront/wf-combined.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/includeManuelUpdateMessage/src/workfront/wf-combined.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/url-check.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/save-changes.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/storage.js
@@ -33,7 +33,7 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-completed-task.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/options.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/load-css.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/includeManuelUpdateMessage/src/workfront/version-warning.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/timesheet-panel.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/save-spinner.js
 // @grant        none
