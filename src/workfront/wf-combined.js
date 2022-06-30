@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WF combined version warning
+// @name         WF combined 3174
 // @namespace    https://www.emakina.com/
 // @version      2.2.1.3
 // @description  Combines the individual wf scripts into one.
