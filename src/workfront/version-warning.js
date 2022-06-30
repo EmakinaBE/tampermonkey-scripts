@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         File to Load a Version Warning
 // @namespace    https://www.emakina.com/
-// @version      1.1.0
+// @version      1.1.1
 // @description  This File Load the Emakina version Warning
 // @author       Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
@@ -37,7 +37,7 @@
 
     var currentVersionCheck = GM_info.script.version;
 
-    if(isInThePast(new Date('2022-07-03')) && currentVersionCheck <= "2.2.1.1") {
+    if(isInThePast(new Date('2022-07-07')) && currentVersionCheck <= "2.2.1.4") {
         setTimeout(async() => {
             var newDiv = document.createElement("div");
             newDiv.innerHTML = "Your Tampermonkey script is out-dated, please update it. (Details <a href='https://share.emakina.net/display/ENWNI/Tampermonkey+Script#TampermonkeyScript-ManualUpdating' style='text-decoration:underline;padding-left: 5px' target='_blank'>see our documentation</a>)";
