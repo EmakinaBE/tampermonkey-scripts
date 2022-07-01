@@ -10,8 +10,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/workfront/options.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/workfront/options.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/options.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/options.js
 // @grant        none
 // ==/UserScript==
 
@@ -84,15 +84,9 @@
         li.appendChild(button);
         let navbarItemGroup;
 
-        if(!isNewUI()) {
-            li.classList.add('navbar-item');
-            navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right', document);
-            if(!navbarItemGroup) return;
-        } else {
-            li.classList.add('flex', 'mr-4', 'items-center');
-            navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
-            if(!navbarItemGroup) return;
-        }
+        li.classList.add('flex', 'mr-4', 'items-center');
+        navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
+        if(!navbarItemGroup) return;
 
         li.id = listId;
         navbarItemGroup[0].appendChild(li);

@@ -10,15 +10,15 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/workfront/load-css.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/workfront/load-css.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/load-css.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/load-css.js
 // @grant        none
 /// ==/UserScript==
 
 (async function (document) {
     'use strict';
-    let iframe_container;
     let main_container;
+    let second_main;
 
     async function generateTag(container ,url) {
         const tag = document.createElement('style');
@@ -26,17 +26,18 @@
         const css = await res.text();
         tag.type="text/css";
         tag.innerHTML = css
-        if (container === iframe_container) {
-            container[0].contentDocument.head.appendChild(tag);
+        if (container === second_main) {
+            container[0].appendChild(tag);
         }
         if (container === main_container) {
             main_container[0].appendChild(tag);
         }
     }
     setTimeout(async() => {
-        iframe_container = await getElementsFromDocument(`#main-frame`, document, 1000);
-        if (!iframe_container) return;
-        generateTag(iframe_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/css/style.css')
+        console.log('eh oh, lets go');
+        second_main = await getElementsFromDocument('head', document, 1000);
+        if (!second_main) return;
+        generateTag(second_main ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/css/style.css')
     }, 7000);
 
     setTimeout(async() => {
