@@ -24,14 +24,7 @@
 
     window.addEventListener("popstate", () => loadDoc());
     loadDoc();
-    addReInit(setAutoSave);
     addReInit(setupHandlers);
-
-    function setAutoSave() {
-        if(window.wfGetOptions().autoSave){
-            autoSaveAfterBeingIdle();
-        }
-    }
 
     async function loadDoc() {
         if (!isTimesheet()) return;
@@ -40,7 +33,6 @@
         executeCallback();
         
         setTimeout(setupHandlers, 3000);
-        setAutoSave();
     }
 
     async function pollNetworkRequestSuccess() {

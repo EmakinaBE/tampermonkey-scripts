@@ -16,21 +16,22 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
+(function(window) {
     'use strict';
 
     callback(init);
     init();
 
     async function init() {
-        const timesheetIdData = await getElementsFromDocument('[data-timesheetid]');
+        const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return; 
         const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
+        
         const data = await fetchProjectData(timesheetId);
 
         createTableRows(data);
 
-        const col = await getElementsFromDocument('#trId13 .total');
+        const col = await getElementsFromDocument('#trId13 .total', document, 5000);
         if(!col) return;
 
         addListener(col[0], parseToFloat(data.extRefID));
@@ -116,4 +117,4 @@
             .then(json => json.data[0]);
     }
 
-})();
+})(window);

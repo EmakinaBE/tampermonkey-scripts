@@ -55,7 +55,7 @@
             });
 
             base = document;
-            selector = '#main-frame';
+            selector = '#root';
             let iframeLoaded = false;
             const iframes = await (new Promise(checkElement));
 
