@@ -25,16 +25,16 @@
     async function init() {
         const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return; 
-        const timesheetId = timesheetIdData[0].getAttribute('data-timesheetid');
         
         const data = await fetchProjectData(timesheetId);
 
         createTableRows(data);
-
-        const col = await getElementsFromDocument('#trId13 .total', document, 5000);
-        if(!col) return;
-
-        addListener(col[0], parseToFloat(data.extRefID));
+        setTimeout(async() => {
+            const col = await getElementsFromDocument('#trId13 .total', document, 5000);
+            if(!col) return;
+    
+            addListener(col[0], parseToFloat(data.extRefID));
+        }, 7000)
     }
 
     function createTableRows(data){

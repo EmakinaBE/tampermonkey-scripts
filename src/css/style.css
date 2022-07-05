@@ -36,3 +36,8 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
       50% { background: #660303; color: #ffffff }
       100% { background: red;}
   }
+
+.grid-cell.hour-cell.current-day.today {
+    /* i must use importan, why the workfront styling use important */
+    background-color: #fffacd !important;
+}
