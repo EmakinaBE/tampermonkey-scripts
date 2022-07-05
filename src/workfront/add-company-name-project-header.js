@@ -24,26 +24,35 @@
     init();
 
     async function init() {
-        if (window.wfGetOptions().showCompanyName) {                     
-            const elements = (await getElementsFromDocument('.thead.project-hours')) || [];
-            elements.forEach(getProjectFromWorkFront);
+        if (window.wfGetOptions().showCompanyName) {
+
+
+            const headers = (await document.getElementsByClassName('grid-row group-row'));
+
+            if (headers.length != 0)
+            {
+                Array.from(headers).forEach(element => {
+                    const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
+                    const spanObject = row[0].getElementsByTagName("span")[3];
+
+                    getProjectFromWorkFront(spanObject.innerText, spanObject);
+                  });
+            }
         }
     }
 
-    async function getProjectFromWorkFront(projectHTMLElement) {
-        return fetch(`${location.origin}/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=company:name`)
+    async function getProjectFromWorkFront(name, spanObject) {
+        return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
             .then(response => {
                 return response.json();
             }).then(e => {
-                e.data[0] && addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
+                console.log(e.data[0].company.name);
+                e.data[0] && addCompanyNameToHeader(e.data[0].company.name, spanObject);
             });
     }
 
-    async function addCompanyNameToHeader(projectHTMLElement, companyName) {
-        const textNode = document.createTextNode(` - ${companyName}`);
-        const header = projectHTMLElement.querySelector('td.header');
-
-        header.appendChild(textNode);
+    async function addCompanyNameToHeader(companyName, spanObject) {
+        spanObject.insertAdjacentText('beforeend', ` - ${companyName}`);
     }
-    
+
 })();
