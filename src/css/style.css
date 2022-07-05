@@ -41,3 +41,27 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
     /* i must use importan, why the workfront styling use important */
     background-color: #fffacd !important;
 }
+
+.flex {
+    display: flex;
+}
+
+.flex-1 {
+    flex: 1
+}
+
+.time-wrapper {
+  width: 200px;  
+}
+
+.weekly-hours {
+    color: #008000;
+}
+
+.hours-red {
+    color: #ff0000;
+}
+
+.hours-green {
+    color: #008000;
+}

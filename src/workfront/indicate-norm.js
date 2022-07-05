@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.2.0.0
 // @description  Add new table row to see the difference between norm time and filled in time
-// @author       Wouter Versyck
+// @author       Jan-Dennis Drenkhahn
 // @connect      self
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
@@ -26,74 +26,49 @@
         const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return; 
         
-        const data = await fetchProjectData(timesheetId);
+        const data = await fetchProjectData(timesheetIdData);
 
-        createTableRows(data);
         setTimeout(async() => {
-            const col = await getElementsFromDocument('#trId13 .total', document, 5000);
-            if(!col) return;
-    
-            addListener(col[0], parseToFloat(data.extRefID));
+            const addHours = await getElementsFromDocument('.css-ub2476', document);
+            
+            if(!addHours) return;
+            addHours[0].appendChild(createTimeWrapper());
+            createHoursOutput(data);
         }, 7000)
     }
 
-    function createTableRows(data){
-       
-        const delta = data.totalHours - parseToFloat(data.extRefID);
-        insertRow(createText(delta, data.extRefID), findColorForDelta(delta));
+    function createTimeWrapper() {
+        const div = document.createElement('div');
+        div.classList.add('flex');
+        div.classList.add('time-wrapper');
+        div.appendChild(createRestHours());
+        div.appendChild(createWeeklyHours());
+        return div;
     }
 
-    async function addListener(col, norm) {
-        const tableFooter = await getElementsFromDocument('#timesheet-data tfoot .total');
-        if(!tableFooter) return;
-
-        const observer = new MutationObserver(mutations => {
-            mutations.forEach(mutation => {
-                const newTotal = parseToFloat(mutation.target.innerHTML);
-                const delta = newTotal - norm;
-                col.innerHTML = createText(delta, norm);
-                col.style = `color: ${ findColorForDelta(delta) }`;
-            });
-        });
-
-        observer.observe(tableFooter[0], {
-            attributes: true,
-            childList: true,
-            subTree: true,
-            attributeOldValue: true,
-            characterData: true
-        });
+    function createRestHours() {
+        const restHours = document.createElement('div');
+        restHours.classList.add('rest-hour');
+        restHours.classList.add('flex-1');
+        return restHours;
     }
 
-    async function insertRow(text, color) {
-        const tableFooter = await getElementsFromDocument('#timesheet-data > tfoot');
-        if(!tableFooter) return;
+    function createWeeklyHours() {
+        const weeklyHours = document.createElement('div');
+        weeklyHours.classList.add('weekly-hours');
+        weeklyHours.classList.add('flex-1');
+        return weeklyHours;
+    }
 
-        // check if table row was created already
-        const trId = 'trId13';
-        const oldTr= await getElementsFromDocument(`#${trId}`);
-        if(oldTr) return;
-
-        const tr = tableFooter[0].insertRow(-1);
-        tr.id = trId;
-
-        const firstCell = tr.insertCell(0);
-        firstCell.innerHTML = 'Norm(delta):';
-        firstCell.style = 'text-align: right';
-
-        for (let i = 0; i < 7; i++) {
-            tr.insertCell(-1);
-        }
-
-        const tdSpacer = tr.insertCell(-1);
-        tdSpacer.className = 'spacer';
-
-        const tdVal = tr.insertCell(-1);
-        tdVal.className = 'total';
-        if (color) {
-            tdVal.style = `color: ${color}`;
-        }
-        tdVal.innerHTML = text;
+    function createHoursOutput(data) {
+        let delta = data.totalHours - parseToFloat(data.extRefID);
+        delta = Math.round(delta * 100) / 100;
+        const deltaText = delta < 0 ? '' + delta : `+${delta}`;
+        const rest = document.querySelector('.rest-hour');
+        const week = document.querySelector('.weekly-hours');
+        rest.textContent = deltaText;
+        week.textContent = data.extRefID;
+        rest.classList.add(findColorForDelta(delta))
     }
 
     function parseToFloat(text) {
@@ -101,7 +76,7 @@
     }
 
     function findColorForDelta(delta) {
-        return delta >= 0 ? 'green' : 'red';
+        return delta >= 0 ? 'hours-green' : 'hours-red';
     }
 
     function createText(delta, norm) {
