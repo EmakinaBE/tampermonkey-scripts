@@ -23,27 +23,30 @@
     addReInit(init)
     init();
 
-    var loadedScript;
 
     var initRun = false;
 
     async function init() {
 
-        console.log(loadedScript);
-
-        if (!loadedScript)
-        {
-           loadedScript = true;
-            console.log("Inside Script")
         setTimeout(async() => {
-            const timesheetGrid = document.getElementsByClassName("timesheet-grid")[0];
+            const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
+
+            console.log('%c GRID', 'color: green; background: #000', timesheetGrid);
 
             if (timesheetGrid != null)
             {
-                timesheetGrid.addEventListener("scroll", init);
-                timesheetGrid.addEventListener("keydown", init);
+                console.log(timesheetGrid);
+                console.log('%c event', 'color: red; background: #000');
+                timesheetGrid[0].addEventListener("scroll", createCompanyName);
+                timesheetGrid[0].addEventListener("keydown", createCompanyName);
             }
+            createCompanyName();
+        }, 7000)
 
+
+    }
+
+   async function createCompanyName() {
             if (window.wfGetOptions().showCompanyName) {
                 const headers = (await document.getElementsByClassName('grid-row group-row'));
 
@@ -59,10 +62,6 @@
                     });
                 }
             }
-        }, 2000)
-        }
-
-
     }
 
     async function getProjectFromWorkFront(name, spanObject) {
