@@ -24,13 +24,13 @@
 
     async function init() {
         const timesheetIdData = await window.location.href.split('/')[4];
-        if(!timesheetIdData) return; 
-        
+        if(!timesheetIdData) return;
+
         const data = await fetchProjectData(timesheetIdData);
 
         setTimeout(async() => {
             const addHours = await getElementsFromDocument('.css-ub2476', document);
-            
+
             if(!addHours) return;
             addHours[0].appendChild(createTimeWrapper());
             createHoursOutput(data);
@@ -66,8 +66,8 @@
         const deltaText = delta < 0 ? '' + delta : `+${delta}`;
         const rest = document.querySelector('.rest-hour');
         const week = document.querySelector('.weekly-hours');
-        rest.textContent = deltaText;
-        week.textContent = data.extRefID;
+        rest.innerHTML = 'Total <br>' + deltaText;
+        week.innerHTML = 'Norm(delta) <br>' + data.extRefID;
         rest.classList.add(findColorForDelta(delta))
     }
 
