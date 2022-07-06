@@ -27,7 +27,6 @@
     var initRun = false;
 
     async function init() {
-
         setTimeout(async() => {
             const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
 
@@ -48,35 +47,34 @@
 
    async function createCompanyName() {
             if (window.wfGetOptions().showCompanyName) {
-                const headers = (await document.getElementsByClassName('grid-row group-row'));
+                setTimeout(async() => {
+                    const headers = await document.getElementsByClassName('grid-row group-row');
 
-                if (headers.length != 0)
-                {
-                    Array.from(headers).forEach(element => {
-                        const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
-                        const spanObject = row[0].getElementsByTagName("span")[3];
+                    if (headers.length != 0)
+                    {
+                        Array.from(headers).forEach(element => {
+                            const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
+                            const spanObject = row[0].getElementsByTagName("span")[3];
 
-                        if (!spanObject.classList.contains("header-added")) {
-                            getProjectFromWorkFront(spanObject.innerText, spanObject);
-                        }
-                    });
-                }
+                            if (!spanObject.classList.contains("header-added")) {
+                                getProjectFromWorkFront(spanObject.innerText, spanObject);
+                            }
+                        });
+                    }
+                }, 7000)
             }
     }
 
     async function getProjectFromWorkFront(name, spanObject) {
-        return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
-            .then(response => {
-                return response.json();
-            }).then(e => {
-
-            if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
-            {
-                addCompanyNameToHeader(e.data[0].company.name, spanObject);
-            }
-
-
-            });
+            return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
+                .then(response => {
+                    return response.json();
+                }).then(e => {
+                    if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
+                    {
+                        addCompanyNameToHeader(e.data[0].company.name, spanObject);
+                    }
+                });
     }
 
     async function addCompanyNameToHeader(companyName, spanObject) {
