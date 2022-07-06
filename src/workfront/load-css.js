@@ -34,7 +34,6 @@
         }
     }
     setTimeout(async() => {
-        console.log('eh oh, lets go');
         second_main = await getElementsFromDocument('head', document, 1000);
         if (!second_main) return;
         generateTag(second_main ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/css/style.css')
