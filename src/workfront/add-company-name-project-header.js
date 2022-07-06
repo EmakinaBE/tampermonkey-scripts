@@ -23,22 +23,46 @@
     addReInit(init)
     init();
 
+    var loadedScript;
+
+    var initRun = false;
+
     async function init() {
-        if (window.wfGetOptions().showCompanyName) {
 
+        console.log(loadedScript);
 
-            const headers = (await document.getElementsByClassName('grid-row group-row'));
+        if (!loadedScript)
+        {
+           loadedScript = true;
+            console.log("Inside Script")
+        setTimeout(async() => {
+            const timesheetGrid = document.getElementsByClassName("timesheet-grid")[0];
 
-            if (headers.length != 0)
+            if (timesheetGrid != null)
             {
-                Array.from(headers).forEach(element => {
-                    const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
-                    const spanObject = row[0].getElementsByTagName("span")[3];
-
-                    getProjectFromWorkFront(spanObject.innerText, spanObject);
-                  });
+                timesheetGrid.addEventListener("scroll", init);
+                timesheetGrid.addEventListener("keydown", init);
             }
+
+            if (window.wfGetOptions().showCompanyName) {
+                const headers = (await document.getElementsByClassName('grid-row group-row'));
+
+                if (headers.length != 0)
+                {
+                    Array.from(headers).forEach(element => {
+                        const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
+                        const spanObject = row[0].getElementsByTagName("span")[3];
+
+                        if (!spanObject.classList.contains("header-added")) {
+                            getProjectFromWorkFront(spanObject.innerText, spanObject);
+                        }
+                    });
+                }
+            }
+        }, 2000)
         }
+
+
     }
 
     async function getProjectFromWorkFront(name, spanObject) {
@@ -46,13 +70,22 @@
             .then(response => {
                 return response.json();
             }).then(e => {
-                console.log(e.data[0].company.name);
-                e.data[0] && addCompanyNameToHeader(e.data[0].company.name, spanObject);
+
+            if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
+            {
+                addCompanyNameToHeader(e.data[0].company.name, spanObject);
+            }
+
+
             });
     }
 
     async function addCompanyNameToHeader(companyName, spanObject) {
+        initRun = +1;
+        console.log(initRun);
         spanObject.insertAdjacentText('beforeend', ` - ${companyName}`);
+        spanObject.classList.add("header-added");
     }
 
 })();
+
