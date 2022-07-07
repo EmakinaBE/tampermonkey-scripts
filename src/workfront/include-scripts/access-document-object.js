@@ -48,29 +48,6 @@
             checkElement(resolve, reject);
         };
 
-        // if the document was not found yet and its the new UI search for the iframe
-        // if (!doc && !overwrite) {
-        //     callbacks.push(() => {
-        //         maxTries = 0;
-        //     });
-
-        //     base = document;
-        //     selector = '#root';
-        //     let iframeLoaded = false;
-        //     const iframes = await (new Promise(checkElement));
-
-        //     // ensures that the iframe element is fully loaded
-        //     if(iframes) {
-        //         doc = new Promise(async(resolve) => {
-        //             while(!iframeLoaded){
-        //                 const iframeContainer  = iframes?.[0]?.contentWindow?.document;
-        //                 iframeLoaded = iframeContainer?.children?.[0]?.children?.[1]?.children?.length;
-        //                 if(iframeLoaded) return resolve(iframeContainer);
-        //                 await pause(100);
-        //             }
-        //         });
-        //     }
-        // }
         maxTries = maxTriesInput;
         callbacks.push(() => {
             maxTries = 0;
