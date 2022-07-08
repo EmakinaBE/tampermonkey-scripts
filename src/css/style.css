@@ -65,3 +65,11 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
 .hours-green {
     color: #008000;
 }
+
+.warning-message {
+    color: tomato; 
+    padding: 15px 0; 
+    font-size: 1.2em; 
+    font-weight: bold;
+    width: 100%;
+}
