@@ -20,11 +20,7 @@
 (function() {
     'use strict';
     const commentId = 'commentId13';
-    const inputFieldSelector = '.css-1nnbcj9 input:not([disabled])';
     const noCommentStyle = 'background: tomato';
-    const containerSelector = '#CommentPanel > menu';
-    const warningMessageSelector = '#CommentPanel > menu > p';
-    const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
 
@@ -38,19 +34,19 @@
 
         const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
         const submitButton = await getElementsFromDocument('.css-14ce388', document);
-        //const container = await getElementsFromDocument(containerSelector);
-        //if(!elements || !submitButton || !container) return;
-        //const warningMessage = await createWarningMessage(container[0]);
-        checkAll(elements, submitButton[0]);
-        initListeners(elements, submitButton[0]);
+        const container = await getElementsFromDocument('.css-ub2476', document);
+        if(!elements || !submitButton || !container) return;
+        const warningMessage = await createWarningMessage(container[0]);
+        checkAll(elements,warningMessage[0], submitButton[0]);
+        initListeners(elements,warningMessage[0], submitButton[0]);
         }, 3000)
     }
 
     async function initNewTask(e){
         const newLine = e.detail.newLine;
-        const elements = await getElementsFromDocument(inputFieldSelector, newLine);
-        const submitButton = await getElementsFromDocument(submitButtonSelector);
-        const warningMessage = await getElementsFromDocument( warningMessageSelector);
+        const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document, newLine);
+        const submitButton = await getElementsFromDocument('.css-14ce388', document);
+        const warningMessage = await getElementsFromDocument( '.css-ub2476', document);
         if(!submitButton || !warningMessage) return;
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
@@ -67,7 +63,7 @@
 
         element.appendChild(textNode);
 
-        element.setAttribute('style', warningMessageStyle);
+        element.classList.add('warning-message');
         element.classList.add('hidden');
 
         container.insertBefore(element, container.firstChild);
@@ -75,28 +71,25 @@
         return element;
     }
 
-    async function checkAll(elements, submitButton) {
+    async function checkAll(elements,warningMessage, submitButton) {
         console.log('submitButton', submitButton);
 
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
-console.log('empty', emptyFieldFound);
         // submit button is not always shown (on already commited ts)
         if(submitButton) {
             submitButton.disabled = emptyFieldFound;
-
         }
 
-        //const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
-        //emptyFieldFound
-          //              ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
-            //            : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
+        oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
+        emptyFieldFound
+                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
+                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
     }
 
     function checkAllCommentsAndMarkFields(elements) {
         let isEmptyCommentPresent = false;
         
         elements.forEach(e => {
-            //const comment = e.nextElementSibling.classList.contains('show-comment');
             const value = e.value;
             
             if(value && !e.nextElementSibling.classList.contains('show-comment')) {

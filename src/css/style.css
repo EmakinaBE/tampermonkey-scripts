@@ -66,6 +66,10 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
     color: #008000;
 }
 
+.css-1q57avi .css-ub2476 {
+        flex-direction: inherit;
+}
+
 .warning-message {
     color: tomato; 
     padding: 15px 0; 
