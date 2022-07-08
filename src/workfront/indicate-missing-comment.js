@@ -72,7 +72,6 @@
     }
 
     async function checkAll(elements,warningMessage, submitButton) {
-        console.log('submitButton', submitButton);
 
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
         // submit button is not always shown (on already commited ts)
@@ -110,13 +109,10 @@
     function initListeners(elements, submitButton) {
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
-                console.log('logger log')
                 // should only be executed, when key is not backspace
                 if(keyValue.keyCode != 8)
                 {
-                    console.log('keykey', keyValue.keyCode)
                     const val = e.value;
-                    console.log('val is', val);
                     if (val && val.match(/\d+[,.]\d+/g)) {
                         e.value = toSystemDecimalDelimiter(cleanParseFloat(val));
                     }
