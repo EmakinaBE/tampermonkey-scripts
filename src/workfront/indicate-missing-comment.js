@@ -20,7 +20,12 @@
 (function() {
     'use strict';
     const commentId = 'commentId13';
+    const inputFieldSelector = '.css-1nnbcj9 input:not([disabled])';
     const noCommentStyle = 'background: tomato';
+    const submitButtonSelector = '.css-14ce388';
+    const containerSelector = '#CommentPanel > menu';
+    const warningMessageSelector = '#CommentPanel > menu > p';
+    const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
 
@@ -35,10 +40,11 @@
         const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
         const submitButton = await getElementsFromDocument('.css-14ce388', document);
         const container = await getElementsFromDocument('.css-ub2476', document);
+            console.log('con', container);
         if(!elements || !submitButton || !container) return;
         const warningMessage = await createWarningMessage(container[0]);
-        checkAll(elements,warningMessage[0], submitButton[0]);
-        initListeners(elements,warningMessage[0], submitButton[0]);
+        checkAll(elements, warningMessage, submitButton[0]);
+        initListeners(elements, warningMessage, submitButton[0]);
         }, 3000)
     }
 
@@ -46,7 +52,7 @@
         const newLine = e.detail.newLine;
         const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document, newLine);
         const submitButton = await getElementsFromDocument('.css-14ce388', document);
-        const warningMessage = await getElementsFromDocument( '.css-ub2476', document);
+        const warningMessage = await getElementsFromDocument('.css-ub2476', document);
         if(!submitButton || !warningMessage) return;
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
@@ -62,8 +68,7 @@
         element.id = commentId;
 
         element.appendChild(textNode);
-
-        element.classList.add('warning-message');
+element.classList.add('warning-message');
         element.classList.add('hidden');
 
         container.insertBefore(element, container.firstChild);
@@ -72,23 +77,23 @@
     }
 
     async function checkAll(elements,warningMessage, submitButton) {
-
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
         // submit button is not always shown (on already commited ts)
         if(submitButton) {
             submitButton.disabled = emptyFieldFound;
         }
-
-        oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
+        const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
+        console.log('oldWarning', oldWarningMessage);
         emptyFieldFound
-                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
-                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
+                       ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
+                       : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
     }
 
     function checkAllCommentsAndMarkFields(elements) {
         let isEmptyCommentPresent = false;
         
         elements.forEach(e => {
+            //const comment = e.nextElementSibling.classList.contains('show-comment');
             const value = e.value;
             
             if(value && !e.nextElementSibling.classList.contains('show-comment')) {
@@ -106,9 +111,13 @@
         return parseFloat(string);
     }
 
-    function initListeners(elements, submitButton) {
+    function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
+                    console.log('keykey', keyValue.keyCode)
+                    if (keyValue.keyCode === 110) {
+                      console.log('e.value', e.value)
+                   }
                 // should only be executed, when key is not backspace
                 if(keyValue.keyCode != 8)
                 {
@@ -121,18 +130,18 @@
 
             const observer = new MutationObserver(mutations => {
                 mutations.forEach(mutation => {
-                    if (mutation.attributeName === 'data-description') {
-                        checkAll(elements, submitButton);
-                    }
+                    checkSafeMessage();
                 });
             });
+
+
 
             observer.observe(e, {
                 attributes: true
             });
             e.addEventListener('blur', (keyValue) => {
                 const val = e.value;
-                checkAll(elements, submitButton);
+                checkAll(elements,warningMessage, submitButton);
                 if (window.wfGetOptions().correctComma) { 
                     const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
@@ -142,6 +151,18 @@
             }, false);
         });
     }
+
+      async function checkSafeMessage(elements,warningMessage, submitButton) {
+          setTimeout(async() => {
+              const safeMessage = await getElementsFromDocument('.css-1omcej9', document, 5000);
+              if (!safeMessage[0].getAttribute('data-testID')) return checkSafeMessage();
+              console.log('tt', safeMessage[0].getAttribute('data-testID'));
+               const elementCheck = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+               const submitButtonCheck = await getElementsFromDocument('.css-14ce388', document);
+               const warningMessageCheck = await getElementsFromDocument('.css-ub2476', document);
+              checkAll(elementCheck,warningMessageCheck, submitButtonCheck);
+          }, 3000)
+      }
 
     function shouldRoundToNearestQuarter() {
         if (!window.wfGetOptions) {
