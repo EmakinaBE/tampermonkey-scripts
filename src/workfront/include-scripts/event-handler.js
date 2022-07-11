@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Callback Handler for Events
 // @namespace    https://www.emakina.com/
-// @version      2.0.1.0
+// @version      2.0.2.0
 // @description  Adds all callbacks to an array and executes them
 // @author       Sarah Roupec, Antonia Langer, Jan Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
@@ -21,6 +21,7 @@
 
     let callbacks = [];
     let reInits = [];
+    let reTime = []
 
     window.executeCallback = ()  => {
         callbacks.forEach((callback) => callback());
@@ -36,6 +37,14 @@
 
     window.addReInit = (reInit) => {
         reInits.push(reInit);
+    }
+
+    window.addReTime = () => {
+        reTime.push(reTime);
+    }
+
+    window.excecuteReTime = () => {
+        reTime.forEach((reTime) => reTime());
     }
 
 

@@ -139,6 +139,7 @@ element.classList.add('warning-message');
               const safeMessage = await getElementsFromDocument('.css-1omcej9', document);
               if (safeMessage[0].getAttribute('data-testID') === null) return checkSafeMessage();
               return checkAll(elements,warningMessage, submitButton);
+              excecuteReTime();
           }, 3000)
       }
 

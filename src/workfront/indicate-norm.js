@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Norm hours
 // @namespace    https://www.emakina.com/
-// @version      2.2.0.0
+// @version      2.2.1.0
 // @description  Add new table row to see the difference between norm time and filled in time
 // @author       Jan-Dennis Drenkhahn
 // @connect      self
@@ -20,6 +20,7 @@
     'use strict';
 
     callback(init);
+    addReTime(init);
     init();
 
     async function init() {
