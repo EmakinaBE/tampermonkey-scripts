@@ -20,12 +20,7 @@
 (function() {
     'use strict';
     const commentId = 'commentId13';
-    const inputFieldSelector = '.css-1nnbcj9 input:not([disabled])';
     const noCommentStyle = 'background: tomato';
-    const submitButtonSelector = '.css-14ce388';
-    const containerSelector = '#CommentPanel > menu';
-    const warningMessageSelector = '#CommentPanel > menu > p';
-    const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
 
@@ -40,7 +35,6 @@
         const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
         const submitButton = await getElementsFromDocument('.css-14ce388', document);
         const container = await getElementsFromDocument('.css-ub2476', document);
-            console.log('con', container);
         if(!elements || !submitButton || !container) return;
         const warningMessage = await createWarningMessage(container[0]);
         checkAll(elements, warningMessage, submitButton[0]);
@@ -83,7 +77,6 @@ element.classList.add('warning-message');
             submitButton.disabled = emptyFieldFound;
         }
         const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
-        console.log('oldWarning', oldWarningMessage);
         emptyFieldFound
                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
@@ -114,10 +107,9 @@ element.classList.add('warning-message');
     function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
-                    console.log('keykey', keyValue.keyCode)
-                    if (keyValue.keyCode === 110) {
-                      console.log('e.value', e.value)
-                   }
+                // starting with fix for , problem
+                //     if (keyValue.keyCode === 110) {
+                //    }
                 // should only be executed, when key is not backspace
                 if(keyValue.keyCode != 8)
                 {
@@ -128,20 +120,10 @@ element.classList.add('warning-message');
                 }
             }, false);
 
-            const observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => {
-                    checkSafeMessage();
-                });
-            });
-
-
-
-            observer.observe(e, {
-                attributes: true
-            });
             e.addEventListener('blur', (keyValue) => {
                 const val = e.value;
                 checkAll(elements,warningMessage, submitButton);
+                checkSafeMessage(elements,warningMessage, submitButton);
                 if (window.wfGetOptions().correctComma) { 
                     const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
@@ -154,13 +136,9 @@ element.classList.add('warning-message');
 
       async function checkSafeMessage(elements,warningMessage, submitButton) {
           setTimeout(async() => {
-              const safeMessage = await getElementsFromDocument('.css-1omcej9', document, 5000);
-              if (!safeMessage[0].getAttribute('data-testID')) return checkSafeMessage();
-              console.log('tt', safeMessage[0].getAttribute('data-testID'));
-               const elementCheck = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
-               const submitButtonCheck = await getElementsFromDocument('.css-14ce388', document);
-               const warningMessageCheck = await getElementsFromDocument('.css-ub2476', document);
-              checkAll(elementCheck,warningMessageCheck, submitButtonCheck);
+              const safeMessage = await getElementsFromDocument('.css-1omcej9', document);
+              if (safeMessage[0].getAttribute('data-testID') === null) return checkSafeMessage();
+              return checkAll(elements,warningMessage, submitButton);
           }, 3000)
       }
 
