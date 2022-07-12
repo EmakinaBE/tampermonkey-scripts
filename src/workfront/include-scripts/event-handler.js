@@ -21,7 +21,7 @@
 
     let callbacks = [];
     let reInits = [];
-    let reTime = []
+    let reTimes = []
 
     window.executeCallback = ()  => {
         callbacks.forEach((callback) => callback());
@@ -39,12 +39,12 @@
         reInits.push(reInit);
     }
 
-    window.addReTime = () => {
-        reTime.push(reTime);
+    window.addReTime = (reTime) => {
+        reTimes.push(reTime);
     }
 
     window.excecuteReTime = () => {
-        reTime.forEach((reTime) => reTime());
+        reTimes.forEach((reTime) => reTime());
     }
 
 
