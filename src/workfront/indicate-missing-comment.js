@@ -17,7 +17,7 @@
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
     const commentId = 'commentId13';
     const noCommentStyle = 'background: tomato';
@@ -84,11 +84,10 @@ element.classList.add('warning-message');
 
     function checkAllCommentsAndMarkFields(elements) {
         let isEmptyCommentPresent = false;
-        
         elements.forEach(e => {
             //const comment = e.nextElementSibling.classList.contains('show-comment');
             const value = e.value;
-            
+
             if(value && !e.nextElementSibling.classList.contains('show-comment')) {
                 e.setAttribute('style', noCommentStyle);
                 isEmptyCommentPresent = true;
@@ -124,7 +123,7 @@ element.classList.add('warning-message');
                 const val = e.value;
                 checkAll(elements,warningMessage, submitButton);
                 checkSafeMessage(elements,warningMessage, submitButton);
-                if (window.wfGetOptions().correctComma) { 
+                if (window.wfGetOptions().correctComma) {
                     const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
                         e.value = operation(cleanParseFloat(val));
@@ -137,9 +136,9 @@ element.classList.add('warning-message');
       async function checkSafeMessage(elements,warningMessage, submitButton) {
           setTimeout(async() => {
               const safeMessage = await getElementsFromDocument('.css-1omcej9', document);
-              if (safeMessage[0].getAttribute('data-testID') === null) return checkSafeMessage();
-              return checkAll(elements,warningMessage, submitButton);
+              if (safeMessage[0].getAttribute('data-testID') === null && submitButton.getAttribute('disabled') === true) return checkSafeMessage();
               excecuteReTime();
+              return checkAll(elements,warningMessage, submitButton);
           }, 3000)
       }
 
@@ -161,4 +160,4 @@ element.classList.add('warning-message');
     function roundNearQtr(nr) {
         return Math.round(nr * 4) / 4;
     }
-})();
+})(window);
