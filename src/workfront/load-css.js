@@ -36,12 +36,12 @@
     setTimeout(async() => {
         second_main = await getElementsFromDocument('head', document, 1000);
         if (!second_main) return;
-        generateTag(second_main ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/css/style.css')
+        generateTag(second_main ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/css/style.css')
     }, 7000);
 
     setTimeout(async() => {
         main_container = await getElementsFromDocument('head', document, 1000);
         if (!main_container) return;
-        generateTag(main_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3174/src/css/main-style.css')
+        generateTag(main_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/css/main-style.css')
     }, 7000);
 })(document);
