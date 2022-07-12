@@ -22,13 +22,14 @@
     callback(init);
     init();
 
-    async function init() {
-        const today = await getElementsFromDocument('.today');
-        if(!today) return;
+    function init() {
+        setTimeout(async() => {
+            const today = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
+            if(!today) return;
 
-        for (let i = 0; i < today.length; i++) {
-            today[i].style.backgroundColor = 'lemonchiffon';
-            today[i].style.backgroundImage = 'none';
-        };
+            for (let i = 0; i < today.length; i++) {
+                today[i].classList.add('today');
+            };
+    }, 7000);
     }
 })();

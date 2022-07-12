@@ -17,17 +17,14 @@
 // ==/UserScript==
 
 
-(function() {
+(function(window) {
     'use strict';
     const commentId = 'commentId13';
-    const inputFieldSelector = '.fc > input:not([readonly=true])';
     const noCommentStyle = 'background: tomato';
-    const submitButtonSelector = '.btn.submit.btn-secondary';
-    const containerSelector = '#CommentPanel > menu';
-    const warningMessageSelector = '#CommentPanel > menu > p';
-    const warningMessageStyle = 'color: tomato; padding: 15px 0; font-size: 1.2em; font-weight: bold;';
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
+    let timer = null;
+
 
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
@@ -35,22 +32,25 @@
     init();
 
     async function init() {
-        const elements = await getElementsFromDocument(inputFieldSelector);
-        const submitButton = await getElementsFromDocument(submitButtonSelector);
-        const container = await getElementsFromDocument(containerSelector);
-        
-        if(!elements || !submitButton || !container) return;
-        const warningMessage = await createWarningMessage(container[0]);
-
-        checkAll(elements, warningMessage, submitButton[0]);
-        initListeners(elements, warningMessage, submitButton[0]);
+        setTimeout(async() => {
+            const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
+            const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+            const submitButton = await getElementsFromDocument('.css-14ce388', document);
+            const container = await getElementsFromDocument('.css-ub2476', document);
+            if(!elements || !submitButton || !container) return;
+            const warningMessage = await createWarningMessage(container[0]);
+            timesheetGrid[0].addEventListener("scroll", afterEventCheck);
+            timesheetGrid[0].addEventListener("keydown", afterEventCheck);
+            checkAll(elements, warningMessage, submitButton[0]);
+            initListeners(elements, warningMessage, submitButton[0]);
+        }, 3000)
     }
 
     async function initNewTask(e){
         const newLine = e.detail.newLine;
-        const elements = await getElementsFromDocument(inputFieldSelector, newLine);
-        const submitButton = await getElementsFromDocument(submitButtonSelector);
-        const warningMessage = await getElementsFromDocument( warningMessageSelector);
+        const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document, newLine);
+        const submitButton = await getElementsFromDocument('.css-14ce388', document);
+        const warningMessage = await getElementsFromDocument('.css-ub2476', document);
         if(!submitButton || !warningMessage) return;
         initListeners(elements, warningMessage[0], submitButton[0]);
     }
@@ -66,8 +66,7 @@
         element.id = commentId;
 
         element.appendChild(textNode);
-
-        element.setAttribute('style', warningMessageStyle);
+        element.classList.add('warning-message');
         element.classList.add('hidden');
 
         container.insertBefore(element, container.firstChild);
@@ -75,28 +74,25 @@
         return element;
     }
 
-    async function checkAll(elements, warningMessage, submitButton) {
+    async function checkAll(elements,warningMessage, submitButton) {
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
-
         // submit button is not always shown (on already commited ts)
         if(submitButton) {
             submitButton.disabled = emptyFieldFound;
         }
-
         const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
         emptyFieldFound
-                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
-                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
+                       ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
+                       : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
     }
 
     function checkAllCommentsAndMarkFields(elements) {
         let isEmptyCommentPresent = false;
-        
         elements.forEach(e => {
-            const comment = e.getAttribute('data-description');
+            //const comment = e.nextElementSibling.classList.contains('show-comment');
             const value = e.value;
-            
-            if(value && !comment) {
+
+            if(value && !e.nextElementSibling.classList.contains('show-comment')) {
                 e.setAttribute('style', noCommentStyle);
                 isEmptyCommentPresent = true;
             } else {
@@ -114,6 +110,9 @@
     function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
+                // starting with fix for , problem
+                //     if (keyValue.keyCode === 110) {
+                //    }
                 // should only be executed, when key is not backspace
                 if(keyValue.keyCode != 8)
                 {
@@ -124,21 +123,11 @@
                 }
             }, false);
 
-            const observer = new MutationObserver(mutations => {
-                mutations.forEach(mutation => {
-                    if (mutation.attributeName === 'data-description') {
-                        checkAll(elements, warningMessage, submitButton);
-                    }
-                });
-            });
-
-            observer.observe(e, {
-                attributes: true
-            });
             e.addEventListener('blur', (keyValue) => {
                 const val = e.value;
-                checkAll(elements, warningMessage, submitButton);
-                if (window.wfGetOptions().correctComma) { 
+                checkAll(elements,warningMessage, submitButton);
+                checkSafeMessage(elements,warningMessage, submitButton);
+                if (window.wfGetOptions().correctComma) {
                     const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
                         e.value = operation(cleanParseFloat(val));
@@ -148,13 +137,37 @@
         });
     }
 
+      async function checkSafeMessage(elements,warningMessage, submitButton) {
+          setTimeout(async() => {
+              const safeMessage = await getElementsFromDocument('.css-1omcej9', document);
+
+              if (safeMessage[0].getAttribute('data-testID') === null && submitButton.getAttribute('disabled') === true) return checkSafeMessage();
+              excecuteReTime();
+              return checkAll(elements,warningMessage, submitButton);
+          }, 3000)
+      }
+
     function shouldRoundToNearestQuarter() {
         if (!window.wfGetOptions) {
             return true;
         }
         return window.wfGetOptions().roundToNearestQuarter;
     }
-    
+
+    function afterEventCheck() {
+
+        if(timer !== null) {
+            clearTimeout(timer);
+         }
+        timer = setTimeout(async function() {
+            const elementsEv = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+            const submitButtonEv = await getElementsFromDocument('.css-14ce388', document);
+            const containerEv = await getElementsFromDocument('.css-ub2476', document);
+            const warningMessageEv = await createWarningMessage(containerEv[0]);
+            checkAll(elementsEv, warningMessageEv, submitButtonEv[0]);
+        }, 150);
+    }
+
     function roundStringToNearestQtr(number) {
         return toSystemDecimalDelimiter(roundNearQtr(number));
     }
@@ -166,4 +179,4 @@
     function roundNearQtr(nr) {
         return Math.round(nr * 4) / 4;
     }
-})();
+})(window);
