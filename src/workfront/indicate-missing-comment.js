@@ -154,7 +154,7 @@
         return window.wfGetOptions().roundToNearestQuarter;
     }
 
-    function afterEventCheck(elements, warningMessage, submitButton) {
+    function afterEventCheck() {
 
         if(timer !== null) {
             clearTimeout(timer);
