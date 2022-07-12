@@ -31,9 +31,9 @@
 
         setTimeout(async() => {
             const addHours = await getElementsFromDocument('.css-ub2476', document);
-
+            const timeWrapper = await getElementsFromDocument('.flex.time-wrapper', document);
             if(!addHours) return;
-            addHours[0].appendChild(createTimeWrapper());
+            if (!timeWrapper) addHours[0].appendChild(createTimeWrapper());
             createHoursOutput(data);
         }, 7000)
     }
@@ -67,6 +67,8 @@
         const deltaText = delta < 0 ? '' + delta : `+${delta}`;
         const rest = document.querySelector('.rest-hour');
         const week = document.querySelector('.weekly-hours');
+        if (rest.innerHTML.length !== 0) rest.innterHTML = "";
+        if (week.innerHTML.length !== 0) week.innerHTML = "";
         rest.innerHTML = 'Total <br>' + deltaText;
         week.innerHTML = 'Norm(delta) <br>' + data.extRefID;
         rest.classList.add(findColorForDelta(delta))
