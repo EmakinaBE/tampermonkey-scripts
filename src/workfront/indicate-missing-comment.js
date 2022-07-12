@@ -23,6 +23,8 @@
     const noCommentStyle = 'background: tomato';
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
+    let timer = null;
+
 
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
@@ -31,14 +33,16 @@
 
     async function init() {
         setTimeout(async() => {
-
-        const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
-        const submitButton = await getElementsFromDocument('.css-14ce388', document);
-        const container = await getElementsFromDocument('.css-ub2476', document);
-        if(!elements || !submitButton || !container) return;
-        const warningMessage = await createWarningMessage(container[0]);
-        checkAll(elements, warningMessage, submitButton[0]);
-        initListeners(elements, warningMessage, submitButton[0]);
+            const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
+            const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+            const submitButton = await getElementsFromDocument('.css-14ce388', document);
+            const container = await getElementsFromDocument('.css-ub2476', document);
+            if(!elements || !submitButton || !container) return;
+            const warningMessage = await createWarningMessage(container[0]);
+            timesheetGrid[0].addEventListener("scroll", afterEventCheck);
+            timesheetGrid[0].addEventListener("keydown", afterEventCheck);
+            checkAll(elements, warningMessage, submitButton[0]);
+            initListeners(elements, warningMessage, submitButton[0]);
         }, 3000)
     }
 
@@ -62,7 +66,7 @@
         element.id = commentId;
 
         element.appendChild(textNode);
-element.classList.add('warning-message');
+        element.classList.add('warning-message');
         element.classList.add('hidden');
 
         container.insertBefore(element, container.firstChild);
@@ -136,6 +140,7 @@ element.classList.add('warning-message');
       async function checkSafeMessage(elements,warningMessage, submitButton) {
           setTimeout(async() => {
               const safeMessage = await getElementsFromDocument('.css-1omcej9', document);
+
               if (safeMessage[0].getAttribute('data-testID') === null && submitButton.getAttribute('disabled') === true) return checkSafeMessage();
               excecuteReTime();
               return checkAll(elements,warningMessage, submitButton);
@@ -148,7 +153,21 @@ element.classList.add('warning-message');
         }
         return window.wfGetOptions().roundToNearestQuarter;
     }
-    
+
+    function afterEventCheck(elements, warningMessage, submitButton) {
+
+        if(timer !== null) {
+            clearTimeout(timer);
+         }
+        timer = setTimeout(async function() {
+            const elementsEv = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+            const submitButtonEv = await getElementsFromDocument('.css-14ce388', document);
+            const containerEv = await getElementsFromDocument('.css-ub2476', document);
+            const warningMessageEv = await createWarningMessage(containerEv[0]);
+            checkAll(elementsEv, warningMessageEv, submitButtonEv[0]);
+        }, 150);
+    }
+
     function roundStringToNearestQtr(number) {
         return toSystemDecimalDelimiter(roundNearQtr(number));
     }
