@@ -84,15 +84,9 @@
         li.appendChild(button);
         let navbarItemGroup;
 
-        if(!isNewUI()) {
-            li.classList.add('navbar-item');
-            navbarItemGroup = await getElementsFromDocument('.navbar-item-group.right', document);
-            if(!navbarItemGroup) return;
-        } else {
-            li.classList.add('flex', 'mr-4', 'items-center');
-            navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
-            if(!navbarItemGroup) return;
-        }
+        li.classList.add('flex', 'mr-4', 'items-center');
+        navbarItemGroup = await getElementsFromDocument('ul.adobe-navbar', document);
+        if(!navbarItemGroup) return;
 
         li.id = listId;
         navbarItemGroup[0].appendChild(li);

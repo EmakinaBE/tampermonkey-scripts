@@ -23,27 +23,66 @@
     addReInit(init)
     init();
 
+
+    var initRun = false;
+
     async function init() {
-        if (window.wfGetOptions().showCompanyName) {                     
-            const elements = (await getElementsFromDocument('.thead.project-hours')) || [];
-            elements.forEach(getProjectFromWorkFront);
-        }
+        setTimeout(async() => {
+            const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
+
+            //console.log('%c GRID', 'color: green; background: #000', timesheetGrid);
+
+            if (timesheetGrid != null)
+            {
+                //console.log(timesheetGrid);
+                //console.log('%c event', 'color: red; background: #000');
+                timesheetGrid[0].addEventListener("scroll", createCompanyName);
+                timesheetGrid[0].addEventListener("keydown", createCompanyName);
+            }
+            createCompanyName();
+        }, 7000)
+
+
     }
 
-    async function getProjectFromWorkFront(projectHTMLElement) {
-        return fetch(`${location.origin}/attask/api/v12.0/proj/search?ID=${projectHTMLElement.getAttribute('data-projectid')}&fields=company:name`)
-            .then(response => {
-                return response.json();
-            }).then(e => {
-                e.data[0] && addCompanyNameToHeader(projectHTMLElement, e.data[0].company.name);
-            });
+   async function createCompanyName() {
+            if (window.wfGetOptions().showCompanyName) {
+                setTimeout(async() => {
+                    const headers = await document.getElementsByClassName('grid-row group-row');
+
+                    if (headers.length != 0)
+                    {
+                        Array.from(headers).forEach(element => {
+                            const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
+                            const spanObject = row[0].getElementsByTagName("span")[3];
+
+                            if (!spanObject.classList.contains("header-added")) {
+                                getProjectFromWorkFront(spanObject.innerText, spanObject);
+                            }
+                        });
+                    }
+                }, 7000)
+            }
     }
 
-    async function addCompanyNameToHeader(projectHTMLElement, companyName) {
-        const textNode = document.createTextNode(` - ${companyName}`);
-        const header = projectHTMLElement.querySelector('td.header');
-
-        header.appendChild(textNode);
+    async function getProjectFromWorkFront(name, spanObject) {
+            return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
+                .then(response => {
+                    return response.json();
+                }).then(e => {
+                    if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
+                    {
+                        addCompanyNameToHeader(e.data[0].company.name, spanObject);
+                    }
+                });
     }
-    
+
+    async function addCompanyNameToHeader(companyName, spanObject) {
+        initRun = +1;
+        //console.log(initRun);
+        spanObject.insertAdjacentText('beforeend', ` - ${companyName}`);
+        spanObject.classList.add("header-added");
+    }
+
 })();
+
