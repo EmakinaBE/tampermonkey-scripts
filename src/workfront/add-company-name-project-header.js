@@ -30,12 +30,12 @@
         setTimeout(async() => {
             const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
 
-            console.log('%c GRID', 'color: green; background: #000', timesheetGrid);
+            //console.log('%c GRID', 'color: green; background: #000', timesheetGrid);
 
             if (timesheetGrid != null)
             {
-                console.log(timesheetGrid);
-                console.log('%c event', 'color: red; background: #000');
+                //console.log(timesheetGrid);
+                //console.log('%c event', 'color: red; background: #000');
                 timesheetGrid[0].addEventListener("scroll", createCompanyName);
                 timesheetGrid[0].addEventListener("keydown", createCompanyName);
             }
@@ -79,7 +79,7 @@
 
     async function addCompanyNameToHeader(companyName, spanObject) {
         initRun = +1;
-        console.log(initRun);
+        //console.log(initRun);
         spanObject.insertAdjacentText('beforeend', ` - ${companyName}`);
         spanObject.classList.add("header-added");
     }
