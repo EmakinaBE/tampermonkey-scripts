@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      2.1.0.0
+// @version      2.3.0.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
-// @author       Wouter Versyck
+// @author       Wouter Versyck, Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*

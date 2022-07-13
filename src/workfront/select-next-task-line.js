@@ -15,50 +15,50 @@
 // @grant        GM_xmlhttpRequest
 // ==/UserScript==
 
-(function() {
-    'use strict';
+// (function() {
+//     'use strict';
 
-    document.head.addEventListener('WF_NEW-TASK', handleEvent);
+//     document.head.addEventListener('WF_NEW-TASK', handleEvent);
 
-    async function handleEvent(e) {
-        const { newLine, workitemobjid } = e.detail;
+//     async function handleEvent(e) {
+//         const { newLine, workitemobjid } = e.detail;
 
-        // Open drop down on lew line
-        const hoursDropDown = newLine.getElement('.hour-type-drop-down');
-        hoursDropDown.click();
+//         // Open drop down on lew line
+//         const hoursDropDown = newLine.getElement('.hour-type-drop-down');
+//         hoursDropDown.click();
 
-        const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
-        const itemList = await getElementsFromDocument('.item-list');
-        if(!lines || !itemList) return;
+//         const lines = await getElementsFromDocument(`[data-workitemobjid='${workitemobjid}'].TASK`);
+//         const itemList = await getElementsFromDocument('.item-list');
+//         if(!lines || !itemList) return;
 
-        // get option that is not yet picked and click it
-        const option = getFirstUnusedOption(lines, itemList[0]);
-        option.click();
+//         // get option that is not yet picked and click it
+//         const option = getFirstUnusedOption(lines, itemList[0]);
+//         option.click();
 
-        const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
-        if (!inputFields) return;
-        inputFields.forEach(field => field.nextElementSibling.onclick = () => {
-            if (window.wfGetOptions().autoSave) autoSaveChanges();
-        })
-    }
+//         const inputFields = await getElementsFromDocument('.fc > input:not([readonly=true])');
+//         if (!inputFields) return;
+//         inputFields.forEach(field => field.nextElementSibling.onclick = () => {
+//             if (window.wfGetOptions().autoSave) autoSaveChanges();
+//         })
+//     }
 
-    function getFirstUnusedOption(lines, itemList) {
-        const usedValues  = getElements(lines, '.hour-type-drop-down')
-            .map(e => e.querySelector('.dd-hidden-input').value);
+//     function getFirstUnusedOption(lines, itemList) {
+//         const usedValues  = getElements(lines, '.hour-type-drop-down')
+//             .map(e => e.querySelector('.dd-hidden-input').value);
 
-        const options = [...itemList.children];
-        const leftOver = options.filter(e => !usedValues.includes(e.getAttribute('data-value')));
+//         const options = [...itemList.children];
+//         const leftOver = options.filter(e => !usedValues.includes(e.getAttribute('data-value')));
 
-        return leftOver.length > 0 ? leftOver[0] : options[0];
-    }
+//         return leftOver.length > 0 ? leftOver[0] : options[0];
+//     }
 
-    function getElements(elements, selector) {
-        let array = [];
-        elements.forEach(element => {
-            array.push(element.querySelector(selector));
-        });
-        return array;
-    }
+//     function getElements(elements, selector) {
+//         let array = [];
+//         elements.forEach(element => {
+//             array.push(element.querySelector(selector));
+//         });
+//         return array;
+//     }
 
 
-})();
+// })();

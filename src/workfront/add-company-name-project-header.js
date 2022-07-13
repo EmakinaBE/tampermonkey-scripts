@@ -3,7 +3,7 @@
 // @namespace    https://www.emakina.com/
 // @version      2.0.1.0
 // @description  Add company name in the workfront table header, to see to which company which project is linked
-// @author       Jeffrey Vandenbossche, Jan Drenkhahn
+// @author       Jeffrey Vandenbossche, Jan-Dennis Drenkhahn, Antonia Langer
 // @connect      self
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
