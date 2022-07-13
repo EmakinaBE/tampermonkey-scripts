@@ -34,11 +34,8 @@
     const defaultOptions = {
         autoRedirect: false,
         showCompanyName: true,
-        autoSave: true,
         autoSelect: true,
-        correctComma: true,
         roundToNearestQuarter: true,
-
         };
 
     window.saveOptions = (newOptions) => {

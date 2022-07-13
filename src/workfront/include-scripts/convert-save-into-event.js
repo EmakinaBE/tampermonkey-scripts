@@ -27,7 +27,6 @@
     addReInit(setupHandlers);
 
     async function loadDoc() {
-        if (!isTimesheet()) return;
         resetStorageObj();
         resetDoc();
         executeCallback();
