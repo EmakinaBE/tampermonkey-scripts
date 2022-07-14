@@ -58,7 +58,7 @@
     async function createWarningMessage(container) {
 
         // check if comment was created already
-        const oldComment = await getElementsFromDocument(`#${commentId}`);
+        const oldComment = await getElementsFromDocument(`#${commentId}`, document);
         if(oldComment) return;
 
         const element = document.createElement('p');
