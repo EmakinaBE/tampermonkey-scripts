@@ -10,8 +10,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/warning-current-timesheet.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/warning-current-timesheet.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/warning-current-timesheet.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/warning-current-timesheet.js
 // @grant        none
 // ==/UserScript==
 
@@ -25,20 +25,22 @@
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
-        const getTimesheetId = await getElementsFromDocument('[data-timesheetid]');
-        if(!getTimesheetId) return; 
-        const currentTsId =  getTimesheetId[0].getAttribute('data-timesheetid');
+        const getTimesheetId = await window.location.href.split('/')[4];
+        if(!getTimesheetId) return;
+        const currentTsId = getTimesheetId;
+        console.log('getTime', getTimesheetId);
+        console.log('current', currentTsId);
 
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
 
         redirectIfNeeded(openTsInPast, noOlderTs);
 
-        const isCurrentTs = await getElementsFromDocument('.today');
+        const isCurrentTs = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
 
         if (!isCurrentTs || openTsInPast) {
 
-            const header = await getElementsFromDocument('#timesheet-header');
+            const header = await getElementsFromDocument('.wf-mfe_timesheets', document);
             if(!header) return;
 
             // check if warning message was created already
@@ -48,7 +50,7 @@
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
-            messageBox.setAttribute('style', messageStyle);
+            messageBox.classList.add('wrong-timesheet');
             messageBox.id = messageBoxId;
 
             header[0].appendChild(messageBox);

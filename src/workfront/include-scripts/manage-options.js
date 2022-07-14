@@ -11,15 +11,15 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/manage-options.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/manage-options.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/manage-options.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/manage-options.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
 (function(window) {
     'use strict';
 
-    const store = new Store('wfOptions');
+    const store = new Store('eWfOptions');
     const oldStore = localStorage.getItem('wf-options');
 
     if (oldStore) {
@@ -28,17 +28,14 @@
             result[key] = value.isChecked;
         }
         store.value = result;
-        localStorage.removeItem('wf-options');
+        localStorage.removeItem('wfOptions');
     }
     
     const defaultOptions = {
         autoRedirect: false,
         showCompanyName: true,
-        autoSave: true,
         autoSelect: true,
-        correctComma: true,
         roundToNearestQuarter: true,
-
         };
 
     window.saveOptions = (newOptions) => {
