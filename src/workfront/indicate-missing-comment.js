@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      2.3.0.0
+// @version      2.3.1.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck, Jan-Dennis Drenkhahn
@@ -101,11 +101,6 @@
         return isEmptyCommentPresent;
     }
 
-    function cleanParseFloat(string) {
-        string = string.replace(",", ".");
-        return parseFloat(string);
-    }
-
     function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
@@ -117,7 +112,7 @@
                 {
                     const val = e.value;
                     if (val && val.match(/\d+[,.]\d+/g)) {
-                        e.value = toSystemDecimalDelimiter(cleanParseFloat(val));
+                        e.value = toSystemDecimalDelimiter(val);
                     }
                 }
             }, false);
@@ -129,7 +124,7 @@
                 if (window.wfGetOptions().correctComma) {
                     const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
-                        e.value = operation(cleanParseFloat(val));
+                        e.value = operation(val);
                     }
                 }
             }, false);
