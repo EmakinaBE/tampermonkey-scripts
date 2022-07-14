@@ -70,6 +70,10 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
         flex-direction: inherit;
 }
 
+.missing-comment {
+    background: #ff6347;
+}
+
 .warning-message {
     color: tomato; 
     padding: 15px 0; 

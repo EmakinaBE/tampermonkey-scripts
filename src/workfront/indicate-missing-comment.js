@@ -20,7 +20,7 @@
 (function(window) {
     'use strict';
     const commentId = 'commentId13';
-    const noCommentStyle = 'background: tomato';
+    const noCommentStyle = ;
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
     let timer = null;
@@ -93,10 +93,10 @@
             const value = e.value;
 
             if(value && !e.nextElementSibling.classList.contains('show-comment')) {
-                e.setAttribute('style', noCommentStyle);
+                e.classList.add('missing-comment')
                 isEmptyCommentPresent = true;
             } else {
-                e.removeAttribute('style');
+                e.classList.remove('missing-comment');
             }
         });
         return isEmptyCommentPresent;
