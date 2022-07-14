@@ -1,6 +1,6 @@
 /* Emakina Styling 
 Autor: Jan-Dennis Drenkhahn
-Version: 1.0.0
+Version: 2.0.0
 */
 body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary:disabled,
 body.global-timesheet-improvements .timesheet-saving-panel>div>button.btn-secondary[disabled],
@@ -67,7 +67,7 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
 }
 
 .css-1q57avi .css-ub2476 {
-        flex-direction: inherit;
+    flex-direction: inherit;
 }
 
 .missing-comment {
@@ -75,9 +75,15 @@ body.global-timesheet-improvements .timesheet-saving-panel .timer-panel-btn .tim
 }
 
 .warning-message {
-    color: tomato; 
+    color: #ff6347; 
     padding: 15px 0; 
     font-size: 1.2em; 
     font-weight: bold;
     width: 100%;
+}
+
+.wrong-timesheet {
+    padding: 15px; 
+    background: #ff6347; 
+    color: #fff;
 }
