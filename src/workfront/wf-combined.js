@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined cleanup
 // @namespace    https://www.emakina.com/
-// @version      3.0.0.2
+// @version      3.0.0.3
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck, Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
