@@ -27,7 +27,9 @@
         const openTsInPast = await getOldestOpenTsBeforeToday();
         const getTimesheetId = await window.location.href.split('/')[4];
         if(!getTimesheetId) return;
-        const currentTsId =  getTimesheetId;
+        const currentTsId = getTimesheetId;
+        console.log('getTime', getTimesheetId);
+        console.log('current', currentTsId);
 
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
@@ -38,7 +40,7 @@
 
         if (!isCurrentTs || openTsInPast) {
 
-            const header = await getElementsFromDocument('.css-uln56b', document);
+            const header = await getElementsFromDocument('.wf-mfe_timesheets', document);
             if(!header) return;
 
             // check if warning message was created already
