@@ -2,7 +2,7 @@
 // @name         Get Elements from Document
 // @namespace    https://www.emakina.com/
 // @version      2.0
-// @description  Searches for the iframe element if the new UI ist used and returns an element for the specified selector
+// @description  Searches for elements if the new UI ist used and returns an element for the specified selector
 // @author       Sarah Roupec, Antonia Langer
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico

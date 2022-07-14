@@ -19,7 +19,7 @@
 (function(window) {
     'use strict';
 
-    const store = new Store('wfOptions');
+    const store = new Store('eWfOptions');
     const oldStore = localStorage.getItem('wf-options');
 
     if (oldStore) {
@@ -28,17 +28,14 @@
             result[key] = value.isChecked;
         }
         store.value = result;
-        localStorage.removeItem('wf-options');
+        localStorage.removeItem('wfOptions');
     }
     
     const defaultOptions = {
         autoRedirect: false,
         showCompanyName: true,
-        autoSave: true,
         autoSelect: true,
-        correctComma: true,
         roundToNearestQuarter: true,
-
         };
 
     window.saveOptions = (newOptions) => {

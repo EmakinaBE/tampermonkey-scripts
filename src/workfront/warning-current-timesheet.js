@@ -25,20 +25,22 @@
 
     async function init() {
         const openTsInPast = await getOldestOpenTsBeforeToday();
-        const getTimesheetId = await getElementsFromDocument('[data-timesheetid]');
-        if(!getTimesheetId) return; 
-        const currentTsId =  getTimesheetId[0].getAttribute('data-timesheetid');
+        const getTimesheetId = await window.location.href.split('/')[4];
+        if(!getTimesheetId) return;
+        const currentTsId = getTimesheetId;
+        console.log('getTime', getTimesheetId);
+        console.log('current', currentTsId);
 
         const currentTs = await getCurrentTs(currentTsId);
         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
 
         redirectIfNeeded(openTsInPast, noOlderTs);
 
-        const isCurrentTs = await getElementsFromDocument('.today');
+        const isCurrentTs = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
 
         if (!isCurrentTs || openTsInPast) {
 
-            const header = await getElementsFromDocument('#timesheet-header');
+            const header = await getElementsFromDocument('.wf-mfe_timesheets', document);
             if(!header) return;
 
             // check if warning message was created already
@@ -48,7 +50,7 @@
 
             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
             const messageBox = createElementWithText('p', message);
-            messageBox.setAttribute('style', messageStyle);
+            messageBox.classList.add('wrong-timesheet');
             messageBox.id = messageBoxId;
 
             header[0].appendChild(messageBox);

@@ -1,10 +1,10 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      2.1.0.0
+// @version      2.3.0.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
-// @author       Wouter Versyck
+// @author       Wouter Versyck, Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
@@ -20,7 +20,6 @@
 (function(window) {
     'use strict';
     const commentId = 'commentId13';
-    const noCommentStyle = 'background: tomato';
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
     let timer = null;
@@ -58,7 +57,7 @@
     async function createWarningMessage(container) {
 
         // check if comment was created already
-        const oldComment = await getElementsFromDocument(`#${commentId}`);
+        const oldComment = await getElementsFromDocument(`#${commentId}`, document);
         if(oldComment) return;
 
         const element = document.createElement('p');
@@ -93,10 +92,10 @@
             const value = e.value;
 
             if(value && !e.nextElementSibling.classList.contains('show-comment')) {
-                e.setAttribute('style', noCommentStyle);
+                e.classList.add('missing-comment')
                 isEmptyCommentPresent = true;
             } else {
-                e.removeAttribute('style');
+                e.classList.remove('missing-comment');
             }
         });
         return isEmptyCommentPresent;

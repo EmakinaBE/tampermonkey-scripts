@@ -28,9 +28,7 @@
     const optionsLabel = {
         autoRedirect: 'Auto redirect to oldest open timesheet',
         showCompanyName: 'Show company name next to project',
-        autoSave: 'Auto-save',
         autoSelect: 'Auto-select next task time line',
-        correctComma: 'Correct wrong comma seperator',
         roundToNearestQuarter: 'Round entries to nearest quarter', 
     };
 
