@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Indicate entries without comment + rounding to the nearest quarter
 // @namespace    https://www.emakina.com/
-// @version      2.3.0.0
+// @version      2.3.1.0
 // @description  Indicate entries without comment, hide submit button when entries without comment are found and round to nearest quarter
 // round filled in numbers to the nearest quarter
 // @author       Wouter Versyck, Jan-Dennis Drenkhahn
@@ -11,8 +11,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/indicate-missing-comment.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/indicate-missing-comment.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-missing-comment.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/indicate-missing-comment.js
 // @grant        none
 // ==/UserScript==
 
@@ -101,23 +101,15 @@
         return isEmptyCommentPresent;
     }
 
-    function cleanParseFloat(string) {
-        string = string.replace(",", ".");
-        return parseFloat(string);
-    }
-
     function initListeners(elements, warningMessage, submitButton) {
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
-                // starting with fix for , problem
-                //     if (keyValue.keyCode === 110) {
-                //    }
-                // should only be executed, when key is not backspace
                 if(keyValue.keyCode != 8)
                 {
                     const val = e.value;
                     if (val && val.match(/\d+[,.]\d+/g)) {
-                        e.value = toSystemDecimalDelimiter(cleanParseFloat(val));
+                        console.log('this val', val)
+                        e.value = toSystemDecimalDelimiter(val);
                     }
                 }
             }, false);
@@ -129,7 +121,7 @@
                 if (window.wfGetOptions().correctComma) {
                     const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
                     if (val) {
-                        e.value = operation(cleanParseFloat(val));
+                        e.value = operation(val);
                     }
                 }
             }, false);
