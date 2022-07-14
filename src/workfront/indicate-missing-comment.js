@@ -20,7 +20,6 @@
 (function(window) {
     'use strict';
     const commentId = 'commentId13';
-    const noCommentStyle = ;
     const warningMessageText = 'Not all entries have a comment';
     const numberFormater = new Intl.NumberFormat(navigator.language);
     let timer = null;
