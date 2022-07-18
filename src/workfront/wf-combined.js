@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined
 // @namespace    https://www.emakina.com/
-// @version      3.0.1.4
+// @version      3.0.1.5
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck, Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
