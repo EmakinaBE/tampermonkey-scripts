@@ -108,7 +108,6 @@
                 {
                     const val = e.value;
                     if (val && val.match(/\d+[,.]\d+/g)) {
-                        console.log('this val', val)
                         e.value = toSystemDecimalDelimiter(val);
                     }
                 }
