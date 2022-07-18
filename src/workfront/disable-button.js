@@ -11,8 +11,8 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/disable-button.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/disable-button.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-button.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-button.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
@@ -21,12 +21,11 @@
 
     async function init() {
         setTimeout(async() => {
-            const closeButton = await getElementsFromDocument('css-14ce388', document);
-            console.log('close my Button', closeButton);
-            if (closeButton !== disabled) {
-                closeButton.disabled;
+            const closeButton = await getElementsFromDocument('.css-14ce388', document);
+            if (!closeButton[0].disabled) {
+                closeButton[0].disabled = true;
             }
         }, 3000)
     }
 
-})
+})();
