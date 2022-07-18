@@ -37,7 +37,7 @@
                 //console.log(timesheetGrid);
                 //console.log('%c event', 'color: red; background: #000');
                 timesheetGrid[0].addEventListener("scroll", createCompanyName);
-                timesheetGrid[0].addEventListener("keydown", createCompanyName);
+                //timesheetGrid[0].addEventListener("keydown", createCompanyName);
             }
             createCompanyName();
         }, 7000)
