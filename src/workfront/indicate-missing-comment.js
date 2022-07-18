@@ -113,7 +113,7 @@
                 }
             }, false);
 
-            e.addEventListener('blur', (keyValue) => {
+            e.addEventListener('keyup', (keyValue) => {
                 const val = e.value;
                 checkAll(elements,warningMessage, submitButton);
                 checkSafeMessage(elements,warningMessage, submitButton);
