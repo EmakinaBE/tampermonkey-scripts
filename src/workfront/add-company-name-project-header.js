@@ -68,13 +68,16 @@
     async function getProjectFromWorkFront(name, spanObject) {
             return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
                 .then(response => {
-                    return response.json();
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    throw new Error('Something went wrong');
                 }).then(e => {
                     if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
                     {
                         addCompanyNameToHeader(e.data[0].company.name, spanObject);
                     }
-                });
+                }).catch(error => {console.log(error)});
     }
 
     async function addCompanyNameToHeader(companyName, spanObject) {
