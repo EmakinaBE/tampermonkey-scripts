@@ -21,11 +21,54 @@
 
     async function init() {
         setTimeout(async() => {
+                      
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
             }
+
+                        
+            closeButton[0].after(addNewButton());
+
+            const checkButton = await getElementsFromDocument('.em-check', document);
+            checkButton[0].addEventListener('click', allCommentsIncluded);
         }, 3000)
+    }
+
+    function addNewButton() {
+        const createButton = document.createElement('button');
+        createButton.classList.add('css-14ce388');
+        createButton.classList.add('em-check');
+        createButton.setAttribute('type', 'button');
+        createButton.setAttribute('data-check', 'check-1');
+        createButton.innerHTML= 'Check your Timesheet';
+        return createButton
+    }
+
+    async function allCommentsIncluded() {
+        const timesheetIdData = await window.location.href.split('/')[4];
+        console.log('timesheet', timesheetIdData);
+        if(!timesheetIdData) return;
+
+        const data = await fetchOpenComments(timesheetIdData);
+        console.log('da da da', data);
+        if (data >= 1) {
+            const missingcomments = await getElementsFromDocument('.css-14ce388.em-check', document);
+            missingcomments[0].after(addMessageComment(data));
+        }
+    }
+
+    function fetchOpenComments(timesheetIdData) {
+        return fetch(`${location.origin}/attask/api/v14.0/hour/count?timesheetID=${timesheetIdData}&description_Mod=isblank&fields=*`)
+            .then(response => response.json())
+            .then(json => json.data.count);
+    }
+
+    function addMessageComment(value) {
+        const createMessageArea = document.createElement('p');
+        createMessageArea.classList.add('info-box');
+        createMessageArea.innerHTML = 'We Missinng: ' + value + ' comment';
+        return createMessageArea;
     }
 
 })();
