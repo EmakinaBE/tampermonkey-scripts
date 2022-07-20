@@ -81,7 +81,6 @@
 
     function addCloseWrapper() {
         const wrapper = document.createElement('div');
-        wrapper.classList.add('flex');
         wrapper.classList.add('wp-btn');
         wrapper.appendChild(addCloseButton());
         return wrapper;
