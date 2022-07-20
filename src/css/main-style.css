@@ -128,3 +128,20 @@ Version: 1.0.0
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+.infolay {
+    position: absolute;
+    top: calc(50% - 100px);
+    left: calc(50% - 200px);
+    background: #d0cece;
+    width: 400px;
+    height: 200px;
+    border-radius: 5px;
+    border: 1px solid #000;
+    box-shadow: 1px 2px #000;
+}
+
+.info-box {
+    padding: 5px;
+    color: darkred;
+}
