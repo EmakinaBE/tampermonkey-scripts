@@ -1,5 +1,5 @@
 // ==UserScript==
-// @name         WF combined
+// @name         WF combined test
 // @namespace    https://www.emakina.com/
 // @version      3.0.1.6
 // @description  Combines the individual wf scripts into one.
