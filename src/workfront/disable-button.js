@@ -51,11 +51,14 @@
         if(!timesheetIdData) return;
 
         const data = await fetchOpenComments(timesheetIdData);
+        addInfoverlay();
         console.log('da da da', data);
         if (data >= 1) {
             const missingcomments = await getElementsFromDocument('.css-14ce388.em-check', document);
             missingcomments[0].after(addMessageComment(data));
+            return
         }
+        
     }
 
     function fetchOpenComments(timesheetIdData) {
@@ -64,11 +67,23 @@
             .then(json => json.data.count);
     }
 
-    function addMessageComment(value) {
-        const createMessageArea = document.createElement('p');
-        createMessageArea.classList.add('info-box');
+    async function addMessageComment(value) {
+        const createMessageArea = await getElementsFromDocument('.info-box', document);
         createMessageArea.innerHTML = 'We Missinng: ' + value + ' comment';
-        return createMessageArea;
+        return;
+    }
+
+    function addInfoverlay() {
+        const info = document.createElement('div');
+        info.classList.add('infolay');
+        info.appendChild(addTextelement());
+        return info;
+    }
+
+    function addTextelement() {
+        const textBlock = document.createElement('p')
+        textBlock.classList.add('info-box');
+        return textBlock;
     }
 
 })();

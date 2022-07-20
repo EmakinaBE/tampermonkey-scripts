@@ -76,8 +76,8 @@
     async function checkAll(elements,warningMessage, submitButton) {
         const emptyFieldFound = checkAllCommentsAndMarkFields(elements);
         // submit button is not always shown (on already commited ts)
-        if(submitButton) {
-            submitButton.disabled = emptyFieldFound;
+        if(!submitButton.disabled) {
+            submitButton.disabled = true;
         }
         const oldWarningMessage = await getElementsFromDocument(`#${commentId}`);
         emptyFieldFound
