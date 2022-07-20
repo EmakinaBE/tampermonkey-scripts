@@ -29,6 +29,7 @@
 
                         
             closeButton[0].after(addNewButton());
+            document.body.createElement(addInfoverlay());
 
             //const checkButton = await getElementsFromDocument('.em-check', document);
             //checkButton[0].addEventListener('click', allCommentsIncluded);
@@ -48,15 +49,11 @@
 
     async function allCommentsIncluded() {
         const timesheetIdData = await window.location.href.split('/')[4];
-        console.log('timesheet', timesheetIdData);
         if(!timesheetIdData) return;
 
         const data = await fetchOpenComments(timesheetIdData);
-        addInfoverlay();
-        console.log('da da da', data);
         if (data >= 1) {
-            const missingcomments = await getElementsFromDocument('.css-14ce388.em-check', document);
-            missingcomments[0].after(addMessageComment(data));
+            addMessageComment(data);
             return
         }
         
@@ -69,17 +66,25 @@
     }
 
     async function addMessageComment(value) {
-        const createMessageArea = await getElementsFromDocument('.info-box', document);
-        createMessageArea.innerHTML = 'We Missinng: ' + value + ' comment';
+        const createMessage = await getElementsFromDocument('.infolay .info-box', document);
+        createMessage[0].innerHTML = 'We Missinng: ' + value + ' comment';
         return;
     }
 
     function addInfoverlay() {
         const info = document.createElement('div');
         info.classList.add('infolay');
-        info.appendChild(addCloseButton())
+        info.appendChild(addCloseWrapper());
         info.appendChild(addTextelement());
         return info;
+    }
+
+    function addCloseWrapper() {
+        const wrapper = document.createElement('div');
+        wrapper.classList.add('flex');
+        wrapper.classList.add('wp-btn');
+        wrapper.appendChild(addCloseButton());
+        return wrapper;
     }
 
     function addCloseButton() {
@@ -87,8 +92,8 @@
         closeMe.classList.add('btn-close');
         closeMe.setAttribute('type', 'button');
         closeMe.appendChild(addCloseTitle());
-        button.innerHTML('X');
-        button.onclick(closeInfo);
+        closeMe.textContent = 'X';
+        closeMe.onclick = closeInfo;
         return closeMe
     }
 

@@ -141,7 +141,21 @@ Version: 1.0.0
     box-shadow: 1px 2px #000;
 }
 
+.wp-btn {
+    flex-direction: row-reverse;
+    margin: 5px 5px 0 0;
+}
+
+.btn-close {
+    border: 1px solid;
+    padding: 0 5px;
+}
+
+.btn-close:hover {
+    background: #0057B8;
+}
+
 .info-box {
-    padding: 5px;
+    padding: 0 5px 5px 5px;
     color: darkred;
 }
