@@ -30,8 +30,8 @@
                         
             closeButton[0].after(addNewButton());
 
-            const checkButton = await getElementsFromDocument('.em-check', document);
-            checkButton[0].addEventListener('click', allCommentsIncluded);
+            //const checkButton = await getElementsFromDocument('.em-check', document);
+            //checkButton[0].addEventListener('click', allCommentsIncluded);
         }, 3000)
     }
 
@@ -42,6 +42,7 @@
         createButton.setAttribute('type', 'button');
         createButton.setAttribute('data-check', 'check-1');
         createButton.innerHTML= 'Check your Timesheet';
+        createButton.onclick = allCommentsIncluded;
         return createButton
     }
 
@@ -76,14 +77,35 @@
     function addInfoverlay() {
         const info = document.createElement('div');
         info.classList.add('infolay');
+        info.appendChild(addCloseButton())
         info.appendChild(addTextelement());
         return info;
+    }
+
+    function addCloseButton() {
+        const closeMe = document.createElement('button');
+        closeMe.classList.add('btn-close');
+        closeMe.setAttribute('type', 'button');
+        closeMe.appendChild(addCloseTitle());
+        button.innerHTML('X');
+        button.onclick(closeInfo);
+        return closeMe
+    }
+
+    function addCloseTitle() {
+        const titleClose = document.createElement('title')
+        titleClose.innerHTML = 'close';
+        return titleClose;
     }
 
     function addTextelement() {
         const textBlock = document.createElement('p')
         textBlock.classList.add('info-box');
         return textBlock;
+    }
+
+    function closeInfo() {
+        console.log('THIS IS MUSIC');
     }
 
 })();
