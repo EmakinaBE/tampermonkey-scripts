@@ -79,23 +79,31 @@
     function addCloseWrapper() {
         const wrapper = document.createElement('div');
         wrapper.classList.add('wp-btn');
-        wrapper.appendChild(addticker())
+        wrapper.appendChild(addNewsWrapper())
         wrapper.appendChild(addCloseButton());
         return wrapper;
+    }
+
+    function addNewsWrapper() {
+        const newsWrapper = document.createElement('div');
+        newsWrapper.classList.add('news-wrapper');
+        newsWrapper.appendChild(addticker());
+        newsWrapper.appendChild(addGifDino());
+        return newsWrapper;
     }
 
     function addticker() {
         const ticker = document.createElement('marquee');
         ticker.classList.add('news-ticker');
-        ticker.innerHTML = '+++ Info to fix +++ <img class="news-gif" src="https://c.tenor.com/4lKsJQHA5_AAAAAC/walking-with.gif">';
-        //ticker.appendChild(addGifDino());
+        ticker.innerHTML = '+++ Info to fix +++';
         return ticker;
     }
 
     function addGifDino() {
         const dino = document.createElement('span');
         dino.classList.add('news-gif');
-        ticker.innerHTML = ''
+        dino.innerHTML = '<img class="news-gif" src="https://c.tenor.com/4lKsJQHA5_AAAAAC/walking-with.gif">';
+        return dino;
     }
 
     function addCloseButton() {
@@ -125,5 +133,3 @@
     }
 
 })();
-
-<div class="tenor-gif-embed" data-postid="23850880" data-share-method="host" data-aspect-ratio="1" data-width="100%"><a href="https://tenor.com/view/walking-with-pet-stickman-sad-gif-23850880">Walking With GIF</a>from <a href="https://tenor.com/search/walking-gifs">Walking GIFs</a></div> <script type="text/javascript" async src="https://tenor.com/embed.js"></script>
