@@ -47,7 +47,7 @@
     async function allCommentsIncluded() {
         const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return;
-        
+
         const createMessage = await getElementsFromDocument('.infolay .info-box', document);
 
         const value = await fetchOpenComments(timesheetIdData);
@@ -81,17 +81,17 @@
     }
 
     function addMessageComment(createMessage, value) {
-        createMessage[0].querySelector('.missing-comments').innerHTML = 'We Missinng: ' + value + ' comment.';
+        createMessage[0].querySelector('.missing-comments').innerHTML = 'We Missinng: <span class="hours-red">' + value + '</span> comment.';
         return;
     }
 
     function addTimeInformation(createMessage, missingTime, time) {
-        createMessage[0].querySelector('.missing-time').innerHTML = 'Please check you Booking Time.<br> We miss some Hours for you full Week Time.<br> You Bookes ' + time.totalHours + '.<br> We missed ' + missingTime + ' Hours.<br> Your full Week Time is ' + time.extRefID + '.';
+        createMessage[0].querySelector('.missing-time').innerHTML = 'Please check you Booking Time.<br> We miss some Hours for you full Week Time.<br> You Booked <span class="hours-red">' + time.totalHours + '</span>.<br> We missed <span class="hours-red">' + missingTime + '</span> Hours.<br> Your full Week Time is <span class="hours-green">' + time.extRefID + '</span>.';
         return
     }
 
     function addRoundetMessage(createMessage, roundetTime, time) {
-        createMessage[0].querySelector('.not-roundet').innerHTML = 'Please check you Booking time. Your Booked Time is not Perfekt Roundet. <br> Your Booked Time: ' + time.totalHours + ' <br> Perfekt book Time look like this <span class="weekly-hours">'+ roundetTime +  '</span>'
+        createMessage[0].querySelector('.not-roundet').innerHTML = 'Please check you Booking time. Your Booked Time is not Perfekt Roundet. <br> Your Booked Time: <span class="hours-red">' + time.totalHours + '</span><br> Perfekt book Time look like this <span class="hours-green">'+ roundetTime +  '</span>'
     }
 
     function addInfoverlay() {
@@ -99,6 +99,7 @@
         info.classList.add('infolay');
         info.appendChild(addCloseWrapper());
         info.appendChild(addTextelement());
+        info.appendChild(addButtonWrapper());
         return info;
     }
 
@@ -136,15 +137,15 @@
         const closeMe = document.createElement('button');
         closeMe.classList.add('btn-close');
         closeMe.setAttribute('type', 'button');
-        closeMe.appendChild(addCloseTitle());
+        closeMe.appendChild(addButtonTitel('close'));
         closeMe.textContent = 'X';
         closeMe.onclick = closeInfo;
         return closeMe
     }
 
-    function addCloseTitle() {
+    function addButtonTitel(text) {
         const titleClose = document.createElement('title')
-        titleClose.innerHTML = 'close';
+        titleClose.innerHTML = text;
         return titleClose;
     }
 
@@ -175,8 +176,41 @@
         return textThree;
     }
 
+    function addButtonWrapper() {
+        const buttonWp = document.createElement('div');
+        buttonWp.classList.add('flex');
+        buttonWp.classList.add('btn-wp');
+        buttonWp.appendChild(addIgnoreButton());
+        buttonWp.appendChild(addFixButton());
+        return buttonWp;
+    }
+
+    function addIgnoreButton() {
+        const ignorBtn = document.createElement('button');
+        ignorBtn.classList.add('btn-ignore');
+        ignorBtn.setAttribute('type', 'button');
+        ignorBtn.appendChild(addButtonTitel('Ignore'));
+        ignorBtn.textContent = 'Ignore';
+        ignorBtn.onclick = ignoreInfo;
+        return ignorBtn;
+    }
+
+    function addFixButton() {
+        const fixBtn = document.createElement('button');
+        fixBtn.classList.add('btn-fixed');
+        fixBtn.setAttribute('type', 'button');
+        fixBtn.appendChild(addButtonTitel('Fixed'));
+        fixBtn.textContent = 'Fixen';
+        fixBtn.onclick = closeInfo;
+    }
+
+
     function closeInfo() {
         console.log('THIS IS MUSIC');
+    }
+
+    function ignoreInfo() {
+        console.log('THIS IS Magic');
     }
 
     function calcWeekTime(time) {
