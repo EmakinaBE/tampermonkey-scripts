@@ -46,11 +46,19 @@
 
     async function allCommentsIncluded() {
         const timesheetIdData = await window.location.href.split('/')[4];
+        const createMessage = await getElementsFromDocument('.infolay .info-box', document);
+
         if(!timesheetIdData) return;
 
-        const data = await fetchOpenComments(timesheetIdData);
+        const value = await fetchOpenComments(timesheetIdData);
+
+        const time = await fetchProjectTime(timesheetIdData);
+
+        let fullTime = calcWeekTime(time);
+
         if (data >= 1) {
-            addMessageComment(data);
+            addMessageComment(createMessage, value);
+            if (fullTime <= data.extRefID) addTimeInformation(createMessage, fullTime);
             return
         }
         
@@ -62,10 +70,20 @@
             .then(json => json.data.count);
     }
 
-    async function addMessageComment(value) {
-        const createMessage = await getElementsFromDocument('.infolay .info-box', document);
+    function fetchProjectTime(timesheetId) {
+        return fetch(`${location.origin}/attask/api/v14.0/tshet/search?ID=${timesheetId}&fields=*`)
+            .then(response => response.json())
+            .then(json => json.data[0]);
+    }
+
+    async function addMessageComment(createMessage, value) {
         createMessage[0].innerHTML = 'We Missinng: ' + value + ' comment';
         return;
+    }
+
+    async function addTimeInformation(createMessage, fullTime) {
+        createMessage[0].innerHTML = 'Please check you Booking Time. We miss some Hours for you full Week Time. Current Book ' + fullTime + '. Your full Week Time is ' + data.extRefID + '.';
+        return
     }
 
     function addInfoverlay() {
@@ -130,6 +148,13 @@
 
     function closeInfo() {
         console.log('THIS IS MUSIC');
+    }
+
+    function calcWeekTime(time) {
+        let delta = data.totalHours - parseToFloat(data.extRefID);
+        delta = Math.round(delta * 100) / 100;
+        const deltaText = delta < 0 ? '' + delta : `+${delta}`;
+        return deltaText;
     }
 
 })();
