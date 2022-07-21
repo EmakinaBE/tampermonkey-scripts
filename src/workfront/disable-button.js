@@ -202,6 +202,7 @@
         fixBtn.appendChild(addButtonTitel('Fixed'));
         fixBtn.textContent = 'Fixen';
         fixBtn.onclick = closeInfo;
+        return fixBtn;
     }
 
 
