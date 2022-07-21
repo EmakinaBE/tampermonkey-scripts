@@ -30,7 +30,7 @@
                         
             closeButton[0].after(addNewButton());
             document.body.appendChild(addInfoverlay());
-        }, 3000)
+        }, 5000)
     }
 
     function addNewButton() {
@@ -46,19 +46,23 @@
 
     async function allCommentsIncluded() {
         const timesheetIdData = await window.location.href.split('/')[4];
-        const createMessage = await getElementsFromDocument('.infolay .info-box', document);
-
         if(!timesheetIdData) return;
+        
+        const createMessage = await getElementsFromDocument('.infolay .info-box', document);
 
         const value = await fetchOpenComments(timesheetIdData);
 
         const time = await fetchProjectTime(timesheetIdData);
 
-        let fullTime = calcWeekTime(time);
+        let missingTime = calcWeekTime(time);
 
-        if (data >= 1) {
+        let roundetTime = roundStringToNearestQtr(time.totalHours);
+
+        console.log(roundetTime);
+        if (value >= 1) {
             addMessageComment(createMessage, value);
-            if (fullTime <= data.extRefID) addTimeInformation(createMessage, fullTime);
+            if (missingTime < time.extRefID) addTimeInformation(createMessage, missingTime, time);
+            if (roundetTime !== time.totalHours) addRoundetMessage(createMessage, roundetTime, time);
             return
         }
         
@@ -70,20 +74,24 @@
             .then(json => json.data.count);
     }
 
-    function fetchProjectTime(timesheetId) {
-        return fetch(`${location.origin}/attask/api/v14.0/tshet/search?ID=${timesheetId}&fields=*`)
+    function fetchProjectTime(timesheetIdData) {
+        return fetch(`${location.origin}/attask/api/v14.0/tshet/search?ID=${timesheetIdData}&fields=*`)
             .then(response => response.json())
             .then(json => json.data[0]);
     }
 
-    async function addMessageComment(createMessage, value) {
-        createMessage[0].innerHTML = 'We Missinng: ' + value + ' comment';
+    function addMessageComment(createMessage, value) {
+        createMessage[0].querySelector('.missing-comments').innerHTML = 'We Missinng: ' + value + ' comment.';
         return;
     }
 
-    async function addTimeInformation(createMessage, fullTime) {
-        createMessage[0].innerHTML = 'Please check you Booking Time. We miss some Hours for you full Week Time. Current Book ' + fullTime + '. Your full Week Time is ' + data.extRefID + '.';
+    function addTimeInformation(createMessage, missingTime, time) {
+        createMessage[0].querySelector('.missing-time').innerHTML = 'Please check you Booking Time.<br> We miss some Hours for you full Week Time.<br> You Bookes ' + time.totalHours + '.<br> We missed ' + missingTime + ' Hours.<br> Your full Week Time is ' + time.extRefID + '.';
         return
+    }
+
+    function addRoundetMessage(createMessage, roundetTime, time) {
+        createMessage[0].querySelector('.not-roundet').innerHTML = 'Please check you Booking time. Your Booked Time is not Perfekt Roundet. <br> Your Booked Time: ' + time.totalHours + ' <br> Perfekt book Time look like this <span class="weekly-hours">'+ roundetTime +  '</span>'
     }
 
     function addInfoverlay() {
@@ -141,9 +149,30 @@
     }
 
     function addTextelement() {
-        const textBlock = document.createElement('p')
+        const textBlock = document.createElement('div');
         textBlock.classList.add('info-box');
+        textBlock.appendChild(addTextOne());
+        textBlock.appendChild(addTextTwo());
+        textBlock.appendChild(addTextThree());
         return textBlock;
+    }
+
+    function addTextOne() {
+        const textOne = document.createElement('p');
+        textOne.classList.add('missing-comments');
+        return textOne;
+    }
+
+    function addTextTwo() {
+        const textTwo = document.createElement('p');
+        textTwo.classList.add('missing-time');
+        return textTwo;
+    }
+
+    function addTextThree() {
+        const textThree = document.createElement('p');
+        textThree.classList.add('not-roundet');
+        return textThree;
     }
 
     function closeInfo() {
@@ -151,10 +180,18 @@
     }
 
     function calcWeekTime(time) {
-        let delta = data.totalHours - parseToFloat(data.extRefID);
+        let delta = time.extRefID - time.totalHours;
         delta = Math.round(delta * 100) / 100;
-        const deltaText = delta < 0 ? '' + delta : `+${delta}`;
+        const deltaText = delta < 0 ? '' + delta : `${delta}`;
         return deltaText;
+    }
+
+    function roundStringToNearestQtr(number) {
+        return roundNearQtr(number);
+    }
+
+    function roundNearQtr(nr) {
+        return Math.round(nr * 4) / 4;
     }
 
 })();
