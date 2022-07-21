@@ -42,7 +42,7 @@
             timesheetGrid[0].addEventListener("keydown", afterEventCheck);
             checkAll(elements, warningMessage, submitButton[0]);
             initListeners(elements, warningMessage, submitButton[0]);
-        }, 3000)
+        }, 5000)
     }
 
     async function initNewTask(e){
@@ -134,7 +134,7 @@
               if (safeMessage[0].getAttribute('data-testID') === null && submitButton.getAttribute('disabled') === true) return checkSafeMessage();
               excecuteReTime();
               return checkAll(elements,warningMessage, submitButton);
-          }, 3000)
+          }, 5000)
       }
 
     function shouldRoundToNearestQuarter() {
