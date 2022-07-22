@@ -21,13 +21,12 @@
 
     async function init() {
         setTimeout(async() => {
-                      
+
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
             }
 
-                        
             closeButton[0].after(addNewButton());
             document.body.appendChild(addInfoverlay());
         }, 5000)
@@ -58,14 +57,15 @@
 
         let roundetTime = roundStringToNearestQtr(time.totalHours);
 
-        console.log(roundetTime);
         if (value >= 1) {
             addMessageComment(createMessage, value);
             if (missingTime < time.extRefID) addTimeInformation(createMessage, missingTime, time);
             if (roundetTime !== time.totalHours) addRoundetMessage(createMessage, roundetTime, time);
+            toggleInfoLayer();
             return
         }
-        
+
+        if (value === 0) return clickBtn();
     }
 
     function fetchOpenComments(timesheetIdData) {
@@ -100,6 +100,7 @@
         info.appendChild(addCloseWrapper());
         info.appendChild(addTextelement());
         info.appendChild(addButtonWrapper());
+        info.hidden = true;
         return info;
     }
 
@@ -207,11 +208,32 @@
 
 
     function closeInfo() {
-        console.log('THIS IS MUSIC');
+        toggleInfoLayer();
     }
 
     function ignoreInfo() {
         console.log('THIS IS Magic');
+        toggleInfoLayer();
+        clickBtn();
+    }
+    
+    function clickBtn() {
+        const closeBtn = document.querySelector('.css-14ce388');
+        closeBtn.disabled = false;
+        closeBtn.click();
+    }
+
+    function toggleInfoLayer() {
+        const layerToggle = document.querySelector('.infolay');
+        if (!layerToggle.hidden) {
+            layerToggle.hidden = true;
+            return;
+        }
+
+        if (layerToggle.hidden) {
+            layerToggle.hidden = false;
+            return;
+        }
     }
 
     function calcWeekTime(time) {
