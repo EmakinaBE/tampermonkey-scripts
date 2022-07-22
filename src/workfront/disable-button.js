@@ -215,16 +215,15 @@
     }
 
     function ignoreInfo() {
-        console.log('THIS IS Magic');
         toggleInfoLayer();
         clickBtn();
-        listenRecall();
     }
-    
+
     function clickBtn() {
         const closeBtn = document.querySelector('.css-14ce388');
         closeBtn.disabled = false;
         closeBtn.click();
+        listenRecall();
     }
 
     function toggleInfoLayer() {
@@ -241,8 +240,8 @@
     }
 
     async function listenRecall() {
-        const recallBtn = await getElementsFromDocument('css-jnz3aa', document, 10000);
-        recallBtn.addEventListener("click", excecuteReInit)
+        const recallBtn = await getElementsFromDocument('.css-jnz3aa', document);
+        recallBtn[0].addEventListener("click", excecuteReInit)
     }
 
     function calcWeekTime(time) {
