@@ -28,6 +28,7 @@
     document.head.addEventListener('WF_NEW-TASK', e => initNewTask(e));
 
     callback(init);
+    addReInit(init);
     init();
 
     async function init() {
