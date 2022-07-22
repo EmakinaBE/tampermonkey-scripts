@@ -17,6 +17,8 @@
 // ==/UserScript==
 
 (function () {
+    callback(init);
+    addReInit(init);
     init();
 
     async function init() {
@@ -25,6 +27,7 @@
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
+                closeButton[0].classList.add('non-display');
             }
 
             closeButton[0].after(addNewButton());
@@ -215,6 +218,7 @@
         console.log('THIS IS Magic');
         toggleInfoLayer();
         clickBtn();
+        listenRecall();
     }
     
     function clickBtn() {
@@ -234,6 +238,11 @@
             layerToggle.hidden = false;
             return;
         }
+    }
+
+    async function listenRecall() {
+        const recallBtn = await getElementsFromDocument('css-jnz3aa', document, 10000);
+        recallBtn.addEventListener("click", excecuteReInit)
     }
 
     function calcWeekTime(time) {
