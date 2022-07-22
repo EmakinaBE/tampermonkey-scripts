@@ -194,3 +194,7 @@ Version: 1.0.0
 .btn-fixed:hover {
     transform: scale(1.2);
 }
+
+.non-display {
+    display: none;
+}
