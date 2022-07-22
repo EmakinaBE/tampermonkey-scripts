@@ -20,7 +20,7 @@
     'use strict';
 
     callback(init);
-    addReTime(init);
+    addReInit(init);
     init();
 
     async function init() {

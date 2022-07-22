@@ -20,6 +20,7 @@
     'use strict';
 
     callback(init);
+    addReInit(init);
     init();
 
     function init() {
