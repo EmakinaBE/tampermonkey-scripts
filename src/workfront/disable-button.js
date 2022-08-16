@@ -84,12 +84,12 @@
     }
 
     function addMessageComment(createMessage, value) {
-        createMessage[0].querySelector('.missing-comments').innerHTML = 'We Missinng: <span class="hours-red">' + value + '</span> comment.';
+        createMessage[0].querySelector('.missing-comments').innerHTML = 'Number of missing comments: <span class="hours-red">' + value + '</span>.';
         return;
     }
 
     function addTimeInformation(createMessage, missingTime, time) {
-        createMessage[0].querySelector('.missing-time').innerHTML = 'Please check you Booking Time.<br> We miss some Hours for you full Week Time.<br> You Booked <span class="hours-red">' + time.totalHours + '</span>.<br> We missed <span class="hours-red">' + missingTime + '</span> Hours.<br> Your full Week Time is <span class="hours-green">' + time.extRefID + '</span>.';
+        createMessage[0].querySelector('.missing-time').innerHTML = "Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked:<span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing <span class="hours-red">' + missingTime + ' hours</span>.';
         return
     }
 
