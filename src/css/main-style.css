@@ -165,10 +165,7 @@ Version: 1.0.0
 .btn-close:hover {
     transform: scale(1.2);
     background: #DECDAC;
-}
-
-.btn-close .svg-close:hover {
-    color: #fff;
+    border-radius: 15px;
 }
 
 .info-box {
@@ -197,6 +194,7 @@ Version: 1.0.0
 .clock-item,
 .roundet-item {
     width: 30px;
+    margin-right: 5px;
 }
 
 .btn-wp {
