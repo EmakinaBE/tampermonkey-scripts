@@ -2,6 +2,16 @@
 
 all changes from the project are listed here. The changes are sorted by version
 
+## 3
+- new version for workfront update
+- include new styling
+- remove not used code
+- Remove old Options
+- include new icons
+- include check for timesheet
+- include all fine for your timesheet
+
+
 ## 2.2.1.1
 - HOTFIX for Loading Spinner
 - Change Colors from Loading Spinner
