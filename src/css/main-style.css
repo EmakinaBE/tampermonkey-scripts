@@ -153,12 +153,19 @@ Version: 1.0.0
 }
 
 .btn-close {
-    font-size: 16px;
-    padding: 0 5px;
+    padding: 5px 5px;
+}
+
+.svg-close {
+    width: 18px;
+    height: 18px;
 }
 
 .btn-close:hover {
-    background: #0057B8;
+    background: #DECDAC;
+}
+
+.btn-close .svg-close:hover {
     color: #fff;
 }
 
