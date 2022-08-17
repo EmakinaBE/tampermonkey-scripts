@@ -154,6 +154,7 @@ Version: 1.0.0
 
 .btn-close {
     padding: 5px 5px;
+    transition: .2s ease-in-out 0s;
 }
 
 .svg-close {
@@ -162,6 +163,7 @@ Version: 1.0.0
 }
 
 .btn-close:hover {
+    transform: scale(1.2);
     background: #DECDAC;
 }
 
@@ -171,7 +173,30 @@ Version: 1.0.0
 
 .info-box {
     padding: 0 5px 5px 5px;
-    height: 74%;
+    height: 70%;
+}
+
+.missing-comments {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.missing-time {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 10px;
+}
+
+.not-roundet {
+    display: flex;
+    align-items: flex-start;
+}
+
+.clipboard,
+.clock-item,
+.roundet-item {
+    width: 30px;
 }
 
 .btn-wp {
@@ -181,9 +206,11 @@ Version: 1.0.0
 
 .btn-ignore,
 .btn-fixed {
-    border: 1px solid #000;
-    padding: 5px;
-    border-radius: 5px;
+    padding: 8px;
+    border-radius: 20px;
+    width: 100px;
+    text-transform: uppercase;
+    transition: .2s ease-in-out 0s;
 }
 
 .btn-ignore {
