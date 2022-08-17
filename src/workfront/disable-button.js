@@ -183,25 +183,25 @@
     }
 
     function addTextOne() {
-        const textOne = document.createElement('p');
+        const textOne = document.createElement('div');
         textOne.classList.add('missing-comments');
         return textOne;
     }
 
     function addTextTwo() {
-        const textTwo = document.createElement('p');
+        const textTwo = document.createElement('div');
         textTwo.classList.add('missing-time');
         return textTwo;
     }
 
     function addTextThree() {
-        const textThree = document.createElement('p');
+        const textThree = document.createElement('div');
         textThree.classList.add('not-roundet');
         return textThree;
     }
 
     function addTextFinish() {
-        const textFinish = document.createElement('p');
+        const textFinish = document.createElement('div');
         textFinish.classList.add('all-fine');
         return textFinish;
     }
