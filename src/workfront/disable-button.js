@@ -62,7 +62,7 @@
 
         let roundetTime = roundStringToNearestQtr(time.totalHours);
 
-        if (value >= 1) {
+        if (value >= 1 || missingTime === '0' || roundetTime !== time.totalHours) {
             addMessageComment(createMessage, value);
             if (missingTime < time.extRefID) addTimeInformation(createMessage, missingTime, time);
             if (roundetTime !== time.totalHours) addRoundetMessage(createMessage, roundetTime, time);
