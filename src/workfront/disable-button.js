@@ -50,6 +50,8 @@
         const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return;
 
+        const infoLayer = await getElementsFromDocument('.infolay', document);
+
         const createMessage = await getElementsFromDocument('.infolay .info-box', document);
 
         const value = await fetchOpenComments(timesheetIdData);
@@ -68,7 +70,20 @@
             return
         }
 
-        if (value === 0) return clickBtn();
+        if (value === 0) {
+            infoLayer[0].classList.add('green-layer');
+            addFineMessage(createMessage);
+            toggleBtnArea();
+            toggleInfoLayer();
+            setTimeout(() => {    
+                clickBtn();
+                toggleInfoLayer();
+                toggleBtnArea();
+                infoLayer[0].classList.remove('green-layer');
+            }, 10000);
+            return
+        }
+        
     }
 
     function fetchOpenComments(timesheetIdData) {
@@ -95,6 +110,10 @@
 
     function addRoundetMessage(createMessage, roundetTime, time) {
         createMessage[0].querySelector('.not-roundet').innerHTML = 'Please check you Booking time. Your Booked Time is not Perfekt Roundet. <br> Your Booked Time: <span class="hours-red">' + time.totalHours + '</span><br> Perfekt book Time look like this <span class="hours-green">'+ roundetTime +  '</span>'
+    }
+
+    function addFineMessage(createMessage) {
+        createMessage[0].querySelector('.all-fine').innerHTML = 'Your Timesheet is Correct.<br> Have a great Day.<br> Timesheet closes in 10 seconds';
     }
 
     function addInfoverlay() {
@@ -159,6 +178,7 @@
         textBlock.appendChild(addTextOne());
         textBlock.appendChild(addTextTwo());
         textBlock.appendChild(addTextThree());
+        textBlock.appendChild(addTextFinish());
         return textBlock;
     }
 
@@ -178,6 +198,12 @@
         const textThree = document.createElement('p');
         textThree.classList.add('not-roundet');
         return textThree;
+    }
+
+    function addTextFinish() {
+        const textFinish = document.createElement('p');
+        textFinish.classList.add('all-fine');
+        return textFinish;
     }
 
     function addButtonWrapper() {
@@ -235,6 +261,19 @@
 
         if (layerToggle.hidden) {
             layerToggle.hidden = false;
+            return;
+        }
+    }
+
+    function toggleBtnArea() {
+        const buttonArea = document.querySelector('.infolay .btn-wp')
+        if (!buttonArea.hidden) {
+            buttonArea.classList.add('non-display');
+            return;
+        }
+
+        if (buttonArea.hidden) {
+            buttonArea.classList.remove('non-display');
             return;
         }
     }

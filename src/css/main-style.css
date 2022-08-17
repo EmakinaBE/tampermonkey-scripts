@@ -198,3 +198,8 @@ Version: 1.0.0
 .non-display {
     display: none;
 }
+
+.green-layer {
+    border-color: rgb(0, 128, 0);
+    text-align: center;
+}
