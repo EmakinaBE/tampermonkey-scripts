@@ -220,7 +220,7 @@
         ignorBtn.classList.add('btn-ignore');
         ignorBtn.setAttribute('type', 'button');
         ignorBtn.appendChild(addButtonTitel('Ignore'));
-        ignorBtn.textContent = 'Ignore';
+        ignorBtn.textContent = 'Submit';
         ignorBtn.onclick = ignoreInfo;
         return ignorBtn;
     }
@@ -230,7 +230,7 @@
         fixBtn.classList.add('btn-fixed');
         fixBtn.setAttribute('type', 'button');
         fixBtn.appendChild(addButtonTitel('Fixed'));
-        fixBtn.textContent = 'Fixen';
+        fixBtn.textContent = 'Fix';
         fixBtn.onclick = closeInfo;
         return fixBtn;
     }
