@@ -37,6 +37,7 @@
             const elements = await getElementsFromDocument('input.css-cwtmhs:not([disabled])', document);
             const submitButton = await getElementsFromDocument('.css-14ce388', document);
             const container = await getElementsFromDocument('.css-ub2476', document);
+            console.log('check elements', timesheetGrid, elements, submitButton, container)
             if(!elements || !submitButton || !container) return;
             console.log('i am in');
             const warningMessage = await createWarningMessage(container[0]);
