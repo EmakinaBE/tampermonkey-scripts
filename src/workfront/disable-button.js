@@ -23,8 +23,9 @@
 
     async function init() {
         setTimeout(async() => {
-
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
+            console.log('closeButton', closeButton);
+            if (!closeButton) console.log('not found')
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
                 closeButton[0].classList.add('non-display');
@@ -133,28 +134,6 @@
         wrapper.appendChild(addCloseButton());
         return wrapper;
     }
-
-    // function addNewsWrapper() {
-    //     const newsWrapper = document.createElement('div');
-    //     newsWrapper.classList.add('news-wrapper');
-    //     newsWrapper.appendChild(addticker());
-    //     newsWrapper.appendChild(addGifDino());
-    //     return newsWrapper;
-    // }
-
-    // function addticker() {
-    //     const ticker = document.createElement('marquee');
-    //     ticker.classList.add('news-ticker');
-    //     ticker.innerHTML = '+++ Info to fix +++';
-    //     return ticker;
-    // }
-
-    // function addGifDino() {
-    //     const dino = document.createElement('span');
-    //     dino.classList.add('news-gif');
-    //     dino.innerHTML = '<img class="news-gif" src="https://c.tenor.com/4lKsJQHA5_AAAAAC/walking-with.gif">';
-    //     return dino;
-    // }
 
     function addCloseButton() {
         const closeMe = document.createElement('button');

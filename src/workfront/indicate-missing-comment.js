@@ -33,11 +33,12 @@
 
     async function init() {
         setTimeout(async() => {
-            const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
-            const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+            const timesheetGrid = await getElementsFromDocument("#timesheet-grid-wrapper", document);
+            const elements = await getElementsFromDocument('input.css-cwtmhs:not([disabled])', document);
             const submitButton = await getElementsFromDocument('.css-14ce388', document);
             const container = await getElementsFromDocument('.css-ub2476', document);
             if(!elements || !submitButton || !container) return;
+            console.log('i am in');
             const warningMessage = await createWarningMessage(container[0]);
             timesheetGrid[0].addEventListener("scroll", afterEventCheck);
             timesheetGrid[0].addEventListener("keydown", afterEventCheck);
@@ -45,10 +46,10 @@
             initListeners(elements, warningMessage, submitButton[0]);
         }, 5000)
     }
-
+ 
     async function initNewTask(e){
         const newLine = e.detail.newLine;
-        const elements = await getElementsFromDocument('input.css-54z73u:not([disabled])', document, newLine);
+        const elements = await getElementsFromDocument('input.css-cwtmhs:not([disabled])', document, newLine);
         const submitButton = await getElementsFromDocument('.css-14ce388', document);
         const warningMessage = await getElementsFromDocument('.css-ub2476', document);
         if(!submitButton || !warningMessage) return;
@@ -103,8 +104,10 @@
     }
 
     function initListeners(elements, warningMessage, submitButton) {
+        console.log('inside from listener', elements, warningMessage, submitButton)
         elements.forEach(e => {
             e.addEventListener('keyup', (keyValue) => {
+                console.log('inside first event', keyValue);
                 if(keyValue.keyCode != 8)
                 {
                     const val = e.value;
@@ -115,6 +118,8 @@
             }, false);
 
             e.addEventListener('keyup', (keyValue) => {
+                console.log('inside second event', keyValue);
+
                 const val = e.value;
                 checkAll(elements,warningMessage, submitButton);
                 checkSafeMessage(elements,warningMessage, submitButton);
