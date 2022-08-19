@@ -16,7 +16,44 @@
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 (function(window) {
-    var url = window.location.href;
-    console.log(url)
+
+    let allSheetLinks = [];
+    let urlCountdown = 0;
+
+    init();
+
+    async function init() {
+        timesheetCheck();
+
+        var url = window.location.href;
+        console.log('is url', url)
+        console.log('include', url.includes('timesheets'));
+
+    }
+
+    async function timesheetCheck() {
+        const timesheetLink = await getElementsFromDocument('.css-15ykr7s', document);
+        console.log('sheet', timesheetLink)
+        urlCountdown ++
+        console.log('count', urlCountdown);
+        if (!timesheetLink && urlCountdown !== 5) return timesheetCheck();
+        allSheetLinks = [...timesheetLink];
+        console.log('all', allSheetLinks);
+        addListenerToSheet();
+    }
+
+    function addListenerToSheet() {
+        console.log('add Listener')
+        allSheetLinks.forEach(sheetLinks => {
+            console.log('sheetLinks', sheetLinks);
+            sheetLinks.addEventListener('click', () => {
+                console.log('is clicked');
+            })
+        })
+    }
+
+    function openTimesheet() {
+console.log('is clicked');
+    }
 
 })(window);

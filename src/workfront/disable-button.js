@@ -25,7 +25,7 @@
         setTimeout(async() => {
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
             console.log('closeButton', closeButton);
-            if (!closeButton) console.log('not found')
+            if (!closeButton) return init();
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
                 closeButton[0].classList.add('non-display');
