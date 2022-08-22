@@ -21,7 +21,8 @@
 
     let callbacks = [];
     let reInits = [];
-    let reTimes = []
+    let reTimes = [];
+    let reUrls = [];
 
     window.executeCallback = ()  => {
         callbacks.forEach((callback) => callback());
@@ -45,6 +46,14 @@
 
     window.excecuteReTime = () => {
         reTimes.forEach((reTime) => reTime());
+    }
+
+    window.addReUrl = (reUrl) => {
+        reUrls.push(reUrl);
+    }
+
+    window.ececuteReUrl = () => {
+        reUrls.forEach((reUrl) => reUrl());
     }
 
 

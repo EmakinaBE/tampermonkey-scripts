@@ -19,6 +19,7 @@
 
     let urlCountdown = 0;
 
+    addReUrl(init);
     init();
 
     async function init() {
@@ -38,7 +39,7 @@
         timesheetLink[0].addEventListener('click', () => {
             console.log('if click', event.target);
             setTimeout(() => {
-                addReInit();
+                excecuteReInit();
             }, 3000);
         })
     }
