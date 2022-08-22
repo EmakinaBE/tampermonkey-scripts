@@ -17,7 +17,6 @@
 // ==/UserScript==
 (function(window) {
 
-    let allSheetLinks = [];
     let urlCountdown = 0;
 
     init();
@@ -32,28 +31,16 @@
     }
 
     async function timesheetCheck() {
-        const timesheetLink = await getElementsFromDocument('.css-15ykr7s', document);
-        console.log('sheet', timesheetLink)
+        const timesheetLink = await getElementsFromDocument('#content-all-timesheet-list', document);
         urlCountdown ++
-        console.log('count', urlCountdown);
         if (!timesheetLink && urlCountdown !== 5) return timesheetCheck();
-        allSheetLinks = [...timesheetLink];
-        console.log('all', allSheetLinks);
-        addListenerToSheet();
-    }
 
-    function addListenerToSheet() {
-        console.log('add Listener')
-        allSheetLinks.forEach(sheetLinks => {
-            console.log('sheetLinks', sheetLinks);
-            sheetLinks.addEventListener('click', () => {
-                console.log('is clicked');
-            })
+        timesheetLink[0].addEventListener('click', () => {
+            console.log('if click', event.target);
+            setTimeout(() => {
+                addReInit();
+            }, 3000);
         })
-    }
-
-    function openTimesheet() {
-console.log('is clicked');
     }
 
 })(window);
