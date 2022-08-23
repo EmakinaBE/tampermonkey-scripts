@@ -21,7 +21,6 @@
     'use strict';
     const commentId = 'commentId13';
     const warningMessageText = 'Not all entries have a comment';
-    const numberFormater = new Intl.NumberFormat(navigator.language);
     let timer = null;
 
 
@@ -34,12 +33,10 @@
     async function init() {
         setTimeout(async() => {
             const timesheetGrid = await getElementsFromDocument("#timesheet-grid-wrapper", document);
-            const elements = await getElementsFromDocument('input.css-cwtmhs:not([disabled])', document);
+            const elements = await getElementsFromDocument('input.css-15mowbi:not([disabled])', document);
             const submitButton = await getElementsFromDocument('.css-14ce388', document);
             const container = await getElementsFromDocument('.css-ub2476', document);
-            console.log('check elements', timesheetGrid, elements, submitButton, container)
             if(!elements || !submitButton || !container) return;
-            console.log('i am in');
             const warningMessage = await createWarningMessage(container[0]);
             timesheetGrid[0].addEventListener("scroll", afterEventCheck);
             timesheetGrid[0].addEventListener("keydown", afterEventCheck);
@@ -50,7 +47,7 @@
  
     async function initNewTask(e){
         const newLine = e.detail.newLine;
-        const elements = await getElementsFromDocument('input.css-cwtmhs:not([disabled])', document, newLine);
+        const elements = await getElementsFromDocument('input.css-15mowbi:not([disabled])', document, newLine);
         const submitButton = await getElementsFromDocument('.css-14ce388', document);
         const warningMessage = await getElementsFromDocument('.css-ub2476', document);
         if(!submitButton || !warningMessage) return;
@@ -107,29 +104,11 @@
     function initListeners(elements, warningMessage, submitButton) {
         console.log('inside from listener', elements, warningMessage, submitButton)
         elements.forEach(e => {
-            e.addEventListener('keyup', (keyValue) => {
-                console.log('inside first event', keyValue);
-                if(keyValue.keyCode != 8)
-                {
-                    const val = e.value;
-                    if (val && val.match(/\d+[,.]\d+/g)) {
-                        e.value = toSystemDecimalDelimiter(val);
-                    }
-                }
-            }, false);
 
             e.addEventListener('keyup', (keyValue) => {
-                console.log('inside second event', keyValue);
-
                 const val = e.value;
                 checkAll(elements,warningMessage, submitButton);
                 checkSafeMessage(elements,warningMessage, submitButton);
-                if (window.wfGetOptions().correctComma) {
-                    const operation = shouldRoundToNearestQuarter() ? roundStringToNearestQtr : toSystemDecimalDelimiter;
-                    if (val) {
-                        e.value = operation(val);
-                    }
-                }
             }, false);
         });
     }
@@ -157,23 +136,11 @@
             clearTimeout(timer);
          }
         timer = setTimeout(async function() {
-            const elementsEv = await getElementsFromDocument('input.css-54z73u:not([disabled])', document);
+            const elementsEv = await getElementsFromDocument('input.css-15mowbi:not([disabled])', document);
             const submitButtonEv = await getElementsFromDocument('.css-14ce388', document);
             const containerEv = await getElementsFromDocument('.css-ub2476', document);
             const warningMessageEv = await createWarningMessage(containerEv[0]);
             checkAll(elementsEv, warningMessageEv, submitButtonEv[0]);
         }, 150);
-    }
-
-    function roundStringToNearestQtr(number) {
-        return toSystemDecimalDelimiter(roundNearQtr(number));
-    }
-
-    function toSystemDecimalDelimiter(number) {
-        return numberFormater.format(number);
-    }
-
-    function roundNearQtr(nr) {
-        return Math.round(nr * 4) / 4;
     }
 })(window);
