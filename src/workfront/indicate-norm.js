@@ -22,20 +22,26 @@
     callback(init);
     addReInit(init);
     init();
+    addUpdateTask(startHoursUpdate);
 
     async function init() {
-        const timesheetIdData = await window.location.href.split('/')[4];
-        if(!timesheetIdData) return;
-
-        const data = await fetchProjectData(timesheetIdData);
-
+        
+        
         setTimeout(async() => {
             const addHours = await getElementsFromDocument('.css-ub2476', document);
             const timeWrapper = await getElementsFromDocument('.flex.time-wrapper', document);
             if(!addHours) return;
             if (!timeWrapper) addHours[0].appendChild(createTimeWrapper());
-            createHoursOutput(data);
+            startHoursUpdate()
         }, 7000)
+    }
+    
+    function startHoursUpdate() {
+        const timesheetIdData = await window.location.href.split('/')[4];
+        if(!timesheetIdData) return;
+        const data = await fetchProjectData(timesheetIdData);
+        createHoursOutput(data);
+
     }
 
     function createTimeWrapper() {

@@ -23,6 +23,7 @@
     let reInits = [];
     let reTimes = [];
     let reUrls = [];
+    let updateTimes = [];
 
     window.executeCallback = ()  => {
         callbacks.forEach((callback) => callback());
@@ -56,5 +57,12 @@
         reUrls.forEach((reUrl) => reUrl());
     }
 
+    window.addUpdateTask = (updateTime) => {
+        updateTimes.push(updateTime);
+    }
+
+    window.loadUpdateTask = () => {
+        updateTimes.forEach((updateTime) => updateTime());
+    }
 
 })(window);
