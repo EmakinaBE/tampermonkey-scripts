@@ -83,6 +83,7 @@
         emptyFieldFound
                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
+        loadUpdateTask();
     }
 
     function checkAllCommentsAndMarkFields(elements) {
