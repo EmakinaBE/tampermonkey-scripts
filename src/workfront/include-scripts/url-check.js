@@ -23,12 +23,15 @@
     init();
 
     async function init() {
-        timesheetCheck();
-
         var url = window.location.href;
-        console.log('is url', url)
-        console.log('include', url.includes('timesheets'));
 
+        if (url.includes('timesheets') === true) {
+            timesheetCheck();
+        }
+
+        if (url.includes('timesheet') === true && url.includes('overview') === true) {
+            returnToOverrview();
+        }
     }
 
     async function timesheetCheck() {
@@ -37,11 +40,30 @@
         if (!timesheetLink && urlCountdown !== 5) return timesheetCheck();
 
         timesheetLink[0].addEventListener('click', () => {
-            console.log('if click', event.target);
-            setTimeout(() => {
-                excecuteReInit();
-            }, 3000);
+            let thisTarget = event.target.href
+            if (thisTarget.includes('timesheet') ===  true) {
+                setTimeout(() => {
+                    excecuteReInit();
+                    reloadUrlCheck();
+                }, 1000);
+            }
         })
+    }
+
+    async function returnToOverrview() {
+        const backOverview = await getElementsFromDocument('.css-5l9bhe', document);
+        urlCountdown ++
+        if (!backOverview && urlCountdown !== 5) return returnToOverrview();
+
+        backOverview[0].addEventListener('click', () => {
+            setTimeout(() => {
+                reloadUrlCheck();
+            }, 1000)
+        });
+    }
+
+    function reloadUrlCheck() {
+        ececuteReUrl()
     }
 
 })(window);
