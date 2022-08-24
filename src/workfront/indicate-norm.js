@@ -36,7 +36,7 @@
         }, 7000)
     }
     
-    function startHoursUpdate() {
+    async function startHoursUpdate() {
         const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return;
         const data = await fetchProjectData(timesheetIdData);
@@ -77,6 +77,7 @@
         if (week.innerHTML.length !== 0) week.innerHTML = "";
         rest.innerHTML = 'Total <br>' + deltaText;
         week.innerHTML = 'Norm(delta) <br>' + data.extRefID;
+        rest.classList.remove('hours-green', 'hours-red');
         rest.classList.add(findColorForDelta(delta))
     }
 
