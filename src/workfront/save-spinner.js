@@ -53,6 +53,7 @@
         setTimeout(async() => {
             const spinnerOverlay = await getElementsFromDocument('.wf-save-overlay', document);
             spinnerOverlay[0].classList.toggle('hidden');
+            document.body.classList.toggle('none-click');
         }, 100);
     }
 })(window);
