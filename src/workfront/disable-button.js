@@ -21,22 +21,26 @@
     addReInit(init);
     init();
 
+    let checkBtnCountdown = 0;
+    let closeButtonCreate;
+
     async function init() {
         setTimeout(async() => {
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
-            console.log('closeButton', closeButton);
-            if (!closeButton) return init();
+            checkBtnCountdown ++
+            if (!closeButton && checkBtnCountdown !== 5) return init();
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
                 closeButton[0].classList.add('non-display');
             }
 
-            closeButton[0].after(addNewButton());
+            if(!closeButtonCreate) closeButton[0].after(addNewButton());
             document.body.appendChild(addInfoverlay());
         }, 5000)
     }
 
     function addNewButton() {
+        closeButtonCreate = true;
         const createButton = document.createElement('button');
         createButton.classList.add('css-14ce388');
         createButton.classList.add('em-check');
@@ -265,7 +269,8 @@
     function calcWeekTime(time) {
         let delta = time.extRefID - time.totalHours;
         delta = Math.round(delta * 100) / 100;
-        const deltaText = delta < 0 ? '' + delta : `${delta}`;
+        let deltaText = delta < 0 ? '' + delta : `${delta}`;
+        if(Math.sign(deltaText) !== 1) deltaText = time.extRefID;
         return deltaText;
     }
 
