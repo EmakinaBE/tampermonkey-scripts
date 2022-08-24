@@ -42,6 +42,7 @@
         timesheetLink[0].addEventListener('click', () => {
             let thisTarget = event.target.href
             if (thisTarget.includes('timesheet') ===  true) {
+                findLoadingElement();
                 setTimeout(() => {
                     excecuteReInit();
                     reloadUrlCheck();
