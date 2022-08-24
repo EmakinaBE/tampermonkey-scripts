@@ -84,6 +84,9 @@
                        ? (oldWarningMessage[0] || warningMessage)?.classList?.remove('hidden')
                        : (oldWarningMessage[0] || warningMessage)?.classList?.add('hidden');
         loadUpdateTask();
+        if (document.body.classList.contains('none-click')) {
+            findLoadingElement();
+        }
     }
 
     function checkAllCommentsAndMarkFields(elements) {
@@ -103,7 +106,6 @@
     }
 
     function initListeners(elements, warningMessage, submitButton) {
-        console.log('inside from listener', elements, warningMessage, submitButton)
         elements.forEach(e => {
 
             e.addEventListener('keyup', (keyValue) => {
