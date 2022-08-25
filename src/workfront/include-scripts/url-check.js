@@ -18,6 +18,7 @@
 (function(window) {
 
     let urlCountdown = 0;
+    let comeFromTimesheets;
 
     addReUrl(init);
     init();
@@ -31,6 +32,11 @@
 
         if (url.includes('timesheet') === true && url.includes('overview') === true) {
             returnToOverrview();
+            if (!comeFromTimesheets) {
+                setTimeout(() => {
+                    findLoadingElement();
+                },1000);
+            }
         }
     }
 
@@ -42,6 +48,7 @@
         timesheetLink[0].addEventListener('click', () => {
             let thisTarget = event.target.href
             if (thisTarget.includes('timesheet') ===  true) {
+                comeFromTimesheets = true;
                 findLoadingElement();
                 setTimeout(() => {
                     excecuteReInit();
