@@ -234,3 +234,7 @@ Version: 1.0.0
     border-color: rgb(0, 128, 0);
     text-align: center;
 }
+
+.none-click {
+    pointer-events: none;
+}
