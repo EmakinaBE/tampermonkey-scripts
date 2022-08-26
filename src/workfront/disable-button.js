@@ -28,7 +28,7 @@
         setTimeout(async() => {
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
             checkBtnCountdown ++
-            if (!closeButton && checkBtnCountdown !== 5) return init();
+            if (!closeButton && checkBtnCountdown !== 3) return init();
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
                 closeButton[0].classList.add('non-display');

@@ -66,12 +66,20 @@
         backOverview[0].addEventListener('click', () => {
             setTimeout(() => {
                 reloadUrlCheck();
+                removeMessage();
             }, 1000)
         });
     }
 
     function reloadUrlCheck() {
         ececuteReUrl()
+    }
+
+    window.onmousedown = (e) => {
+        if (e.button === 3) {
+            excecuteReInit();
+            return;
+        }
     }
 
 })(window);

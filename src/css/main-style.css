@@ -238,3 +238,7 @@ Version: 1.0.0
 .none-click {
     pointer-events: none;
 }
+
+.space-between {
+    justify-content: space-between;
+}
