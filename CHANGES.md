@@ -10,6 +10,13 @@ all changes from the project are listed here. The changes are sorted by version
 - include new icons
 - include check for timesheet
 - include all fine for your timesheet
+- include check for old sheets
+- include warning message as popup
+- include loading spinner
+- include mouse event listener for Button 3
+- work on design
+- include event listener for links on timesheets and timesheet
+- include fallbacks for loading file
 
 
 ## 2.2.1.1
