@@ -115,7 +115,7 @@
     }
 
     function addTimeInformation(createMessage, missingTime, time) {
-        createMessage[0].querySelector('.missing-time').innerHTML = "<img src='https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211606_clock_icon.svg' alt='clock Item' class='clock-item'><p>Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked:<span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing <span class="hours-red">' + missingTime + ' hours</span>.</p>';
+        createMessage[0].querySelector('.missing-time').innerHTML = "<img src='https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211606_clock_icon.svg' alt='clock Item' class='clock-item'><p>Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked: <span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing <span class="hours-red">' + missingTime + ' hours</span>.</p>';
         return
     }
 
