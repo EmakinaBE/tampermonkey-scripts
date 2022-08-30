@@ -230,7 +230,9 @@
 
     function clickBtn() {
         const closeBtn = document.querySelector('.css-14ce388');
+        const checkBtn = document.querySelector('.css-14ce388.em-check');
         closeBtn.disabled = false;
+        checkBtn.disabled = true;
         closeBtn.click();
         listenRecall();
     }
