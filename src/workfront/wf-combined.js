@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined test
 // @namespace    https://www.emakina.com/
-// @version      3.0.1.27
+// @version      3.0.1.28
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck, Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
@@ -22,5 +22,6 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/access-document-object.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/url-check.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-button.js
+// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/load-css.js
 // @noframe
 // ==/UserScript==
