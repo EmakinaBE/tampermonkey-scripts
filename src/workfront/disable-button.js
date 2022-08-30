@@ -265,9 +265,11 @@
 
     async function listenRecall() {
         const recallBtn = await getElementsFromDocument('.css-jnz3aa', document);
-        const checkBtn = document.querySelector('.css-14ce388.em-check');
-        checkBtn.disabled = false;
-        recallBtn[0].addEventListener("click", excecuteReInit)
+        recallBtn[0].addEventListener("click", reloadPage)
+    }
+
+    function reloadPage() {
+        location.reload();
     }
 
     function calcWeekTime(time) {
