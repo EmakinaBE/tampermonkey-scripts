@@ -131,7 +131,7 @@
         if (!isCurrentTs) {
             message += 'Be aware! You are not on this week\'s timesheet.';
         }
-        findLoadingElement();
+        // findLoadingElement();
         return message;
     }
 

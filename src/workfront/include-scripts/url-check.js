@@ -32,11 +32,11 @@
 
         if (url.includes('timesheet') === true && url.includes('overview') === true) {
             returnToOverrview();
-            if (!comeFromTimesheets) {
-                setTimeout(() => {
-                    findLoadingElement();
-                },1000);
-            }
+            // if (!comeFromTimesheets) {
+            //     setTimeout(() => {
+            //         findLoadingElement();
+            //     },1000);
+            // }
         }
     }
 
@@ -49,7 +49,7 @@
             let thisTarget = event.target.href
             if (thisTarget.includes('timesheet') ===  true) {
                 comeFromTimesheets = true;
-                findLoadingElement();
+                // findLoadingElement();
                 setTimeout(() => {
                     excecuteReInit();
                     reloadUrlCheck();
