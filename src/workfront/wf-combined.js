@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         WF combined test
 // @namespace    https://www.emakina.com/
-// @version      3.0.1.26
+// @version      3.0.1.27
 // @description  Combines the individual wf scripts into one.
 // @author       Wouter Versyck, Jan-Dennis Drenkhahn
 // @match        https://emakina.my.workfront.com/*
@@ -22,18 +22,5 @@
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/access-document-object.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/include-scripts/url-check.js
 // @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-button.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/expand-project-header.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/highlight-currentday.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/warning-current-timesheet.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/add-company-name-project-header.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/indicate-missing-comment.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/indicate-norm.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-completed-task.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/options.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/load-css.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/version-warning.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/timesheet-panel.js
-// @require      https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/save-spinner.js
-// @grant        none
 // @noframe
 // ==/UserScript==
