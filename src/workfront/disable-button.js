@@ -55,9 +55,15 @@
         const timesheetIdData = await window.location.href.split('/')[4];
         if(!timesheetIdData) return;
 
+
         const infoLayer = await getElementsFromDocument('.infolay', document);
 
         const createMessage = await getElementsFromDocument('.infolay .info-box', document);
+        
+        //remove text from DOM and make space for new text
+        createMessage[0].querySelector('.missing-comments').innerHTML = "";
+        createMessage[0].querySelector('.missing-time').innerHTML = "";
+        createMessage[0].querySelector('.not-roundet').innerHTML = "";
 
         const value = await fetchOpenComments(timesheetIdData);
 
@@ -67,9 +73,9 @@
 
         let roundetTime = roundStringToNearestQtr(time.totalHours);
 
-        if (value >= 1 || missingTime === '0' || roundetTime !== time.totalHours) {
+        if (value >= 1 || missingTime !== time.extRefID || roundetTime !== time.totalHours) {
             addMessageComment(createMessage, value);
-            if (missingTime < time.extRefID) addTimeInformation(createMessage, missingTime, time);
+            if (missingTime !== time.extRefID) addTimeInformation(createMessage, missingTime, time);
             if (roundetTime !== time.totalHours) addRoundetMessage(createMessage, roundetTime, time);
             toggleInfoLayer();
             return
@@ -80,7 +86,7 @@
             addFineMessage(createMessage);
             toggleBtnArea();
             toggleInfoLayer();
-            setTimeout(() => {    
+            setTimeout(() => {
                 clickBtn();
                 toggleInfoLayer();
                 toggleBtnArea();
@@ -88,7 +94,7 @@
             }, 10000);
             return
         }
-        
+
     }
 
     function fetchOpenComments(timesheetIdData) {
@@ -109,7 +115,7 @@
     }
 
     function addTimeInformation(createMessage, missingTime, time) {
-        createMessage[0].querySelector('.missing-time').innerHTML = "<img src='https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211606_clock_icon.svg' alt='clock Item' class='clock-item'><p>Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked: <span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing: <span class="hours-red">' + missingTime + ' hours</span>.</p>';
+        createMessage[0].querySelector('.missing-time').innerHTML = "<img src='https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211606_clock_icon.svg' alt='clock Item' class='clock-item'><p>Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked:<span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing <span class="hours-red">' + missingTime + ' hours</span>.</p>';
         return
     }
 
@@ -269,14 +275,16 @@
     }
 
     function reloadPage() {
-        location.reload();
+        setTimeout(() => {
+            location.reload();
+        }, 500);
     }
 
     function calcWeekTime(time) {
-        let delta = time.extRefID - time.totalHours;
+        let delta = time.totalHours - time.extRefID;
         delta = Math.round(delta * 100) / 100;
         let deltaText = delta < 0 ? '' + delta : `${delta}`;
-        if(Math.sign(deltaText) !== 1) deltaText = time.extRefID;
+        if(Math.sign(deltaText) !== -1) deltaText = time.extRefID;
         return deltaText;
     }
 
