@@ -15,33 +15,33 @@
 // @grant        none
 /// ==/UserScript==
 
-// (async function (document) {
-//     'use strict';
-//     let main_container;
-//     let second_main;
+(async function (document) {
+    'use strict';
+    let main_container;
+    let second_main;
 
-//     async function generateTag(container ,url) {
-//         const tag = document.createElement('style');
-//         const res = await fetch(url);
-//         const css = await res.text();
-//         tag.type="text/css";
-//         tag.innerHTML = css
-//         if (container === second_main) {
-//             container[0].appendChild(tag);
-//         }
-//         if (container === main_container) {
-//             main_container[0].appendChild(tag);
-//         }
-//     }
-//     setTimeout(async() => {
-//         second_main = await getElementsFromDocument('head', document, 1000);
-//         if (!second_main) return;
-//         generateTag(second_main ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/css/style.css')
-//     }, 7000);
+    async function generateTag(container ,url) {
+        const tag = document.createElement('style');
+        const res = await fetch(url);
+        const css = await res.text();
+        tag.type="text/css";
+        tag.innerHTML = css
+        if (container === second_main) {
+            container[0].appendChild(tag);
+        }
+        if (container === main_container) {
+            main_container[0].appendChild(tag);
+        }
+    }
+    setTimeout(async() => {
+        second_main = await getElementsFromDocument('head', document, 1000);
+        if (!second_main) return;
+        generateTag(second_main ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/css/style.css')
+    }, 7000);
 
-//     setTimeout(async() => {
-//         main_container = await getElementsFromDocument('head', document, 1000);
-//         if (!main_container) return;
-//         generateTag(main_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/css/main-style.css')
-//     }, 7000);
-// })(document);
+    setTimeout(async() => {
+        main_container = await getElementsFromDocument('head', document, 1000);
+        if (!main_container) return;
+        generateTag(main_container ,'https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/css/main-style.css')
+    }, 7000);
+})(document);
