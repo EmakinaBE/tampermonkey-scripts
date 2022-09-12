@@ -17,40 +17,40 @@
 // ==/UserScript==
 
 
-(function() {
-    'use strict';
+// (function() {
+//     'use strict';
 
-    callback(init);
-    init();
+//     callback(init);
+//     init();
 
-    async function init() {
-        const allTasks = await getElementsFromDocument('.TASK[data-workitemobjid]');
-        if(!allTasks) return;
-        const ids = [...new Set([...allTasks].map(element => element.getAttribute('data-workitemobjid')))];
+//     async function init() {
+//         const allTasks = await getElementsFromDocument('.TASK[data-workitemobjid]');
+//         if(!allTasks) return;
+//         const ids = [...new Set([...allTasks].map(element => element.getAttribute('data-workitemobjid')))];
 
-        const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
-        const closedTasks = tasks.filter(e => e.closed);
+//         const tasks = await Promise.all(ids.map((e) => fetchStatus(e)));
+//         const closedTasks = tasks.filter(e => e.closed);
 
-        closedTasks.forEach(disableTasks);
-    }
+//         closedTasks.forEach(disableTasks);
+//     }
 
-    async function fetchStatus(id) {
-        return fetch(`${location.origin}/attask/api/v11.0/task/search?ID=${id}&fields=status`)
-            .then(response => response.json())
-            .then(json => {
-                return {
-                    id,
-                    closed: json.data[0].status === 'CPL'
-                };
-            });
-    }
+//     async function fetchStatus(id) {
+//         return fetch(`${location.origin}/attask/api/v11.0/task/search?ID=${id}&fields=status`)
+//             .then(response => response.json())
+//             .then(json => {
+//                 return {
+//                     id,
+//                     closed: json.data[0].status === 'CPL'
+//                 };
+//             });
+//     }
 
-    async function disableTasks({ id }) {
-        const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
-        if(!tasks) return;
-        tasks.forEach(e => {
-            e.setAttribute('disabled', 'disabled');
-            e.style = 'background: rgb(211, 211, 211, 0.35)';
-        });
-    }
-})();
+//     async function disableTasks({ id }) {
+//         const tasks = await getElementsFromDocument(`.TASK[data-workitemobjid='${id}'] .fc > input`);
+//         if(!tasks) return;
+//         tasks.forEach(e => {
+//             e.setAttribute('disabled', 'disabled');
+//             e.style = 'background: rgb(211, 211, 211, 0.35)';
+//         });
+//     }
+// })();

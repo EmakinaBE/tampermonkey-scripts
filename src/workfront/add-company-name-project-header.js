@@ -16,73 +16,76 @@
 // @grant        none
 // ==/UserScript==
 
-(function () {
-    'use strict';
+// (function () {
+//     'use strict';
 
-    callback(init);
-    addReInit(init)
-    init();
-
-
-    var initRun = false;
-
-    async function init() {
-        setTimeout(async() => {
-            const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
-
-            //console.log('%c GRID', 'color: green; background: #000', timesheetGrid);
-
-            if (timesheetGrid != null)
-            {
-                //console.log(timesheetGrid);
-                //console.log('%c event', 'color: red; background: #000');
-                timesheetGrid[0].addEventListener("scroll", createCompanyName);
-                timesheetGrid[0].addEventListener("keydown", createCompanyName);
-            }
-            createCompanyName();
-        }, 7000)
+//     callback(init);
+//     addReInit(init)
+//     init();
 
 
-    }
+//     var initRun = false;
 
-   async function createCompanyName() {
-            if (window.wfGetOptions().showCompanyName) {
-                setTimeout(async() => {
-                    const headers = await document.getElementsByClassName('grid-row group-row');
+//     async function init() {
+//         setTimeout(async() => {
+//             const timesheetGrid = await getElementsFromDocument("#timesheet-grid", document);
 
-                    if (headers.length != 0)
-                    {
-                        Array.from(headers).forEach(element => {
-                            const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
-                            const spanObject = row[0].getElementsByTagName("span")[3];
+//             //console.log('%c GRID', 'color: green; background: #000', timesheetGrid);
 
-                            if (!spanObject.classList.contains("header-added")) {
-                                getProjectFromWorkFront(spanObject.innerText, spanObject);
-                            }
-                        });
-                    }
-                }, 7000)
-            }
-    }
+//             if (timesheetGrid != null)
+//             {
+//                 //console.log(timesheetGrid);
+//                 //console.log('%c event', 'color: red; background: #000');
+//                 //timesheetGrid[0].addEventListener("scroll", createCompanyName);
+//                 //timesheetGrid[0].addEventListener("keydown", createCompanyName);
+//             }
+//             createCompanyName();
+//         }, 7000)
 
-    async function getProjectFromWorkFront(name, spanObject) {
-            return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
-                .then(response => {
-                    return response.json();
-                }).then(e => {
-                    if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
-                    {
-                        addCompanyNameToHeader(e.data[0].company.name, spanObject);
-                    }
-                });
-    }
 
-    async function addCompanyNameToHeader(companyName, spanObject) {
-        initRun = +1;
-        //console.log(initRun);
-        spanObject.insertAdjacentText('beforeend', ` - ${companyName}`);
-        spanObject.classList.add("header-added");
-    }
+//     }
 
-})();
+//    async function createCompanyName() {
+//             if (window.wfGetOptions().showCompanyName) {
+//                 setTimeout(async() => {
+//                     const headers = await document.getElementsByClassName('grid-row group-row');
+
+//                     if (headers.length != 0)
+//                     {
+//                         Array.from(headers).forEach(element => {
+//                             const row = element.getElementsByClassName('grid-cell grid-sticky-cell name-cell');
+//                             const spanObject = row[0].getElementsByTagName("span")[3];
+
+//                             if (!spanObject.classList.contains("header-added")) {
+//                                 getProjectFromWorkFront(spanObject.innerText, spanObject);
+//                             }
+//                         });
+//                     }
+//                 }, 7000)
+//             }
+//     }
+
+//     async function getProjectFromWorkFront(name, spanObject) {
+//             return fetch(`${location.origin}/attask/api/v12.0/proj/search?name=${name}&fields=company:name`)
+//                 .then(response => {
+//                     if (response.ok) {
+//                         return response.json();
+//                     }
+//                     throw new Error('Something went wrong');
+//                 }).then(e => {
+//                     if (e.data[0] && (name.search(` - ${e.data[0].company.name}`) === -1))
+//                     {
+//                         addCompanyNameToHeader(e.data[0].company.name, spanObject);
+//                     }
+//                 }).catch(error => {console.log(error)});
+//     }
+
+//     async function addCompanyNameToHeader(companyName, spanObject) {
+//         initRun = +1;
+//         //console.log(initRun);
+//         spanObject.insertAdjacentText('beforeend', ` - ${companyName}`);
+//         spanObject.classList.add("header-added");
+//     }
+
+// })();
 

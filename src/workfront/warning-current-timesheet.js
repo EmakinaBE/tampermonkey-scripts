@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Warning current timesheet
 // @namespace    https://www.emakina.com/
-// @version      2.0
+// @version      2.2.0.0
 // @description  This script will show a warning if you are not looking at the current week.
 // @author       Wouter Versyck
 // @match        https://emakina.my.workfront.com/*
@@ -15,106 +15,160 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+// (function() {
+//     'use strict';
 
-    const messageStyle = 'padding: 15px; background: tomato; color: white;';
+//     let warningCheck = 0;
+//     const messageBoxId = 'messageBoxId13';
 
-    callback(init);
-    init();
+//     callback(init);
+//     init();
 
-    async function init() {
-        const openTsInPast = await getOldestOpenTsBeforeToday();
-        const getTimesheetId = await window.location.href.split('/')[4];
-        if(!getTimesheetId) return;
-        const currentTsId = getTimesheetId;
-        console.log('getTime', getTimesheetId);
-        console.log('current', currentTsId);
+//     async function init() {
 
-        const currentTs = await getCurrentTs(currentTsId);
-        const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
+//         const isCurrentTs = await getElementsFromDocument('.grid-cell.hour-cell.date-cell.current-day', document);
+//         warningCheck ++
+//         if (!isCurrentTs && warningCheck !== 2) return init();
 
-        redirectIfNeeded(openTsInPast, noOlderTs);
+//         const openTsInPast = await getOldestOpenTsBeforeToday();
+//         const getTimesheetId = await window.location.href.split('/')[4];
+//         if(!getTimesheetId) return;
+//         const currentTsId = getTimesheetId;
+//         console.log('getTime', getTimesheetId);
+//         console.log('current', currentTsId);
 
-        const isCurrentTs = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
+//         const currentTs = await getCurrentTs(currentTsId);
+//         const noOlderTs = noOlderTsExist(openTsInPast, currentTsId, currentTs);
 
-        if (!isCurrentTs || openTsInPast) {
+//         redirectIfNeeded(openTsInPast, noOlderTs);
 
-            const header = await getElementsFromDocument('.wf-mfe_timesheets', document);
-            if(!header) return;
+//         if (!isCurrentTs || openTsInPast) {
 
-            // check if warning message was created already
-            const messageBoxId = 'messageBoxId13';
-            const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
-            if(oldMessageBox) return;
+//             const body = await getElementsFromDocument('body', document);
+//             if(!body) return;
 
-            const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
-            const messageBox = createElementWithText('p', message);
-            messageBox.classList.add('wrong-timesheet');
-            messageBox.id = messageBoxId;
+//             // check if warning message was created already
+//             const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
+//             if(oldMessageBox) return;
 
-            header[0].appendChild(messageBox);
-        }
-    }
+//             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
+//             const messageBox = document.createElement('div');
+//             messageBox.classList.add('wf-popup');
+//             messageBox.classList.add('wrong-sheet');
+//             messageBox.id = messageBoxId;
+//             messageBox.appendChild(createElementWithText('p', message));
+//             messageBox.appendChild(createButtonArea());
 
-    function createElementWithText(tagName, text) {
-        const element = document.createElement(tagName);
-        element.innerHTML = text;
-        return element;
-    }
+//             body[0].appendChild(messageBox);
+//         }
+//     }
 
-    function createMessage(isCurrentTs, olderTs, noOlderTs) {
-        let message = '';
+//     function createElementWithText(tagName, text) {
+//         const element = document.createElement(tagName);
+//         element.classList.add('wrong-timesheet')
+//         element.innerHTML = text;
+//         return element;
+//     }
 
-        if (!noOlderTs) {
-            const link = constructLink(olderTs);
-            message += `Be aware! You are not on the oldest open timesheet follow ${link} to go directly to it.`;
-        }
+//     function createButtonArea() {
+//         const element = document.createElement('div');
+//         element.classList.add('wp-btn');
+//         element.classList.add('space-between');
+//         element.appendChild(createReturnBTN());
+//         element.appendChild(backToSheet());
+//         return element;
+//     }
 
-        if (!isCurrentTs && !noOlderTs) {
-            message += '<br><br>';
-        }
+//     function createReturnBTN() {
+//         const element = document.createElement('button');
+//         element.classList.add('btn-ignore');
+//         element.textContent = 'CLOSE';
+//         element.onclick = toggleMessage;
+//         return element;
+//     }
 
-        if (!isCurrentTs) {
-            message += 'Be aware! You are not on this week\'s timesheet.';
-        }
-        return message;
-    }
+//     function backToSheet() {
+//         const element = document.createElement('button');
+//         element.classList.add('btn-fixed');
+//         element.textContent = 'Overview';
+//         element.onclick = backToOverview;
+//         return element;
+//     }
 
-    function constructLink(olderTs){
-        return `<a href="${constructUrl(olderTs)}">this link</a>`;
-    }
+//     function toggleMessage() {
+//         const message = document.querySelector('#'+ messageBoxId);
+//         if (!message.hidden) {
+//             message.hidden = true;
+//             return;
+//         }
+//     }
 
-    function constructUrl(olderTs) {
-        return `/timesheet/view?ID=${olderTs.ID}`;
-    }
+//     function backToOverview() {
+//         const back = document.querySelector('.css-5l9bhe');
+//         back.click();
+//         toggleMessage();
+//         removeMessage();
+//     }
 
-    function redirectIfNeeded(olderTs, noOlderTs) {
-
-        if (noOlderTs) {
-            return;
-        }
-
-        if (window.wfGetOptions().autoRedirect) {
-            window.location = constructUrl(olderTs);
-        }
-    }
-
-    function getCurrentTs(currentTsId) {
-        return fetch(`${location.origin}/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
-            .then(e => e.json())
-            .then(e => e.data[0]);
-    }
+//     window.removeMessage = async() => {
+//         const messagePopup = document.querySelector('.wf-popup.wrong-sheet');
+//         if (messagePopup) messagePopup.remove();
+//     }
 
 
-    function getOldestOpenTsBeforeToday() {
-        return fetch(`${location.origin}/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1`)
-            .then(e => e.json())
-            .then(e => e.data[0]);
-    }
+//     function createMessage(isCurrentTs, olderTs, noOlderTs) {
+//         let message = '';
 
-    function noOlderTsExist (olderTs, currentTsId, currentTs) {
-        return (!window.wfGetOptions || !olderTs || olderTs.ID === currentTsId || currentTs.status === 'C');
-    }
+//         if (!noOlderTs) {
+//             const link = constructLink(olderTs);
+//             message += `Be aware! You are not on the oldest open timesheet follow ${link} to go directly to it.`;
+//         }
 
-})();
+//         if (!isCurrentTs && !noOlderTs) {
+//             message += '<br><br>';
+//         }
+
+//         if (!isCurrentTs) {
+//             message += 'Be aware! You are not on this week\'s timesheet.';
+//         }
+//         // findLoadingElement();
+//         return message;
+//     }
+
+//     function constructLink(olderTs){
+//         return `<a href="${constructUrl(olderTs)}">this link</a>`;
+//     }
+
+//     function constructUrl(olderTs) {
+//         return `/timesheet/view?ID=${olderTs.ID}`;
+//     }
+
+//     function redirectIfNeeded(olderTs, noOlderTs) {
+
+//         if (noOlderTs) {
+//             return;
+//         }
+
+//         if (window.wfGetOptions().autoRedirect) {
+//             window.location = constructUrl(olderTs);
+//         }
+//     }
+
+//     function getCurrentTs(currentTsId) {
+//         return fetch(`${location.origin}/attask/api/v14.0/tshet/search?ID=${currentTsId}&fields=status`)
+//             .then(e => e.json())
+//             .then(e => e.data[0]);
+//     }
+
+
+//     function getOldestOpenTsBeforeToday() {
+//         return fetch(`${location.origin}/attask/api/v14.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1`)
+//             .then(e => e.json())
+//             .then(e => e.data[0]);
+//     }
+
+//     function noOlderTsExist (olderTs, currentTsId, currentTs) {
+//         return (!window.wfGetOptions || !olderTs || olderTs.ID === currentTsId || currentTs.status === 'C');
+//     }
+
+// })();

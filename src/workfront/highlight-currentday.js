@@ -16,20 +16,21 @@
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
-(function() {
-    'use strict';
+// (function() {
+//     'use strict';
 
-    callback(init);
-    init();
+//     callback(init);
+//     addReInit(init);
+//     init();
 
-    function init() {
-        setTimeout(async() => {
-            const today = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
-            if(!today) return;
+//     function init() {
+//         setTimeout(async() => {
+//             const today = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
+//             if(!today) return;
 
-            for (let i = 0; i < today.length; i++) {
-                today[i].classList.add('today');
-            };
-    }, 7000);
-    }
-})();
+//             for (let i = 0; i < today.length; i++) {
+//                 today[i].classList.add('today');
+//             };
+//     }, 7000);
+//     }
+// })();

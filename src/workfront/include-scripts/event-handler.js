@@ -11,7 +11,7 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/event-handler.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masterfront/include-scripts/event-handler.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/include-scripts/event-handler.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
@@ -21,7 +21,9 @@
 
     let callbacks = [];
     let reInits = [];
-    let reTimes = []
+    let reTimes = [];
+    let reUrls = [];
+    let updateTimes = [];
 
     window.executeCallback = ()  => {
         callbacks.forEach((callback) => callback());
@@ -47,5 +49,20 @@
         reTimes.forEach((reTime) => reTime());
     }
 
+    window.addReUrl = (reUrl) => {
+        reUrls.push(reUrl);
+    }
+
+    window.ececuteReUrl = () => {
+        reUrls.forEach((reUrl) => reUrl());
+    }
+
+    window.addUpdateTask = (updateTime) => {
+        updateTimes.push(updateTime);
+    }
+
+    window.loadUpdateTask = () => {
+        updateTimes.forEach((updateTime) => updateTime());
+    }
 
 })(window);

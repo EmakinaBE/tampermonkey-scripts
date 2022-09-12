@@ -15,32 +15,32 @@
 // @grant        none
 // ==/UserScript==
 
-(function() {
-    'use strict';
+// (function() {
+//     'use strict';
     
-    callback(init);
-    init();
+//     callback(init);
+//     init();
 
-    function init() {
-        selectTimePanel();
-    }
+//     function init() {
+//         selectTimePanel();
+//     }
 
-    async function selectTimePanel() {
-        setTimeout(async() => {
-            const panel = (await getElementsFromDocument(`#main-frame`, document))?.[0];
-            if (!panel) return selectTimePanel();
-            const panelinner = (await getElementsFromDocument(`#timesheet-saving-panel div`, panel.contentWindow.document))?.[0];
-            if (!panelinner) return selectTimePanel();
-            if (panelinner && !panelinner.classList.contains('timer-panel-btn')) {
-                panelinner.classList.add('timer-panel-btn');
-                panelinner.appendChild(autoSaveTiming());
-            }
-        }, 3000);
-    }
+//     async function selectTimePanel() {
+//         setTimeout(async() => {
+//             const panel = (await getElementsFromDocument(`#main-frame`, document))?.[0];
+//             if (!panel) return selectTimePanel();
+//             const panelinner = (await getElementsFromDocument(`#timesheet-saving-panel div`, panel.contentWindow.document))?.[0];
+//             if (!panelinner) return selectTimePanel();
+//             if (panelinner && !panelinner.classList.contains('timer-panel-btn')) {
+//                 panelinner.classList.add('timer-panel-btn');
+//                 panelinner.appendChild(autoSaveTiming());
+//             }
+//         }, 3000);
+//     }
 
-    function autoSaveTiming() {
-        const timerElement = document.createElement('div');
-        timerElement.classList.add('timer-area');
-        return timerElement;
-    }
-})();
+//     function autoSaveTiming() {
+//         const timerElement = document.createElement('div');
+//         timerElement.classList.add('timer-area');
+//         return timerElement;
+//     }
+// })();

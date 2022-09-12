@@ -12,58 +12,58 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/expand-project-header.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/mastere/cleanup/src/workfront/expand-project-header.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/expand-project-header.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
-(function() {
-    'use strict'
+// (function() {
+//     'use strict'
     
-    let headers;
-    let allHeaders = [];
-    const store = new Store('expanded-header');
-    store.value = store.value || [];
+//     let headers;
+//     let allHeaders = [];
+//     const store = new Store('expanded-header');
+//     store.value = store.value || [];
 
-    callback(init);
-    init();
+//     callback(init);
+//     init();
     
-    async function init(){
-        await getHeaderElements();
-        setExpandedHeader();
-        getExpandedHeader();
-    }
+//     async function init(){
+//         await getHeaderElements();
+//         setExpandedHeader();
+//         getExpandedHeader();
+//     }
 
-    async function getHeaderElements() {
-        headers = await getElementsFromDocument('.thead.project-hours');
-        if(!headers) return;
+//     async function getHeaderElements() {
+//         headers = await getElementsFromDocument('.thead.project-hours');
+//         if(!headers) return;
         
-        allHeaders = [...headers];  
-    }
+//         allHeaders = [...headers];  
+//     }
 
-    // create a listener for all headers and save it to the local storage if it gets closed
-    function getExpandedHeader()  {
-        allHeaders.forEach(header => {
-            header.addEventListener('click', () => {
-                const headerId = header.getAttribute('data-projectid');
-                if(!header.classList.contains('closed'))
-                    store.value = [...store.value, headerId];   
-                else
-                    store.value = store.value.filter(item => item !== headerId);
-            });	
-        });
-    }
+//     // create a listener for all headers and save it to the local storage if it gets closed
+//     function getExpandedHeader()  {
+//         allHeaders.forEach(header => {
+//             header.addEventListener('click', () => {
+//                 const headerId = header.getAttribute('data-projectid');
+//                 if(!header.classList.contains('closed'))
+//                     store.value = [...store.value, headerId];   
+//                 else
+//                     store.value = store.value.filter(item => item !== headerId);
+//             });	
+//         });
+//     }
     
-    // set all headers + body that are in the local storage to closed
-    function setExpandedHeader() {
-        let closedHeaders = store.value || [];
+//     // set all headers + body that are in the local storage to closed
+//     function setExpandedHeader() {
+//         let closedHeaders = store.value || [];
         
-        allHeaders.forEach(header => {
-            if(closedHeaders.includes(header.getAttribute('data-projectid'))) {
-                header.classList.add('closed');
-                header.nextElementSibling.classList.add('closed');
-            }
-        });
-    }   
+//         allHeaders.forEach(header => {
+//             if(closedHeaders.includes(header.getAttribute('data-projectid'))) {
+//                 header.classList.add('closed');
+//                 header.nextElementSibling.classList.add('closed');
+//             }
+//         });
+//     }   
     
-})();
+// })();

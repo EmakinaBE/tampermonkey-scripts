@@ -18,41 +18,42 @@
 // ==/UserScript==
 
 
-(function(window) {
-    'use strict';
+// (function(window) {
+//     'use strict';
 
-    let loadSpinner;
+//     let loadSpinner;
 
-    callback(init);
-    init();
+//     callback(init);
+//     init();
 
-    function init() {
-        setTimeout(async() => {
-            if (!loadSpinner) document.body.appendChild(createSaveOverlay());
+//     function init() {
+//         setTimeout(async() => {
+//             if (!loadSpinner) document.body.appendChild(createSaveOverlay());
 
-        }, 1000)
-    }
+//         }, 1000)
+//     }
 
-    function createSaveOverlay() {
-        loadSpinner = true;
-        const div = document.createElement('div');
-        div.classList.add('wf-save-overlay');
-        div.classList.add('hidden');
-        div.appendChild(createSaveSpinner());
-        div.id = 'WF-Save-overlay';
-        return div;
-    }
+//     function createSaveOverlay() {
+//         loadSpinner = true;
+//         const div = document.createElement('div');
+//         div.classList.add('wf-save-overlay');
+//         div.classList.add('hidden');
+//         div.appendChild(createSaveSpinner());
+//         div.id = 'WF-Save-overlay';
+//         return div;
+//     }
 
-    function createSaveSpinner() {
-        const spinner = document.createElement('div');
-        spinner.classList.add('wf-save-spinner');
-        return spinner;
-    }
+//     function createSaveSpinner() {
+//         const spinner = document.createElement('div');
+//         spinner.classList.add('wf-save-spinner');
+//         return spinner;
+//     }
 
-    window.findLoadingElement = async() => {
-        setTimeout(async() => {
-            const spinnerOverlay = await getElementsFromDocument('.wf-save-overlay', document);
-            spinnerOverlay[0].classList.toggle('hidden');
-        }, 100);
-    }
-})(window);
+//     window.findLoadingElement = async() => {
+//         setTimeout(async() => {
+//             const spinnerOverlay = await getElementsFromDocument('.wf-save-overlay', document);
+//             spinnerOverlay[0].classList.toggle('hidden');
+//             document.body.classList.toggle('none-click');
+//         }, 100);
+//     }
+// })(window);
