@@ -11,8 +11,8 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-button.js
-// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/disable-button.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masterfront/disable-button.js
+// @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-button.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
 
@@ -110,17 +110,17 @@
     }
 
     function addMessageComment(createMessage, value) {
-        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
+        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masters/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
         return;
     }
 
     function addTimeInformation(createMessage, missingTime, time) {
-        createMessage[0].querySelector('.missing-time').innerHTML = "<img src='https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211606_clock_icon.svg' alt='clock Item' class='clock-item'><p>Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked: <span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing <span class="hours-red">' + missingTime + ' hours</span>.</p>';
+        createMessage[0].querySelector('.missing-time').innerHTML = "<img src='https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/icons/211606_clock_icon.svg' alt='clock Item' class='clock-item'><p>Your week normtime hasn't been reached.<br> Your Normtime: <span class='hours-green'>" + time.extRefID + ' hours</span>.<br> You booked: <span class="hours-red">' + time.totalHours + ' hours</span>.<br> You are missing <span class="hours-red">' + missingTime + ' hours</span>.</p>';
         return
     }
 
     function addRoundetMessage(createMessage, roundetTime, time) {
-        createMessage[0].querySelector('.not-roundet').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211814_refresh_icon.svg" alt="Roundet Item" class="roundet-item"><p>Please check you Booking time. Your Booked Time is not Perfekt Roundet. <br> Your Booked Time: <span class="hours-red">' + time.totalHours + '</span><br> Perfekt book Time look like this <span class="hours-green">'+ roundetTime +  '</span></p>'
+        createMessage[0].querySelector('.not-roundet').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/icons/211814_refresh_icon.svg" alt="Roundet Item" class="roundet-item"><p>Please check you Booking time. Your Booked Time is not Perfekt Roundet. <br> Your Booked Time: <span class="hours-red">' + time.totalHours + '</span><br> Perfekt book Time look like this <span class="hours-green">'+ roundetTime +  '</span></p>'
     }
 
     function addFineMessage(createMessage) {
@@ -150,7 +150,7 @@
         closeMe.classList.add('btn-close');
         closeMe.setAttribute('type', 'button');
         closeMe.appendChild(addButtonTitel('close'));
-        closeMe.innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/icons/211652_close_icon.svg" alt="close-button" class="svg-close">';
+        closeMe.innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/icons/211652_close_icon.svg" alt="close-button" class="svg-close">';
         closeMe.onclick = closeInfo;
         return closeMe
     }

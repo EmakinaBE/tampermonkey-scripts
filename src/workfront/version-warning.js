@@ -10,8 +10,8 @@
 // @icon         https://emakina.my.workfront.com/static/img/favicon.ico
 // @supportURL   https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // @homepage     https://github.com/EmakinaBE/tampermonkey-scripts
-// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/version-warning.js
-// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/cleanup/src/workfront/version-warning.js
+// @downloadURL  https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
+// @updateURL    https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/version-warning.js
 // @grant        none
 /// ==/UserScript==
 
@@ -27,7 +27,7 @@
 
     var currentVersionCheck = GM_info.script.version;
 
-    if(isInThePast(new Date('2022-07-11')) && currentVersionCheck <= "2.2.2.0") {
+    if(isInThePast(new Date('2022-09-12')) && currentVersionCheck <= "3.2.0.0") {
 
         setTimeout(async() => {
             var newDiv = document.createElement("div");
