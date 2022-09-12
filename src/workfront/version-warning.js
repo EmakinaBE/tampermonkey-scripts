@@ -27,7 +27,7 @@
 
     var currentVersionCheck = GM_info.script.version;
 
-    if(isInThePast(new Date('2022-07-11')) && currentVersionCheck <= "2.2.2.0") {
+    if(isInThePast(new Date('2022-09-12')) && currentVersionCheck <= "3.2.0.0") {
 
         setTimeout(async() => {
             var newDiv = document.createElement("div");

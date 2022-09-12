@@ -18,12 +18,18 @@
 // (function() {
 //     'use strict';
 
-//     const messageStyle = 'padding: 15px; background: tomato; color: white;';
+//     let warningCheck = 0;
+//     const messageBoxId = 'messageBoxId13';
 
 //     callback(init);
 //     init();
 
 //     async function init() {
+
+//         const isCurrentTs = await getElementsFromDocument('.grid-cell.hour-cell.date-cell.current-day', document);
+//         warningCheck ++
+//         if (!isCurrentTs && warningCheck !== 2) return init();
+
 //         const openTsInPast = await getOldestOpenTsBeforeToday();
 //         const getTimesheetId = await window.location.href.split('/')[4];
 //         if(!getTimesheetId) return;
@@ -36,32 +42,79 @@
 
 //         redirectIfNeeded(openTsInPast, noOlderTs);
 
-//         const isCurrentTs = await getElementsFromDocument('.grid-cell.hour-cell.current-day', document);
-
 //         if (!isCurrentTs || openTsInPast) {
 
-//             const header = await getElementsFromDocument('.wf-mfe_timesheets', document);
-//             if(!header) return;
+//             const body = await getElementsFromDocument('body', document);
+//             if(!body) return;
 
 //             // check if warning message was created already
-//             const messageBoxId = 'messageBoxId13';
 //             const oldMessageBox = await getElementsFromDocument(`#${messageBoxId}`);
 //             if(oldMessageBox) return;
 
 //             const message = createMessage(isCurrentTs, openTsInPast, noOlderTs);
-//             const messageBox = createElementWithText('p', message);
-//             messageBox.classList.add('wrong-timesheet');
+//             const messageBox = document.createElement('div');
+//             messageBox.classList.add('wf-popup');
+//             messageBox.classList.add('wrong-sheet');
 //             messageBox.id = messageBoxId;
+//             messageBox.appendChild(createElementWithText('p', message));
+//             messageBox.appendChild(createButtonArea());
 
-//             header[0].appendChild(messageBox);
+//             body[0].appendChild(messageBox);
 //         }
 //     }
 
 //     function createElementWithText(tagName, text) {
 //         const element = document.createElement(tagName);
+//         element.classList.add('wrong-timesheet')
 //         element.innerHTML = text;
 //         return element;
 //     }
+
+//     function createButtonArea() {
+//         const element = document.createElement('div');
+//         element.classList.add('wp-btn');
+//         element.classList.add('space-between');
+//         element.appendChild(createReturnBTN());
+//         element.appendChild(backToSheet());
+//         return element;
+//     }
+
+//     function createReturnBTN() {
+//         const element = document.createElement('button');
+//         element.classList.add('btn-ignore');
+//         element.textContent = 'CLOSE';
+//         element.onclick = toggleMessage;
+//         return element;
+//     }
+
+//     function backToSheet() {
+//         const element = document.createElement('button');
+//         element.classList.add('btn-fixed');
+//         element.textContent = 'Overview';
+//         element.onclick = backToOverview;
+//         return element;
+//     }
+
+//     function toggleMessage() {
+//         const message = document.querySelector('#'+ messageBoxId);
+//         if (!message.hidden) {
+//             message.hidden = true;
+//             return;
+//         }
+//     }
+
+//     function backToOverview() {
+//         const back = document.querySelector('.css-5l9bhe');
+//         back.click();
+//         toggleMessage();
+//         removeMessage();
+//     }
+
+//     window.removeMessage = async() => {
+//         const messagePopup = document.querySelector('.wf-popup.wrong-sheet');
+//         if (messagePopup) messagePopup.remove();
+//     }
+
 
 //     function createMessage(isCurrentTs, olderTs, noOlderTs) {
 //         let message = '';
@@ -78,6 +131,7 @@
 //         if (!isCurrentTs) {
 //             message += 'Be aware! You are not on this week\'s timesheet.';
 //         }
+//         // findLoadingElement();
 //         return message;
 //     }
 
@@ -101,14 +155,14 @@
 //     }
 
 //     function getCurrentTs(currentTsId) {
-//         return fetch(`${location.origin}/attask/api/v11.0/tshet/search?ID=${currentTsId}&fields=status`)
+//         return fetch(`${location.origin}/attask/api/v14.0/tshet/search?ID=${currentTsId}&fields=status`)
 //             .then(e => e.json())
 //             .then(e => e.data[0]);
 //     }
 
 
 //     function getOldestOpenTsBeforeToday() {
-//         return fetch(`${location.origin}/attask/api/v11.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1`)
+//         return fetch(`${location.origin}/attask/api/v14.0/tshet/search?endDate=$$TODAYb-1m&endDate_Mod=between&endDate_Range=$$TODAYe-1m&userID=$$USER.ID&userID_Mod=in&status=O&status_Mod=in&OR:1:endDate=$$TODAYbw&OR:1:endDate_Mod=lte&OR:1:userID=$$USER.ID&OR:1:userID_Mod=in&OR:1:status=O&OR:1:status_Mod=in&endDate_Sort=asc&$$LIMIT=1`)
 //             .then(e => e.json())
 //             .then(e => e.data[0]);
 //     }
