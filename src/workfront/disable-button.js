@@ -110,7 +110,7 @@
     }
 
     function addMessageComment(createMessage, value) {
-        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masters/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
+        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masters/src/icons/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
         return;
     }
 
@@ -209,7 +209,7 @@
         ignorBtn.classList.add('btn-ignore');
         ignorBtn.setAttribute('type', 'button');
         ignorBtn.appendChild(addButtonTitel('Ignore'));
-        ignorBtn.textContent = 'Submit';
+        ignorBtn.textContent = 'Submit and Close';
         ignorBtn.onclick = ignoreInfo;
         return ignorBtn;
     }
