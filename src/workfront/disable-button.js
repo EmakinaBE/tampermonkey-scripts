@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disbale Button
 // @namespace    https://www.emakina.com/
-// @version      1.0.0.1
+// @version      1.0.0.2
 // @description  Disable Button direct after loading
 // @author       Jan-Dennis Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
@@ -110,7 +110,7 @@
     }
 
     function addMessageComment(createMessage, value) {
-        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3292e/ENWORKFNAV-3292e/ENWORKFNAV-3292e/ENWORKFNAV-3292e/ENWORKFNAV-3292e/ENWORKFNAV-3292s/src/icons/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
+        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/feature/ENWORKFNAV-3292/src/icons/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
         return;
     }
 
