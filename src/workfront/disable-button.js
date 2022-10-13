@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disbale Button
 // @namespace    https://www.emakina.com/
-// @version      1.0.0.0
+// @version      1.0.0.1
 // @description  Disable Button direct after loading
 // @author       Jan-Dennis Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
