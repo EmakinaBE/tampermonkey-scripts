@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Disbale Button
 // @namespace    https://www.emakina.com/
-// @version      1.0.0.0
+// @version      1.0.0.2
 // @description  Disable Button direct after loading
 // @author       Jan-Dennis Drenkhahn
 // @homepage	 https://github.com/EmakinaBE/tampermonkey-scripts
@@ -11,7 +11,7 @@
 // @match        https://emakina.preview.workfront.com/*
 // @match        https://emakina.sb01.workfront.com/*
 // @grant        none
-// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masterfront/disable-button.js
+// @downloadURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-button.js
 // @updateURL	 https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/workfront/disable-button.js
 // @supportURL	 https://emakina.my.workfront.com/requests/new?activeTab=tab-new-helpRequest&projectID=5d5a659a004ee38ffbb5acc9b3c23c4c&path=61685dd40006ed63ccba6a27b6e31226
 // ==/UserScript==
@@ -110,7 +110,7 @@
     }
 
     function addMessageComment(createMessage, value) {
-        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/masters/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
+        createMessage[0].querySelector('.missing-comments').innerHTML = '<img src="https://raw.githubusercontent.com/EmakinaBE/tampermonkey-scripts/master/src/icons/211649_clipboard_icon.svg" alt="clipboard" class="clipboard"><p>Number of missing comments: <span class="hours-red">' + value + '</span>.</p>';
         return;
     }
 
@@ -209,7 +209,7 @@
         ignorBtn.classList.add('btn-ignore');
         ignorBtn.setAttribute('type', 'button');
         ignorBtn.appendChild(addButtonTitel('Ignore'));
-        ignorBtn.textContent = 'Submit';
+        ignorBtn.textContent = 'Submit and Close';
         ignorBtn.onclick = ignoreInfo;
         return ignorBtn;
     }
