@@ -29,6 +29,7 @@
             const closeButton = await getElementsFromDocument('.css-14ce388', document);
             checkBtnCountdown ++
             if (!closeButton && checkBtnCountdown !== 3) return init();
+            if (!closeButton) return;
             if (!closeButton[0].disabled) {
                 closeButton[0].disabled = true;
                 closeButton[0].classList.add('non-display');
@@ -36,7 +37,7 @@
 
             if(!closeButtonCreate) closeButton[0].after(addNewButton());
             document.body.appendChild(addInfoverlay());
-        }, 5000)
+        }, 3000)
     }
 
     function addNewButton() {

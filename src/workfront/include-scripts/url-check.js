@@ -47,6 +47,7 @@
 
         timesheetLink[0].addEventListener('click', () => {
             let thisTarget = event.target.href
+            if (!thisTarget) return;
             if (thisTarget.includes('timesheet') ===  true) {
                 comeFromTimesheets = true;
                 // findLoadingElement();
@@ -66,7 +67,7 @@
         backOverview[0].addEventListener('click', () => {
             setTimeout(() => {
                 reloadUrlCheck();
-                removeMessage();
+                // removeMessage();
             }, 1000)
         });
     }
